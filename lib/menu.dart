@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import './dashboard.dart';
+import './salesorderreport.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -13,23 +14,31 @@ class MenuScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           InkWell(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(Icons.mail),
                 Text(
-                  'Notifications',
+                  'Sales Order Report',
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
-            // onTap: () {
-
-            // },
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => SalesOrderReportScreen(),
+                ),
+              );
+            },
           ),
-          const SizedBox(height: 30,),
+          const SizedBox(
+            height: 30,
+          ),
           InkWell(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -42,12 +51,14 @@ class MenuScreen extends StatelessWidget {
               ],
             ),
             onTap: () {
-              Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (context) => DashboardScreen(),
-              ),);              
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => DashboardScreen(),
+                ),
+              );
             },
           ),
-          ],
+        ],
       ),
     );
   }
