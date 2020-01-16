@@ -25,18 +25,21 @@ class DashboardScreen extends StatelessWidget {
         title: Row(
           children: <Widget>[
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 const Text(
                   'ABC Pvt Ltd',
                   style: TextStyle(
                     fontSize: 15,
+                    letterSpacing: 2.5,
                   ),
                 ),
                 const Text(
-                  'Revenue: 123\$',
+                  'Total Revenue: 123\$',
                   style: TextStyle(
                     color: Colors.green,
                     fontSize: 12,
+                    letterSpacing: 1.0,
                   ),
                 ),
               ],
@@ -65,29 +68,87 @@ class DashboardScreen extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
+          Container(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+              child: Text('Your Tally is Connected!'),
+            ),
+            color: const Color(0xff14D2B8),
+            width: MediaQuery.of(context).size.width,
+            height: 20,
+          ),
           // Container 1 - Sales
           Container(
             child: SalesDashboardWidget(),
-            margin: const EdgeInsets.all(30.0),
-            padding: const EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(15.0),
             // decoration: myBoxDecoration()
+          ),
+          Container(
+            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Product Wise Sales',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
           ),
           // Container 2 - Purchases
           Container(
             child: PurchaseDashboardWidget(),
-            margin: const EdgeInsets.all(30.0),
-            padding: const EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(20.0),
             // decoration: myBoxDecoration()
           ),
           Container(
+            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Check Pending Purchase Orders',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
+          ),
+          Container(
             child: OutstandingsDashboardWidget(),
-            margin: const EdgeInsets.all(30.0),
-            padding: const EdgeInsets.all(10.0),
+            margin: const EdgeInsets.all(15.0),
             // decoration: myBoxDecoration()
           ),
         ],
       ),
-      // bottomNavigationBar: ,
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            title: Text('Home'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            title: Text('Business'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.computer),
+            title: Text('School'),
+          ),
+        ],
+        // currentIndex: _selectedIndex,
+        // selectedItemColor: Colors.amber[800],
+        // onTap: _onItemTapped,
+      ),
     );
   }
 }
@@ -104,7 +165,6 @@ class SalesDashboardWidget extends StatelessWidget {
         children: <Widget>[
           Container(
             child: SalesDashboardWidgetTitleRow(),
-            color: Colors.grey,
           ),
           const SizedBox(
             height: 20,
@@ -124,7 +184,7 @@ class SalesDashboardWidgetContentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
           child: Column(
@@ -195,7 +255,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Icon(
-                Icons.info,
+                Icons.info_outline,
                 color: Colors.grey[400],
               ),
             ],
@@ -205,7 +265,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(
-                Icons.thumb_up,
+                Icons.favorite,
                 color: Colors.purple[800],
               ),
               Icon(
@@ -236,7 +296,6 @@ class PurchaseDashboardWidget extends StatelessWidget {
         children: <Widget>[
           Container(
             child: PurchaseDashboardWidgetTitleRow(),
-            color: Colors.grey,
           ),
           const SizedBox(
             height: 20,
@@ -256,7 +315,7 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Container(
           child: Column(
@@ -327,7 +386,7 @@ class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Icon(
-                Icons.info,
+                Icons.info_outline,
                 color: Colors.grey[400],
               ),
             ],
@@ -337,7 +396,7 @@ class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(
-                Icons.thumb_up,
+                Icons.favorite,
                 color: Colors.purple[800],
               ),
               Icon(
@@ -368,7 +427,6 @@ class OutstandingsDashboardWidget extends StatelessWidget {
         children: <Widget>[
           Container(
             child: OutstandingsDashboardWidgetTitleRow(),
-            color: Colors.grey,
           ),
           const SizedBox(
             height: 20,
@@ -388,7 +446,7 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -453,7 +511,7 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Icon(
-                Icons.info,
+                Icons.info_outline,
                 color: Colors.grey[400],
               ),
             ],
@@ -463,7 +521,7 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Icon(
-                Icons.thumb_up,
+                Icons.favorite,
                 color: Colors.purple[800],
               ),
               Icon(
