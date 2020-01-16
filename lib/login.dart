@@ -3,8 +3,8 @@ import 'package:flutter_login/flutter_login.dart';
 import './dashboard.dart';
 
 const users = const {
-  'akash@restat.com': 'restat12345',
-  'richa@restat.com': 'restat12345',
+  'akash@restat.co': 'restat12345',
+  'richa@restat.co': 'restat12345',
 };
 
 class LoginScreen extends StatelessWidget {

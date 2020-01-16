@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './dashboard.dart';
 import './salesorderreport.dart';
+import './notifications.dart';
 
 class MenuScreen extends StatelessWidget {
   @override
@@ -16,6 +17,25 @@ class MenuScreen extends StatelessWidget {
         children: <Widget>[
           const SizedBox(
             height: 30,
+          ),
+          InkWell(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Icon(Icons.mail),
+                Text(
+                  'Notifications',
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => NotificationScreen(),
+                ),
+              );
+            },
           ),
           InkWell(
             child: Row(
