@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import './login.dart';
+
+import './dashboard.dart';
+// import './login.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -40,7 +42,7 @@ class HomeScreenButton extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
+                  MaterialPageRoute(builder: (context) => DashboardScreen()),
                 );
               },
               textColor: Colors.white,

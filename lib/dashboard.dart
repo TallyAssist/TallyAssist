@@ -26,7 +26,12 @@ class DashboardScreen extends StatelessWidget {
           children: <Widget>[
             Column(
               children: <Widget>[
-                const Text('ABC Pvt Ltd'),
+                const Text(
+                  'ABC Pvt Ltd',
+                  style: TextStyle(
+                    fontSize: 15,
+                  ),
+                ),
                 const Text(
                   'Revenue: 123\$',
                   style: TextStyle(
