@@ -1,71 +1,16 @@
 // Pending issue - dropdown widget not displaying value
 
 import 'package:flutter/material.dart';
-import 'package:tassist/menu.dart';
+import './headernav.dart';
+// import 'package:tassist/menu.dart';
+// import './linechart.dart';
 // import './myboxdecoration.dart';
 
 class DashboardScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => MenuScreen(),
-                ),
-              );
-            },
-          ),
-        ),
-        title: Row(
-          children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Text(
-                  'ABC Pvt Ltd',
-                  style: TextStyle(
-                    fontSize: 15,
-                    letterSpacing: 2.5,
-                  ),
-                ),
-                const Text(
-                  'Total Revenue: 123\$',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 12,
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ],
-            ),
-            DropdownButton(
-              value: '1 month',
-              items: <String>['1 month', '3 months', '6 months', '1 year']
-                  .map((String value) {
-                return new DropdownMenuItem<String>(
-                  value: value,
-                  child: new Text(value),
-                );
-              }).toList(),
-              onChanged: (_) {},
-              // isExpanded: true,
-            ),
-          ],
-        ),
-        backgroundColor: Colors.black,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add_alarm),
-            onPressed: null,
-          )
-        ],
-      ),
+      appBar: headerNav(context),
       body: ListView(
         children: <Widget>[
           Container(
@@ -93,9 +38,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Product Wise Sales',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Product Wise Sales',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -115,9 +63,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Check Pending Purchase Orders',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Check Pending Purchase Orders',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -136,9 +87,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Check Expenses',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Check Expenses',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -154,10 +108,13 @@ class DashboardScreen extends StatelessWidget {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Text(
-                      'Cash In Hand',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Cash In Hand',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20.0),
+                      ),
                     ),
                     Text(
                       '21,24,230',
@@ -186,9 +143,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Check Bank Reconciliation',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Check Bank Reconciliation',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -207,9 +167,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Account Payables',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Account Payables',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -223,9 +186,12 @@ class DashboardScreen extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'Account Receivables',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    'Account Receivables',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Icon(
                   Icons.play_arrow,
@@ -347,6 +313,7 @@ class SalesDashboardWidgetContentRow extends StatelessWidget {
             ],
           ),
         ),
+        // SimpleTimeSeriesChart.withSampleData(),
       ],
     );
   }
