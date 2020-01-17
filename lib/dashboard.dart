@@ -66,12 +66,17 @@ class DashboardScreen extends StatelessWidget {
           )
         ],
       ),
-      body: Column(
+      body: ListView(
         children: <Widget>[
           Container(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-              child: Text('Your Tally is Connected!'),
+              child: Text(
+                'Your Tally is Connected!',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
             color: const Color(0xff14D2B8),
             width: MediaQuery.of(context).size.width,
@@ -84,7 +89,6 @@ class DashboardScreen extends StatelessWidget {
             // decoration: myBoxDecoration()
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
             color: Color(0xffF3EEFE),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -107,7 +111,6 @@ class DashboardScreen extends StatelessWidget {
             // decoration: myBoxDecoration()
           ),
           Container(
-            margin: const EdgeInsets.only(left: 20.0, right: 20.0),
             color: Color(0xffF3EEFE),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -124,25 +127,137 @@ class DashboardScreen extends StatelessWidget {
             ),
           ),
           Container(
+            child: ExpenseDashboardWidget(),
+            margin: const EdgeInsets.all(15.0),
+            // decoration: myBoxDecoration()
+          ),
+          Container(
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Check Expenses',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(5.0, 20.0, 5.0, 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(
+                      'Cash In Hand',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
+                    Text(
+                      '21,24,230',
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    Text(
+                      'Cash In Bank',
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, fontSize: 20.0),
+                    ),
+                    Text(
+                      '12,51,332',
+                      style: TextStyle(fontSize: 17.0),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Container(
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Check Bank Reconciliation',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
+          ),
+          Container(
             child: OutstandingsDashboardWidget(),
             margin: const EdgeInsets.all(15.0),
             // decoration: myBoxDecoration()
           ),
+          Container(
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Account Payables',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
+          ),
+          Container(
+            color: Color(0xffF3EEFE),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  'Account Receivables',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Icon(
+                  Icons.play_arrow,
+                  color: Colors.purple[800],
+                )
+              ],
+            ),
+          ),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            title: Text('Home'),
+            icon: Icon(Icons.file_upload),
+            title: SizedBox.shrink(),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
+            icon: Icon(Icons.file_download),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.filter_none),
+            title: SizedBox.shrink(),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.update),
+            title: SizedBox.shrink(),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.computer),
-            title: Text('School'),
+            title: SizedBox.shrink(),
           ),
         ],
         // currentIndex: _selectedIndex,
@@ -192,7 +307,7 @@ class SalesDashboardWidgetContentRow extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Icon(
-                    Icons.arrow_upward,
+                    Icons.arrow_drop_up,
                     color: Colors.green,
                   ),
                   Text(
@@ -215,7 +330,7 @@ class SalesDashboardWidgetContentRow extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Icon(
-                    Icons.arrow_downward,
+                    Icons.arrow_drop_down,
                     color: Colors.red,
                   ),
                   Text(
@@ -323,7 +438,7 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Icon(
-                    Icons.arrow_upward,
+                    Icons.arrow_drop_up,
                     color: Colors.green,
                   ),
                   Text(
@@ -346,7 +461,7 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Icon(
-                    Icons.arrow_upward,
+                    Icons.arrow_drop_up,
                     color: Colors.red,
                   ),
                   Text(
@@ -508,6 +623,137 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Outstandings',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              Icon(
+                Icons.info_outline,
+                color: Colors.grey[400],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          child: Row(
+            children: <Widget>[
+              Icon(
+                Icons.favorite,
+                color: Colors.purple[800],
+              ),
+              Icon(
+                Icons.bookmark,
+                color: Colors.purple[800],
+              ),
+              Icon(
+                Icons.share,
+                color: Colors.purple[800],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ExpenseDashboardWidget extends StatelessWidget {
+  const ExpenseDashboardWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: ExpenseDashboardWidgetTitleRow(),
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          ExpenseDashboardWidgetContentRow(),
+        ],
+      ),
+    );
+  }
+}
+
+class ExpenseDashboardWidgetContentRow extends StatelessWidget {
+  const ExpenseDashboardWidgetContentRow({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.arrow_drop_up,
+                    color: Colors.green,
+                  ),
+                  Text(
+                    '1.2L',
+                    style: TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+              Text('Total Expenses'),
+            ],
+          ),
+        ),
+        Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.red,
+                  ),
+                  Text(
+                    '20k',
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
+                    ),
+                  ),
+                ],
+              ),
+              Text('Unpaid expenses'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class ExpenseDashboardWidgetTitleRow extends StatelessWidget {
+  const ExpenseDashboardWidgetTitleRow({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          child: Row(
+            children: <Widget>[
+              Text(
+                'Expenses',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Icon(
