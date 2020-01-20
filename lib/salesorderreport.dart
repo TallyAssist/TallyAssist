@@ -1,357 +1,223 @@
 import 'package:flutter/material.dart';
-import './menu.dart';
+import './headernav.dart';
+import './bottomnav.dart';
 
 class SalesOrderReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Padding(
-          padding: EdgeInsets.only(left: 12),
-          child: IconButton(
-            icon: Icon(Icons.menu),
-            onPressed: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  // builder: (context) => MenuScreen(),
-                  builder: (context) => MenuScreen(),
-                ),
-              );
-            },
-          ),
-        ),
-        title: Row(
-          children: <Widget>[
-            Column(
+      appBar: headerNav(context),
+      bottomNavigationBar: bottomNav(),
+      body: ListView(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(10.0),
+            color: Color(0xffF3EEFE),
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                const Text('ABC Pvt Ltd'),
-                const Text(
-                  'Revenue: 123\$',
-                  style: TextStyle(
-                    color: Colors.green,
-                    fontSize: 12,
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Text(
+                        'Sales Order Report',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+                Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.favorite,
+                        color: Colors.purple[800],
+                      ),
+                      Icon(
+                        Icons.bookmark,
+                        color: Colors.purple[800],
+                      ),
+                      Icon(
+                        Icons.share,
+                        color: Colors.purple[800],
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            // DropdownButton(
-            //   value: '1 month',
-            //   items: <String>['1 month', '3 months', '6 months', '1 year']
-            //       .map((String value) {
-            //     return new DropdownMenuItem<String>(
-            //       value: value,
-            //       child: new Text(value),
-            //     );
-            //   }).toList(),
-            //   onChanged: (_) {},
-            //   isExpanded: true,
-            // ),
-          ],
-        ),
-        backgroundColor: Colors.black,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.add_alarm),
-            onPressed: null,
-          )
-        ],
-      ),
-      body: Container(child: SalesOrderReportList()),
-    );
-  }
-}
-
-class SalesOrderReportList extends StatelessWidget {
-  const SalesOrderReportList({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView(
-        children: <Widget>[
-          // Headline
+          ),
           Container(
-            child: SalesOrderReportWidgetTitleRow(),
-            color: Colors.grey,
-            height: 50,
-          ),
-          const SizedBox(
-            height: 5,
-          ),
-          // Product and Customer subheadings
-          Container(           
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Flexible(flex: 5, child: SalesOrderReportProductSubtitle()),
-                Flexible(flex: 5, child: SalesOrderReportCustomerSubtitle()),
+                Expanded(
+                  child: Container(
+                    color: Color(0xffEDF4FC),
+                    child: Row(
+                      children: <Widget>[
+                        Text('Product'),
+                        Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    color: Color(0xffEDF4FC),
+                    child: Row(
+                      children: <Widget>[
+                        Text('Customer'),
+                        Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                      ],
+                    ),
+                  ),
+                ),
               ],
             ),
-            height: 20,
           ),
-          // Product and Customer metrics
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  new Text(
-                    "₹20.3L",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xff219653),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  new Text(
-                    "23",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xff219653),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  new Text(
-                    "₹1.05L",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xffeb5757),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
+                  ColoredIconNumberRow(metric: '20.3L'),
+                  ColoredIconNumberRow(metric: '23'),
+                  ColoredIconNumberRow(metric: '1.05L'),
                 ],
               ),
               Column(
                 children: <Widget>[
-                  new Text(
-                    "₹20.3L",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xff219653),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  new Text(
-                    "23",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xff219653),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
-                  new Text(
-                    "₹1.05L",
-                    style: TextStyle(
-                      fontFamily: 'Poppins',
-                      color: Color(0xffeb5757),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 3,
-                    ),
-                  ),
+                  ColoredIconNumberRow(metric: '200 tns'),
+                  ColoredIconNumberRow(metric: '73 tns'),
+                  ColoredIconNumberRow(metric: '20k'),
                 ],
+              )
+            ],
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Expanded(
+                  child: Container(
+                    height: 20,
+                    color: Color(0xffEDF4FC),
+                    child: Row(
+                      children: <Widget>[
+                        Text('Pending Sales Order by'),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 20,
+                    color: Color(0xffEDF4FC),
+                    child: Row(
+                      children: <Widget>[
+                        Text('Due Date'),
+                        Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'XYZ Pvt Ltd.',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Container(
+                          color: Colors.grey[200],
+                          child: Text(
+                            '23 days',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Rs. 1,23,890'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '123456',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '450 Nos.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
               ),
             ],
           )
-          // Pending Sales list
         ],
       ),
     );
   }
 }
 
-class SalesOrderReportCustomerSubtitle extends StatelessWidget {
-  const SalesOrderReportCustomerSubtitle({
-    Key key,
-  }) : super(key: key);
+class ColoredIconNumberRow extends StatefulWidget {
+  final String metric;
+  ColoredIconNumberRow({String metric}) : this.metric = metric;
+
+  @override
+  _ColoredIconNumberRowState createState() =>
+      _ColoredIconNumberRowState(metric);
+}
+
+class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
+  _ColoredIconNumberRowState(this.metric);
+  final String metric;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      child: Row(
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
         children: <Widget>[
-          new Text(
-            "Customer",
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal,
-              letterSpacing: 2,
-            ),
-          ),
-          Icon(
-            Icons.arrow_downward,
-            color: Colors.purple[400],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SalesOrderReportProductSubtitle extends StatelessWidget {
-  const SalesOrderReportProductSubtitle({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey,
-      child: Row(
-        children: <Widget>[
-          new Text(
-            "Product A",
-            style: TextStyle(
-              fontFamily: 'Poppins',
-              color: Colors.black,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-              fontStyle: FontStyle.normal,
-              letterSpacing: 2,
-            ),
-          ),
-          Icon(
-            Icons.arrow_downward,
-            color: Colors.purple[400],
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class SalesOrderReportWidgetTitleRow extends StatelessWidget {
-  const SalesOrderReportWidgetTitleRow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Row(
+          Row(
             children: <Widget>[
-              new Text("Sales Order Report",
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Color(0xff000000),
-                    fontSize: 16,
+              Icon(
+                Icons.arrow_drop_up,
+                color: Colors.green,
+                size: 30.0,
+              ),
+              Text(
+                metric,
+                style: TextStyle(
+                    fontSize: 30.0,
                     fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.normal,
-                    letterSpacing: 2,
-                  )),
-              Icon(
-                Icons.info,
-                color: Colors.grey[400],
+                    color: Colors.green),
               ),
             ],
           ),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.thumb_up,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.bookmark,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.share,
-                color: Colors.purple[800],
-              ),
-            ],
-          ),
-        ),
-      ],
+          Text(
+            'Placeholder',
+            style: TextStyle(fontSize: 20.0),
+          )
+        ],
+      ),
     );
   }
 }
-
-// class SalesDashboardWidgetContentRow extends StatelessWidget {
-//   const SalesDashboardWidgetContentRow({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//       children: <Widget>[
-//         Container(
-//           child: Column(
-//             children: <Widget>[
-//               Row(
-//                 children: <Widget>[
-//                   Icon(
-//                     Icons.arrow_upward,
-//                     color: Colors.green,
-//                   ),
-//                   Text(
-//                     '20.3L',
-//                     style: TextStyle(
-//                       color: Colors.green,
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 24,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               Text('Revenue'),
-//             ],
-//           ),
-//         ),
-//         Container(
-//           child: Column(
-//             children: <Widget>[
-//               Row(
-//                 children: <Widget>[
-//                   Icon(
-//                     Icons.arrow_downward,
-//                     color: Colors.red,
-//                   ),
-//                   Text(
-//                     '200 Kg',
-//                     style: TextStyle(
-//                       color: Colors.red,
-//                       fontWeight: FontWeight.bold,
-//                       fontSize: 24,
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//               Text('Quantity'),
-//             ],
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }
