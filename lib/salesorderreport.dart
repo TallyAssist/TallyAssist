@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import './headernav.dart';
 import './bottomnav.dart';
+// import './theme.dart';
 
 class SalesOrderReportScreen extends StatelessWidget {
   @override
@@ -128,7 +129,188 @@ class SalesOrderReportScreen extends StatelessWidget {
             ),
           ),
           Column(
-            children: <Widget>[
+            children: <Widget>
+            [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'XYZ Pvt Ltd.',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Container(
+                          color: Colors.grey[200],
+                          child: Text(
+                            '23 days',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Rs. 1,23,890'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '123456',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '450 Nos.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+           Column(
+            children: <Widget>
+            [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'XYZ Pvt Ltd.',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Container(
+                          color: Colors.grey[200],
+                          child: Text(
+                            '23 days',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Rs. 1,23,890'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '123456',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '450 Nos.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>
+            [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'XYZ Pvt Ltd.',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Container(
+                          color: Colors.grey[200],
+                          child: Text(
+                            '23 days',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Rs. 1,23,890'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '123456',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '450 Nos.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>
+            [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          'XYZ Pvt Ltd.',
+                          style: TextStyle(fontSize: 18.0),
+                        ),
+                        Container(
+                          color: Colors.grey[200],
+                          child: Text(
+                            '23 days',
+                            style: TextStyle(color: Colors.red, fontSize: 15.0),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Text('Rs. 1,23,890'),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Text(
+                      '123456',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      '450 Nos.',
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>
+            [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
@@ -171,6 +353,10 @@ class SalesOrderReportScreen extends StatelessWidget {
               ),
             ],
           )
+        
+        
+        
+        
         ],
       ),
     );
