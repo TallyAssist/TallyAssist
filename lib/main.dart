@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './homescreen.dart';
+import 'package:tassist/homescreen.dart';
 
 void main() => runApp(MyApp());
 
@@ -11,6 +11,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: HomeScreen(),
+      // home: RootPage(
+      //   auth: new Auth(),
+      // ),
     );
   }
 }

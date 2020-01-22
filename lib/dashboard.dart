@@ -3,11 +3,21 @@
 import 'package:flutter/material.dart';
 import './headernav.dart';
 import './bottomnav.dart';
+import 'authentication.dart';
 // import 'package:tassist/menu.dart';
-// import './linechart.dart';
-// import './myboxdecoration.dart';
 
-class DashboardScreen extends StatelessWidget {
+class DashboardScreen extends StatefulWidget {
+  DashboardScreen({Key key, this.auth, this.userId, this.onSignedOut})
+      : super(key: key);
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  final String userId;
+
+  @override
+  _DashboardScreenState createState() => _DashboardScreenState();
+}
+
+class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
