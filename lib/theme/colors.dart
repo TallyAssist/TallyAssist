@@ -18,11 +18,13 @@ const TassistInfoGrey = const Color(0xff979797);
 const TassistInfoLight = const Color(0xffe8f0fd);
 const TassistInfoBlue = const Color(0xff2F80ED);
 const TassistBgBlue = const Color(0xffEDF4FC);
-const TassistBgPurple = const Color.fromRGBO(78, 17, 244, 0.07);
-const TassistBgDarkBlue = const Color(0xffAAA4F7);
+const TassistBgDarkBlue = const Color.fromRGBO(78, 17, 244, 0.07);
+const TassistBgPurple = const Color(0xffAAA4F7);
+const TassistBgLightPurple = const Color(0xffF3EEFE);
 const TassistWhite = const Color(0xffffffff);
 const TassistGray = const Color(0xffC4C4C4);
 const TassistBlack = const Color(0xff000000);
+const TassistMenuBg = const Color(0xff645AFF);
 
 ///
 /// Alpha color system

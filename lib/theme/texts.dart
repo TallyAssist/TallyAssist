@@ -100,20 +100,30 @@ const secondaryCategoryDesc = const TextStyle(
 const secondaryListTitle = const TextStyle(
   color: TassistPrimary,
   fontFamily: 'Poppins',
-  fontSize: 34,
+  fontSize: 20,
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
-  letterSpacing: 3,
+  letterSpacing: 2,
 
 );
 
 const secondaryListDisc = const TextStyle(
-  color: TassistPrimary,
+  color: TassistInfoGrey,
   fontFamily: 'Poppins',
-  fontSize: 30,
+  fontSize: 14,
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
-  letterSpacing: 3,
+  letterSpacing: 1
+);
+
+
+const secondaryListTitle2 = const TextStyle(
+  color: TassistBlack,
+  fontFamily: 'Poppins',
+  fontSize: 20,
+  fontWeight: FontWeight.w700,
+  fontStyle: FontStyle.normal,
+  letterSpacing: 1
 );
 
 const secondaryDrawerText = const TextStyle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 
 class DetailCard extends StatelessWidget {
@@ -14,35 +15,50 @@ class DetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      
-      children: <Widget>[
-        Padding(
-          padding: spacer.all.xs,
-          child: Column(children: <Widget>[
-            Text(_title1, style: Theme.of(context).textTheme.title),
-            Text(info1, style: Theme.of(context).textTheme.body1)
-          ],),
-        ),
-        Padding(
-          padding: spacer.all.xs,
-          child: Column(children: <Widget>[
-            Text(info2)
-          ],),
-        ),
-        Padding(
-          padding: spacer.all.xs,
-          child: Column(children: <Widget>[
-            Text(info3, style: Theme.of(context).textTheme.body1),
-            Text(info4,  style: Theme.of(context).textTheme.body1)
-          ],
 
+    return FittedBox(
+          child: Row(
+  
+        children: <Widget>[
+          Padding(
+            padding: spacer.all.xs,
+            child: Row(children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(_title1, style: Theme.of(context).textTheme.title),
+                  Text(info1, style: Theme.of(context).textTheme.body1),
+                ],
+              ),
+            ],),
           ),
-        )
+          Padding(
+            padding: spacer.all.xs,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+              Container(
+                color: TassistInfoLight,
+                child: Text(info2, style: Theme.of(context).textTheme.body1,))
+            ],),
+          ),
+          Padding(
+            padding: spacer.all.xs,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+              Text(info3, style: Theme.of(context).textTheme.body2),
+              Text(info4,  style: Theme.of(context).textTheme.body1)
+            ],
 
-      ],
+            ),
+          )
 
-      
+        ],
+
+        
+      ),
     );
   }
 }

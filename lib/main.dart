@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
         ),
         textTheme: TextTheme(
           title: secondaryListTitle,
-          body1: secondaryListDisc
+          body1: secondaryListDisc,
+          body2: secondaryListTitle2
         )
       ),
     );
