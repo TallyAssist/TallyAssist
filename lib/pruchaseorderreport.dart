@@ -9,7 +9,7 @@ import './sectionHeader.dart';
 import './filterbar.dart';
 
 
-class SalesOrderReportScreen extends StatelessWidget {
+class PurchaseOrderReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,8 +17,9 @@ class SalesOrderReportScreen extends StatelessWidget {
       bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[
-          SectionHeader('Sales Order Report'),
+          SectionHeader('Purchase Order Report'),
           Container(
+           
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -38,7 +39,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: spacer.x.xs,
-                    margin: spacer.all.xxs,
+                     margin: spacer.all.xxs,
                     color: Color(0xffEDF4FC),
                     child: Row(
                       children: <Widget>[
@@ -51,45 +52,39 @@ class SalesOrderReportScreen extends StatelessWidget {
               ],
             ),
           ),
-          Row(
+         Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  ColoredIconNumberRow('20.3L', 'Amount Sold'),
+                  ColoredIconNumberRow('20.3L', 'Spent So Far'),
                   ColoredIconNumberRow('23', 'Open Orders'),
-                  ColoredIconNumberRow('1.05L', 'Sales Return'),
                 ],
               ),
               Column(
                 children: <Widget>[
                   ColoredIconNumberRow('200 tns', 'Ordered Qty'),
                   ColoredIconNumberRow('73 tns', 'Quantity Due'),
-                  ColoredIconNumberRow('20k', 'Discount'),
                 ],
               )
             ],
           ),
-            FilterBar('Pending Sales Order By', 'Due Date'),
-             Column(
+          FilterBar('Pending Purcahse Order By', 'Due Date'),
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
             DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
             DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
             DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
 
             ],
           ),
-           GoToBar('Inactive Customer List')
-        
-        
+          GoToBar('Top Suppliers'),
+          GoToBar('Top Items Due'),
+          GoToBar('Top Accounts Payable')       
         ],
       ),
     );
   }
 }
-
