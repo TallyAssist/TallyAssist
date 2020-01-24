@@ -19,12 +19,14 @@ class PurchaseOrderReportScreen extends StatelessWidget {
         children: <Widget>[
           SectionHeader('Purchase Order Report'),
           Container(
+           
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
                   child: Container(
                     padding: spacer.x.xs,
+                    margin: spacer.all.xxs,
                     color: Color(0xffEDF4FC),
                     child: Row(
                       children: <Widget>[
@@ -37,6 +39,7 @@ class PurchaseOrderReportScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: spacer.x.xs,
+                     margin: spacer.all.xxs,
                     color: Color(0xffEDF4FC),
                     child: Row(
                       children: <Widget>[

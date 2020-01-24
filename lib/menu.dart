@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/accountsreceivables.dart';
+import 'package:tassist/gstreportscreen.dart';
 import 'package:tassist/pruchaseorderreport.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
@@ -179,6 +181,71 @@ class MenuScreen extends StatelessWidget {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => PurchaseOrderReportScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
+         const SizedBox(
+           height: 15,
+         ),
+         Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.x.sm,
+                    child: Icon(Icons.card_membership, color: Colors.white,),
+                  ),
+                  Text(
+                    'Accounts Receivables',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.title.copyWith(
+                      color: TassistWhite
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => AccountsReceivableScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
+        
+        const SizedBox(
+           height: 15,
+         ),
+         Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.x.sm,
+                    child: Icon(Icons.card_membership, color: Colors.white,),
+                  ),
+                  Text(
+                    'GST Report',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.title.copyWith(
+                      color: TassistWhite
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => GstReportScreen(),
                   ),
                 );
               },

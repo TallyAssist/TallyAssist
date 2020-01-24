@@ -25,6 +25,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: spacer.x.xs,
+                    margin: spacer.all.xxs,
                     color: Color(0xffEDF4FC),
                     child: Row(
                       children: <Widget>[
@@ -37,6 +38,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                 Expanded(
                   child: Container(
                     padding: spacer.x.xs,
+                    margin: spacer.all.xxs,
                     color: Color(0xffEDF4FC),
                     child: Row(
                       children: <Widget>[

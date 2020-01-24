@@ -13,6 +13,7 @@ const TassistSuccess = const Color(0xff219653);
 const TassistSuccessLight = const Color(0xff9DE686);
 const TassistTrafficYellow = const Color(0xffFFB41D);
 const TassistWarning = const Color(0xffEB5757);
+const TassistDanger = const Color(0xffE91C1C);
 const TassistWarningText = const Color(0xffF75161);
 const TassistInfoGrey = const Color(0xff979797);
 const TassistInfoLight = const Color(0xffe8f0fd);

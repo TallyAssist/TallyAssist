@@ -29,7 +29,7 @@ AppBar headerNav(BuildContext context) {
               ),
             ),
             const Text(
-              'Total Revenue: 123\$',
+              'GSTIN: 29ABCDE1234F2Z5',
               style: TextStyle(
                 color: Colors.green,
                 fontSize: 12,
@@ -38,26 +38,28 @@ AppBar headerNav(BuildContext context) {
             ),
           ],
         ),
-        DropdownButton(
-          value: '1 month',
-          items: <String>['1 month', '3 months', '6 months', '1 year']
-              .map((String value) {
-            return new DropdownMenuItem<String>(
-              value: value,
-              child: new Text(value),
-            );
-          }).toList(),
-          onChanged: (_) {},
-          // isExpanded: true,
+        Expanded(
+                  child: DropdownButton(
+            value: '1 month',
+            items: <String>['1 month', '3 months', '6 months', '1 year']
+                .map((String value) {
+              return new DropdownMenuItem<String>(
+                value: value,
+                child: new Text(value),
+              );
+            }).toList(),
+            onChanged: (_) {},
+            // isExpanded: true,
+          ),
         ),
       ],
     ),
     backgroundColor: Colors.black,
-    actions: <Widget>[
-      IconButton(
-        icon: Icon(Icons.add_alarm),
-        onPressed: null,
-      )
-    ],
+    // actions: <Widget>[
+    //   IconButton(
+    //     icon: Icon(Icons.add_alarm),
+    //     onPressed: null,
+    //   )
+    // ],
   );
 }

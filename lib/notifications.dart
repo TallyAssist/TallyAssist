@@ -47,8 +47,8 @@ class NotificationScreen extends StatelessWidget {
           )
         ],
       ),
-     body: ListView.builder(itemBuilder: (
-       BuildContext context, int index) {
+     body: ListView.builder(
+       itemBuilder: (BuildContext context, int index) {
          return Card(
            child: Padding(
              padding: const EdgeInsets.all(25.0),

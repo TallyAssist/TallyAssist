@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/secondarysectionheader.dart';
-import 'package:tassist/theme/colors.dart';
-import 'package:tassist/theme/dimensions.dart';
 import './headernav.dart';
 import './bottomnav.dart';
 import './detailcard.dart';
