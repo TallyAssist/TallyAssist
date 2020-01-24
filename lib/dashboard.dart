@@ -1,16 +1,54 @@
 // Pending issue - dropdown widget not displaying value
 
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import './headernav.dart';
 import './bottomnav.dart';
-import 'authentication.dart';
-// import 'package:tassist/menu.dart';
+
+class SalesMetricText extends StatefulWidget {
+  SalesMetricText({this.userId});
+
+  final String userId; 
+    
+  @override
+  _SalesMetricTextState createState() => _SalesMetricTextState();
+}
+
+class _SalesMetricTextState extends State<SalesMetricText> {
+  @override
+  Widget build(BuildContext context) {
+    return new StreamBuilder(
+        stream: Firestore.instance
+            .collection('metrics')
+            .document(widget.userId)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return new Text(
+              "Loading",
+              style: TextStyle(
+                color: Colors.green,
+                fontWeight: FontWeight.bold,
+                fontSize: 24,
+              ),
+            );
+          }
+          var userDocument = snapshot.data;
+          return new Text(
+            userDocument["total_sales"].toString(),
+            style: TextStyle(
+              color: Colors.green,
+              fontWeight: FontWeight.bold,
+              fontSize: 24,
+            ),
+          );
+        });
+  }
+}
 
 class DashboardScreen extends StatefulWidget {
-  DashboardScreen({Key key, this.auth, this.userId, this.onSignedOut})
-      : super(key: key);
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
+  DashboardScreen({Key key, this.userId}) : super(key: key);
+
   final String userId;
 
   @override
@@ -40,7 +78,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           // Container 1 - Sales
           Container(
-            child: SalesDashboardWidget(),
+            child: SalesDashboardWidget(userId: widget.userId),
             margin: const EdgeInsets.all(15.0),
             // decoration: myBoxDecoration()
           ),
@@ -218,11 +256,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 }
 
-class SalesDashboardWidget extends StatelessWidget {
-  const SalesDashboardWidget({
-    Key key,
-  }) : super(key: key);
+class SalesDashboardWidget extends StatefulWidget {
+  const SalesDashboardWidget({Key key, this.userId}) : super(key: key);
 
+  final String userId;
+
+  @override
+  _SalesDashboardWidgetState createState() => _SalesDashboardWidgetState();
+}
+
+class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -234,18 +277,26 @@ class SalesDashboardWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          SalesDashboardWidgetContentRow(),
+          SalesDashboardWidgetContentRow(userId: widget.userId),
         ],
       ),
     );
   }
 }
 
-class SalesDashboardWidgetContentRow extends StatelessWidget {
-  const SalesDashboardWidgetContentRow({
-    Key key,
-  }) : super(key: key);
+class SalesDashboardWidgetContentRow extends StatefulWidget {
+  const SalesDashboardWidgetContentRow({Key key, this.userId})
+      : super(key: key);
 
+  final String userId;
+
+  @override
+  _SalesDashboardWidgetContentRowState createState() =>
+      _SalesDashboardWidgetContentRowState();
+}
+
+class _SalesDashboardWidgetContentRowState
+    extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -260,14 +311,7 @@ class SalesDashboardWidgetContentRow extends StatelessWidget {
                     Icons.arrow_drop_up,
                     color: Colors.green,
                   ),
-                  Text(
-                    '20.3L',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
+                  SalesMetricText(userId: widget.userId)
                 ],
               ),
               Text('Revenue'),

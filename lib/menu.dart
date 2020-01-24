@@ -92,7 +92,9 @@ class _MenuScreenState extends State<MenuScreen> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => DashboardScreen(),
+                    builder: (context) => DashboardScreen(
+                      userId: widget.userId,
+                    ),
                   ),
                 );
               },
