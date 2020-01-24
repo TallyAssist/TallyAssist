@@ -13,6 +13,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: HomeScreen(),
+      // home: RootPage(
+      //   auth: new Auth(),
+      // ),
       theme: ThemeData(
         appBarTheme: AppBarTheme(
           textTheme: TextTheme(title: primaryAppBarTitle),

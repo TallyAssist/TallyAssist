@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/authentication.dart';
 import 'package:tassist/accountsreceivables.dart';
 import 'package:tassist/gstreportscreen.dart';
 import 'package:tassist/pruchaseorderreport.dart';
@@ -9,7 +10,27 @@ import './salesorderreport.dart';
 import './notifications.dart';
 import './productperformance.dart';
 
-class MenuScreen extends StatelessWidget {
+class MenuScreen extends StatefulWidget {
+  MenuScreen({Key key, this.auth, this.userId, this.onSignedOut})
+      : super(key: key);
+  final BaseAuth auth;
+  final VoidCallback onSignedOut;
+  final String userId;
+
+  @override
+  _MenuScreenState createState() => _MenuScreenState();
+}
+
+class _MenuScreenState extends State<MenuScreen> {
+  _signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.onSignedOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,28 +45,30 @@ class MenuScreen extends StatelessWidget {
       ),
       backgroundColor: TassistMenuBg,
       body: ListView(
-  
         children: <Widget>[
           const SizedBox(
-            height:15,
+            height: 15,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
-              
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.mail_outline, color: Colors.white,),
+                    child: Icon(
+                      Icons.mail_outline,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Notifications',
                     textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -58,7 +81,7 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 15,
           ),
           Padding(
@@ -70,46 +93,56 @@ class MenuScreen extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.dashboard, color: Colors.white,),
+                    child: Icon(
+                      Icons.dashboard,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Dashboard',
                     textAlign: TextAlign.center,
-                   style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => DashboardScreen(),
+                    builder: (context) => DashboardScreen(
+                      userId: widget.userId,
+                    ),
                   ),
                 );
               },
             ),
           ),
-          const SizedBox(
+          SizedBox(
             height: 15,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.domain, color: Colors.white,),
+                    child: Icon(
+                      Icons.domain,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Product Performance',
                     textAlign: TextAlign.center,
-                   style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -122,26 +155,30 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-           const SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.card_giftcard, color: Colors.white,),
+                    child: Icon(
+                      Icons.card_giftcard,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Sales',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -154,26 +191,55 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-           const SizedBox(
-            height: 15,
+          const SizedBox(
+            height: 30,
           ),
-         Padding(
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.card_giftcard,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Sign Out',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white, fontSize: 25.0),
+                  ),
+                ],
+              ),
+              onTap: () {
+                _signOut();
+              },
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.card_membership, color: Colors.white,),
+                    child: Icon(
+                      Icons.card_membership,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Purchases',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -186,26 +252,30 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-         const SizedBox(
-           height: 15,
-         ),
-         Padding(
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.card_membership, color: Colors.white,),
+                    child: Icon(
+                      Icons.card_membership,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'Accounts Receivables',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -218,27 +288,30 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-        
-        const SizedBox(
-           height: 15,
-         ),
-         Padding(
+          const SizedBox(
+            height: 15,
+          ),
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
-                 crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   Padding(
                     padding: spacer.x.sm,
-                    child: Icon(Icons.card_membership, color: Colors.white,),
+                    child: Icon(
+                      Icons.card_membership,
+                      color: Colors.white,
+                    ),
                   ),
                   Text(
                     'GST Report',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.title.copyWith(
-                      color: TassistWhite
-                    ),
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
                   ),
                 ],
               ),
@@ -251,7 +324,6 @@ class MenuScreen extends StatelessWidget {
               },
             ),
           ),
-        
         ],
       ),
     );
