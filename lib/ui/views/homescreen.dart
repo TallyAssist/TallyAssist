@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'root_page.dart';
-import 'authentication.dart';
+import 'package:tassist/root_page.dart';
+import 'package:tassist/authentication.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

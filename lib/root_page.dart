@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:tassist/dashboard.dart';
-import 'package:tassist/menu.dart';
+import 'package:tassist/ui/views/menu.dart';
 import 'authentication.dart';
 import 'login_signup_page.dart';
 

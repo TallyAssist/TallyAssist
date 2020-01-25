@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/bigmetricnoicon.dart';
-import 'package:tassist/gotobar.dart';
-import 'package:tassist/itemlist.dart';
-import 'package:tassist/secondarysectionheader.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-import './headernav.dart';
-import './bottomnav.dart';
-import './sectionHeader.dart';
+import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
+import 'package:tassist/ui/widgets/gotobar.dart';
+import 'package:tassist/ui/widgets/itemlist.dart';
+import 'package:tassist/ui/widgets/secondarysectionheader.dart';
+import 'package:tassist/ui/widgets/sectionHeader.dart';
+
 
 
 class AccountsReceivableScreen extends StatelessWidget {

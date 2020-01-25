@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/theme/texts.dart';
-import './homescreen.dart';
+import 'package:tassist/ui/views/homescreen.dart';
 
 
 void main() => runApp(MyApp());

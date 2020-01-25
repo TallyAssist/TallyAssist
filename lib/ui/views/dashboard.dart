@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import './headernav.dart';
-import './bottomnav.dart';
+import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/shared/bottomnav.dart';
 
 class SalesMetricText extends StatefulWidget {
   SalesMetricText({this.userId});

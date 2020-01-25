@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/gotobar.dart';
 import 'package:tassist/theme/dimensions.dart';
-import './headernav.dart';
-import './bottomnav.dart';
-import './coloredIcon.dart';
-import './detailcard.dart';
-import './sectionHeader.dart';
-import './filterbar.dart';
+import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/widgets/coloredIcon.dart';
+import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/widgets/filterbar.dart';
+import 'package:tassist/ui/widgets/gotobar.dart';
+import 'package:tassist/ui/widgets/sectionHeader.dart';
+
 
 
 class SalesOrderReportScreen extends StatelessWidget {

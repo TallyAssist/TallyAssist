@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/secondarysectionheader.dart';
-import './headernav.dart';
-import './bottomnav.dart';
-import './detailcard.dart';
-import './sectionHeader.dart';
+import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/widgets/secondarysectionheader.dart';
+import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 class ProductPerformanceScreen extends StatelessWidget {
   @override

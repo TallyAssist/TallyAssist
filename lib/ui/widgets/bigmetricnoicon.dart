@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import './theme/theme.dart';
+import 'package:tassist/theme/theme.dart';
 
 class BigMetricNoIcon extends StatelessWidget {
 

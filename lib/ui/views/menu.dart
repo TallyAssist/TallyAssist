@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/authentication.dart';
-import 'package:tassist/accountsreceivables.dart';
-import 'package:tassist/gstreportscreen.dart';
-import 'package:tassist/pruchaseorderreport.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/gstreportscreen.dart';
+import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import './dashboard.dart';
 import './salesorderreport.dart';
 import './notifications.dart';

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/gotobar.dart';
-import 'package:tassist/gstcard.dart';
-import './headernav.dart';
-import './bottomnav.dart';
-import './sectionHeader.dart';
-
+import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/widgets/gotobar.dart';
+import 'package:tassist/ui/widgets/gstcard.dart';
+import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 
 class GstReportScreen extends StatelessWidget {
