@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/authentication.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
@@ -12,25 +11,25 @@ import './notifications.dart';
 import './productperformance.dart';
 
 class MenuScreen extends StatefulWidget {
-  MenuScreen({Key key, this.auth, this.userId, this.onSignedOut})
-      : super(key: key);
-  final BaseAuth auth;
-  final VoidCallback onSignedOut;
-  final String userId;
+  // MenuScreen({Key key, this.auth, this.userId, this.onSignedOut})
+  //     : super(key: key);
+  // final BaseAuth auth;
+  // final VoidCallback onSignedOut;
+  // final String userId;
 
   @override
   _MenuScreenState createState() => _MenuScreenState();
 }
 
 class _MenuScreenState extends State<MenuScreen> {
-  _signOut() async {
-    try {
-      await widget.auth.signOut();
-      widget.onSignedOut();
-    } catch (e) {
-      print(e);
-    }
-  }
+  // _signOut() async {
+  //   try {
+  //     await widget.auth.signOut();
+  //     widget.onSignedOut();
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -112,9 +111,7 @@ class _MenuScreenState extends State<MenuScreen> {
               onTap: () {
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
-                    builder: (context) => DashboardScreen(
-                      userId: widget.userId,
-                    ),
+                    builder: (context) => DashboardScreen(),
                   ),
                 );
               },
@@ -337,34 +334,6 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           
-          Padding(
-            padding: spacer.all.sm,
-            child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: spacer.all.sm,
-                    child: Icon(
-                      Icons.card_giftcard,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Text(
-                    'Sign Out',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title
-                        .copyWith(color: TassistWhite),
-                  ),
-                ],
-              ),
-              onTap: () {
-                _signOut();
-              },
-            ),
-          ),
           SizedBox(
             height: 15,
           ),

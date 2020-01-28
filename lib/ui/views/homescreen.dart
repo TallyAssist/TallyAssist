@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/root_page.dart';
-import 'package:tassist/authentication.dart';
+import 'package:tassist/ui/authenticate.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -42,9 +41,7 @@ class HomeScreenButton extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RootPage(
-                      auth: new Auth(),
-                    ),
+                    builder: (context) => Authenticate(),
                   ),
                 );
               },
