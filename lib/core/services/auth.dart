@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tassist/core/models/user.dart';
 
@@ -35,6 +36,12 @@ class AuthService {
       AuthResult result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+
+      Firestore.instance
+          .collection('metrics')
+          .document(user.uid)
+          .setData({'total_sales': 0});
+
       return _userFromFirebaseUser(user);
     } catch (error) {
       print(error.toString());
