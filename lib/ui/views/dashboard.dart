@@ -1,15 +1,13 @@
 // Pending issue - dropdown widget not displaying value
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
 
 class SalesMetricText extends StatefulWidget {
-  SalesMetricText({this.userId});
-
-  final String userId; 
-    
   @override
   _SalesMetricTextState createState() => _SalesMetricTextState();
 }
@@ -17,10 +15,12 @@ class SalesMetricText extends StatefulWidget {
 class _SalesMetricTextState extends State<SalesMetricText> {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FirebaseUser>(context);
+
     return new StreamBuilder(
         stream: Firestore.instance
             .collection('metrics')
-            .document(widget.userId)
+            .document(user.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -311,7 +311,7 @@ class _SalesDashboardWidgetContentRowState
                     Icons.arrow_drop_up,
                     color: Colors.green,
                   ),
-                  SalesMetricText(userId: widget.userId)
+                  SalesMetricText()
                 ],
               ),
               Text('Revenue'),
