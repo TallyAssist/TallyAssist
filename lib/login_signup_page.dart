@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/dimensions.dart';
 // import 'package:firebase_auth/firebase_auth.dart';
 import 'authentication.dart';
 
@@ -25,10 +27,19 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("TallyAssist Login"),
+        backgroundColor: TassistPrimaryBackground,
+        title: new Text("TallyAssist Login",
+        style: Theme.of(context).textTheme.title.copyWith(
+          color: TassistWhite
+        ),
+        ),
       ),
       body: Column(
         children: <Widget>[
+          Padding(
+            padding: spacer.all.sm,
+            child: Text('Welcome to TallyAssit!', style: Theme.of(context).textTheme.body2),
+          ),
           formWidget(),
           loginButtonWidget(),
           secondaryButton(),
@@ -63,7 +74,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget _emailWidget() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 100.0, 0.0, 0.0),
+      padding: const EdgeInsets.fromLTRB(24.0, 24.0, 24.0, 24.0),
       child: TextFormField(
         maxLines: 1,
         keyboardType: TextInputType.emailAddress,
@@ -72,7 +83,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
             hintText: 'Enter Email',
             icon: new Icon(
               Icons.mail,
-              color: Colors.grey,
+              color: TassistBlack,
             )),
         validator: (value) => value.isEmpty ? 'Email cannot be empty' : null,
         onSaved: (value) => _email = value.trim(),
@@ -82,16 +93,16 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
 
   Widget _passwordWidget() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+      padding: spacer.all.sm,
       child: new TextFormField(
         maxLines: 1,
         obscureText: true,
         autofocus: false,
         decoration: new InputDecoration(
-            hintText: 'Password',
+            hintText: 'Enter Password',
             icon: new Icon(
               Icons.lock,
-              color: Colors.grey,
+              color: TassistBlack,
             )),
         validator: (value) => value.isEmpty ? 'Password cannot be empty' : null,
         onSaved: (value) => _password = value.trim(),
@@ -106,12 +117,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           elevation: 5.0,
           minWidth: 200.0,
           height: 42.0,
-          color: Colors.blue,
+          color: TassistPrimaryBackground,
           child: _formMode == FormMode.LOGIN
               ? new Text('Login',
-                  style: new TextStyle(fontSize: 20.0, color: Colors.white))
+                  style: Theme.of(context).textTheme.title.copyWith(
+            color: TassistWhite,
+            fontSize: 15,
+        ),
+                  )
               : new Text('Create account',
-                  style: new TextStyle(fontSize: 20.0, color: Colors.white)),
+                  style: Theme.of(context).textTheme.title.copyWith(
+                    color: TassistWhite,
+                    fontSize: 15,
+                  ),
+                  ),
           onPressed: _validateAndSubmit,
         ));
   }
@@ -120,10 +139,10 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return new FlatButton(
       child: _formMode == FormMode.LOGIN
           ? new Text('Create an account',
-              style: new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300))
+              style: Theme.of(context).textTheme.body1)
           : new Text('Have an account? Sign in',
               style:
-                  new TextStyle(fontSize: 18.0, fontWeight: FontWeight.w300)),
+                  Theme.of(context).textTheme.body1),
       onPressed: _formMode == FormMode.LOGIN ? showSignupForm : showLoginForm,
     );
   }

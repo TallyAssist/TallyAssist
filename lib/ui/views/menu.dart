@@ -4,6 +4,7 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/gstreportscreen.dart';
+import 'package:tassist/ui/views/productionInput.dart';
 import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import './dashboard.dart';
 import './salesorderreport.dart';
@@ -194,32 +195,7 @@ class _MenuScreenState extends State<MenuScreen> {
           const SizedBox(
             height: 30,
           ),
-          Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(
-                    Icons.card_giftcard,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    'Sign Out',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 25.0),
-                  ),
-                ],
-              ),
-              onTap: () {
-                _signOut();
-              },
-            ),
-          ),
-          SizedBox(
-            height: 15,
-          ),
-          Padding(
+            Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
@@ -324,6 +300,75 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
+           const SizedBox(
+            height: 15,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.x.sm,
+                    child: Icon(
+                      Icons.card_membership,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'Production',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => ProductionScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
+          
+          Padding(
+            padding: spacer.all.sm,
+            child: InkWell(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.all.sm,
+                    child: Icon(
+                      Icons.card_giftcard,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'Sign Out',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
+                  ),
+                ],
+              ),
+              onTap: () {
+                _signOut();
+              },
+            ),
+          ),
+          SizedBox(
+            height: 15,
+          ),
+        
         ],
       ),
     );
