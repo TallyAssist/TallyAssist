@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/services/auth.dart';
+import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';

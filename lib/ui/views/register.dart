@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/services/auth.dart';
+import 'package:tassist/core/services/auth.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
