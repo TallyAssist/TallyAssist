@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
@@ -30,6 +31,8 @@ class _MenuScreenState extends State<MenuScreen> {
   //     print(e);
   //   }
   // }
+
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +195,7 @@ class _MenuScreenState extends State<MenuScreen> {
           const SizedBox(
             height: 30,
           ),
-            Padding(
+          Padding(
             padding: const EdgeInsets.all(15.0),
             child: InkWell(
               child: Row(
@@ -297,7 +300,7 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
-           const SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
@@ -333,11 +336,38 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
-          
           SizedBox(
             height: 15,
           ),
-        
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.x.sm,
+                    child: Icon(
+                      Icons.card_membership,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'Sign Out',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
+                  ),
+                ],
+              ),
+              onTap: () async {
+                await _auth.signOut();
+              },
+            ),
+          ),
         ],
       ),
     );
