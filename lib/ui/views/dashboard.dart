@@ -4,8 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
+
+import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/widgets/dashboardScreens/Purchases.dart';
+import 'package:tassist/ui/widgets/dashboardScreens/expenses.dart';
 
 class SalesMetricText extends StatefulWidget {
   @override
@@ -26,11 +30,9 @@ class _SalesMetricTextState extends State<SalesMetricText> {
           if (!snapshot.hasData) {
             return new Text(
               "Loading",
-              style: TextStyle(
-                color: Colors.green,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
+              style: Theme.of(context).textTheme.body1.copyWith(
+                  color: TassistSuccess
+                ),
             );
           }
           var userDocument = snapshot.data;
@@ -394,136 +396,6 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   }
 }
 
-class PurchaseDashboardWidget extends StatelessWidget {
-  const PurchaseDashboardWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: PurchaseDashboardWidgetTitleRow(),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          PurchaseDashboardWidgetContentRow(),
-        ],
-      ),
-    );
-  }
-}
-
-class PurchaseDashboardWidgetContentRow extends StatelessWidget {
-  const PurchaseDashboardWidgetContentRow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.arrow_drop_up,
-                    color: Colors.green,
-                  ),
-                  Text(
-                    '6.8L',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              Text('Revenue'),
-            ],
-          ),
-        ),
-        Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.arrow_drop_up,
-                    color: Colors.red,
-                  ),
-                  Text(
-                    '24',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              Text('Open orders'),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
-  const PurchaseDashboardWidgetTitleRow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Purchase',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Icon(
-                Icons.info_outline,
-                color: Colors.grey[400],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.bookmark,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.share,
-                color: Colors.purple[800],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class OutstandingsDashboardWidget extends StatelessWidget {
   const OutstandingsDashboardWidget({
@@ -650,133 +522,3 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
   }
 }
 
-class ExpenseDashboardWidget extends StatelessWidget {
-  const ExpenseDashboardWidget({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            child: ExpenseDashboardWidgetTitleRow(),
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          ExpenseDashboardWidgetContentRow(),
-        ],
-      ),
-    );
-  }
-}
-
-class ExpenseDashboardWidgetContentRow extends StatelessWidget {
-  const ExpenseDashboardWidgetContentRow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.arrow_drop_up,
-                    color: Colors.green,
-                  ),
-                  Text(
-                    '1.2L',
-                    style: TextStyle(
-                      color: Colors.green,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              Text('Total Expenses'),
-            ],
-          ),
-        ),
-        Container(
-          child: Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.red,
-                  ),
-                  Text(
-                    '20k',
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              Text('Unpaid expenses'),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class ExpenseDashboardWidgetTitleRow extends StatelessWidget {
-  const ExpenseDashboardWidgetTitleRow({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Expenses',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-              ),
-              Icon(
-                Icons.info_outline,
-                color: Colors.grey[400],
-              ),
-            ],
-          ),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.bookmark,
-                color: Colors.purple[800],
-              ),
-              Icon(
-                Icons.share,
-                color: Colors.purple[800],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}

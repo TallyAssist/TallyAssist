@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
+import 'package:tassist/theme/colors.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -23,15 +24,22 @@ class _SignInState extends State<SignIn> {
   Widget build(BuildContext context) {
     // return loading ? Loading() : Scaffold(
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: TassistWhite,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: TassistPrimary,
         elevation: 0.0,
-        title: Text('Sign in to Brew Crew'),
+        title: Text('Sign In',
+        style: Theme.of(context).textTheme.title.copyWith(
+          color: TassistWhite
+        )),
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Register'),
+            icon: Icon(Icons.person, color: TassistWhite,),
+            label: Text('Register',
+            style: Theme.of(context).textTheme.body1.copyWith(
+              color: TassistWhite
+            ),
+              ),
             onPressed: () => widget.toggleView(),
           ),
         ],
@@ -62,7 +70,8 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                  color: Colors.pink[400],
+                  color: TassistPrimaryBackground,
+                  elevation: 20.0,
                   child: Text(
                     'Sign In',
                     style: TextStyle(color: Colors.white),
