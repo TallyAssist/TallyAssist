@@ -35,15 +35,15 @@ class SectionHeader extends StatelessWidget {
                     children: <Widget>[
                       Icon(
                         Icons.favorite,
-                        color: Colors.purple[800],
+                        color: TassistPrimaryBackground,
                       ),
                       Icon(
                         Icons.bookmark,
-                        color: Colors.purple[800],
+                        color: TassistPrimaryBackground,
                       ),
                       Icon(
                         Icons.share,
-                        color: Colors.purple[800],
+                        color: TassistPrimaryBackground,
                       ),
                     ],
                   ),

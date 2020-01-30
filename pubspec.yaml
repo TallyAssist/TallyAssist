@@ -60,6 +60,7 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: fonts/Montserrat-Regular.ttf
+          weight: 300
         - asset: fonts/Montserrat-ExtraBold.ttf
           weight: 800
         - asset: fonts/Montserrat-Bold.ttf
@@ -67,6 +68,9 @@ flutter:
     - family: Poppins
       fonts:
         - asset: fonts/Poppins-Regular.ttf
+          weight: 300
+        - asset: fonts/Poppins-SemiBold.ttf
+          weight: 500
         - asset: fonts/Poppins-Bold.ttf
           weight: 700
 

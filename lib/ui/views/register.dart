@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
+import 'package:tassist/theme/colors.dart';
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -23,15 +24,17 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     // return loading ? Loading() : Scaffold(
     return Scaffold(
-      backgroundColor: Colors.brown[100],
+      backgroundColor: TassistWhite,
       appBar: AppBar(
-        backgroundColor: Colors.brown[400],
+        backgroundColor: TassistPrimaryBackground,
         elevation: 0.0,
-        title: Text('Sign up to Brew Crew'),
+        title: Text('Sign up'),
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.person),
-            label: Text('Sign In'),
+            icon: Icon(Icons.person, color: TassistWhite,),
+            label: Text('Sign In', style: Theme.of(context).textTheme.body1.copyWith(
+              color: TassistWhite
+            ),),
             onPressed: () => widget.toggleView(),
           ),
         ],
@@ -44,7 +47,11 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
-                // decoration: textInputDecoration.copyWith(hintText: 'email'),
+                decoration: InputDecoration(
+                  icon: Icon(Icons.email, color: TassistPrimaryBackground),
+                  hintText: 'Enter your email ID please',
+                  labelText: 'Email'
+                ),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -52,7 +59,11 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
-                // decoration: textInputDecoration.copyWith(hintText: 'password'),
+                decoration: InputDecoration(
+                   icon: Icon(Icons.vpn_key, color: TassistPrimaryBackground),
+                  hintText: 'Enter your password please',
+                  labelText: 'Password'
+                ),
                 obscureText: true,
                 validator: (val) =>
                     val.length < 6 ? 'Enter a password 6+ chars long' : null,
@@ -62,10 +73,11 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               RaisedButton(
-                  color: Colors.pink[400],
+                  color: TassistPrimary,
+                  elevation: 10.0,
                   child: Text(
                     'Register',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: TassistWhite),
                   ),
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {

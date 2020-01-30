@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
 
 
@@ -9,18 +11,19 @@ class ColoredIconNumberRow extends StatefulWidget {
 
   @override
   _ColoredIconNumberRowState createState() =>
-      _ColoredIconNumberRowState(metric, mTitle);
+      _ColoredIconNumberRowState();
 }
 
 class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
-  final String mTitle;
-  final String metric;
 
-
-  _ColoredIconNumberRowState(this.metric, this.mTitle);
-  
   @override
   Widget build(BuildContext context) {
+
+    final snapshot = Provider.of<DocumentSnapshot>(context);
+
+    var userDocument = snapshot.data; 
+
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -33,7 +36,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
                 size: 30.0,
               ),
               Text(
-                metric,
+                userDocument[widget.metric].toString(),
                 style: TextStyle(
                     fontSize: 30.0,
                     fontWeight: FontWeight.bold,
@@ -43,7 +46,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
           ),
           Container(
              child: Text(
-              mTitle,
+              widget.mTitle,
               overflow: TextOverflow.fade,
               style: Theme.of(context).textTheme.title.copyWith(
                 fontSize: 12,

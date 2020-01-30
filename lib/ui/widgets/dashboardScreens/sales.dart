@@ -1,49 +1,54 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tassist/theme/colors.dart';
 
 
-class PurchaseDashboardWidget extends StatefulWidget {
+class SalesDashboardWidget extends StatefulWidget {
+
 
 
   @override
-  _PurchaseDashboardWidgetState createState() => _PurchaseDashboardWidgetState();
+  _SalesDashboardWidgetState createState() => _SalesDashboardWidgetState();
 }
 
-class _PurchaseDashboardWidgetState extends State<PurchaseDashboardWidget> {
+class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
 
-   return Container(
+
+    return Container(
         child: Column(
           children: <Widget>[
             Container(
-              child: PurchaseDashboardWidgetTitleRow(),
+              child: SalesDashboardWidgetTitleRow(),
             ),
             const SizedBox(
               height: 20,
             ),
-            PurchaseDashboardWidgetContentRow(),
+            SalesDashboardWidgetContentRow(),
           ],
         ),
     );
   }
 }
 
-class PurchaseDashboardWidgetContentRow extends StatelessWidget {
-  
+class SalesDashboardWidgetContentRow extends StatefulWidget {
+ 
 
+  @override
+  _SalesDashboardWidgetContentRowState createState() =>
+      _SalesDashboardWidgetContentRowState();
+}
 
+class _SalesDashboardWidgetContentRowState
+    extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
 
-    final snapshot = Provider.of<DocumentSnapshot>(context);
+  final snapshot = Provider.of<DocumentSnapshot>(context);
+  var userDocument = snapshot.data; 
 
-    var userDocument = snapshot.data; 
-
-        
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -56,12 +61,12 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
                     Icons.arrow_drop_up,
                     color: TassistSuccess,
                   ),
-                  Text(userDocument['total_purchases'].toString(),
-                    style: Theme.of(context).textTheme.body2.copyWith(
-                        color: TassistSuccess,
-                        fontSize: 24,
-                      ),
+                  Text(userDocument['total_sales'].toString(),
+                  style: Theme.of(context).textTheme.body2.copyWith(
+                    color: TassistSuccess,
+                    fontSize: 24
                   ),
+                  )
                 ],
               ),
               Text('Revenue'),
@@ -74,29 +79,31 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
               Row(
                 children: <Widget>[
                   Icon(
-                    Icons.arrow_drop_up,
-                    color: TassistWarning,
+                    Icons.arrow_drop_down,
+                    color: Colors.red,
                   ),
                   Text(
-                    userDocument['open_purchase_orders'].toString(),
-                    style: Theme.of(context).textTheme.body2.copyWith(
-                        color: TassistWarning,
-                        fontSize: 24,
+                  userDocument['total_sales_quantity'].toString(),
+                    style: TextStyle(
+                      color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
                     ),
                   ),
                 ],
               ),
-              Text('Open orders'),
+              Text('Quantity'),
             ],
           ),
         ),
+        // SimpleTimeSeriesChart.withSampleData(),
       ],
     );
   }
 }
 
-class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
-  const PurchaseDashboardWidgetTitleRow({
+class SalesDashboardWidgetTitleRow extends StatelessWidget {
+  const SalesDashboardWidgetTitleRow({
     Key key,
   }) : super(key: key);
 
@@ -109,7 +116,7 @@ class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                'Purchase',
+                'Sales',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Icon(
@@ -141,3 +148,4 @@ class PurchaseDashboardWidgetTitleRow extends StatelessWidget {
     );
   }
 }
+

@@ -50,7 +50,7 @@ class _MenuScreenState extends State<MenuScreen> {
       body: ListView(
         children: <Widget>[
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -85,7 +85,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -121,7 +121,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -157,7 +157,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -193,7 +193,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(
-            height: 30,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -229,7 +229,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -241,7 +241,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Padding(
                     padding: spacer.x.sm,
                     child: Icon(
-                      Icons.card_membership,
+                      Icons.face,
                       color: Colors.white,
                     ),
                   ),
@@ -265,7 +265,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -277,7 +277,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Padding(
                     padding: spacer.x.sm,
                     child: Icon(
-                      Icons.card_membership,
+                      Icons.insert_drive_file,
                       color: Colors.white,
                     ),
                   ),
@@ -301,7 +301,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           const SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -313,7 +313,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Padding(
                     padding: spacer.x.sm,
                     child: Icon(
-                      Icons.card_membership,
+                      Icons.build,
                       color: Colors.white,
                     ),
                   ),
@@ -337,7 +337,7 @@ class _MenuScreenState extends State<MenuScreen> {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 10,
           ),
           Padding(
             padding: const EdgeInsets.all(15.0),
@@ -349,7 +349,7 @@ class _MenuScreenState extends State<MenuScreen> {
                   Padding(
                     padding: spacer.x.sm,
                     child: Icon(
-                      Icons.card_membership,
+                      Icons.person,
                       color: Colors.white,
                     ),
                   ),

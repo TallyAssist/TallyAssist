@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tassist/core/models/metrics.dart';
 import 'package:tassist/core/models/production.dart';
 
 
@@ -48,6 +47,9 @@ class DatabaseService {
       .map(_productionListfromSnapshot);
     }
 
+//Connectiong to Collection Products
+final CollectionReference productCollection = 
+    Firestore.instance.collection('products');
 
 
 

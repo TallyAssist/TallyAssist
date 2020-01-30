@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/services/database.dart';
+import 'package:tassist/theme/colors.dart';
 
 
 
@@ -19,11 +18,7 @@ class _ExpenseDashboardWidgetState extends State<ExpenseDashboardWidget> {
   @override
   Widget build(BuildContext context) {
 
-      final user = Provider.of<FirebaseUser>(context);
-
-  return StreamProvider<DocumentSnapshot>.value (
-          value: DatabaseService().metricCollection.document(user.uid).snapshots(),
-          child: Container(
+  return Container(
       child: Column(
         children: <Widget>[
           Container(
@@ -35,8 +30,7 @@ class _ExpenseDashboardWidgetState extends State<ExpenseDashboardWidget> {
           ExpenseDashboardWidgetContentRow(),
         ],
       ),
-    ),
-  );
+    );
   }
 }
 
@@ -65,13 +59,12 @@ class _ExpenseDashboardWidgetContentRowState extends State<ExpenseDashboardWidge
                   children: <Widget>[
                     Icon(
                       Icons.arrow_drop_up,
-                      color: Colors.green,
+                      color: TassistSuccess,
                     ),
                     Text(
                       userDocument['total_expenses'].toString(),
-                      style: TextStyle(
-                        color: Colors.green,
-                        fontWeight: FontWeight.bold,
+                      style: Theme.of(context).textTheme.body2.copyWith(
+                        color: TassistSuccess,
                         fontSize: 24,
                       ),
                     ),
@@ -91,7 +84,7 @@ class _ExpenseDashboardWidgetContentRowState extends State<ExpenseDashboardWidge
                       color: Colors.red,
                     ),
                     Text(
-                      '20k',
+                      userDocument['unpaid_expenses'].toString(),
                       style: TextStyle(
                         color: Colors.red,
                         fontWeight: FontWeight.bold,
@@ -138,15 +131,15 @@ class ExpenseDashboardWidgetTitleRow extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.favorite,
-                color: Colors.purple[800],
+                color:TassistPrimaryBackground,
               ),
               Icon(
                 Icons.bookmark,
-                color: Colors.purple[800],
+                color:TassistPrimaryBackground,
               ),
               Icon(
                 Icons.share,
-                color: Colors.purple[800],
+                color:TassistPrimaryBackground,
               ),
             ],
           ),

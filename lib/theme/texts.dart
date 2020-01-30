@@ -101,17 +101,17 @@ const secondaryListTitle = const TextStyle(
   color: TassistPrimary,
   fontFamily: 'Poppins',
   fontSize: 20,
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
   letterSpacing: 2,
 
 );
 
 const secondaryListDisc = const TextStyle(
-  color: TassistInfoGrey,
+  color: TassistBlack,
   fontFamily: 'Poppins',
   fontSize: 14,
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.w300,
   fontStyle: FontStyle.normal,
   letterSpacing: 1
 );
