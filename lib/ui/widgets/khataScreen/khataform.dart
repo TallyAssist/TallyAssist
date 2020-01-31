@@ -92,7 +92,7 @@ class _KhataFormState extends State<KhataForm> {
             TextFormField(
       keyboardType: TextInputType.number,
       decoration: new InputDecoration(
-      hintText: 'Enter Production',
+      hintText: 'Enter Amount',
       icon: new Icon(
         Icons.attach_money,
         color: TassistBlack,
@@ -116,6 +116,19 @@ class _KhataFormState extends State<KhataForm> {
               _currentTranType ?? '',
              );
             Navigator.pop(context);
+          //  Future.delayed(Duration(seconds: 5)).then((onValue) {
+          //   Scaffold.of(context).showSnackBar(new SnackBar(
+          //             content: Text("Wohoo! New transaction for $_currentParty added")
+          //         ));
+          //         });
+          // }
+          // else {
+          //   AlertDialog(
+          //     title: Text('No Input!'),
+          //     actions: <Widget>[
+          //       Text('Ok')
+          //     ],
+          //   );
           }
       },
             )

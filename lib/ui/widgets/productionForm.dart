@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 
@@ -11,11 +12,13 @@ class ProductionForm extends StatefulWidget {
 }
 
 class _ProductionFormState extends State<ProductionForm> {
+  
+  var formatter = new DateFormat('dd-MM-yyyy');
 
   final _formKey = GlobalKey<FormState>();
   final List<String> product = ['Product A', 'Product B', 'Product C'];
 
-  String _currentDate;
+  DateTime _currentDate;
   String  _currentProduct;
   String _currentProduction;
 
@@ -27,17 +30,30 @@ class _ProductionFormState extends State<ProductionForm> {
         children: <Widget>[
           Text('Enter data for the day'),
           SizedBox(height: 20.0,),
-          TextFormField(
-            keyboardType: TextInputType.datetime,
-            decoration: new InputDecoration(
-            hintText: 'Enter Date',
-            icon: new Icon(
-              Icons.date_range,
-              color: TassistBlack,
-            )),
-            validator: (val) => val.isEmpty ? 'Please select a date': null,
-            onChanged: (val) => setState(() => _currentDate = val),
-          ),
+           Row(children: <Widget>[ 
+      Padding(
+        padding: const EdgeInsets.fromLTRB(2.0, 8.0, 10.0, 8.0),
+        child: Icon(Icons.date_range),
+      ),
+      Text(_currentDate == null ? 'Select a date': formatter.format(_currentDate).toString()),
+      SizedBox(width: 10.0,),
+      RaisedButton(
+      child: Text('Date Picker'),
+      color: TassistBgLightPurple,
+      onPressed: () {
+        showDatePicker(
+          context: context,
+          initialDate: DateTime.now(),
+          firstDate: DateTime(2001),
+          lastDate: DateTime(2022)
+        ).then( (date) {
+          _currentDate = date;
+        }
+        );
+      },
+      )
+      ],
+      ),
           SizedBox(height: 20.0),
           DropdownButtonFormField(
               value: _currentProduct ?? 'Product A',

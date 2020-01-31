@@ -20,9 +20,9 @@ class DatabaseService {
     Stream<QuerySnapshot> get sales => metricCollection.snapshots();
 
   final CollectionReference productionCollection = 
-    Firestore.instance.collection('production');
+    Firestore.instance.collection('company').document('PTDQMfuftCgJJiA6UwZOExfawV23').collection('production');
 
-  Future createProductionRecord(String date, String product, String production) async {
+  Future createProductionRecord(DateTime date, String product, String production) async {
     return await productionCollection.document(this.uid).setData({
       'Date': date,
       'Product': product,
@@ -35,7 +35,7 @@ class DatabaseService {
   List<Production> _productionListfromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
           return Production(
-            date: doc.data['Date'] ?? '',
+            date: doc.data['Date'].toDate() ?? '',
             product: doc.data['Product'] ?? '',
             production: doc.data['Production'] ?? 0,
           );
@@ -69,6 +69,10 @@ Future createKhataRecord(DateTime date, String partyname, String amount, String 
     });
   }
 
+
+Future deleteKhata(String id) async {
+  await khataCollection.document(this.uid).collection('transations').document(id).delete();
+}
 
 // defining a list of production data items 
   List<Khata> _khatarecordfromSnapshots (QuerySnapshot snapshot) {

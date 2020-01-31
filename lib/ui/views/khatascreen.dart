@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/bottomsheetcustom.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +25,7 @@ class KhataScreen extends StatelessWidget {
    final user = Provider.of<FirebaseUser>(context);
 
     void _showProductionPanel() {
-      showModalBottomSheet(context: context, builder: (context) {
+      showModalBottomSheetCustom(context: context, builder: (context) {
         return Container(
           padding: spacer.all.xs,
           child: KhataForm(),
@@ -42,8 +43,11 @@ class KhataScreen extends StatelessWidget {
         body: Column(
           children: <Widget>[
             SectionHeader('Your Secret Khata'),
-                      
-             
+            Container(
+              child: Text('  Not syncing with Tally :) Swipe to delete.'),
+              color: TassistWarningShadow,
+              width: MediaQuery.of(context).size.width,
+              ),
             KhataList(),
             Container(
               padding: spacer.x.xxs,

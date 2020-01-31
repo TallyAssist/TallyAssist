@@ -1,8 +1,11 @@
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tassist/core/models/production.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
 
 class ProductionTile extends StatelessWidget {
 
@@ -19,7 +22,7 @@ class ProductionTile extends StatelessWidget {
         margin: spacer.all.xs,
         child: ListTile(
           leading: Container(
-              child: Text(production.date),
+              child: Text(formatter.format(production.date).toString()),
               color: TassistSuccessLight,
           ),
           title: Text(production.product),

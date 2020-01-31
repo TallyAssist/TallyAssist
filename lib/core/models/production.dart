@@ -2,7 +2,7 @@
 
 class Production {
 
-  final String date;
+  final DateTime date;
   final String product;
   final String production;
 
