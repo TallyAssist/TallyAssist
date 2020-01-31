@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tassist/core/models/production.dart';
+import 'package:tassist/core/models/khata.dart';
 
 
 class DatabaseService {
@@ -22,7 +23,7 @@ class DatabaseService {
     Firestore.instance.collection('production');
 
   Future createProductionRecord(String date, String product, String production) async {
-    return await productionCollection.document(uid).setData({
+    return await productionCollection.document(this.uid).setData({
       'Date': date,
       'Product': product,
       'Production': production,
@@ -52,7 +53,45 @@ final CollectionReference productCollection =
     Firestore.instance.collection('products');
 
 
+// //Connectiong to Collection Products
+final CollectionReference khataCollection = 
+    Firestore.instance.collection('khata');
+
+
+// CTS
+
+Future createKhataRecord(DateTime date, String partyname, String amount, String trantype) async {
+    return await khataCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23').collection('transations').document().setData({
+      'date': date,
+      'trantype': trantype,
+      'partyname': partyname,
+      'amount': amount,
+    });
+  }
+
+
+// defining a list of production data items 
+  List<Khata> _khatarecordfromSnapshots (QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+          return Khata(
+            date: doc.data['date'].toDate() ?? '',
+            partyname: doc.data['partyname'] ?? '',
+            amount: doc.data['amount'] ?? '',
+            trantype: doc.data['l'] ?? '',
+          );
+        }).toList();
+      }
+    
+// Creating a stream of production data items so that we can listen on them
+    Stream<List<Khata>> get khataData {
+      return khataCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23')
+      .collection('transations').snapshots()
+      .map(_khatarecordfromSnapshots);
+    }
+
+
+
+
+
 
     }
-    
-   

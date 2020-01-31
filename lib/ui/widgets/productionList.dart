@@ -21,7 +21,7 @@ class _ProductionListState extends State<ProductionList> {
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: false, 
-          itemCount: productionData.length,
+          itemCount: productionData?.length ?? 0,
           itemBuilder: (context, index) {
             return ProductionTile(production: productionData[index]);
           },

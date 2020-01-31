@@ -4,6 +4,7 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/gstreportscreen.dart';
+import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/productionInput.dart';
 import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import './dashboard.dart';
@@ -156,6 +157,43 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
+           SizedBox(
+            height: 10,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: InkWell(
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  Padding(
+                    padding: spacer.x.sm,
+                    child: Icon(
+                      Icons.book,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'Your Secret Khata',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context)
+                        .textTheme
+                        .title
+                        .copyWith(color: TassistWhite),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => (KhataScreen()),
+                  ),
+                );
+              },
+            ),
+          ),
+          
           const SizedBox(
             height: 10,
           ),

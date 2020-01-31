@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
 import 'package:tassist/ui/shared/headernav.dart';
@@ -12,7 +16,16 @@ import 'package:tassist/ui/widgets/sectionHeader.dart';
 class PurchaseOrderReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    final user = Provider.of<FirebaseUser>(context);
+    
+    return  MultiProvider(
+      providers: [
+        StreamProvider<DocumentSnapshot>.value(value: DatabaseService().metricCollection.document(user.uid).snapshots()),
+        // StreamProvider<DocumentSnapshot>.value(value: DatabaseService().productCollection.document(user.uid).snapshots()),
+      ],
+  
+
+      child:  Scaffold(
       appBar: headerNav(context),
       bottomNavigationBar: bottomNav(),
       body: ListView(
@@ -57,14 +70,14 @@ class PurchaseOrderReportScreen extends StatelessWidget {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  ColoredIconNumberRow('20.3L', 'Spent So Far'),
-                  ColoredIconNumberRow('23', 'Open Orders'),
+                  ColoredIconNumberRow('total_purchases', 'Spent So Far'),
+                  ColoredIconNumberRow('open_purchase_orders', 'Open Orders'),
                 ],
               ),
               Column(
                 children: <Widget>[
-                  ColoredIconNumberRow('200 tns', 'Ordered Qty'),
-                  ColoredIconNumberRow('73 tns', 'Quantity Due'),
+                  ColoredIconNumberRow('purchase_order_qty', 'Ordered Qty'),
+                  ColoredIconNumberRow('purchase_qty_due', 'Quantity Due'),
                 ],
               )
             ],
@@ -85,6 +98,7 @@ class PurchaseOrderReportScreen extends StatelessWidget {
           GoToBar('Top Accounts Payable')       
         ],
       ),
+    )
     );
   }
 }

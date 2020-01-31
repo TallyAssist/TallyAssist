@@ -83,7 +83,7 @@ class _SalesDashboardWidgetContentRowState
                     color: Colors.red,
                   ),
                   Text(
-                  userDocument['total_sales_quantity'].toString(),
+                  userDocument['total_sales_quantity'].toString() ?? '',
                     style: TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
