@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/homescreen.dart';
-import 'package:tassist/ui/views/menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:tassist/ui/views/menu.dart';
 
 class RootPage extends StatelessWidget {
   @override
@@ -15,7 +16,7 @@ class RootPage extends StatelessWidget {
     if (user == null){
       return HomeScreen();
     } else {
-      return MenuScreen();
+      return DashboardScreen();
     }
     
   }

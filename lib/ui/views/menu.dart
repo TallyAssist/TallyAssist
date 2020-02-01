@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/gstreportscreen.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
@@ -157,7 +158,7 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
-           SizedBox(
+          SizedBox(
             height: 10,
           ),
           Padding(
@@ -193,7 +194,6 @@ class _MenuScreenState extends State<MenuScreen> {
               },
             ),
           ),
-          
           const SizedBox(
             height: 10,
           ),
@@ -402,7 +402,12 @@ class _MenuScreenState extends State<MenuScreen> {
                 ],
               ),
               onTap: () async {
-                await _auth.signOut();
+                dynamic result = await _auth.signOut();
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (context) => RootPage(),
+                  ),
+                );
               },
             ),
           ),
