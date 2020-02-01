@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tassist/core/models/user.dart';
 
 class AuthService {
+  static var _authCredential, actualCode;
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // convert firebase user into custom User instance
@@ -48,6 +50,75 @@ class AuthService {
       return null;
     }
   }
+
+  Future verifyPhone(String phone) async {
+    print(phone.toString());
+    _auth
+        .verifyPhoneNumber(
+            phoneNumber: phone.toString(),
+            timeout: Duration(seconds: 60),
+            verificationCompleted: verificationCompleted,
+            verificationFailed: verificationFailed,
+            codeSent: codeSent,
+            codeAutoRetrievalTimeout: codeAutoRetrievalTimeout)
+        .then((value) {
+      print('Code sent');
+    }).catchError((error) {
+      print(error.toString());
+    });
+  }
+
+  void codeSent (String verificationId, [int forceResendingToken]) async {
+    actualCode = verificationId;
+    print("\nEnter the code sent");
+  }
+
+  void codeAutoRetrievalTimeout (String verificationId) {
+    actualCode = verificationId;
+    print("\nAuto retrieval time out");
+  }
+
+  void verificationFailed(AuthException authException) {
+    print('${authException.message}');
+    if (authException.message.contains('not authorized'))
+      print('App not authroized');
+    else if (authException.message.contains('Network'))
+      print('Please check your internet connection and try again');
+    else
+      print('Something has gone wrong, please try later ' +
+          authException.message);
+  }
+
+  void verificationCompleted(AuthCredential auth) {
+    print('Auto retrieving verification code');
+
+    _auth.signInWithCredential(auth).then((AuthResult result) {
+      if (result.user != null) {
+        print('Authentication successful');
+        // onAuthenticationSuccessful();
+      } else {
+        print('Invalid code/invalid authentication');
+      }
+    }).catchError((error) {
+      print('Something has gone wrong, please try later $error');
+    });
+  }
+
+  Future signInWithPhone({String smsCode}) async {
+    _authCredential = PhoneAuthProvider.getCredential(
+        verificationId: actualCode, smsCode: smsCode);
+
+    _auth
+        .signInWithCredential(_authCredential)
+        .then((AuthResult result) async {
+      print('Authentication successful');
+      // onAuthenticationSuccessful();
+    }).catchError((error) {
+      print(
+          'Something has gone wrong, please try later(signInWithPhoneNumber) $error');
+    });
+  }
+
 
   // sign out
   Future signOut() async {
