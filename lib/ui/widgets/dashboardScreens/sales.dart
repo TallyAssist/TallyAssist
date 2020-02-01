@@ -61,7 +61,7 @@ class _SalesDashboardWidgetContentRowState
                     Icons.arrow_drop_up,
                     color: TassistSuccess,
                   ),
-                  Text(userDocument['total_sales'].toString(),
+                  Text(userDocument['total_sales'].toString() ?? '',
                   style: Theme.of(context).textTheme.body2.copyWith(
                     color: TassistSuccess,
                     fontSize: 24

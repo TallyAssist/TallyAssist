@@ -6,10 +6,15 @@ import 'package:tassist/ui/widgets/secondarysectionheader.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 class ProductPerformanceScreen extends StatelessWidget {
+
+  
   @override
   Widget build(BuildContext context) {
+        final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      appBar: headerNav(context),
+      key: _drawerKey,
+      appBar: headerNav(_drawerKey),
       bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[

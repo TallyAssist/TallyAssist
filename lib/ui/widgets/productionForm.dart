@@ -80,7 +80,9 @@ class _ProductionFormState extends State<ProductionForm> {
           ),
           RaisedButton(
             color: TassistPrimary,
-            child: Text('Submit'),
+            child: Text('Submit', style: Theme.of(context).textTheme.body1.copyWith(
+        color: TassistWhite
+      )),
             onPressed: () async {
                 if(_formKey.currentState.validate()) {
                   await DatabaseService().createProductionRecord(

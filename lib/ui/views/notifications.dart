@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/ui/shared/drawer.dart';
 
 // import 'dashboard.dart';
 import 'menu.dart';
@@ -9,6 +10,7 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var onPressed2;
         return Scaffold(
+          drawer: tassistDrawer(context),
           appBar: AppBar(
             leading: Padding(
               padding: EdgeInsets.only(left: 12),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/gstcard.dart';
@@ -7,10 +8,15 @@ import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 
 class GstReportScreen extends StatelessWidget {
+
+      final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: headerNav(context),
+      key: _drawerKey,
+      drawer: tassistDrawer(context),
+      appBar: headerNav(_drawerKey),
       bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[

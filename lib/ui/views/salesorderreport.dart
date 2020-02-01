@@ -6,6 +6,7 @@ import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
@@ -23,6 +24,8 @@ class SalesOrderReportScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
      final user = Provider.of<FirebaseUser>(context);
+         final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
     
     return  MultiProvider(
       providers: [
@@ -32,7 +35,9 @@ class SalesOrderReportScreen extends StatelessWidget {
   
 
           child: Scaffold(
-          appBar: headerNav(context),
+            key: _drawerKey,
+            drawer: tassistDrawer(context),
+          appBar: headerNav(_drawerKey),
           bottomNavigationBar: bottomNav(),
           body: ListView(
             children: <Widget>[

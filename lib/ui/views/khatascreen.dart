@@ -4,6 +4,7 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
 import 'package:tassist/ui/shared/bottomsheetcustom.dart';
+import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:provider/provider.dart';
@@ -33,12 +34,15 @@ class KhataScreen extends StatelessWidget {
       }
       );
     }
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
 
     return StreamProvider<List<Khata>>.value (
           value: DatabaseService(uid: user.uid).khataData,
           child: Scaffold(
-        appBar: headerNav(context),
+            key: _drawerKey,
+            drawer: tassistDrawer(context),
+        appBar: headerNav(_drawerKey),
         bottomNavigationBar: bottomNav(),
         body: Column(
           children: <Widget>[

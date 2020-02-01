@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/bottomnav.dart';
+import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
@@ -15,8 +16,13 @@ class AccountsReceivableScreen extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
+
+        final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
     return Scaffold(
-      appBar: headerNav(context),
+      key: _drawerKey,
+      drawer: tassistDrawer(context),
+      appBar: headerNav(_drawerKey),
       bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[

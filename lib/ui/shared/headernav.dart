@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/ui/views/menu.dart';
+import 'package:tassist/theme/colors.dart';
 
-AppBar headerNav(BuildContext context) {
+
+
+
+AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey) {
+
+// headerNav(_drawerkey);
+
+// GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
+bool enabled = false;
 
   return AppBar(
     leading: Padding(
@@ -9,11 +17,16 @@ AppBar headerNav(BuildContext context) {
       child: IconButton(
         icon: Icon(Icons.menu),
         onPressed: () {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-              builder: (context) => MenuScreen(),
-            ),
-          );
+          // Navigator.of(context).pushReplacement(
+          //   MaterialPageRoute(
+          //     builder: (context) => MenuScreen(),
+          //   ),
+          // // );
+           if (enabled) {
+
+                         // open drawer if this value is true
+            _drawerkey.currentState.openDrawer();
+          } 
         },
       ),
     ),
@@ -26,23 +39,25 @@ AppBar headerNav(BuildContext context) {
               'ABC Pvt Ltd',
               style: TextStyle(
                 fontSize: 15,
-                letterSpacing: 2.5,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.0,
               ),
             ),
             const Text(
               'GSTIN: 29ABCDE1234F2Z5',
               style: TextStyle(
-                color: Colors.green,
+                color: TassistWhite,
                 fontSize: 12,
                 letterSpacing: 1.0,
               ),
             ),
           ],
         ),
+        SizedBox(width: 10.0,),
         DropDownMonths(),
       ],
     ),
-    backgroundColor: Colors.black,
+    backgroundColor: TassistMenuBg
   );
 }
 
@@ -63,7 +78,9 @@ class _DropDownMonthsState extends State<DropDownMonths> {
   Widget build(BuildContext context) {
     return Expanded(child: DropdownButton(
         items: _months.map((value) => DropdownMenuItem(
-            child: Text(value),
+            child: Text(value, style: Theme.of(context).textTheme.body1.copyWith(
+              color: TassistPrimaryBackground
+            ),),
             value: value,
         )).toList(),
         onChanged: (selectedMonth) {
@@ -71,9 +88,17 @@ class _DropDownMonthsState extends State<DropDownMonths> {
             selectedValue=selectedMonth;
           });
         },
+        // value: Text(selectedValue.toString(), style: Theme.of(context).textTheme.body1.copyWith(
+        //       color: TassistWhite,
+        //       fontSize: 12.0,
+        //     )),
         value: selectedValue,
-        hint: Text('Select Dates'),
+
         isExpanded: false,   
+        hint: Text('Period', style: Theme.of(context).textTheme.body1.copyWith(
+              color: TassistWhite,
+              fontSize: 12.0,
+            )),
 
       ),
     );
