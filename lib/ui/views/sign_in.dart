@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/ui/root_page.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -29,17 +30,23 @@ class _SignInState extends State<SignIn> {
         backgroundColor: TassistPrimary,
         elevation: 0.0,
         title: Text('Sign In',
-        style: Theme.of(context).textTheme.title.copyWith(
-          color: TassistWhite
-        )),
+            style: Theme.of(context)
+                .textTheme
+                .title
+                .copyWith(color: TassistWhite)),
         actions: <Widget>[
           FlatButton.icon(
-            icon: Icon(Icons.person, color: TassistWhite,),
-            label: Text('Register',
-            style: Theme.of(context).textTheme.body1.copyWith(
-              color: TassistWhite
+            icon: Icon(
+              Icons.person,
+              color: TassistWhite,
             ),
-              ),
+            label: Text(
+              'Register',
+              style: Theme.of(context)
+                  .textTheme
+                  .body1
+                  .copyWith(color: TassistWhite),
+            ),
             onPressed: () => widget.toggleView(),
           ),
         ],
@@ -53,10 +60,9 @@ class _SignInState extends State<SignIn> {
               SizedBox(height: 20.0),
               TextFormField(
                 decoration: InputDecoration(
-                  icon: Icon(Icons.email, color: TassistPrimaryBackground),
-                  hintText: 'Enter your email ID please',
-                  labelText: 'Email'
-                ),
+                    icon: Icon(Icons.email, color: TassistPrimaryBackground),
+                    hintText: 'Enter your email ID please',
+                    labelText: 'Email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
                   setState(() => email = val);
@@ -66,10 +72,9 @@ class _SignInState extends State<SignIn> {
               TextFormField(
                 obscureText: true,
                 decoration: InputDecoration(
-                   icon: Icon(Icons.vpn_key, color: TassistPrimaryBackground),
-                  hintText: 'Enter your password please',
-                  labelText: 'Password'
-                ),
+                    icon: Icon(Icons.vpn_key, color: TassistPrimaryBackground),
+                    hintText: 'Enter your password please',
+                    labelText: 'Password'),
                 validator: (val) =>
                     val.length < 6 ? 'Enter a password 6+ chars long' : null,
                 onChanged: (val) {
@@ -94,6 +99,12 @@ class _SignInState extends State<SignIn> {
                           loading = false;
                           error = 'Could not sign in with those credentials';
                         });
+                      } else {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => RootPage(),
+                          ),
+                        );
                       }
                     }
                   }),
