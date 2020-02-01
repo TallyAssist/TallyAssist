@@ -44,7 +44,9 @@ class DatabaseService {
     
 // Creating a stream of production data items so that we can listen on them
     Stream<List<Production>> get productionData {
-      return productionCollection.snapshots()
+      return productionCollection
+      .orderBy('Date', descending: true)
+      .snapshots()
       .map(_productionListfromSnapshot);
     }
 
@@ -81,7 +83,7 @@ Future deleteKhata(String id) async {
             date: doc.data['date'].toDate() ?? '',
             partyname: doc.data['partyname'] ?? '',
             amount: doc.data['amount'] ?? '',
-            trantype: doc.data['l'] ?? '',
+            trantype: doc.data['trantype'] ?? '',
           );
         }).toList();
       }
@@ -89,7 +91,9 @@ Future deleteKhata(String id) async {
 // Creating a stream of production data items so that we can listen on them
     Stream<List<Khata>> get khataData {
       return khataCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23')
-      .collection('transations').snapshots()
+      .collection('transations')
+      .orderBy('date', descending: true)
+      .snapshots()
       .map(_khatarecordfromSnapshots);
     }
 

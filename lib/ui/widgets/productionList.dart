@@ -17,7 +17,7 @@ class _ProductionListState extends State<ProductionList> {
     
     
     return Container(
-      height: 450.0,
+      height: MediaQuery.of(context).size.height / 1.5,
       child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: false, 

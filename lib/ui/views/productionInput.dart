@@ -45,23 +45,18 @@ class ProductionScreen extends StatelessWidget {
             SectionHeader('Daily Production Report'),
           
              ProductionList(),
-
-             Container(
-              padding: spacer.x.xxs,
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                      child: Icon(Icons.add),
-                      backgroundColor: TassistPrimaryBackground,
-                      onPressed: () => _showProductionPanel(),
-                  ),
-                ),
-            ),
              
           ],
 
-        )
-          
+        ),
+        floatingActionButton: Padding(
+          padding: spacer.all.xs,
+          child: FloatingActionButton(
+                        child: Icon(Icons.add),
+                        backgroundColor: TassistPrimaryBackground,
+                        onPressed: () => _showProductionPanel(),
+                    ),
+        ), 
         
         ),
           );

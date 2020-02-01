@@ -103,6 +103,7 @@ const secondaryListTitle = const TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
+  letterSpacing: 1
 
 );
 

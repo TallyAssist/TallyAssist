@@ -25,7 +25,7 @@ class KhataScreen extends StatelessWidget {
 
    final user = Provider.of<FirebaseUser>(context);
 
-    void _showProductionPanel() {
+    void _showKhataPanel() {
       showModalBottomSheetCustom(context: context, builder: (context) {
         return Container(
           padding: spacer.all.xs,
@@ -53,22 +53,19 @@ class KhataScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               ),
             KhataList(),
-            Container(
-              padding: spacer.x.xxs,
-              child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: FloatingActionButton(
-                      child: Icon(Icons.add),
-                      backgroundColor: TassistPrimaryBackground,
-                      onPressed: () => _showProductionPanel(),
-                  ),
-                ),
-            ),
+            
              
           ],
 
-        )
-          
+        ),
+        floatingActionButton: Padding(
+              padding: spacer.x.xs,
+              child: FloatingActionButton(
+                  child: Icon(Icons.add),
+                  backgroundColor: TassistPrimaryBackground,
+                  onPressed: () => _showKhataPanel(),
+              ),
+            ),  
         
         ),
           );
