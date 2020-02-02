@@ -26,7 +26,7 @@ class DetailCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(_title1, style: Theme.of(context).textTheme.title),
+                  Text(_title1, overflow: TextOverflow.ellipsis, style: Theme.of(context).textTheme.title),
                   Text(info1, style: Theme.of(context).textTheme.body1),
                 ],
               ),

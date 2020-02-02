@@ -69,7 +69,7 @@ class _SalesDashboardWidgetContentRowState
                   )
                 ],
               ),
-              Text('Revenue'),
+              Text('Total Sales'),
             ],
           ),
         ),
@@ -92,7 +92,7 @@ class _SalesDashboardWidgetContentRowState
                   ),
                 ],
               ),
-              Text('Quantity'),
+              Text('Qty Sold'),
             ],
           ),
         ),

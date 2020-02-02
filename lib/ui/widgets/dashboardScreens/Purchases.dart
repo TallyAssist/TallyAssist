@@ -64,7 +64,7 @@ class PurchaseDashboardWidgetContentRow extends StatelessWidget {
                   ),
                 ],
               ),
-              Text('Revenue'),
+              Text('Total Purchases'),
             ],
           ),
         ),

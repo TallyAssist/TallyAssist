@@ -44,56 +44,58 @@ class _DashboardScreenState extends State<DashboardScreen> {
         key: _drawerKey,
         appBar: headerNav(_drawerKey),
         drawer: tassistDrawer(context),
-        body: ListView(
-          children: <Widget>[
-            Container(
-              
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                child: Text(
-                  'Your Tally is Connected!',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
+        body: SafeArea(
+                  child: ListView(
+            children: <Widget>[
+              Container(
+                
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                  child: Text(
+                    'Your Tally is Connected!',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
+                color: const Color(0xff14D2B8),
+                width: MediaQuery.of(context).size.width,
+                height: 20,
               ),
-              color: const Color(0xff14D2B8),
-              width: MediaQuery.of(context).size.width,
-              height: 20,
-            ),
-            // Container 1 - Sales
-            Container(
-              child: SalesDashboardWidget(),
-              margin: const EdgeInsets.all(15.0),
-              // decoration: myBoxDecoration()
-            ),
-            GoToBar('Pending Sales Orders'),
-            // Container 2 - Purchases
-            Container(
-              child: PurchaseDashboardWidget(),
-              margin: const EdgeInsets.all(20.0),
-              // decoration: myBoxDecoration()
-            ),
-            GoToBar('Check Pending Purchase Orders'),
-            Container(
-              child: ExpenseDashboardWidget(),
-              margin: const EdgeInsets.all(15.0),
-              // decoration: myBoxDecoration()
-            ),
-            GoToBar('Check Expenses'),
-            Container(
-              child: CashWidget(),
-              margin: const EdgeInsets.all(15.0),
-            ),
-            GoToBar('Check Bank Reconciliation'),
-            Container(
-              child: OutstandingsDashboardWidget(),
-              margin: const EdgeInsets.all(15.0),
-              // decoration: myBoxDecoration()
-            ),
-           GoToBar('Accounts Payables'),
-           GoToBar('Accounts Receivables')
-          ],
+              // Container 1 - Sales
+              Container(
+                child: SalesDashboardWidget(),
+                margin: const EdgeInsets.all(15.0),
+                // decoration: myBoxDecoration()
+              ),
+              GoToBar('Pending Sales Orders'),
+              // Container 2 - Purchases
+              Container(
+                child: PurchaseDashboardWidget(),
+                margin: const EdgeInsets.all(20.0),
+                // decoration: myBoxDecoration()
+              ),
+              GoToBar('Check Pending Purchase Orders'),
+              Container(
+                child: ExpenseDashboardWidget(),
+                margin: const EdgeInsets.all(15.0),
+                // decoration: myBoxDecoration()
+              ),
+              GoToBar('Check Expenses'),
+              Container(
+                child: CashWidget(),
+                margin: const EdgeInsets.all(15.0),
+              ),
+              GoToBar('Check Bank Reconciliation'),
+              Container(
+                child: OutstandingsDashboardWidget(),
+                margin: const EdgeInsets.all(15.0),
+                // decoration: myBoxDecoration()
+              ),
+             GoToBar('Accounts Payables'),
+             GoToBar('Accounts Receivables')
+            ],
+          ),
         ),
         bottomNavigationBar: bottomNav(),
     )

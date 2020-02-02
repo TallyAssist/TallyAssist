@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tassist/core/models/production.dart';
 import 'package:tassist/core/models/khata.dart';
+import 'package:tassist/core/models/salesvoucher.dart';
 
 
 class DatabaseService {
@@ -96,10 +97,36 @@ Future deleteKhata(String id) async {
       .snapshots()
       .map(_khatarecordfromSnapshots);
     }
+  }
 
 
 
+class SalesVoucherService {
+
+    final String uid;
+    SalesVoucherService({this.uid});
 
 
+  final CollectionReference companyCollection = 
+Firestore.instance.collection('company');
 
+Stream<List<SalesVoucher>> get salesVoucherData {
+      return companyCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23')
+      .collection('voucher')
+      .where('type', isEqualTo: 'Sales')
+      .snapshots()
+      .map(_salesvouchersfromSnapshots);
     }
+
+ List<SalesVoucher> _salesvouchersfromSnapshots (QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc) {
+      return SalesVoucher(
+        date: doc.data['date'] ?? '',
+        partyname: doc.data['party_ledger_name'] ?? '',
+        amount: doc.data['amount'] ?? 0,
+        masterid: doc.data['master_id'] ?? '',
+        iscancelled: doc.data['is_cancelled'] ?? '',
+                  );
+           }).toList();
+        }
+  }
