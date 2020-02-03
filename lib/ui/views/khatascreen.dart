@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/bottomsheetcustom.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
@@ -43,7 +43,7 @@ class KhataScreen extends StatelessWidget {
             key: _drawerKey,
             drawer: tassistDrawer(context),
         appBar: headerNav(_drawerKey),
-        bottomNavigationBar: bottomNav(),
+        // bottomNavigationBar: bottomNav(),
         body: Column(
           children: <Widget>[
             SectionHeader('Your Secret Khata'),

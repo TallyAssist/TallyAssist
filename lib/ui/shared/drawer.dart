@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
@@ -6,10 +7,12 @@ import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/gstreportscreen.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
+import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/notifications.dart';
 import 'package:tassist/ui/views/productionInput.dart';
 import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
+import 'package:tassist/ui/views/stockscreen.dart';
 
  final AuthService _auth = AuthService();
 
@@ -93,6 +96,18 @@ Drawer tassistDrawer(BuildContext context) {
         icon: Icons.computer,
         title: 'GST Report',
         ontap: GstReportScreen(),
+        color: TassistPrimaryBackground,
+      ),
+      DrawerItem(
+        icon: FontAwesomeIcons.warehouse,
+        title: 'Stock',
+        ontap: StockScreen(),
+        color: TassistPrimaryBackground,
+      ),
+      DrawerItem(
+        icon: FontAwesomeIcons.listAlt,
+        title: 'Ledgers',
+        ontap: LedgerScreen(),
         color: TassistPrimaryBackground,
       ),
        Padding(

@@ -7,13 +7,16 @@ import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
 
 
-void main() => runApp(MyApp());
+
+void main() {
+
+ runApp(MyApp());
+ }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const String _title = "TallyAssist";
-    
 
     return MultiProvider(
       providers: [

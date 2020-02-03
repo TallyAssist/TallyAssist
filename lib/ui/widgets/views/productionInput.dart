@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/models/production.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:provider/provider.dart';
@@ -33,7 +33,7 @@ class ProductionScreen extends StatelessWidget {
           value: DatabaseService().productionData,
           child: Scaffold(
         appBar: headerNav(_drawerKey),
-        bottomNavigationBar: bottomNav(),
+        // bottomNavigationBar: bottomNav(),
         body: Column(
           children: <Widget>[
             SectionHeader('Daily Production Report'),

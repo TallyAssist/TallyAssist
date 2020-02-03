@@ -113,7 +113,8 @@ Firestore.instance.collection('company');
 Stream<List<SalesVoucher>> get salesVoucherData {
       return companyCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23')
       .collection('voucher')
-      .where('type', isEqualTo: 'Sales')
+      .where('primary_voucher_type_name', isEqualTo: 'Sales')
+      .orderBy('amount', descending: false)
       .snapshots()
       .map(_salesvouchersfromSnapshots);
     }
@@ -123,7 +124,7 @@ Stream<List<SalesVoucher>> get salesVoucherData {
       return SalesVoucher(
         date: doc.data['date'] ?? '',
         partyname: doc.data['party_ledger_name'] ?? '',
-        amount: doc.data['amount'] ?? 0,
+        amount: doc.data['amount'].toInt() ?? 0,
         masterid: doc.data['master_id'] ?? '',
         iscancelled: doc.data['is_cancelled'] ?? '',
                   );

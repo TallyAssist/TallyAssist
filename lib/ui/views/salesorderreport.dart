@@ -6,7 +6,7 @@ import 'package:tassist/core/models/salesvoucher.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
@@ -30,7 +30,7 @@ class SalesOrderReportScreen extends StatelessWidget {
     
     return  MultiProvider(
       providers: [
-        StreamProvider<DocumentSnapshot>.value(value: DatabaseService().metricCollection.document(user.uid).snapshots()),
+        StreamProvider<DocumentSnapshot>.value(value: DatabaseService(uid: user.uid).metricCollection.document(user.uid).snapshots()),
         StreamProvider<List<SalesVoucher>>.value(value: SalesVoucherService(uid: user.uid).salesVoucherData,)
       ],
   
@@ -39,7 +39,7 @@ class SalesOrderReportScreen extends StatelessWidget {
             key: _drawerKey,
             drawer: tassistDrawer(context),
           appBar: headerNav(_drawerKey),
-          bottomNavigationBar: bottomNav(),
+          // bottomNavigationBar: bottomNav(),
           body: ListView(
             children: <Widget>[
               SectionHeader('Sales Report'),

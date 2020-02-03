@@ -1,32 +1,39 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-BottomNavigationBar bottomNav() {
-  return BottomNavigationBar(
-    type: BottomNavigationBarType.fixed,
-    items: const <BottomNavigationBarItem>[
-      BottomNavigationBarItem(
-        icon: Icon(Icons.file_upload),
-        title: SizedBox.shrink(),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.file_download),
-        title: SizedBox.shrink(),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.filter_none),
-        title: SizedBox.shrink(),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.update),
-        title: SizedBox.shrink(),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.computer),
-        title: SizedBox.shrink(),
-      ),
-    ],
-    // currentIndex: _selectedIndex,
-    // selectedItemColor: Colors.amber[800],
-    // onTap: _onItemTapped,
-  );
-}
+// BottomNavigationBar bottomNav(_selectedPage) {
+//   return BottomNavigationBar(
+//     currentIndex: _selectedPage,
+//     type: BottomNavigationBarType.fixed,
+//     onTap: (int index) {
+//       setState(() {
+//         _selectedPage = index;
+//       });
+//     },
+//     items: const <BottomNavigationBarItem>[
+//       BottomNavigationBarItem(
+//         icon: Icon(FontAwesomeIcons.tachometerAlt),
+//         title: Text('MyReport'),
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(FontAwesomeIcons.building),
+//         title: Text('Party'),
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(FontAwesomeIcons.book),
+//         title: Text('Khata'),
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(FontAwesomeIcons.warehouse),
+//         title: Text('Stock'),
+//       ),
+//       BottomNavigationBarItem(
+//         icon: Icon(FontAwesomeIcons.ellipsisH),
+//         title: Text('More'),
+//       ),
+//     ],
+//     // currentIndex: _selectedIndex,
+//     // selectedItemColor: Colors.amber[800],
+//     // onTap: _onItemTapped,
+//   );
+// }

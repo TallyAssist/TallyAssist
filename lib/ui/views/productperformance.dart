@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/ui/widgets/secondarysectionheader.dart';
@@ -15,7 +15,7 @@ class ProductPerformanceScreen extends StatelessWidget {
     return Scaffold(
       key: _drawerKey,
       appBar: headerNav(_drawerKey),
-      bottomNavigationBar: bottomNav(),
+      // bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[
           SectionHeader('Product Performance'),

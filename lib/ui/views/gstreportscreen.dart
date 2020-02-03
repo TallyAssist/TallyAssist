@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
@@ -17,7 +17,7 @@ class GstReportScreen extends StatelessWidget {
       key: _drawerKey,
       drawer: tassistDrawer(context),
       appBar: headerNav(_drawerKey),
-      bottomNavigationBar: bottomNav(),
+      // bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[
           SectionHeader('GST Report'),

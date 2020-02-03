@@ -7,8 +7,8 @@ import 'package:intl/intl.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 // TODO
-// var numberFormatter = new NumberFormat('##,##,##,##,###.##');
-// https://api.flutter.dev/flutter/intl/NumberFormat/NumberFormat.simpleCurrency.html
+var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
+
 
 class KhataTile extends StatelessWidget {
 
@@ -27,15 +27,7 @@ class KhataTile extends StatelessWidget {
         margin: spacer.all.xs,
         child: ListTile(
           leading:
-          Container(
-            padding: spacer.all.xs,
-            child: Text(khata.trantype, style: Theme.of(context).textTheme.body1,),
-            decoration: BoxDecoration(
-             color: TassistBgLightPurple,
-             shape: BoxShape.circle,
-            ),
-            
-          ),
+          IconSwitchKhata(khata: khata),
           
           title: Column(
            children: <Widget>[
@@ -50,7 +42,7 @@ class KhataTile extends StatelessWidget {
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(khata.amount, style: Theme.of(context).textTheme.body1.copyWith(
+                Text(numberFormatter.format(khata.amount).toString(), style: Theme.of(context).textTheme.body1.copyWith(
                   color: TassistPrimary
                 )),
                 Text(formatter.format(khata.date).toString()),
@@ -67,36 +59,36 @@ class KhataTile extends StatelessWidget {
 }
 
 // TODO
-// class IconSwitchKhata extends StatefulWidget {
+class IconSwitchKhata extends StatefulWidget {
 
+    final Khata khata;
+    IconSwitchKhata({this.khata});
 
+  @override
+  _IconSwitchKhataState createState() => _IconSwitchKhataState();
+}
 
-//   @override
-//   _IconSwitchKhataState createState() => _IconSwitchKhataState();
-// }
+class _IconSwitchKhataState extends State<IconSwitchKhata> {
 
-// class _IconSwitchKhataState extends State<IconSwitchKhata> {
-
-//   @override
-//   Widget build(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
  
+  
 
-//     Khata khata;
-
-//     if (khata.trantype == 'Lia') {
+    if (widget.khata.trantype == 'Lia') {
 
     
-//               return Container(
-//               child: Icon(Icons.arrow_downward),
-//               color: TassistWarning,
-//           );
-//           } else {
-//          return  Container(
-//               child: Icon(Icons.arrow_upward),
-//               color: TassistBgBlue,
-//           );
-//           }
-//   }
-// }
+              return Container(
+              child: Icon(Icons.arrow_downward),
+              color: TassistWarning,
+          );
+          } else {
+         return  Container(
+              child: Icon(Icons.arrow_upward),
+              color: TassistSuccess,
+          );
+          }
+  }
+}
 
 

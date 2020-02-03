@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
@@ -23,16 +23,15 @@ class PurchaseOrderReportScreen extends StatelessWidget {
     
     return  MultiProvider(
       providers: [
-        StreamProvider<DocumentSnapshot>.value(value: DatabaseService().metricCollection.document(user.uid).snapshots()),
-        // StreamProvider<DocumentSnapshot>.value(value: DatabaseService().productCollection.document(user.uid).snapshots()),
-      ],
+        StreamProvider<DocumentSnapshot>.value(value: DatabaseService(uid: user.uid).metricCollection.document(user.uid).snapshots()),
+        ],
   
 
       child:  Scaffold(
         key: _drawerKey,
         drawer: tassistDrawer(context),
       appBar: headerNav(_drawerKey),
-      bottomNavigationBar: bottomNav(),
+      // bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[
           SectionHeader('Purchase Order Report'),

@@ -9,13 +9,14 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
-import 'package:tassist/ui/shared/bottomnav.dart';
+
 import 'package:tassist/ui/widgets/dashboardScreens/Purchases.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/expenses.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/sales.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/cash.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/outstanding.dart';
+
 
 
 
@@ -97,7 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ],
           ),
         ),
-        bottomNavigationBar: bottomNav(),
+        // bottomNavigationBar: bottomNav(),
     )
     );
   }

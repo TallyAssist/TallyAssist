@@ -20,6 +20,12 @@ dependencies:
   flutter:
     sdk: flutter
   
+  local_auth: ^0.6.1
+  font_awesome_flutter: ^8.4.0
+  material_design_icons_flutter: 3.4.4895
+  flappy_search_bar: 1.4.1
+
+  
   # flutter_login: ^1.0.10+1
   charts_flutter: ^0.8.1
 
