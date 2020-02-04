@@ -62,22 +62,16 @@ Drawer tassistDrawer(BuildContext context) {
         padding: spacer.all.xs,
         child: Text('Reports', style: Theme.of(context).textTheme.body1),
       ),
-      DrawerItem(
-        icon: Icons.mail_outline,
-        title: 'Notifications',
-        ontap: NotificationScreen(),
-        color: TassistPrimaryBackground,
-      ),
+      // DrawerItem(
+      //   icon: Icons.mail_outline,
+      //   title: 'Notifications',
+      //   ontap: NotificationScreen(),
+      //   color: TassistPrimaryBackground,
+      // ),
       DrawerItem(
         icon: Icons.dashboard,
         title: 'Dashboard',
         ontap: DashboardScreen(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: Icons.call_received,
-        title: 'Accounts Receivables',
-        ontap: AccountsReceivableScreen(),
         color: TassistPrimaryBackground,
       ),
       DrawerItem(
@@ -108,6 +102,12 @@ Drawer tassistDrawer(BuildContext context) {
         icon: FontAwesomeIcons.listAlt,
         title: 'Ledgers',
         ontap: LedgerScreen(),
+        color: TassistPrimaryBackground,
+      ),
+       DrawerItem(
+        icon: Icons.call_received,
+        title: 'Accounts Receivables',
+        ontap: AccountsReceivableScreen(),
         color: TassistPrimaryBackground,
       ),
        Padding(
