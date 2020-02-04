@@ -7,11 +7,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
+import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 
 import 'package:tassist/ui/widgets/dashboardScreens/Purchases.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/expenses.dart';
+import 'package:tassist/ui/widgets/dashboardScreens/payments.dart';
+import 'package:tassist/ui/widgets/dashboardScreens/receipts.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/sales.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/cash.dart';
@@ -69,14 +72,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 margin: const EdgeInsets.all(15.0),
                 // decoration: myBoxDecoration()
               ),
-              GoToBar('Pending Sales Orders'),
+              GoToBar('Check Sales'),
               // Container 2 - Purchases
               Container(
-                child: PurchaseDashboardWidget(),
+                child: ReceiptsDashboardWidget(),
                 margin: const EdgeInsets.all(20.0),
                 // decoration: myBoxDecoration()
               ),
-              GoToBar('Check Pending Purchase Orders'),
+              GoToBar('Check Receipts'),
+              Container(
+                child: PurchasesDashboardWidget(),
+                margin: const EdgeInsets.all(20.0),
+                // decoration: myBoxDecoration()
+              ),
+              GoToBar('Check Purchases'),
+              Container(
+                child: PaymentsDashboardWidget(),
+                margin: const EdgeInsets.all(20.0),
+                // decoration: myBoxDecoration()
+              ),
+              GoToBar('Check Payments'),
+              Column(
+                children: <Widget>[
+                  Text('Coming soon...', style: TextStyle(
+                      backgroundColor: TassistWarning,
+                      color: TassistWhite,
+                      fontSize: 24.0,
+                    ),)
+
+                ],
+              ),
               Container(
                 child: ExpenseDashboardWidget(),
                 margin: const EdgeInsets.all(15.0),

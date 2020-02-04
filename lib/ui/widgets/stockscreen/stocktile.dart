@@ -23,7 +23,7 @@ class StockItemTile extends StatelessWidget {
     '# ${stockItem.masterId}',
      'CR: Rs.${stockItem.closingRate.toString()}', 
      '${stockItem.closingBalance.toString()} ${stockItem.baseUnit}', 
-     'Rs. ${stockItem.closingValue.toString()}'),
+     'Rs. ${stockItem.closingValue.toString().substring(1, stockItem.closingValue.length)}'),
       title1: 'StandardCost', 
       info1: 'Rs. ${stockItem.standardCost.toString()}', 
       title2: 'StandardPrice', 

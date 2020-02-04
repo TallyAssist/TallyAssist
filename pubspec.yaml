@@ -24,6 +24,7 @@ dependencies:
   font_awesome_flutter: ^8.4.0
   material_design_icons_flutter: 3.4.4895
   flappy_search_bar: 1.4.1
+  share: ^0.6.2+5
 
   
   # flutter_login: ^1.0.10+1

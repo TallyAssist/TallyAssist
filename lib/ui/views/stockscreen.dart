@@ -30,15 +30,12 @@ class StockScreen extends StatelessWidget {
           StockItemList()
 
 
-  ],
-)
-
-
-
-        
+          ],
+        )   
       ),
     );
   }
 }
+
 
 

@@ -5,15 +5,15 @@ import 'package:share/share.dart';
 import 'package:tassist/theme/colors.dart';
 
 
-class PurchasesDashboardWidget extends StatefulWidget {
+class PaymentsDashboardWidget extends StatefulWidget {
 
 
 
   @override
-  _PurchasesDashboardWidgetState createState() => _PurchasesDashboardWidgetState();
+  _PaymentsDashboardWidgetState createState() => _PaymentsDashboardWidgetState();
 }
 
-class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
+class _PaymentsDashboardWidgetState extends State<PaymentsDashboardWidget> {
   @override
   Widget build(BuildContext context) {
 
@@ -22,28 +22,28 @@ class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
         child: Column(
           children: <Widget>[
             Container(
-              child: PurchasesDashboardWidgetTitleRow(),
+              child: PaymentsDashboardWidgetTitleRow(),
             ),
             const SizedBox(
               height: 20,
             ),
-            PurchasesDashboardWidgetContentRow(),
+            PaymentsDashboardWidgetContentRow(),
           ],
         ),
     );
   }
 }
 
-class PurchasesDashboardWidgetContentRow extends StatefulWidget {
+class PaymentsDashboardWidgetContentRow extends StatefulWidget {
  
 
   @override
-  _PurchasesDashboardWidgetContentRowState createState() =>
-      _PurchasesDashboardWidgetContentRowState();
+  _PaymentsDashboardWidgetContentRowState createState() =>
+      _PaymentsDashboardWidgetContentRowState();
 }
 
-class _PurchasesDashboardWidgetContentRowState
-    extends State<PurchasesDashboardWidgetContentRow> {
+class _PaymentsDashboardWidgetContentRowState
+    extends State<PaymentsDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
 
@@ -65,7 +65,7 @@ class _PurchasesDashboardWidgetContentRowState
                   //   Icons.arrow_drop_up,
                   //   color: TassistInfoGrey,
                   // ),
-                  Text(userDocument['total_purchases'].toString() ?? '',
+                  Text(userDocument['total_payments'].toString() ?? '',
                   style: Theme.of(context).textTheme.body2.copyWith(
                     color: TassistMainText,
                     fontSize: 24,
@@ -74,7 +74,7 @@ class _PurchasesDashboardWidgetContentRowState
                   )
                 ],
               ),
-              Text('Total Purchases'),
+              Text('Total Payments'),
             ],
           ),
           SizedBox(width: 100.0,),
@@ -87,7 +87,7 @@ class _PurchasesDashboardWidgetContentRowState
           //   color: TassistMainText,
           // ),
           Text(
-          userDocument['num_purchases_vouchers'].toString() ?? '',
+          userDocument['num_payments_vouchers'].toString() ?? '',
             style: TextStyle(
           color: TassistMainText,
 
@@ -106,8 +106,8 @@ class _PurchasesDashboardWidgetContentRowState
   }
 }
 
-class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
-  const PurchasesDashboardWidgetTitleRow({
+class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
+  const PaymentsDashboardWidgetTitleRow({
     Key key,
   }) : super(key: key);
 
@@ -118,10 +118,10 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
   final snapshot = Provider.of<DocumentSnapshot>(context);
   var userDocument = snapshot.data; 
   
-   void sharePurchases(BuildContext context, double purchases) {
-    final String text = "Total Purchases is ${userDocument['total_purchases'].toString()}, and total number of vouchers ${userDocument['num_purchases_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
+   void sharePayments(BuildContext context, double payments) {
+    final String text = "Total Payments is ${userDocument['total_payments'].toString()}, and total number of vouchers ${userDocument['num_payments_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
 
-    Share.share(text, subject: "Total Purchases ${userDocument['total_purchases'].toString()}");
+    Share.share(text, subject: "Total Payments ${userDocument['total_payments'].toString()}");
 }
 
 
@@ -132,7 +132,7 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Text(
-                'Purchases',
+                'Payments',
                 style: TextStyle(color:TassistPrimary,fontWeight: FontWeight.bold, fontSize: 20),
               ),
               SizedBox(width: 5.0),
@@ -144,8 +144,8 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return  AlertDialog(
-                  title: Text('Total Purchases'),
-                  content: Text('Total Purchases is calculated using sum of all Purchase Vouchers. This represents Gross Purcahses, no Debit notes are deducted.'),
+                  title: Text('Total Payments'),
+                  content: Text('Total Payments is calculated using sum of all Payments. This represents all payments.'),
                   elevation: 24.0,
                   actions: <Widget>[
                     FlatButton(
@@ -178,7 +178,7 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
               IconButton( 
                 icon: Icon(Icons.share),
                 color: TassistPrimaryBackground,
-                onPressed: () => sharePurchases(context, userDocument['total_purchases']),
+                onPressed: () => sharePayments(context, userDocument['total_payments']),
               ),
             ],
           ),

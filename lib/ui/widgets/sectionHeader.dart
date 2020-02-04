@@ -10,6 +10,8 @@ class SectionHeader extends StatelessWidget {
  
   @override
   Widget build(BuildContext context) {
+
+
     return Container(
             padding: EdgeInsets.all(10.0),
             color: TassistBgLightPurple,
@@ -33,17 +35,17 @@ class SectionHeader extends StatelessWidget {
                 Container(
                   child: Row(
                     children: <Widget>[
-                      Icon(
-                        Icons.favorite,
+                      // Icon(
+                      //   Icons.favorite,
+                      //   color: TassistPrimaryBackground,
+                      // ),
+                      // Icon(
+                      //   Icons.bookmark,
+                      //   color: TassistPrimaryBackground,
+                      // ),
+                      Icon(Icons.share,
                         color: TassistPrimaryBackground,
-                      ),
-                      Icon(
-                        Icons.bookmark,
-                        color: TassistPrimaryBackground,
-                      ),
-                      Icon(
-                        Icons.share,
-                        color: TassistPrimaryBackground,
+
                       ),
                     ],
                   ),
