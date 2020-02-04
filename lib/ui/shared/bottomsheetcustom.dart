@@ -210,6 +210,9 @@ class _ModalBottomSheetState<T> extends State<_ModalBottomSheet<T>> {
         break;
       // case TargetPlatform.macOS:
      
+        // break;
+      // case TargetPlatform.macOS:
+        // TODO: Handle this case.
         break;
     }
 

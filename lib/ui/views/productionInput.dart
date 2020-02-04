@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tassist/core/models/production.dart';
 import 'package:tassist/theme/colors.dart';

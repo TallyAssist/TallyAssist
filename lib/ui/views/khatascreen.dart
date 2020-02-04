@@ -19,8 +19,7 @@ class KhataScreen extends StatelessWidget {
     final user = Provider.of<FirebaseUser>(context);
     print(user.uid);
 
-    // IDFixTODO - pass user
-    void _showKhataPanel(String uid) {
+    void _showKhataPanel() {
       showModalBottomSheetCustom(
           context: context,
           builder: (context) {
@@ -34,6 +33,7 @@ class KhataScreen extends StatelessWidget {
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return StreamProvider<List<Khata>>.value(
+      // IDFixTODO - pass current user to database service
       value: DatabaseService(uid: user.uid).khataData,
       child: Scaffold(
         key: _drawerKey,
@@ -56,8 +56,7 @@ class KhataScreen extends StatelessWidget {
           child: FloatingActionButton(
             child: Icon(Icons.add),
             backgroundColor: TassistPrimaryBackground,
-            // IDFixTODO - pass user
-            onPressed: () => _showKhataPanel(user.uid),
+            onPressed: () => _showKhataPanel(),
           ),
         ),
       ),

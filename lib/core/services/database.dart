@@ -62,8 +62,8 @@ class DatabaseService {
 
 // CTS
 
-  Future createKhataRecord(DateTime date, String partyname, String amount,
-      String trantype, String uid) async {
+  Future createKhataRecord(
+      DateTime date, String partyname, String amount, String trantype) async {
     return await khataCollection
         .document(uid)
         .collection('transations')
