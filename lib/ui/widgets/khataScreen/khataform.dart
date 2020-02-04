@@ -1,7 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 
@@ -26,6 +28,8 @@ class _KhataFormState extends State<KhataForm> {
 
   @override
   Widget build(BuildContext context) {
+    // IDFIXTODO - get current user
+    var user = Provider.of<FirebaseUser>(context);  
     return Form(
       key:  _formKey,
       child: Column(
@@ -109,11 +113,13 @@ class _KhataFormState extends State<KhataForm> {
       )),
       onPressed: () async {
           if(_formKey.currentState.validate()) {
+            // IDFixTODO - pass current user when creating khata record
             await DatabaseService().createKhataRecord(
               _currentDate ?? DateTime.now(),
               _currentParty ?? '',
               _currentAmount ?? '',
               _currentTranType ?? '',
+              user.uid
              );
             Navigator.pop(context);
           //  Future.delayed(Duration(seconds: 5)).then((onValue) {

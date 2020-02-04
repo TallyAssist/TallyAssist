@@ -13,9 +13,6 @@ var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
 class KhataTile extends StatelessWidget {
 
   final Khata khata;
-
-  
-  
   KhataTile({this.khata});
 
 
@@ -42,7 +39,7 @@ class KhataTile extends StatelessWidget {
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(numberFormatter.format(khata.amount).toString(), style: Theme.of(context).textTheme.body1.copyWith(
+                Text((khata.amount).toString(), style: Theme.of(context).textTheme.body1.copyWith(
                   color: TassistPrimary
                 )),
                 Text(formatter.format(khata.date).toString()),
