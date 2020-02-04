@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/theme.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 
@@ -53,13 +56,31 @@ bool enabled = false;
             ),
           ],
         ),
-        SizedBox(width: 10.0,),
-        DropDownMonths(),
+        Spacer(),
+        Text('Help?', style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),),
+        IconButton(
+        icon: Icon(FontAwesomeIcons.whatsapp),
+        onPressed: () => _launchURL()
+            )
+        // DropDownMonths(),
       ],
     ),
     backgroundColor: TassistMenuBg
   );
 }
+
+
+_launchURL() async {
+  const url = 'https://api.whatsapp.com/send?phone=+917759091029';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+
+
+
 
 class DropDownMonths extends StatefulWidget {
   
