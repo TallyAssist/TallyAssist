@@ -80,7 +80,7 @@ class DatabaseService {
       DateTime date, String partyname, String amount, String trantype) async {
     return await khataCollection
         .document(this.uid)
-        .collection('transations')
+        .collection('transactions')
         .document()
         .setData({
       'date': date,
@@ -94,7 +94,7 @@ class DatabaseService {
     // IDFixTODO
     await khataCollection
         .document(this.uid)
-        .collection('transations')
+        .collection('transactions')
         .document(documentId)
         .delete();
   }
@@ -115,7 +115,7 @@ class DatabaseService {
   Stream<List<Khata>> get khataData {
     return khataCollection
         .document(this.uid)
-        .collection('transations')
+        .collection('transactions')
         .orderBy('date', descending: true)
         .snapshots()
         .map(_khatarecordfromSnapshots);
@@ -131,7 +131,7 @@ class SalesVoucherService {
 
   Stream<List<SalesVoucher>> get salesVoucherData {
     return companyCollection
-        .document('PTDQMfuftCgJJiA6UwZOExfawV23')
+        .document(this.uid)
         .collection('voucher')
         .where('primary_voucher_type_name', isEqualTo: 'Sales')
         .orderBy('amount', descending: false)
