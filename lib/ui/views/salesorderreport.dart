@@ -15,29 +15,26 @@ import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/salesvoucherslist.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
 
-
-
-
-
 class SalesOrderReportScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FirebaseUser>(context);
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
-     final user = Provider.of<FirebaseUser>(context);
-         final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-
-    
-    return  MultiProvider(
-      providers: [
-        StreamProvider<DocumentSnapshot>.value(value: DatabaseService(uid: user.uid).metricCollection.document(user.uid).snapshots()),
-        StreamProvider<List<SalesVoucher>>.value(value: SalesVoucherService(uid: user.uid).salesVoucherData,)
-      ],
-  
-
-          child: Scaffold(
-            key: _drawerKey,
-            drawer: tassistDrawer(context),
+    return MultiProvider(
+        providers: [
+          StreamProvider<DocumentSnapshot>.value(
+              value: DatabaseService(uid: user.uid)
+                  .metricCollection
+                  .document(user.uid)
+                  .snapshots()),
+          StreamProvider<List<SalesVoucher>>.value(
+            value: SalesVoucherService(uid: user.uid).salesVoucherData,
+          )
+        ],
+        child: Scaffold(
+          key: _drawerKey,
+          drawer: tassistDrawer(context),
           appBar: headerNav(_drawerKey),
           // bottomNavigationBar: bottomNav(),
           body: ListView(
@@ -67,7 +64,8 @@ class SalesOrderReportScreen extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Text('Customer'),
-                            Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                            Icon(Icons.arrow_drop_down,
+                                color: Colors.purple[800]),
                           ],
                         ),
                       ),
@@ -94,8 +92,8 @@ class SalesOrderReportScreen extends StatelessWidget {
                   )
                 ],
               ),
-                FilterBar('Pending Sales Vouchers By', 'Due Date'),
-                SalesVoucherList(),
+              FilterBar('Pending Sales Vouchers By', 'Due Date'),
+              SalesVoucherList(),
               //    Column(
               //   mainAxisAlignment: MainAxisAlignment.start,
               //   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -109,13 +107,9 @@ class SalesOrderReportScreen extends StatelessWidget {
 
               //   ],
               // ),
-               GoToBar('Inactive Customer List')
-            
-            
+              GoToBar('Inactive Customer List')
             ],
           ),
-      )
-    );
+        ));
   }
 }
-

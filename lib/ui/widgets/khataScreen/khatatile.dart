@@ -13,9 +13,6 @@ var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
 class KhataTile extends StatelessWidget {
 
   final Khata khata;
-
-  
-  
   KhataTile({this.khata});
 
 
