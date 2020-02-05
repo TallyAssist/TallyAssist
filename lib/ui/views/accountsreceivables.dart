@@ -4,6 +4,7 @@ import 'package:tassist/theme/dimensions.dart';
 
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/itemlist.dart';
@@ -72,7 +73,7 @@ class AccountsReceivableScreen extends StatelessWidget {
                 ]
             ),
           ),
-          GoToBar('Purchase Order Report')
+          GoToBar('Purchase Order Report', PurchaseOrderReportScreen())
           
 
         ],

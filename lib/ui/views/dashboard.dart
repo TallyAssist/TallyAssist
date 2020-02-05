@@ -10,7 +10,9 @@ import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
-
+import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/pruchaseorderreport.dart';
+import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/Purchases.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/expenses.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/payments.dart';
@@ -70,26 +72,26 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   margin: const EdgeInsets.all(15.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Sales'),
+                GoToBar('Check Sales', SalesOrderReportScreen()),
                 // Container 2 - Purchases
                 Container(
                   child: ReceiptsDashboardWidget(),
                   margin: const EdgeInsets.all(20.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Receipts'),
+                GoToBar('Check Receipts', DashboardScreen()),
                 Container(
                   child: PurchasesDashboardWidget(),
                   margin: const EdgeInsets.all(20.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Purchases'),
+                GoToBar('Check Purchases', PurchaseOrderReportScreen()),
                 Container(
                   child: PaymentsDashboardWidget(),
                   margin: const EdgeInsets.all(20.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Payments'),
+                GoToBar('Check Payments', DashboardScreen()),
                 Column(
                   children: <Widget>[
                     Text(
@@ -107,23 +109,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   margin: const EdgeInsets.all(15.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Expenses'),
+                GoToBar('Check Expenses', DashboardScreen()),
                 Container(
                   child: CashWidget(),
                   margin: const EdgeInsets.all(15.0),
                 ),
-                GoToBar('Check Bank Reconciliation'),
+                GoToBar('Check Bank Reconciliation', DashboardScreen()),
                 Container(
                   child: OutstandingsDashboardWidget(),
                   margin: const EdgeInsets.all(15.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Accounts Payables'),
-                GoToBar('Accounts Receivables')
+                GoToBar('Accounts Payables', AccountsReceivableScreen()),
+                GoToBar('Accounts Receivables', AccountsReceivableScreen())
               ],
             ),
           ),
-          // bottomNavigationBar: bottomNav(),
         ));
   }
 }

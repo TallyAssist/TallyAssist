@@ -7,6 +7,9 @@ import 'package:tassist/theme/dimensions.dart';
 
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/ledgerscreen.dart';
+import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/ui/widgets/filterbar.dart';
@@ -97,9 +100,9 @@ class PurchaseOrderReportScreen extends StatelessWidget {
 
             ],
           ),
-          GoToBar('Top Suppliers'),
-          GoToBar('Top Items Due'),
-          GoToBar('Top Accounts Payable')       
+          GoToBar('Top Suppliers', LedgerScreen()),
+          GoToBar('Top Items Due', StockScreen()),
+          GoToBar('Top Accounts Payable', AccountsReceivableScreen())       
         ],
       ),
     )

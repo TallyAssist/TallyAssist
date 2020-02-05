@@ -4,15 +4,16 @@ import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/crm.dart';
 import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/gstreportscreen.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
-import 'package:tassist/ui/views/notifications.dart';
 import 'package:tassist/ui/views/productionInput.dart';
 import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
+import 'package:tassist/ui/views/vouchers.dart';
 
  final AuthService _auth = AuthService();
 
@@ -92,6 +93,12 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: GstReportScreen(),
         color: TassistPrimaryBackground,
       ),
+       DrawerItem(
+        icon: FontAwesomeIcons.fileInvoice,
+        title: 'Vouchers',
+        ontap: VouchersHome(),
+        color: TassistPrimaryBackground,
+      ),
       DrawerItem(
         icon: FontAwesomeIcons.warehouse,
         title: 'Stock',
@@ -124,6 +131,12 @@ Drawer tassistDrawer(BuildContext context) {
         icon: Icons.build,
         title: 'Production',
         ontap: ProductionScreen(),
+        color: TassistPrimaryBackground,
+      ),
+      DrawerItem(
+        icon: FontAwesomeIcons.users,
+        title: 'CRM',
+        ontap: CRMScreen(),
         color: TassistPrimaryBackground,
       ),
       SizedBox(height: 20.0,),

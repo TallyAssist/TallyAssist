@@ -13,9 +13,45 @@ class StockItemList extends StatefulWidget {
 class _StockItemListState extends State<StockItemList> {
   @override
   Widget build(BuildContext context) {
-    
+
     final stockItemData = Provider.of<List<StockItem>>(context);
     
+
+    List<StockItem> stockItemDataforDisplay = stockItemData;
+
+
+
+    _searchBar() {
+        // var stockItemData = Provider.of<List<StockItem>>(context);
+
+  return Padding(
+    padding: spacer.x.sm,
+    child: TextField(decoration: InputDecoration(
+      hintText: 'Search...',
+      prefixIcon: Icon(Icons.search),
+      border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0))
+    ),
+    onChanged: (text) {
+      text = text.toLowerCase();
+      setState( () {
+        if (text.length == 0) {
+          stockItemDataforDisplay = stockItemData;
+        } else {
+
+        stockItemDataforDisplay = stockItemData.where((item) {
+          var name = item.name.toLowerCase();
+          return name.contains(text);
+          }).toList();
+
+        }
+        });
+
+      }
+    )
+  ); 
+}
+
+      
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Column(
@@ -24,13 +60,19 @@ class _StockItemListState extends State<StockItemList> {
             padding: spacer.all.xxs,
             child: Text('Total Stock Items: ${stockItemData.length}'),
           ),
+              Container(
+                padding: spacer.bottom.xs,
+          child: _searchBar(),
+              ),
           Expanded(
             child: ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true, 
-            itemCount: stockItemData?.length ?? 0,
+            itemCount: stockItemDataforDisplay?.length ?? 0,
             itemBuilder: (context, index) {
-              return StockItemTile(stockItem: stockItemData[index]);
+
+            return StockItemTile(stockItem: stockItemDataforDisplay[index]);
+            
             },
       ),
           ),
@@ -41,8 +83,9 @@ class _StockItemListState extends State<StockItemList> {
      
     );
   }
+
+
+
 }
-
-
 
 

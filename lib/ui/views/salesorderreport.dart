@@ -6,7 +6,6 @@ import 'package:tassist/core/models/salesvoucher.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
@@ -107,7 +106,7 @@ class SalesOrderReportScreen extends StatelessWidget {
 
               //   ],
               // ),
-              GoToBar('Inactive Customer List')
+              GoToBar('Inactive Customer List', SalesOrderReportScreen())
             ],
           ),
         ));

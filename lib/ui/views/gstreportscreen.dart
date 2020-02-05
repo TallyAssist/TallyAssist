@@ -22,13 +22,13 @@ class GstReportScreen extends StatelessWidget {
         children: <Widget>[
           SectionHeader('GST Report'),
           GSTCard('IGST', 'Input',  'Rs. 12,13,234', 'Output', 'Rs. 12,11,234', 'Net Payable', 'Rs. 12,345'),
-          GoToBar('Due IGST From/To'),
+          GoToBar('Due IGST From/To', GstReportScreen()),
           GSTCard('CGST', 'Input',  'Rs. 12,13,234', 'Output', 'Rs. 12,11,234', 'Net Payable', 'Rs. 12,345'),
-           GoToBar('Due CGST From/To'),
+           GoToBar('Due CGST From/To', GstReportScreen()),
           GSTCard('SGST', 'Input',  'Rs. 12,13,234', 'Output', 'Rs. 12,11,234', 'Net Payable', 'Rs. 12,345'),
-           GoToBar('Due SGST From/To'),
+           GoToBar('Due SGST From/To', GstReportScreen()),
           GSTCard('Total GST', 'Input',  'Rs. 12,13,234', 'Output', 'Rs. 12,11,234', 'Net Payable', 'Rs. 12,345'),
-          GoToBar('Due GST From/To'),
+          GoToBar('Due GST From/To', GstReportScreen()),
 
         ]
       )
