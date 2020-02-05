@@ -66,7 +66,7 @@ class HomeScreenText extends StatelessWidget {
     return Column(
       children: <Widget>[
         Text(
-          "BizAssist",
+          "TallyAssist",
           style: TextStyle(
               color: Colors.purple, fontWeight: FontWeight.bold, fontSize: 40),
         ),
