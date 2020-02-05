@@ -4,6 +4,7 @@ import 'package:tassist/core/models/khata.dart';
 import 'package:tassist/core/models/salesvoucher.dart';
 
 
+
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
@@ -91,7 +92,7 @@ Future deleteKhata(String id) async {
     
 // Creating a stream of production data items so that we can listen on them
     Stream<List<Khata>> get khataData {
-      return khataCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23')
+      return khataCollection.document(this.uid)
       .collection('transations')
       .orderBy('date', descending: true)
       .snapshots()

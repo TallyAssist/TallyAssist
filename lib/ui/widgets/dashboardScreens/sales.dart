@@ -124,7 +124,6 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
     Share.share(text, subject: "Total Sales ${userDocument['total_sales'].toString()}");
 }
 
-
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[

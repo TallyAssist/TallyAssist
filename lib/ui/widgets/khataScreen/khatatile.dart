@@ -42,7 +42,7 @@ class KhataTile extends StatelessWidget {
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(numberFormatter.format(khata.amount).toString(), style: Theme.of(context).textTheme.body1.copyWith(
+                Text(khata.amount.toString(), style: Theme.of(context).textTheme.body1.copyWith(
                   color: TassistPrimary
                 )),
                 Text(formatter.format(khata.date).toString()),
@@ -79,13 +79,29 @@ class _IconSwitchKhataState extends State<IconSwitchKhata> {
 
     
               return Container(
-              child: Icon(Icons.arrow_downward),
-              color: TassistWarning,
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+              ),
+               color: TassistWarning,
+              ),
+              child: Icon(Icons.arrow_downward, color: TassistWhite,),
+             
           );
           } else {
-         return  Container(
-              child: Icon(Icons.arrow_upward),
-              color: TassistSuccess,
+          return Container(
+              decoration: ShapeDecoration(
+                shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(10),
+                      ),
+              ),
+               color: TassistSuccess,
+              ),
+              child: Icon(Icons.arrow_upward, color: TassistWhite,),
+             
           );
           }
   }
