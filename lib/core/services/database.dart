@@ -7,9 +7,25 @@ class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
-  // create metric collection on signup
+  // INITIALIZE DATABASE REFERENCES
+
+  // create reference to metric collection
   final CollectionReference metricCollection =
       Firestore.instance.collection('metrics');
+
+  //Connectiong to Collection Products
+  final CollectionReference productCollection =
+      Firestore.instance.collection('products');
+
+  //Connectiong to Collection Products
+  final CollectionReference khataCollection =
+      Firestore.instance.collection('khata');
+
+  // create reference to company collection
+  final CollectionReference companyCollection =
+      Firestore.instance.collection('company');
+
+  // METRICS
 
   Future createMetricsRecord() async {
     return await metricCollection.document(uid).setData({
@@ -17,16 +33,18 @@ class DatabaseService {
     });
   }
 
-  Stream<QuerySnapshot> get sales => metricCollection.snapshots();
+  // Stream<QuerySnapshot> get sales => metricCollection.snapshots();
 
-  final CollectionReference productionCollection = Firestore.instance
-      .collection('company')
-      .document('PTDQMfuftCgJJiA6UwZOExfawV23')
-      .collection('production');
+  // PRODUCTION
 
+  // IDFix - use current user
   Future createProductionRecord(
       DateTime date, String product, String production) async {
-    return await productionCollection.document(this.uid).setData({
+    return await companyCollection
+        .document(this.uid)
+        .collection('production')
+        .document()
+        .setData({
       'Date': date,
       'Product': product,
       'Production': production,
@@ -46,26 +64,22 @@ class DatabaseService {
 
 // Creating a stream of production data items so that we can listen on them
   Stream<List<Production>> get productionData {
-    return productionCollection
+    return companyCollection
+        .document(this.uid)
+        .collection('production')
         .orderBy('Date', descending: true)
         .snapshots()
         .map(_productionListfromSnapshot);
   }
 
-//Connectiong to Collection Products
-  final CollectionReference productCollection =
-      Firestore.instance.collection('products');
-
-// //Connectiong to Collection Products
-  final CollectionReference khataCollection =
-      Firestore.instance.collection('khata');
-
 // CTS
+
+  // KHATA
 
   Future createKhataRecord(
       DateTime date, String partyname, String amount, String trantype) async {
     return await khataCollection
-        .document(uid)
+        .document(this.uid)
         .collection('transations')
         .document()
         .setData({
@@ -76,12 +90,12 @@ class DatabaseService {
     });
   }
 
-  Future deleteKhata(String id) async {
+  Future deleteKhata(String documentId) async {
     // IDFixTODO
     await khataCollection
         .document(this.uid)
         .collection('transations')
-        .document(id)
+        .document(documentId)
         .delete();
   }
 

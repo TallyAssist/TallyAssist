@@ -1,7 +1,9 @@
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 
@@ -24,6 +26,9 @@ class _ProductionFormState extends State<ProductionForm> {
 
   @override
   Widget build(BuildContext context) {
+    // IDFixTODO - get current user
+    var user = Provider.of<FirebaseUser>(context);
+
     return Form(
       key:  _formKey,
       child: Column(
@@ -85,10 +90,11 @@ class _ProductionFormState extends State<ProductionForm> {
       )),
             onPressed: () async {
                 if(_formKey.currentState.validate()) {
-                  await DatabaseService().createProductionRecord(
+                  // IDFix - pass current user
+                  await DatabaseService(uid: user.uid).createProductionRecord(
                     _currentDate ?? DateTime.now(), 
                     _currentProduct ?? 'Product A',
-                    _currentProduction ?? '0' 
+                    _currentProduction ?? '0',
                   );
                   Navigator.pop(context);
                 }

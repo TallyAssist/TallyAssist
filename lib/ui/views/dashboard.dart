@@ -46,54 +46,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
         child: Scaffold(
           key: _drawerKey,
           appBar: headerNav(_drawerKey),
-          // appBar: AppBar(
-          //     leading: Padding(
-          //       padding: EdgeInsets.only(left: 12),
-          //       child: IconButton(
-          //         icon: Icon(Icons.menu),
-          //         onPressed: () {
-          //           // Navigator.of(context).pushReplacement(
-          //           //   MaterialPageRoute(
-          //           //     builder: (context) => MenuScreen(),
-          //           //   ),
-          //           // // );
-          //           if (enabled) {
-          //           //   // open drawer if this value is true
-          //             _drawerKey.currentState.openDrawer();
-          //           }
-          //         },
-          //       ),
-          //     ),
-          //     title: Row(
-          //       children: <Widget>[
-          //         Column(
-          //           crossAxisAlignment: CrossAxisAlignment.start,
-          //           children: <Widget>[
-          //             const Text(
-          //               'ABC Pvt Ltd',
-          //               style: TextStyle(
-          //                 fontSize: 15,
-          //                 fontWeight: FontWeight.bold,
-          //                 letterSpacing: 1.0,
-          //               ),
-          //             ),
-          //             const Text(
-          //               'GSTIN: 29ABCDE1234F2Z5',
-          //               style: TextStyle(
-          //                 color: TassistWhite,
-          //                 fontSize: 12,
-          //                 letterSpacing: 1.0,
-          //               ),
-          //             ),
-          //           ],
-          //         ),
-          //         SizedBox(
-          //           width: 10.0,
-          //         ),
-          //         DropDownMonths(),
-          //       ],
-          //     ),
-          //     backgroundColor: TassistMenuBg),
           drawer: tassistDrawer(context),
           body: SafeArea(
             child: ListView(
