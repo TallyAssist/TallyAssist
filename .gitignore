@@ -38,3 +38,6 @@ lib/generated_plugin_registrant.dart
 
 # Exclude firebase config
 *google-services.json
+
+# Exclude key file
+*key.properties
