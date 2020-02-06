@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:intl/intl.dart';
-import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
@@ -19,7 +19,7 @@ class StockItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansibleDetailCard(detailCard: DetailCard(stockItem.name, 
+    return ExpansibleDetailCard(childdetailCard: ChildDetailCard(stockItem.name, 
     '# ${stockItem.masterId}',
      'CR: Rs.${stockItem.closingRate.toString()}', 
      '${stockItem.closingBalance.toString()} ${stockItem.baseUnit}', 

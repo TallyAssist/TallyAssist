@@ -4,10 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/dimensions.dart';
-
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
-import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
@@ -102,7 +101,7 @@ class PurchaseOrderReportScreen extends StatelessWidget {
           ),
           GoToBar('Top Suppliers', LedgerScreen()),
           GoToBar('Top Items Due', StockScreen()),
-          GoToBar('Top Accounts Payable', AccountsReceivableScreen())       
+          GoToBar('Top Accounts Payable', AccountsPayableScreen())       
         ],
       ),
     )

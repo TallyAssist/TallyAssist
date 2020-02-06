@@ -8,6 +8,15 @@ class LedgerItemService {
   final CollectionReference companyCollection =
       Firestore.instance.collection('company');
 
+      Stream<List<LedgerItem>> get inactiveCustomerData {
+    return companyCollection
+        .document(this.uid)
+        .collection('ledger')
+        .where('closing_balance', isEqualTo: 0)
+        .snapshots()
+        .map(_ledgerItemData);
+  }
+
   Stream<List<LedgerItem>> get ledgerItemData {
     return companyCollection
         .document(this.uid)

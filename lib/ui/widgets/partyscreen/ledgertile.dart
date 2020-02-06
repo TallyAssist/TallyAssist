@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:intl/intl.dart';
-import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
@@ -19,7 +19,7 @@ class LedgerItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansibleDetailCard(detailCard: DetailCard(ledgerItem.name, 
+    return ExpansibleDetailCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.state, 
      'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 

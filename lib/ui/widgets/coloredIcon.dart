@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/dimensions.dart';
 
 
 class ColoredIconNumberRow extends StatefulWidget {
@@ -25,7 +26,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
 
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: spacer.y.xxs,
       child: Column(
         children: <Widget>[
           Row(
@@ -38,8 +39,8 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
               Text(
                 userDocument[widget.metric].toString(),
                 style: TextStyle(
-                    fontSize: 30.0,
-                    fontWeight: FontWeight.bold,
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.normal,
                     color: TassistSuccess),
               ),
             ],

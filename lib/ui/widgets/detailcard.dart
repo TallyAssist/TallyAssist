@@ -13,7 +13,7 @@ class DetailCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-          elevation: 10.0,
+          elevation: 8.0,
           child: Padding(
             padding: spacer.all.xs,
             child: Column(children: <Widget>[

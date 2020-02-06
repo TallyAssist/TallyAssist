@@ -2,16 +2,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/salesvoucher.dart';
+import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/services/database.dart';
+import 'package:tassist/core/services/ledgerservice.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/views/vouchers.dart';
 import 'package:tassist/ui/widgets/coloredIcon.dart';
-import 'package:tassist/ui/widgets/filterbar.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
-import 'package:tassist/ui/widgets/salesvoucherslist.dart';
+import 'package:tassist/ui/widgets/inactivecustomerlist.dart';
+import 'package:tassist/ui/widgets/secondarysectionheader.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 class SalesOrderReportScreen extends StatelessWidget {
@@ -27,9 +29,9 @@ class SalesOrderReportScreen extends StatelessWidget {
                   .metricCollection
                   .document(user.uid)
                   .snapshots()),
-          StreamProvider<List<SalesVoucher>>.value(
-            value: SalesVoucherService(uid: user.uid).salesVoucherData,
-          )
+         StreamProvider<List<LedgerItem>>.value (
+          value: LedgerItemService(uid: user.uid).inactiveCustomerData
+         )
         ],
         child: Scaffold(
           key: _drawerKey,
@@ -50,7 +52,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                         color: TassistBgBlue,
                         child: Row(
                           children: <Widget>[
-                            Text('abc'),
+                            Text('Product'),
                           ],
                         ),
                       ),
@@ -77,7 +79,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                 children: <Widget>[
                   Column(
                     children: <Widget>[
-                      ColoredIconNumberRow('amt_sold', 'Amount Sold'),
+                      ColoredIconNumberRow('total_sales', 'Amount Sold'),
                       ColoredIconNumberRow('open_sales_orders', 'Open Orders'),
                       ColoredIconNumberRow('amt_sales_return', 'Sales Return'),
                     ],
@@ -91,22 +93,15 @@ class SalesOrderReportScreen extends StatelessWidget {
                   )
                 ],
               ),
-              FilterBar('Pending Sales Vouchers By', 'Due Date'),
-              SalesVoucherList(),
-              //    Column(
-              //   mainAxisAlignment: MainAxisAlignment.start,
-              //   crossAxisAlignment: CrossAxisAlignment.stretch,
-              //   children: <Widget>[
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-              //   // DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
+              // FilterBar('Sales Vouchers By', 'Due Date'),
+              GoToBar('SalesVouchers', VouchersHome()),
+              // SalesVoucherList(),
 
-              //   ],
-              // ),
-              GoToBar('Inactive Customer List', SalesOrderReportScreen())
+              SecondarySectionHeader('Inactive Customer List'),
+
+              InactiveCustomerList()
+
+
             ],
           ),
         ));

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
-import 'package:tassist/ui/views/salesorderreport.dart';
+import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/widgets/itemlist.dart';
@@ -12,7 +13,7 @@ import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 
 
-class AccountsReceivableScreen extends StatelessWidget {
+class AccountsPayableScreen extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class AccountsReceivableScreen extends StatelessWidget {
       // bottomNavigationBar: bottomNav(),
       body: ListView(
         children: <Widget>[
-          SectionHeader('Accounts Receivables'),
+          SectionHeader('Accounts Payables'),
           Padding(
             padding: spacer.all.xs,
             child: Row(
@@ -38,13 +39,13 @@ class AccountsReceivableScreen extends StatelessWidget {
               ],
             ),
           ),
-          SecondarySectionHeader('List of customers'),
-          SingleItem('Customer 1', 'Rs. 123,456,323'),
-          SingleItem('Customer 2', 'Rs. 123,456,323'),
-          SingleItem('Customer 3', 'Rs. 123,456,323'),
-          SingleItem('Customer 4', 'Rs. 123,456,323'),
-          SingleItem('Customer 5', 'Rs. 123,456,323'),
-          SingleItem('Customer 6', 'Rs. 123,456,323'),
+          SecondarySectionHeader('List of suppliers'),
+          SingleItem('Supplier 1', 'Rs. 123,456,323'),
+          SingleItem('Supplier 2', 'Rs. 123,456,323'),
+          SingleItem('Supplier 3', 'Rs. 123,456,323'),
+          SingleItem('Supplier 4', 'Rs. 123,456,323'),
+          SingleItem('Supplier 5', 'Rs. 123,456,323'),
+          SingleItem('Supplier 6', 'Rs. 123,456,323'),
           Padding(
             padding: spacer.y.xs,
             child: Row(
@@ -72,7 +73,7 @@ class AccountsReceivableScreen extends StatelessWidget {
                 ]
             ),
           ),
-          GoToBar('Sales Order Report', SalesOrderReportScreen())
+          GoToBar('Purchase Order Report', PurchaseOrderReportScreen())
           
 
         ],

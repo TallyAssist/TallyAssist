@@ -10,9 +10,11 @@ import 'package:tassist/core/services/database.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
+import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
+import 'package:tassist/ui/views/vouchers.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/Purchases.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/expenses.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/payments.dart';
@@ -79,7 +81,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   margin: const EdgeInsets.all(20.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Receipts', DashboardScreen()),
+                GoToBar('Check Receipts', VouchersHome()),
                 Container(
                   child: PurchasesDashboardWidget(),
                   margin: const EdgeInsets.all(20.0),
@@ -91,7 +93,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   margin: const EdgeInsets.all(20.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Check Payments', DashboardScreen()),
+                GoToBar('Check Payments', VouchersHome()),
                 Column(
                   children: <Widget>[
                     Text(
@@ -120,7 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   margin: const EdgeInsets.all(15.0),
                   // decoration: myBoxDecoration()
                 ),
-                GoToBar('Accounts Payables', AccountsReceivableScreen()),
+                GoToBar('Accounts Payables', AccountsPayableScreen()),
                 GoToBar('Accounts Receivables', AccountsReceivableScreen())
               ],
             ),

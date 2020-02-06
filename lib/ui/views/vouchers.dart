@@ -27,9 +27,9 @@ class _VouchersHomeState extends State<VouchersHome>
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 1, length: 4);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 4);
     _tabController.addListener(() {
-      if (_tabController.index == 1) {
+      if (_tabController.index == 0) {
         showFab = true;
       } else {
         showFab = false;

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/crm.dart';
 import 'package:tassist/ui/views/dashboard.dart';
@@ -74,6 +75,7 @@ Drawer tassistDrawer(BuildContext context) {
         title: 'Dashboard',
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
+        
       ),
       DrawerItem(
         icon: Icons.card_membership,
@@ -117,6 +119,12 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: AccountsReceivableScreen(),
         color: TassistPrimaryBackground,
       ),
+       DrawerItem(
+        icon: Icons.call_made,
+        title: 'Accounts Payables',
+        ontap: AccountsPayableScreen(),
+        color: TassistPrimaryBackground,
+      ),
        Padding(
         padding: spacer.all.xs,
         child: Text('Specials', style: Theme.of(context).textTheme.body1),
@@ -125,7 +133,7 @@ Drawer tassistDrawer(BuildContext context) {
         icon: Icons.lock,
         title: 'Apka Secret Khata',
         ontap: KhataScreen(),
-        color: TassistInfoGrey,
+        color: TassistMainText,
       ),
       DrawerItem(
         icon: Icons.build,
