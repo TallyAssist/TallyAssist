@@ -29,13 +29,12 @@ class CRMScreen extends StatelessWidget {
 
         Padding(
           padding: spacer.all.xxl,
-          child: Stack(
-            alignment: Alignment.center,
+          child: Column(
             
                     children: <Widget> [
                     
                     Text('Coming Soon... '),
-                    Spacer(),
+                    SizedBox(height: 10.0),
                     Text('Want it sooner? WhatsApp us!')
                     ]
           ),
