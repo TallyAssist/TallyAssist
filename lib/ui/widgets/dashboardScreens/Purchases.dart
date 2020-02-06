@@ -118,7 +118,7 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
   final snapshot = Provider.of<DocumentSnapshot>(context);
   var userDocument = snapshot.data; 
   
-   void sharePurchases(BuildContext context, double purchases) {
+   void sharePurchases(BuildContext context, int purchases) {
     final String text = "Total Purchases is ${userDocument['total_purchases'].toString()}, and total number of vouchers ${userDocument['num_purchases_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
 
     Share.share(text, subject: "Total Purchases ${userDocument['total_purchases'].toString()}");
