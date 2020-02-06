@@ -80,14 +80,15 @@ class SalesOrderReportScreen extends StatelessWidget {
                   Column(
                     children: <Widget>[
                       ColoredIconNumberRow('total_sales', 'Amount Sold'),
-                      ColoredIconNumberRow('open_sales_orders', 'Open Orders'),
+                      // ColoredIconNumberRow('open_sales_orders', 'Open Orders'),
                       ColoredIconNumberRow('amt_sales_return', 'Sales Return'),
                     ],
                   ),
                   Column(
                     children: <Widget>[
-                      ColoredIconNumberRow('qty_sales_order', 'Ordered Qty'),
-                      ColoredIconNumberRow('qty_sales_due', 'Quantity Due'),
+                      // ColoredIconNumberRow('qty_sales_order', 'Ordered Qty'),
+                      // ColoredIconNumberRow('qty_sales_due', 'Quantity Due'),
+                      ColoredIconNumberRow('open_sales_orders', 'Open Orders'),                
                       ColoredIconNumberRow('sales_discount', 'Discount'),
                     ],
                   )
