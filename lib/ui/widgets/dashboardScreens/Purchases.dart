@@ -87,7 +87,7 @@ class _PurchasesDashboardWidgetContentRowState
           //   color: TassistMainText,
           // ),
           Text(
-          userDocument['num_purchases_vouchers'].toString() ?? '',
+          userDocument['num_purchase_vouchers'].toString() ?? '',
             style: TextStyle(
           color: TassistMainText,
 
