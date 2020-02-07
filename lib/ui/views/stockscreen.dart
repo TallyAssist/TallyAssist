@@ -9,33 +9,20 @@ import 'package:tassist/ui/widgets/sectionHeader.dart';
 import 'package:tassist/ui/widgets/stockscreen/stocklist.dart';
 
 class StockScreen extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FirebaseUser>(context);
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
-  final user = Provider.of<FirebaseUser>(context);
-  final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-
-    return StreamProvider<List<StockItem>>.value (
-          value: StockItemService(uid: user.uid).stockItemsData,
-          child: Scaffold(
+    return StreamProvider<List<StockItem>>.value(
+      value: StockItemService(uid: user.uid).stockItemsData,
+      child: Scaffold(
           key: _drawerKey,
-        drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
-        body: ListView(
-          children: <Widget>[
-          SectionHeader('Stock Items'),
-          StockItemList()
-
-
-          ],
-        )   
-      ),
+          drawer: tassistDrawer(context),
+          appBar: headerNav(_drawerKey),
+          body: ListView(
+            children: <Widget>[SectionHeader('Stock Items'), StockItemList()],
+          )),
     );
   }
 }
-
-
-
