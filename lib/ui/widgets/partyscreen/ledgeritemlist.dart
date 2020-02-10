@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/widgets/partyscreen/ledgertile-new.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgertile.dart';
 
 class LedgerItemList extends StatefulWidget {
@@ -28,7 +29,7 @@ class _LedgerItemListState extends State<LedgerItemList> {
                 shrinkWrap: true,
                 itemCount: ledgerItemData?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return LedgerItemTile(ledgerItem: ledgerItemData[index]);
+                  return LedgerItemTileNew(ledgerItem: ledgerItemData[index]);
                 },
               ),
             ),

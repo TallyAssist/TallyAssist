@@ -12,7 +12,7 @@ class StockItemList extends StatefulWidget {
 class _StockItemListState extends State<StockItemList> {
   TextEditingController editingController = TextEditingController();
 
-  List<StockItem> stockItemData = List<StockItem>();
+  List<StockItem> stockItemData;
   List<StockItem> stockItemDataforDisplay = List<StockItem>();
 
   @override
