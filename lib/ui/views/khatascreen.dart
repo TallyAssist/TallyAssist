@@ -35,28 +35,31 @@ class KhataScreen extends StatelessWidget {
     return StreamProvider<List<Khata>>.value(
       // IDFixTODO - pass current user to database service
       value: DatabaseService(uid: user.uid).khataData,
-      child: Scaffold(
-        key: _drawerKey,
-        drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
-        // bottomNavigationBar: bottomNav(),
-        body: Column(
-          children: <Widget>[
-            SectionHeader('Your Secret Khata'),
-            Container(
-              child: Text('  Not syncing with Tally :) Swipe to delete.'),
-              color: TassistWarningShadow,
-              width: MediaQuery.of(context).size.width,
+      child: WillPopScope (
+              onWillPop: () async => false,
+              child: Scaffold(
+          key: _drawerKey,
+          drawer: tassistDrawer(context),
+          appBar: headerNav(_drawerKey),
+          // bottomNavigationBar: bottomNav(),
+          body: Column(
+            children: <Widget>[
+              SectionHeader('Your Secret Khata'),
+              Container(
+                child: Text('  Not syncing with Tally :) Swipe to delete.'),
+                color: TassistWarningShadow,
+                width: MediaQuery.of(context).size.width,
+              ),
+              KhataList(),
+            ],
+          ),
+          floatingActionButton: Padding(
+            padding: spacer.x.xs,
+            child: FloatingActionButton(
+              child: Icon(Icons.add),
+              backgroundColor: TassistPrimaryBackground,
+              onPressed: () => _showKhataPanel(),
             ),
-            KhataList(),
-          ],
-        ),
-        floatingActionButton: Padding(
-          padding: spacer.x.xs,
-          child: FloatingActionButton(
-            child: Icon(Icons.add),
-            backgroundColor: TassistPrimaryBackground,
-            onPressed: () => _showKhataPanel(),
           ),
         ),
       ),

@@ -45,19 +45,22 @@ class _VouchersHomeState extends State<VouchersHome>
   
    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
   
-    return Scaffold(
-      key: _drawerKey,
-      appBar: headerNavOther(_drawerKey, _tabController),
-      drawer: tassistDrawer(context),
-      body: 
-      TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-         SalesVoucherScreen(),
-         PurchaseVoucherScreen(),
-         ReceiptVoucherScreen(),
-         PaymentVoucherScreen()
-        ],
+    return WillPopScope (
+              onWillPop: () async => false,
+          child: Scaffold(
+        key: _drawerKey,
+        appBar: headerNavOther(_drawerKey, _tabController),
+        drawer: tassistDrawer(context),
+        body: 
+        TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+           SalesVoucherScreen(),
+           PurchaseVoucherScreen(),
+           ReceiptVoucherScreen(),
+           PaymentVoucherScreen()
+          ],
+        ),
       ),
     );
   }

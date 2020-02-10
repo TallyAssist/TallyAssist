@@ -43,13 +43,13 @@ Drawer tassistDrawer(BuildContext context) {
               'John Doe',
               style: Theme.of(context)
                   .textTheme
-                  .title
+                  .headline6
                   .copyWith(color: TassistWhite),
             ),
             Text('Company: ABC Pvt. Ltd.', 
              style: Theme.of(context)
                   .textTheme
-                  .body1
+                  .bodyText1
                   .copyWith(color: TassistWhite),
             )
 
@@ -62,7 +62,7 @@ Drawer tassistDrawer(BuildContext context) {
       ),
       Padding(
         padding: spacer.all.xs,
-        child: Text('Reports', style: Theme.of(context).textTheme.body1),
+        child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
       // DrawerItem(
       //   icon: Icons.mail_outline,
@@ -127,7 +127,7 @@ Drawer tassistDrawer(BuildContext context) {
       ),
        Padding(
         padding: spacer.all.xs,
-        child: Text('Specials', style: Theme.of(context).textTheme.body1),
+        child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
         icon: Icons.lock,
@@ -166,7 +166,7 @@ Drawer tassistDrawer(BuildContext context) {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title,
+                        .headline6,
                   ),
                 ],
               ),
@@ -211,7 +211,7 @@ class _DrawerItemState extends State<DrawerItem> {
             Text(
               widget.title,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.title.copyWith(
+              style: Theme.of(context).textTheme.headline6.copyWith(
                 color: widget.color
               ),
             ),

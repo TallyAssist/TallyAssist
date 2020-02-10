@@ -37,7 +37,7 @@ SingleItem(this.name, this.value);
         children: <Widget>[
           SizedBox(width: 5,),
           Text(name,
-          style: Theme.of(context).textTheme.body2.copyWith(
+          style: Theme.of(context).textTheme.bodyText2.copyWith(
             fontSize: 14
           ),
           ),

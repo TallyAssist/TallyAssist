@@ -85,7 +85,7 @@ class _ProductionFormState extends State<ProductionForm> {
           ),
           RaisedButton(
             color: TassistPrimary,
-            child: Text('Submit', style: Theme.of(context).textTheme.body1.copyWith(
+            child: Text('Submit', style: Theme.of(context).textTheme.bodyText1.copyWith(
         color: TassistWhite
       )),
             onPressed: () async {

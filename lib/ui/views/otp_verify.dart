@@ -27,7 +27,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         title: Text('Get OTP',
             style: Theme.of(context)
                 .textTheme
-                .title
+                .headline6
                 .copyWith(color: TassistWhite)),
         // actions: <Widget>[
         //   FlatButton.icon(
@@ -39,7 +39,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
         //       'Register',
         //       style: Theme.of(context)
         //           .textTheme
-        //           .body1
+        //           .bodyText1
         //           .copyWith(color: TassistWhite),
         //     ),
         //     onPressed: () => widget.toggleView(),

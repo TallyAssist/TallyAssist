@@ -29,13 +29,13 @@ class ProductionTile extends StatelessWidget {
           ),
           title: Padding(
             padding: spacer.left.xs,
-            child: Text(production.product, style: Theme.of(context).textTheme.title.copyWith(
+            child: Text(production.product, style: Theme.of(context).textTheme.headline6.copyWith(
               fontSize: 18.0
             )),
           ),
           subtitle: Padding(
             padding: spacer.left.xs,
-            child: Text(production.production,  style: Theme.of(context).textTheme.body1,)
+            child: Text(production.production,  style: Theme.of(context).textTheme.bodyText1,)
             ),
           )
           )

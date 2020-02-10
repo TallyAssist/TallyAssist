@@ -97,7 +97,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
                     value,
                     style: Theme.of(context)
                         .textTheme
-                        .body1
+                        .bodyText1
                         .copyWith(color: TassistPrimaryBackground),
                   ),
                   value: value,
@@ -108,7 +108,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
             selectedValue = selectedMonth;
           });
         },
-        // value: Text(selectedValue.toString(), style: Theme.of(context).textTheme.body1.copyWith(
+        // value: Text(selectedValue.toString(), style: Theme.of(context).textTheme.bodyText1.copyWith(
         //       color: TassistWhite,
         //       fontSize: 12.0,
         //     )),
@@ -116,7 +116,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
 
         isExpanded: false,
         hint: Text('Period',
-            style: Theme.of(context).textTheme.body1.copyWith(
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
                   color: TassistWhite,
                   fontSize: 12.0,
                 )),

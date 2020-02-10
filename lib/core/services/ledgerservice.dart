@@ -21,7 +21,7 @@ class LedgerItemService {
     return companyCollection
         .document(this.uid)
         .collection('ledger')
-        .orderBy('closing_balance', descending: false)
+        .orderBy('name', descending: false)
         .snapshots()
         .map(_ledgerItemData);
   }

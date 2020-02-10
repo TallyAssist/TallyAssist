@@ -72,7 +72,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.left,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -108,7 +108,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -144,7 +144,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -180,7 +180,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -216,7 +216,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -252,7 +252,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -288,7 +288,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -324,7 +324,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -360,7 +360,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],
@@ -396,7 +396,7 @@ class _MenuScreenState extends State<MenuScreen> {
                     textAlign: TextAlign.center,
                     style: Theme.of(context)
                         .textTheme
-                        .title
+                        .headline6
                         .copyWith(color: TassistWhite),
                   ),
                 ],

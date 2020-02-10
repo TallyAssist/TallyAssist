@@ -62,18 +62,24 @@ class _StockItemListState extends State<StockItemList> {
               padding: spacer.bottom.xs,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: (value) {
-                    filterSearchResults(value.toLowerCase());
-                  },
-                  controller: editingController,
-                  decoration: InputDecoration(
-                    labelText: "Search",
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
+                child: Container(
+                  height: 50.0,
+                  child: TextField(
+                    onChanged: (value) {
+                      filterSearchResults(value.toLowerCase());
+                    },
+                    controller: editingController,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    enableSuggestions: true,
+                    decoration: InputDecoration(
+                      labelText: "Search",
+                      labelStyle: Theme.of(context).textTheme.bodyText2,
+                      counterStyle: Theme.of(context).textTheme.bodyText2,
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(25.0),
+                          Radius.circular(25.0),
+                        ),
                       ),
                     ),
                   ),

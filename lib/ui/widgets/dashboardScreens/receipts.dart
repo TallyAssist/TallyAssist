@@ -57,7 +57,7 @@ class _ReceiptsDashboardWidgetContentRowState
                   // ),
                   Text(
                     userDocument['total_receipts'].toString() ?? '',
-                    style: Theme.of(context).textTheme.body2.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistMainText,
                         fontSize: 24,
                         fontWeight: FontWeight.normal),

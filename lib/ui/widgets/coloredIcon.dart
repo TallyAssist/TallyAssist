@@ -49,7 +49,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
              child: Text(
               widget.mTitle,
               overflow: TextOverflow.fade,
-              style: Theme.of(context).textTheme.title.copyWith(
+              style: Theme.of(context).textTheme.headline6.copyWith(
                 fontSize: 12,
                 color: TassistMainText
               ),

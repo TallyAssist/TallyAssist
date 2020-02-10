@@ -16,13 +16,18 @@ class StockScreen extends StatelessWidget {
 
     return StreamProvider<List<StockItem>>.value(
       value: StockItemService(uid: user.uid).stockItemsData,
-      child: Scaffold(
-          key: _drawerKey,
-          drawer: tassistDrawer(context),
-          appBar: headerNav(_drawerKey),
-          body: ListView(
-            children: <Widget>[SectionHeader('Stock Items'), StockItemList()],
-          )),
+      child: WillPopScope (
+              onWillPop: () async => false,
+              child: Scaffold(
+            key: _drawerKey,
+            drawer: tassistDrawer(context),
+            appBar: headerNav(_drawerKey),
+            body: Container(
+              child: ListView(
+                children: <Widget>[SectionHeader('Stock Items'), StockItemList()],
+              ),
+            )),
+      ),
     );
   }
 }

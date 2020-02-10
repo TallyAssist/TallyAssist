@@ -16,7 +16,7 @@ class SecondarySectionHeader extends StatelessWidget {
             color: TassistBgLightPurple,
             padding: spacer.x.xs,
             child:
-            Text(sectionText, style: Theme.of(context).textTheme.body2)
+            Text(sectionText, style: Theme.of(context).textTheme.bodyText2)
           );
   }
 }

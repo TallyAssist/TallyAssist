@@ -33,7 +33,7 @@ class GoToBar extends StatelessWidget {
                       child: Row(
                         children: <Widget>[
                           Text(goToText,
-                          style: Theme.of(context).textTheme.body2.copyWith(
+                          style: Theme.of(context).textTheme.bodyText2.copyWith(
                             fontSize: 14
                           ),                       
                           ),

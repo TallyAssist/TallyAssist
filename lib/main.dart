@@ -28,12 +28,13 @@ class MyApp extends StatelessWidget {
         home: RootPage(),
         theme: ThemeData(
           appBarTheme: AppBarTheme(
-            textTheme: TextTheme(title: primaryAppBarTitle),
+            textTheme: TextTheme(headline6: primaryAppBarTitle),
           ),
           textTheme: TextTheme(
-              title: secondaryListTitle,
-              body1: secondaryListDisc,
-              body2: secondaryListTitle2),
+              headline6: secondaryListTitle,
+              subtitle1: secondaryCategoryDesc,
+              bodyText1: secondaryListDisc,
+              bodyText2: secondaryListTitle2),
         ),
       )
     );

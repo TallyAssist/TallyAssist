@@ -29,82 +29,85 @@ class PurchaseOrderReportScreen extends StatelessWidget {
         ],
   
 
-      child:  Scaffold(
-        key: _drawerKey,
-        drawer: tassistDrawer(context),
-      appBar: headerNav(_drawerKey),
-      // bottomNavigationBar: bottomNav(),
-      body: ListView(
-        children: <Widget>[
-          SectionHeader('Purchase Order Report'),
-          Container(
-           
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Expanded(
-                  child: Container(
-                    padding: spacer.x.xs,
-                    margin: spacer.all.xxs,
-                    color: Color(0xffEDF4FC),
-                    child: Row(
-                      children: <Widget>[
-                        Text('Product'),
-                        Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    padding: spacer.x.xs,
-                     margin: spacer.all.xxs,
-                    color: Color(0xffEDF4FC),
-                    child: Row(
-                      children: <Widget>[
-                        Text('Customer'),
-                        Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Column(
+      child:  WillPopScope (
+              onWillPop: () async => false,
+              child: Scaffold(
+          key: _drawerKey,
+          drawer: tassistDrawer(context),
+        appBar: headerNav(_drawerKey),
+        // bottomNavigationBar: bottomNav(),
+        body: ListView(
+          children: <Widget>[
+            SectionHeader('Purchase Order Report'),
+            Container(
+             
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  ColoredIconNumberRow('total_purchases', 'Spent So Far'),
-                  ColoredIconNumberRow('open_purchase_orders', 'Open Orders'),
+                  Expanded(
+                    child: Container(
+                      padding: spacer.x.xs,
+                      margin: spacer.all.xxs,
+                      color: Color(0xffEDF4FC),
+                      child: Row(
+                        children: <Widget>[
+                          Text('Product'),
+                          Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      padding: spacer.x.xs,
+                       margin: spacer.all.xxs,
+                      color: Color(0xffEDF4FC),
+                      child: Row(
+                        children: <Widget>[
+                          Text('Customer'),
+                          Icon(Icons.arrow_drop_down, color: Colors.purple[800]),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  ColoredIconNumberRow('purchase_order_qty', 'Ordered Qty'),
-                  ColoredIconNumberRow('purchase_qty_due', 'Quantity Due'),
-                ],
-              )
-            ],
-          ),
-          FilterBar('Pending Purcahse Order By', 'Due Date'),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
-            DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
+            ),
+           Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    ColoredIconNumberRow('total_purchases', 'Spent So Far'),
+                    ColoredIconNumberRow('open_purchase_orders', 'Open Orders'),
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    ColoredIconNumberRow('purchase_order_qty', 'Ordered Qty'),
+                    ColoredIconNumberRow('purchase_qty_due', 'Quantity Due'),
+                  ],
+                )
+              ],
+            ),
+            FilterBar('Pending Purcahse Order By', 'Due Date'),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
+              DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
+              DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
+              DetailCard('XYZ Pvt. Ltd.', '#12483', '23 days', 'Rs. 1,23,890', '450 Nos.'),
 
-            ],
-          ),
-          GoToBar('Top Suppliers', LedgerScreen()),
-          GoToBar('Top Items Due', StockScreen()),
-          GoToBar('Top Accounts Payable', AccountsPayableScreen())       
-        ],
-      ),
-    )
+              ],
+            ),
+            GoToBar('Top Suppliers', LedgerScreen()),
+            GoToBar('Top Items Due', StockScreen()),
+            GoToBar('Top Accounts Payable', AccountsPayableScreen())       
+          ],
+        ),
+    ),
+      )
     );
   }
 }

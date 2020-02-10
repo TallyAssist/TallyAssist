@@ -56,13 +56,13 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
             Text('Actual'),
             Text(
               userDocument['out_actual_pay'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistWarning
               ),
             ),
             Text(
               userDocument['out_actual_rec'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistWarning
               ),
             )
@@ -73,13 +73,13 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
             Text('Avg. Delay'),
             Text(
               userDocument['out_avgdel_pay'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistWarning
               ),
             ),
             Text(
               userDocument['out_avgdel_rec'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistSuccess
               ),
             ),

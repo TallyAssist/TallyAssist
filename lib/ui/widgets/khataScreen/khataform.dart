@@ -112,7 +112,7 @@ class _KhataFormState extends State<KhataForm> {
             child: Text('Submit',
                 style: Theme.of(context)
                     .textTheme
-                    .body1
+                    .bodyText1
                     .copyWith(color: TassistWhite)),
             onPressed: () async {
               if (_formKey.currentState.validate()) {

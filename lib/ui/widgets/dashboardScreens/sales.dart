@@ -58,7 +58,7 @@ class _SalesDashboardWidgetContentRowState
                     userDocument['total_sales'].toString().substring(
                             1, userDocument['total_sales'].toString().length) ??
                         '',
-                    style: Theme.of(context).textTheme.body2.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistMainText,
                         fontSize: 24,
                         fontWeight: FontWeight.normal),
@@ -107,6 +107,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
     var userDocument = snapshot.data;
+  
 
     void shareSales(BuildContext context, double sales) {
       final String text =
