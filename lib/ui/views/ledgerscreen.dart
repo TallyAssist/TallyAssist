@@ -1,3 +1,4 @@
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,8 +20,10 @@ class LedgerScreen extends StatelessWidget {
   final user = Provider.of<FirebaseUser>(context);
   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
-    return StreamProvider<List<LedgerItem>>.value (
+    return 
+        StreamProvider<List<LedgerItem>>.value(
           value: LedgerItemService(uid: user.uid).ledgerItemData,
+  
           child: WillPopScope (
               onWillPop: () async => false,
                       child: Scaffold(

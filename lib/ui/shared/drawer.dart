@@ -83,18 +83,6 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: SalesOrderReportScreen(),
         color: TassistPrimaryBackground,
       ),
-      DrawerItem(
-        icon: Icons.inbox,
-        title: 'Purchases',
-        ontap: PurchaseOrderReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: Icons.computer,
-        title: 'GST Report',
-        ontap: GstReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
        DrawerItem(
         icon: FontAwesomeIcons.fileInvoice,
         title: 'Vouchers',
@@ -125,6 +113,18 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: AccountsPayableScreen(),
         color: TassistPrimaryBackground,
       ),
+           DrawerItem(
+        icon: Icons.inbox,
+        title: 'Purchases',
+        ontap: PurchaseOrderReportScreen(),
+        color: TassistInfoGrey,
+      ),
+      DrawerItem(
+        icon: Icons.computer,
+        title: 'GST Report',
+        ontap: GstReportScreen(),
+        color: TassistInfoGrey,
+      ),
        Padding(
         padding: spacer.all.xs,
         child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
@@ -139,13 +139,13 @@ Drawer tassistDrawer(BuildContext context) {
         icon: Icons.build,
         title: 'Production',
         ontap: ProductionScreen(),
-        color: TassistPrimaryBackground,
+        color: TassistInfoGrey,
       ),
       DrawerItem(
         icon: FontAwesomeIcons.users,
         title: 'CRM',
         ontap: CRMScreen(),
-        color: TassistPrimaryBackground,
+        color: TassistInfoGrey,
       ),
       SizedBox(height: 20.0,),
        Padding(

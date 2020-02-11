@@ -27,7 +27,7 @@ class _KhataListState extends State<KhataList> {
         itemBuilder: (context, index) {
           return Dismissible(
               key: Key(khataData[index].toString()),
-              onDismissed: (DismissDirection direction) async {
+              onDismissed: (DismissDirection dismissDirection) async {
                 DatabaseService().deleteKhata(user.uid);
                 if (khataData.contains(khataData[index])) {
                   setState(() {

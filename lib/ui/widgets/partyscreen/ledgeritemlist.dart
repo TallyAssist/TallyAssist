@@ -12,6 +12,7 @@ class LedgerItemList extends StatefulWidget {
 
 class _LedgerItemListState extends State<LedgerItemList> {
 
+
 TextEditingController editingController = TextEditingController();
 
   List<LedgerItem> ledgerItemData;
@@ -50,55 +51,57 @@ TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
   
-    return Container(
-        height: MediaQuery.of(context).size.height / 1.1,
-        child: Column(
-          children: <Widget>[
-            Padding(
-              padding: spacer.all.xxs,
-              child: Text('Total Ledgers: ${ledgerItemDataforDisplay.length}'),
-            ),
-              Container(
-              padding: spacer.bottom.xs,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: 50.0,
-                  child: TextField(
-                    onChanged: (value) {
-                      filterSearchResults(value.toLowerCase());
-                    },
-                    controller: editingController,
-                    style: Theme.of(context).textTheme.bodyText2,
-                    enableSuggestions: true,
-                    decoration: InputDecoration(
-                      labelText: "Search",
-                      labelStyle: Theme.of(context).textTheme.bodyText2,
-                      counterStyle: Theme.of(context).textTheme.bodyText2,
-                      prefixIcon: Icon(Icons.search),
-                      border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(25.0),
+    return 
+          Container(
+          height: MediaQuery.of(context).size.height / 1.1,
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: spacer.all.xxs,
+                child: Text('Total Ledgers: ${ledgerItemDataforDisplay.length}'),
+              ),
+                Container(
+                padding: spacer.bottom.xs,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50.0,
+                    child: TextField(
+                      onChanged: (value) {
+                        filterSearchResults(value.toLowerCase());
+                      },
+                      controller: editingController,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      enableSuggestions: true,
+                      decoration: InputDecoration(
+                        labelText: "Search",
+                        labelStyle: Theme.of(context).textTheme.bodyText2,
+                        counterStyle: Theme.of(context).textTheme.bodyText2,
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(25.0),
+                          ),
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
 
-            Expanded(
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                shrinkWrap: true,
-                itemCount: ledgerItemDataforDisplay?.length ?? 0,
-                itemBuilder: (context, index) {
-                  return LedgerItemTileNew(ledgerItem: ledgerItemDataforDisplay[index]);
-                },
+              Expanded(
+                child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: ledgerItemDataforDisplay?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return LedgerItemTileNew(ledgerItem: ledgerItemDataforDisplay[index]);
+                  },
+                ),
               ),
-            ),
-          ],
-        ));
+            ],
+          ));
   }
 }

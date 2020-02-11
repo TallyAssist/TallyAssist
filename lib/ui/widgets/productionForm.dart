@@ -33,6 +33,7 @@ class _ProductionFormState extends State<ProductionForm> {
       key:  _formKey,
       child: Column(
         children: <Widget>[
+          SizedBox(height: 20.0),
           Text('Enter data for the day'),
           SizedBox(height: 20.0,),
            Row(children: <Widget>[ 
@@ -65,7 +66,7 @@ class _ProductionFormState extends State<ProductionForm> {
              items: product.map( (product){
               return DropdownMenuItem(
                 value: product,
-                child: Text('$product')
+                child: Text('$product', style: Theme.of(context).textTheme.bodyText2,)
                 );   
 
             }).toList(),
@@ -73,9 +74,11 @@ class _ProductionFormState extends State<ProductionForm> {
           ),
           SizedBox(height: 20.0),
           TextFormField(
+            style: Theme.of(context).textTheme.bodyText2,
             keyboardType: TextInputType.number,
             decoration: new InputDecoration(
             hintText: 'Enter Production',
+            hintStyle: Theme.of(context).textTheme.bodyText2,
             icon: new Icon(
               Icons.note_add,
               color: TassistBlack,

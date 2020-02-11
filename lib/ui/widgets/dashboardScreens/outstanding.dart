@@ -39,52 +39,56 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
       children: <Widget>[
         Column(
           children: <Widget>[
-            Text(' '),
-            Text('Payables'),
-            Text('Receivables'),
+            // Text(' '),
+            Text('Payables', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistPrimary
+              )),
+            Text('Receivables', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistPrimary
+              )),
           ],
         ),
+        // Column(
+        //   children: <Widget>[
+        //     Text('Target'),
+        //     Text(userDocument['out_target_pay'].toString()),
+        //     Text(userDocument['out_target_rec'].toString())
+        //   ],
+        // ),
         Column(
           children: <Widget>[
-            Text('Target'),
-            Text(userDocument['out_target_pay'].toString()),
-            Text(userDocument['out_target_rec'].toString())
-          ],
-        ),
-        Column(
-          children: <Widget>[
-            Text('Actual'),
+            // Text('Actual'),
             Text(
               userDocument['out_actual_pay'].toString(),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistWarning
+                color: TassistMainText
               ),
             ),
             Text(
-              userDocument['out_actual_rec'].toString(),
+              userDocument['out_actual_rec'].toString().substring(1, userDocument['out_actual_rec'].toString().length),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistWarning
+                color: TassistMainText
               ),
             )
           ],
         ),
-        Column(
-          children: <Widget>[
-            Text('Avg. Delay'),
-            Text(
-              userDocument['out_avgdel_pay'].toString(),
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistWarning
-              ),
-            ),
-            Text(
-              userDocument['out_avgdel_rec'].toString(),
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistSuccess
-              ),
-            ),
-          ],
-        ),
+        // Column(
+        //   children: <Widget>[
+        //     Text('Avg. Delay'),
+        //     Text(
+        //       userDocument['out_avgdel_pay'].toString(),
+        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //         color: TassistWarning
+        //       ),
+        //     ),
+        //     Text(
+        //       userDocument['out_avgdel_rec'].toString(),
+        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //         color: TassistSuccess
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }

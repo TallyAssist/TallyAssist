@@ -23,18 +23,18 @@ class LedgerItemTileNew  extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-  if (ledgerItem.parentid == '20') {
+  if (ledgerItem.parentid == '20')  {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.state, 
      'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
      'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
       title1: 'Receivables', 
-      info1: ledgerItem.contact, 
+      info1: ledgerItem.totalReceivables, 
       title2: 'Last Sale ', 
-      info2: ledgerItem.email, 
-      title3: 'Last Receipt', info3: ledgerItem.phone,
-      title4: 'Last Price Sold', info4: 'NA',
+      info2: ledgerItem.lastSalesDate, 
+      title3: 'Last Receipt', info3: ledgerItem.lastReceiptDate,
+      title4: 'Last Price Sold', info4: 'Coming Soon!',
       ledgerItem: ledgerItem,);
   }
   else {
@@ -45,14 +45,14 @@ class LedgerItemTileNew  extends StatelessWidget {
      ledgerItem.state, 
      'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
      'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
-      title1: 'Payables', 
-      info1: ledgerItem.contact, 
+        title1: 'Payables', 
+      info1: ledgerItem.totalPayables, 
       title2: 'Last Purchase ', 
-      info2: ledgerItem.email, 
-      title3: 'Last Payment', info3: ledgerItem.phone,
-      title4: 'Last Price Bought', info4: 'NA',
-      ledgerItem: ledgerItem,
-      );
+      info2: ledgerItem.lastPurchaseDate, 
+      title3: 'Last Payment', info3: ledgerItem.lastPaymentDate,
+      title4: 'Last Price Bought', info4: 'Coming Soon!',
+      ledgerItem: ledgerItem,);
+    
 
   }
   else {

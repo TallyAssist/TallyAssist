@@ -29,7 +29,6 @@ class LedgerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    
 
 _launchURL() async {
   var url = 'https://api.whatsapp.com/send?phone=${ledgerItem.phone}';
@@ -40,6 +39,66 @@ _launchURL() async {
   }
 }
  
+_changeCreditorDebtor() {
+  if (ledgerItem.parentid == '20') {
+    return  Container(
+                    decoration: ShapeDecoration(
+                      color: TassistInfoLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )
+                    ),
+                    child: Padding(
+                      padding: spacer.x.xxs,
+                      child: Text('Debtor', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12.0
+                      ))
+                     
+                    )
+                  );
+    
+  }
+  else {
+  return Container(
+                    decoration: ShapeDecoration(
+                      color: TassistInfoLight,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      )
+                    ),
+                    child: Padding(
+                      padding: spacer.x.xxs,
+                      child: Text('Creditor', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        fontSize: 12.0
+                      ))
+                     
+                    )
+                  );
+  }
+
+}
+
+_changeReceivables() {
+ if ((ledgerItem.totalReceivables != '0.0') ) {
+return Icon(FontAwesomeIcons.arrowCircleDown, color: TassistSuccess, size: 20.0);
+}
+else if ((ledgerItem.totalPayables != '0.0')) {
+return Icon(FontAwesomeIcons.arrowCircleUp, color: TassistWarning, size: 20.0);
+}
+else {
+    return Icon(FontAwesomeIcons.circle, color: TassistInfoBlue, size: 20.0);
+  }
+}
+
+_changeActiveStatus() {
+if (ledgerItem.closingBalance == '0') {
+ return Icon(FontAwesomeIcons.powerOff, color: TassistWarning, size: 20.0);
+}
+else {
+  return Icon(FontAwesomeIcons.powerOff, color: TassistSuccess, size: 20.0);
+}
+}
+
 
     return Card(
       shape: RoundedRectangleBorder(
@@ -56,30 +115,30 @@ _launchURL() async {
               Row(
                 children: <Widget>[
 
-                  Icon(FontAwesomeIcons.powerOff, color: TassistWarning, size: 20.0),
+                _changeActiveStatus(),
                   SizedBox(width: 8.0,),
-                   Icon(FontAwesomeIcons.arrowCircleDown, color: TassistSuccess, size: 20.0),
+                _changeReceivables(),
                   SizedBox(width: 8.0,),
-                  
-                      Container(
-                    decoration: ShapeDecoration(
-                      color: TassistInfoLight,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      )
-                    ),
-                    child: Padding(
-                      padding: spacer.x.xxs,
-                      child: Text('Creditor', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                        fontSize: 12.0
-                      ))
-                     
-                    )
-                  ),
+                  _changeCreditorDebtor(),   
                 Spacer(),
 
                 IconButton(icon: Icon(FontAwesomeIcons.whatsapp), onPressed: () => _launchURL()  ),
-                IconButton(icon: Icon(FontAwesomeIcons.bell), onPressed: () {} ),  
+                IconButton(icon: Icon(FontAwesomeIcons.bell), onPressed: () {
+                  showDialog(
+                    context: context, 
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Coming Soon!'),
+                        content: Text('Reminders are in the works, you will see them by end of the week latest!', style: Theme.of(context).textTheme.bodyText1,),
+                        actions: <Widget>[
+                          FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text("I'll wait :)", style: TextStyle(fontSize: 20.0, color: TassistPrimaryBackground),))
+                        ],
+                      );
+
+                    }
+                  
+                  );
+                } ),  
                  
                   
 

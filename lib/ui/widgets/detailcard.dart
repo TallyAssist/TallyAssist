@@ -18,12 +18,16 @@ class DetailCard extends StatelessWidget {
             padding: spacer.all.xs,
             child: Column(children: <Widget>[
         Row(children: <Widget>[
-            Text(_title1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.headline6.copyWith(
-                    fontSize: 16.0,
-                )
-                ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.2,
+              child: Text(_title1,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.headline6.copyWith(
+                      fontSize: 16.0,
+                  )
+                  ),
+            ),
         ]),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

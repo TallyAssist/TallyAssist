@@ -2,38 +2,16 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/models/ledger.dart';
-import 'package:intl/intl.dart';
 import 'package:tassist/theme/colors.dart';
-// import 'package:tassist/ui/widgets/childdetailcard.dart';
-// import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-var formatter = new DateFormat('dd-MM-yyyy');
-// TODO
-var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
 
 
-class LedgerItemTile extends StatelessWidget {
+class APSingleItem extends StatelessWidget {
 
   final LedgerItem ledgerItem;
-  
-  LedgerItemTile({this.ledgerItem});
 
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ExpansibleDetailCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
-//     '# ${ledgerItem.masterId}',
-//      ledgerItem.state, 
-//      'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
-//      'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
-//       title1: 'Contact', 
-//       info1: ledgerItem.contact, 
-//       title2: 'Email', 
-//       info2: ledgerItem.email, 
-//       title3: 'Phone', info3: ledgerItem.phone,);
-//   }
-// }
+APSingleItem({this.ledgerItem});
 
  @override
   Widget build(BuildContext context) {
@@ -46,7 +24,6 @@ _launchURL() async {
     throw 'Could not launch $url';
   }
 }
-
 
     return 
     FittedBox(
@@ -68,10 +45,9 @@ _launchURL() async {
               ),
             ),
             SizedBox(width: 5,),
-            Text('Rs. ${ledgerItem.openingBalance}', style: TextStyle(color: TassistInfoGrey)),
+            Text('Rs. ${ledgerItem.totalPayables}'),
             SizedBox(width: 10,),
-    
-               Text('Rs. ${ledgerItem.totalReceivables}',),
+               Text('Rs. ${ledgerItem.totalPayment.substring(1, ledgerItem.totalPayment.length)}', style: TextStyle(color: TassistInfoGrey),),
               IconButton(
                 onPressed: () {
                   _launchURL();
@@ -83,7 +59,6 @@ _launchURL() async {
       ),
           ),
     );
-  }
 
 }  
-
+}

@@ -48,9 +48,11 @@ class _RegisterState extends State<Register> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText2,
                 decoration: InputDecoration(
                   icon: Icon(Icons.email, color: TassistPrimaryBackground),
                   hintText: 'Enter your email ID please',
+                  hintStyle: Theme.of(context).textTheme.bodyText2,
                   labelText: 'Email'
                 ),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
@@ -60,9 +62,11 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText2,
                 decoration: InputDecoration(
                    icon: Icon(Icons.vpn_key, color: TassistPrimaryBackground),
                   hintText: 'Enter your password please',
+                  hintStyle: Theme.of(context).textTheme.bodyText2,
                   labelText: 'Password'
                 ),
                 obscureText: true,
@@ -74,9 +78,11 @@ class _RegisterState extends State<Register> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText2,
                 decoration: InputDecoration(
                    icon: Icon(Icons.perm_contact_calendar, color: TassistPrimaryBackground),
                   hintText: 'Enter your referral code',
+                  hintStyle: Theme.of(context).textTheme.bodyText2,
                   labelText: 'Referral Code'
                 ),
                 obscureText: true,
