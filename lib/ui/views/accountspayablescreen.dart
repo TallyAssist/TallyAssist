@@ -25,14 +25,12 @@ class AccountsPayableScreen extends StatelessWidget {
         final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
         final user = Provider.of<FirebaseUser>(context);
 
-    return StreamProvider<List<LedgerItem>>.value(
-          value: LedgerItemService(uid: user.uid).accountsPayablesData,
-          child:WillPopScope (
+    return WillPopScope (
               onWillPop: () async => false,
           child: Scaffold(
         key: _drawerKey,
         drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
+        appBar: headerNav(_drawerKey, context),
         // bottomNavigationBar: bottomNav(),
         body: ListView(
           children: <Widget>[
@@ -88,7 +86,6 @@ class AccountsPayableScreen extends StatelessWidget {
 
 
       ),
-    )
     );
   }
 }

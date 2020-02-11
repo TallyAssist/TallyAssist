@@ -34,7 +34,7 @@ class PurchaseOrderReportScreen extends StatelessWidget {
               child: Scaffold(
           key: _drawerKey,
           drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
+        appBar: headerNav(_drawerKey, context),
         // bottomNavigationBar: bottomNav(),
         body: ListView(
           children: <Widget>[

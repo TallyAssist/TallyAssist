@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
@@ -19,6 +22,11 @@ import 'package:tassist/ui/views/vouchers.dart';
  final AuthService _auth = AuthService();
 
 Drawer tassistDrawer(BuildContext context) {
+  final user = Provider.of<FirebaseUser>(context);
+  
+  final snapshot = Provider.of<DocumentSnapshot>(context);
+    var companyInfo = snapshot.data;
+   
   
   return Drawer(
       child: ListView(
@@ -40,17 +48,23 @@ Drawer tassistDrawer(BuildContext context) {
               height: 10.0,
             ),
             Text(
-              'John Doe',
+              user.email,
               style: Theme.of(context)
                   .textTheme
                   .headline6
-                  .copyWith(color: TassistWhite),
+                  .copyWith(color: TassistWhite, 
+                  fontSize: 18.0,
+                  ),
             ),
-            Text('Company: ABC Pvt. Ltd.', 
-             style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: TassistWhite),
+            Container(
+              child: Text('Company: ${companyInfo['formal_name']}', 
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+               style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: TassistWhite),
+              ),
             )
 
           ],

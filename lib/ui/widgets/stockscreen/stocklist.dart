@@ -5,6 +5,11 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/stockscreen/stocktile.dart';
 
 class StockItemList extends StatefulWidget {
+  
+  // Stream<List<StockItem>> stockItemData;
+  
+  // StockItemList({this.stockItemData});
+
   @override
   _StockItemListState createState() => _StockItemListState();
 }
@@ -17,6 +22,26 @@ class _StockItemListState extends State<StockItemList> {
 
   @override
   void initState() {
+    
+    // stockItemData = [];
+    // print('data ayga');
+    // widget.stockItemData.listen((value) {
+    //   print('data!!!!!!!!');
+    //   print(value[0].toString());
+    //   setState(() {
+    //     stockItemData = value;
+    //     stockItemDataforDisplay = value;
+    //     print('data length: ');
+    //     print(stockItemData.length);
+    //   });
+    //   print('data length: ');
+    //   print(stockItemData.length);
+    // });
+
+    
+    // // print('----------+++++---------');
+    // // print(Provider.of(context, listen: false));
+    // // print('----------+++++---------');
     stockItemData = Provider.of<List<StockItem>>(context, listen: false);
     stockItemDataforDisplay.addAll(stockItemData);
 

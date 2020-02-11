@@ -17,14 +17,11 @@ class PaymentVoucherScreen extends StatelessWidget {
 
   final user = Provider.of<FirebaseUser>(context);
 
-    return StreamProvider<List<PaymentVoucher>>.value (
-          value: PaymentVoucherService(uid: user.uid).paymentVoucherData,
-          child:  ListView(
+    return  ListView(
           children: <Widget>[
           PaymentVoucherList()
 
   ],
-)
     );
   }
 }

@@ -32,7 +32,7 @@ class ProductionScreen extends StatelessWidget {
     return StreamProvider<List<Production>>.value (
           value: DatabaseService().productionData,
           child: Scaffold(
-        appBar: headerNav(_drawerKey),
+        appBar: headerNav(_drawerKey, context),
         // bottomNavigationBar: bottomNav(),
         body: Column(
           children: <Widget>[

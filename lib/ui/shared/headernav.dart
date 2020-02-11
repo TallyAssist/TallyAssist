@@ -1,14 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey) {
+AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
 // headerNav(_drawerkey);
 
 // GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   bool enabled = true;
+
+  final snapshot = Provider.of<DocumentSnapshot>(context);
+    var companyInfo = snapshot.data;
+   
 
   return AppBar(
       leading: Padding(
@@ -33,16 +39,21 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey) {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
-                'ABC Pvt Ltd',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0,
-                ),
+               Container(
+                 width: MediaQuery.of(context).size.width /2,
+                 child: Text(
+                  companyInfo['formal_name'] ?? '',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 1.0,
+                  ),
               ),
-              const Text(
-                'GSTIN: 29ABCDE1234F2Z5',
+               ),
+              Text(
+                'GSTIN: ${companyInfo['gst_number']}',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,

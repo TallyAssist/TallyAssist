@@ -21,15 +21,14 @@ class LedgerScreen extends StatelessWidget {
   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return 
-        StreamProvider<List<LedgerItem>>.value(
-          value: LedgerItemService(uid: user.uid).ledgerItemData,
+       
   
-          child: WillPopScope (
+          WillPopScope (
               onWillPop: () async => false,
                       child: Scaffold(
             key: _drawerKey,
         drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
+        appBar: headerNav(_drawerKey, context),
         body: ListView(
             children: <Widget>[
             SectionHeader('Ledgers'),
@@ -43,7 +42,7 @@ class LedgerScreen extends StatelessWidget {
 
         
       ),
-          ),
+
     );
   }
 }

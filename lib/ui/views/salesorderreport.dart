@@ -29,16 +29,13 @@ class SalesOrderReportScreen extends StatelessWidget {
                   .metricCollection
                   .document(user.uid)
                   .snapshots()),
-         StreamProvider<List<LedgerItem>>.value (
-          value: LedgerItemService(uid: user.uid).inactiveCustomerData
-         )
         ],
         child: WillPopScope (
               onWillPop: () async => false,
                   child: Scaffold(
             key: _drawerKey,
             drawer: tassistDrawer(context),
-            appBar: headerNav(_drawerKey),
+            appBar: headerNav(_drawerKey, context),
             // bottomNavigationBar: bottomNav(),
             body: ListView(
               children: <Widget>[

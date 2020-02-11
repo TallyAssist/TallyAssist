@@ -43,6 +43,7 @@ dependencies:
   get_it: ^1.0.3+2
   image_picker: ^0.6.1+4
   intl: ^0.16.1
+  flutter_spinkit: "^4.1.1"
 
 dev_dependencies:
   flutter_test:

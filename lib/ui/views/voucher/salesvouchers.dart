@@ -14,15 +14,11 @@ class SalesVoucherScreen extends StatelessWidget {
 
   final user = Provider.of<FirebaseUser>(context);
 
-    return StreamProvider<List<SalesVoucher>>.value (
-          value: SalesVoucherService(uid: user.uid).salesVoucherData,
-          child:  
-          ListView(
-          children: <Widget>[
-          SalesVoucherList()
+    return ListView(
+    children: <Widget>[
+    SalesVoucherList()
 
   ],
-)
-    );
+);
   }
 }

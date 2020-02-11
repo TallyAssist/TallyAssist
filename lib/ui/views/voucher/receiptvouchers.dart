@@ -17,14 +17,11 @@ class ReceiptVoucherScreen extends StatelessWidget {
 
   final user = Provider.of<FirebaseUser>(context);
 
-    return StreamProvider<List<ReceiptVoucher>>.value (
-          value: ReceiptVoucherService(uid: user.uid).receiptVoucherData,
-          child:  ListView(
+    return ListView(
           children: <Widget>[
           ReceiptVoucherList()
 
   ],
-)
     );
   }
 }
