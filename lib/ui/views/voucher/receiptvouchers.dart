@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/receiptvoucher.dart';
-import 'package:tassist/core/services/receiptvoucherservice.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -15,7 +13,7 @@ class ReceiptVoucherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  final user = Provider.of<FirebaseUser>(context);
+  // final user = Provider.of<FirebaseUser>(context);
 
     return ListView(
           children: <Widget>[

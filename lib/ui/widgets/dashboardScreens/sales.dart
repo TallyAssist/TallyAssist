@@ -111,7 +111,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
 
     void shareSales(BuildContext context, double sales) {
       final String text =
-          "Total Sales is ${userDocument['total_sales'].toString()}, and total number of vouchers ${userDocument['num_sales_vouchersr'].toString()}. - Shared via restat.co/tallyassist.in";
+          "Total Sales is ${userDocument['total_sales'].toString()}, and total number of vouchers ${userDocument['num_sales_vouchers']}. - Shared via restat.co/tallyassist.in";
 
       Share.share(text,
           subject: "Total Sales ${userDocument['total_sales'].toString()}");
@@ -140,7 +140,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
                     return AlertDialog(
                       title: Text('Total Sales'),
                       content: Text(
-                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.'),
+                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.', style: Theme.of(context).textTheme.bodyText2,),
                       elevation: 24.0,
                       actions: <Widget>[
                         FlatButton(

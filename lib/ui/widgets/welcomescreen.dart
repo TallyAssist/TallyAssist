@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/views/dashboard.dart';
 
@@ -8,11 +8,6 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-//  final spinkit = SpinKitSquareCircle(
-//   color: TassistPrimary,
-//   size: 50.0,
-//   // controller: AnimationController(vsync: this, duration: const Duration(milliseconds: 1200)),
-// );
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
 

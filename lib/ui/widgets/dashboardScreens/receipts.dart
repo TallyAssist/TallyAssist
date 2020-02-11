@@ -139,7 +139,7 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
                     return AlertDialog(
                       title: Text('Total Receipts'),
                       content: Text(
-                          'Total Receipts is calculated using sum of Sales Vouchers. This represents all receipts.'),
+                          'Total Receipts is calculated using sum of Sales Vouchers. This represents all receipts.', style: Theme.of(context).textTheme.bodyText2,),
                       elevation: 24.0,
                       actions: <Widget>[
                         FlatButton(

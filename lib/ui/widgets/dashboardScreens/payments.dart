@@ -118,7 +118,7 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
   final snapshot = Provider.of<DocumentSnapshot>(context);
   var userDocument = snapshot.data; 
   
-   void sharePayments(BuildContext context, int payments) {
+   void sharePayments(BuildContext context, double payments) {
     final String text = "Total Payments is ${userDocument['total_payments'].toString()}, and total number of vouchers ${userDocument['num_payments_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
 
     Share.share(text, subject: "Total Payments ${userDocument['total_payments'].toString()}");
@@ -145,7 +145,7 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
                     builder: (BuildContext context) {
                       return  AlertDialog(
                   title: Text('Total Payments'),
-                  content: Text('Total Payments is calculated using sum of all Payments. This represents all payments.'),
+                  content: Text('Total Payments is calculated using sum of all Payments. This represents all payments.', style: Theme.of(context).textTheme.bodyText2,),
                   elevation: 24.0,
                   actions: <Widget>[
                     FlatButton(

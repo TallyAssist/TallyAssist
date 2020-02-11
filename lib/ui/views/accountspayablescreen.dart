@@ -1,8 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:tassist/core/models/ledger.dart';
-import 'package:tassist/core/services/ledgerservice.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 
@@ -23,7 +20,7 @@ class AccountsPayableScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 
         final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-        final user = Provider.of<FirebaseUser>(context);
+        // final user = Provider.of<FirebaseUser>(context);
 
     return WillPopScope (
               onWillPop: () async => false,

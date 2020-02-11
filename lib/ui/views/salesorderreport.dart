@@ -2,9 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/services/database.dart';
-import 'package:tassist/core/services/ledgerservice.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/drawer.dart';
@@ -52,6 +50,8 @@ class SalesOrderReportScreen extends StatelessWidget {
                           child: Row(
                             children: <Widget>[
                               Text('Product'),
+                              Icon(Icons.arrow_drop_down,
+                                  color: Colors.purple[800]),
                             ],
                           ),
                         ),
@@ -94,7 +94,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                   ],
                 ),
                 // FilterBar('Sales Vouchers By', 'Due Date'),
-                GoToBar('SalesVouchers', VouchersHome()),
+                GoToBar('Sales Vouchers', VouchersHome()),
                 // SalesVoucherList(),
 
                 SecondarySectionHeader('Inactive Customer List'),
