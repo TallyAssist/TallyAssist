@@ -6,7 +6,7 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 
- LedgerItem ledgerItem;
+
 
 class LedgerCard extends StatelessWidget {
 
@@ -21,9 +21,10 @@ class LedgerCard extends StatelessWidget {
   final String info3;
   final String title4;
   final String info4;
+  final LedgerItem ledgerItem;
   
 
-  LedgerCard({this.category, this.childdetailCard, this.title1, this.info1, this.title2, this.info2, this.title3, this.info3, this.title4, this.info4,});
+  LedgerCard({this.category, this.childdetailCard, this.title1, this.info1, this.title2, this.info2, this.title3, this.info3, this.title4, this.info4, this.ledgerItem});
 
   @override
   Widget build(BuildContext context) {

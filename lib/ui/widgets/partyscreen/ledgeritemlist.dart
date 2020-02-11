@@ -15,7 +15,7 @@ class _LedgerItemListState extends State<LedgerItemList> {
 TextEditingController editingController = TextEditingController();
 
   List<LedgerItem> ledgerItemData;
-  List<LedgerItem> ledgerItemDataforDisplay = List<LedgerItem>();
+  List<LedgerItem> ledgerItemDataforDisplay= List<LedgerItem>();
 
   @override
   void initState() {
@@ -57,7 +57,7 @@ TextEditingController editingController = TextEditingController();
           children: <Widget>[
             Padding(
               padding: spacer.all.xxs,
-              child: Text('Total Ledgers: ${ledgerItemData.length}'),
+              child: Text('Total Ledgers: ${ledgerItemDataforDisplay.length}'),
             ),
               Container(
               padding: spacer.bottom.xs,
@@ -92,9 +92,9 @@ TextEditingController editingController = TextEditingController();
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: ledgerItemData?.length ?? 0,
+                itemCount: ledgerItemDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return LedgerItemTileNew(ledgerItem: ledgerItemData[index]);
+                  return LedgerItemTileNew(ledgerItem: ledgerItemDataforDisplay[index]);
                 },
               ),
             ),

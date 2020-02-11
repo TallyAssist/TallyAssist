@@ -34,7 +34,8 @@ class LedgerItemTileNew  extends StatelessWidget {
       title2: 'Last Sale ', 
       info2: ledgerItem.email, 
       title3: 'Last Receipt', info3: ledgerItem.phone,
-      title4: 'Last Price Sold', info4: 'NA',);
+      title4: 'Last Price Sold', info4: 'NA',
+      ledgerItem: ledgerItem,);
   }
   else {
 
@@ -50,6 +51,7 @@ class LedgerItemTileNew  extends StatelessWidget {
       info2: ledgerItem.email, 
       title3: 'Last Payment', info3: ledgerItem.phone,
       title4: 'Last Price Bought', info4: 'NA',
+      ledgerItem: ledgerItem,
       );
 
   }
