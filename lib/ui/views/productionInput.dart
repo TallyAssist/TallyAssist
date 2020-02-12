@@ -38,7 +38,7 @@ class ProductionScreen extends StatelessWidget {
               child: Scaffold(
           key: _drawerKey,
           drawer: tassistDrawer(context),
-          appBar: headerNav(_drawerKey, context),
+          appBar: headerNav(_drawerKey),
           // bottomNavigationBar: bottomNav(),
           body: Column(
             children: <Widget>[

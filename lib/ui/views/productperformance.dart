@@ -16,7 +16,7 @@ class ProductPerformanceScreen extends StatelessWidget {
               onWillPop: () async => false,
           child: Scaffold(
         key: _drawerKey,
-        appBar: headerNav(_drawerKey, context),
+        appBar: headerNav(_drawerKey),
         // bottomNavigationBar: bottomNav(),
         body: ListView(
           children: <Widget>[

@@ -19,7 +19,7 @@ class CRMScreen extends StatelessWidget {
     return  Scaffold(
         key: _drawerKey,
         drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey, context),
+        appBar: headerNav(_drawerKey),
         body: ListView(
           children: <Widget>[
           SectionHeader('CRM'),

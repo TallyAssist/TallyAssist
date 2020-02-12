@@ -33,7 +33,7 @@ class SalesOrderReportScreen extends StatelessWidget {
                   child: Scaffold(
             key: _drawerKey,
             drawer: tassistDrawer(context),
-            appBar: headerNav(_drawerKey, context),
+            appBar: headerNav(_drawerKey),
             // bottomNavigationBar: bottomNav(),
             body: ListView(
               children: <Widget>[

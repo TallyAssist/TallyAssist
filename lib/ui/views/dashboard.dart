@@ -51,7 +51,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onWillPop: () async => false,
                   child: Scaffold(
               key: _drawerKey,
-              appBar: headerNav(_drawerKey, context),
+              appBar: headerNav(_drawerKey),
               drawer: tassistDrawer(context),
               body: SafeArea(
                 child: ListView(

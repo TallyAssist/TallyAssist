@@ -1,19 +1,19 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
+AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey ) {
 // headerNav(_drawerkey);
 
 // GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   bool enabled = true;
 
-  final snapshot = Provider.of<DocumentSnapshot>(context);
-    var companyInfo = snapshot.data;
+  // final snapshot = Provider.of<DocumentSnapshot>(context);
+  //   var companyInfo = snapshot.data;
    
 
   return AppBar(
@@ -40,9 +40,9 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
                Container(
-                 width: MediaQuery.of(context).size.width /2,
+                //  width: MediaQuery.of(context).size.width /2,
                  child: Text(
-                  '',
+                  'TallyAssist',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -54,7 +54,7 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
                ),
               Text(
                 // 'GSTIN: ${companyInfo['gst_number']}',
-                '',
+                'Beta',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,
