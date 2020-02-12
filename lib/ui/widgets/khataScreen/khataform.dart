@@ -85,6 +85,7 @@ class _KhataFormState extends State<KhataForm> {
           TextFormField(
             initialValue: _currentParty,
             keyboardType: TextInputType.text,
+            style: Theme.of(context).textTheme.bodyText2,
             decoration: new InputDecoration(
                 hintText: 'Enter Party',
                 hintStyle: Theme.of(context).textTheme.bodyText2,
@@ -98,6 +99,7 @@ class _KhataFormState extends State<KhataForm> {
           SizedBox(height: 20.0),
           TextFormField(
             keyboardType: TextInputType.number,
+            style: Theme.of(context).textTheme.bodyText2,
             decoration: new InputDecoration(
                 hintText: 'Enter Amount',
                 hintStyle: Theme.of(context).textTheme.bodyText2,

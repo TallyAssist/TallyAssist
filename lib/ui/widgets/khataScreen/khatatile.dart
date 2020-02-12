@@ -42,7 +42,7 @@ class KhataTile extends StatelessWidget {
                 Text(khata.amount.toString(), style: Theme.of(context).textTheme.bodyText1.copyWith(
                   color: TassistPrimary
                 )),
-                Text(formatter.format(khata.date).toString()),
+                Text(formatter.format(khata.date).toString(), style: Theme.of(context).textTheme.bodyText1 ),
 
               ],
             ),

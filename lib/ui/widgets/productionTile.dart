@@ -24,7 +24,7 @@ class ProductionTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
               Icon(Icons.date_range),
-              Text(formatter.format(production.date).toString()),
+              Text(formatter.format(production.date).toString(),style: Theme.of(context).textTheme.bodyText1),
               ]
           ),
           title: Padding(
