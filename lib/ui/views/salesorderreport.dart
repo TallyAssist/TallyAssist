@@ -23,7 +23,7 @@ class SalesOrderReportScreen extends StatelessWidget {
     return MultiProvider(
         providers: [
           StreamProvider<DocumentSnapshot>.value(
-              value: DatabaseService(uid: user.uid)
+              value: DatabaseService(uid: user?.uid)
                   .metricCollection
                   .document(user.uid)
                   .snapshots()),

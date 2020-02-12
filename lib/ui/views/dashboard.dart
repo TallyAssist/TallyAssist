@@ -44,7 +44,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           StreamProvider<DocumentSnapshot>.value(
               value: DatabaseService()
                   .metricCollection
-                  .document(user.uid)
+                  .document(user?.uid)
                   .snapshots()),
         ],
         child: WillPopScope (
