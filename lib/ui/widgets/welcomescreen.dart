@@ -8,28 +8,18 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-
 class _WelcomeScreenState extends State<WelcomeScreen> {
-
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(seconds: 5), (){
-    Navigator.push(context, 
-    MaterialPageRoute(builder: (context) => DashboardScreen())
-    );
-
+    Future.delayed(const Duration(seconds: 5), () {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => DashboardScreen()));
     });
-
-   
   }
 
- 
-  
   @override
   Widget build(BuildContext context) {
-
-    
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -41,11 +31,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               //   image: AssetImage('graphics/dataanalysis.png'),
               //   fit: BoxFit.fill,
               // ),
-              Center(child: Text('Welcome to TallyAssist', style: Theme.of(context).textTheme.headline6.copyWith(
-                  fontSize: 24.0,
-                  color: TassistWhite
-                ),))
-              
+              Center(
+                  child: Text(
+                'Welcome to TallyAssist',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline6
+                    .copyWith(fontSize: 24.0, color: TassistWhite),
+              ))
             ],
           ),
         ),
@@ -53,4 +46,3 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     );
   }
 }
-
