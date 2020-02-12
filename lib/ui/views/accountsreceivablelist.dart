@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/receivables.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/itemlist.dart';
@@ -16,22 +17,22 @@ class _ARLedgerItemListState extends State<ARLedgerItemList> {
 
 TextEditingController editingController = TextEditingController();
 
-  List<LedgerItem> ledgerItemData;
-  List<LedgerItem> ledgerItemDataforDisplay= List<LedgerItem>();
+  List<ReceivablesItem> ledgerItemData;
+  List<ReceivablesItem> ledgerItemDataforDisplay= List<ReceivablesItem>();
 
   @override
   void initState() {
-    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false);
+    ledgerItemData = Provider.of<List<ReceivablesItem>>(context, listen: false);
     ledgerItemDataforDisplay.addAll(ledgerItemData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<LedgerItem> dummySearchList = List<LedgerItem>();
+    List<ReceivablesItem> dummySearchList = List<ReceivablesItem>();
     dummySearchList.addAll(ledgerItemData);
     if (query.isNotEmpty) {
-      List<LedgerItem> dummyListData = List<LedgerItem>();
+      List<ReceivablesItem> dummyListData = List<ReceivablesItem>();
       dummySearchList.forEach((item) {
         if (item.name.toLowerCase().contains(query)) {
           dummyListData.add(item);

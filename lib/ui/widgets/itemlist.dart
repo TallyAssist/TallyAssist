@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/receivables.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,7 +9,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SingleItem extends StatelessWidget {
 
-  final LedgerItem ledgerItem;
+  final ReceivablesItem ledgerItem;
 
 SingleItem({this.ledgerItem});
 

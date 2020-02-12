@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/inactivecustomer.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/theme/colors.dart';
 // import 'package:tassist/ui/widgets/childdetailcard.dart';
@@ -15,7 +15,7 @@ var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
 
 class LedgerItemTile extends StatelessWidget {
 
-  final LedgerItem ledgerItem;
+  final InactiveCustomer ledgerItem;
   
   LedgerItemTile({this.ledgerItem});
 
