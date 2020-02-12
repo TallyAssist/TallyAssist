@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,7 +5,6 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/crm.dart';
@@ -27,8 +25,8 @@ final AuthService _auth = AuthService();
 Drawer tassistDrawer(BuildContext context) {
   final user = Provider.of<FirebaseUser>(context);
 
-  final snapshot = Provider.of<DocumentSnapshot>(context);
-  var companyInfo = snapshot.data;
+  // final snapshot = Provider.of<DocumentSnapshot>(context);
+  // var companyInfo = snapshot.data;
 
   return Drawer(
       child: ListView(

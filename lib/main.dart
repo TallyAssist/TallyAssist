@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/inactivecustomer.dart';
 import 'package:tassist/core/models/payables.dart';
 import 'package:tassist/core/models/paymentvoucher.dart';
 import 'package:tassist/core/models/receiptvoucher.dart';
@@ -10,6 +11,7 @@ import 'package:tassist/core/models/salesvoucher.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/core/services/database.dart';
+import 'package:tassist/core/services/inactivecustomerservice.dart';
 import 'package:tassist/core/services/payablesservice.dart';
 import 'package:tassist/core/services/paymentvoucherservice.dart';
 import 'package:tassist/core/services/purchasevoucherservice.dart';
@@ -18,7 +20,6 @@ import 'package:tassist/core/services/receivablesservice.dart';
 import 'package:tassist/core/services/stockservice.dart';
 import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
-
 import 'core/models/ledger.dart';
 import 'core/models/purchasevoucher.dart';
 import 'core/services/ledgerservice.dart';
@@ -63,8 +64,8 @@ class TopWidget extends StatelessWidget {
             value: StockItemService(uid: user?.uid).stockItemsData),
         StreamProvider<List<PayablesItem>>.value(
             value: PayablesItemService(uid: user?.uid).accountsPayablesData),
-        StreamProvider<List<LedgerItem>>.value(
-            value: LedgerItemService(uid: user?.uid).inactiveCustomerData),
+        StreamProvider<List<InactiveCustomer>>.value(
+            value: InactiveCustomerService(uid: user?.uid).inactiveCustomerData),
         StreamProvider<List<SalesVoucher>>.value(
             value: SalesVoucherService(uid: user?.uid).salesVoucherData),
         StreamProvider<List<PurchaseVoucher>>.value(
