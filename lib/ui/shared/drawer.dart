@@ -57,7 +57,7 @@ Drawer tassistDrawer(BuildContext context) {
             Container(
               child: Text(
                 // 'Company: ${companyInfo['formal_name']}',
-                'Company',
+                'You are awesome!',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)

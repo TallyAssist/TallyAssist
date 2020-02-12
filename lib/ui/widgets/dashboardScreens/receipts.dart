@@ -40,7 +40,10 @@ class _ReceiptsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+
+  if (snapshot?.data != null) {
 
     return FittedBox(
       child: Row(
@@ -95,7 +98,13 @@ class _ReceiptsDashboardWidgetContentRowState
       ),
     );
   }
+  else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
 }
+}
+    }
 
 class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
   const ReceiptsDashboardWidgetTitleRow({
@@ -105,7 +114,9 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+
 
     void shareReceipts(BuildContext context, double receipts) {
       final String text =
@@ -115,6 +126,7 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
           subject:
               "Total Receipts ${userDocument['total_receipts'].toString()}");
     }
+  if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -175,5 +187,11 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
         ),
       ],
     );
+  }
+  else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
   }
 }

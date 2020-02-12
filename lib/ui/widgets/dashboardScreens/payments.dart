@@ -49,9 +49,9 @@ class _PaymentsDashboardWidgetContentRowState
 
     
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data; 
     
-
+if (snapshot?.data != null) {
     return FittedBox(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -104,6 +104,12 @@ class _PaymentsDashboardWidgetContentRowState
       ),
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
 }
 
 class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
@@ -116,7 +122,8 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
   Widget build(BuildContext context) {
 
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data;
+ 
   
    void sharePayments(BuildContext context, double payments) {
     final String text = "Total Payments is ${userDocument['total_payments'].toString()}, and total number of vouchers ${userDocument['num_payments_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
@@ -124,6 +131,7 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
     Share.share(text, subject: "Total Payments ${userDocument['total_payments'].toString()}");
 }
 
+if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -186,5 +194,11 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
-}
 
+       else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
+}

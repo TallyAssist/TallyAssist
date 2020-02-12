@@ -6,9 +6,6 @@ import 'package:tassist/theme/colors.dart';
 
 
 class PurchasesDashboardWidget extends StatefulWidget {
-
-
-
   @override
   _PurchasesDashboardWidgetState createState() => _PurchasesDashboardWidgetState();
 }
@@ -35,8 +32,6 @@ class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
 }
 
 class PurchasesDashboardWidgetContentRow extends StatefulWidget {
- 
-
   @override
   _PurchasesDashboardWidgetContentRowState createState() =>
       _PurchasesDashboardWidgetContentRowState();
@@ -49,8 +44,9 @@ class _PurchasesDashboardWidgetContentRowState
 
     
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
-    
+  var userDocument = snapshot?.data;
+
+  if (snapshot?.data != null) { 
 
     return FittedBox(
           child: Row(
@@ -103,7 +99,15 @@ class _PurchasesDashboardWidgetContentRowState
         ],
       ),
     );
-  }
+
+    }
+  
+     else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
 }
 
 class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
@@ -111,12 +115,11 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
- 
   @override
   Widget build(BuildContext context) {
 
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data; 
   
    void sharePurchases(BuildContext context, double purchases) {
     final String text = "Total Purchases is ${userDocument['total_purchases'].toString()}, and total number of vouchers ${userDocument['num_purchases_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
@@ -124,7 +127,7 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
     Share.share(text, subject: "Total Purchases ${userDocument['total_purchases'].toString()}");
 }
 
-
+if (snapshot?.data != null) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -186,5 +189,11 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
-}
 
+   else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
+}

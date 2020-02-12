@@ -32,7 +32,9 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+    if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,6 +94,12 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
       ],
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
 }
 
 class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
@@ -121,14 +129,14 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
         Container(
           child: Row(
             children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: TassistPrimaryBackground,
-              ),
-              Icon(
-                Icons.bookmark,
-                color: TassistPrimaryBackground,
-              ),
+              // Icon(
+              //   Icons.favorite,
+              //   color: TassistPrimaryBackground,
+              // ),
+              // Icon(
+              //   Icons.bookmark,
+              //   color: TassistPrimaryBackground,
+              // ),
               Icon(
                 Icons.share,
                 color: TassistPrimaryBackground,

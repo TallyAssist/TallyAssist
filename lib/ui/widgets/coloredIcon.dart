@@ -22,9 +22,9 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
 
     final snapshot = Provider.of<DocumentSnapshot>(context);
 
-    var userDocument = snapshot.data; 
+    var userDocument = snapshot?.data; 
 
-
+  if (snapshot?.data != null) {
     return Padding(
       padding: spacer.y.xxs,
       child: Column(
@@ -59,4 +59,10 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
       ),
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+}
 }

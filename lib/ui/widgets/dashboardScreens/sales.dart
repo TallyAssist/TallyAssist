@@ -12,6 +12,7 @@ class SalesDashboardWidget extends StatefulWidget {
 class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -38,9 +39,12 @@ class _SalesDashboardWidgetContentRowState
     extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
-    final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
 
+    final snapshot = Provider.of<DocumentSnapshot>(context);
+    var userDocument = snapshot?.data;
+
+    if (snapshot?.data != null) {
+     
     return FittedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -96,7 +100,15 @@ class _SalesDashboardWidgetContentRowState
       ),
     );
   }
+  
+else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
 }
+}
+}
+
 
 class SalesDashboardWidgetTitleRow extends StatelessWidget {
   const SalesDashboardWidgetTitleRow({
@@ -116,6 +128,8 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
       Share.share(text,
           subject: "Total Sales ${userDocument['total_sales'].toString()}");
     }
+
+  if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -177,4 +191,13 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
+
+else {
+  return Container(
+    child: Center(child: Text('Whatever'),),
+  );
+}
+
+  }
+
 }
