@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/payables.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/accountspayables/apitemlist.dart';
@@ -16,22 +16,22 @@ class _APLedgerItemListState extends State<APLedgerItemList> {
 
 TextEditingController editingController = TextEditingController();
 
-  List<LedgerItem> ledgerItemData;
-  List<LedgerItem> ledgerItemDataforDisplay= List<LedgerItem>();
+  List<PayablesItem> ledgerItemData;
+  List<PayablesItem> ledgerItemDataforDisplay= List<PayablesItem>();
 
   @override
   void initState() {
-    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false);
+    ledgerItemData = Provider.of<List<PayablesItem>>(context, listen: false);
     ledgerItemDataforDisplay.addAll(ledgerItemData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<LedgerItem> dummySearchList = List<LedgerItem>();
+    List<PayablesItem> dummySearchList = List<PayablesItem>();
     dummySearchList.addAll(ledgerItemData);
     if (query.isNotEmpty) {
-      List<LedgerItem> dummyListData = List<LedgerItem>();
+      List<PayablesItem> dummyListData = List<PayablesItem>();
       dummySearchList.forEach((item) {
         if (item.name.toLowerCase().contains(query)) {
           dummyListData.add(item);

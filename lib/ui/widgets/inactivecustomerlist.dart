@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/inactivecustomer.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgertile.dart';
@@ -15,7 +15,7 @@ class InactiveCustomerList extends StatefulWidget {
 class _InactiveCustomerListState extends State<InactiveCustomerList> {
   @override
   Widget build(BuildContext context) {
-    final inactiveCustomerData = Provider.of<List<LedgerItem>>(context);
+    final inactiveCustomerData = Provider.of<List<InactiveCustomer>>(context);
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
