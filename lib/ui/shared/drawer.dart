@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/crm.dart';
@@ -19,15 +20,16 @@ import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 
- final AuthService _auth = AuthService();
+import '../../main.dart';
+
+final AuthService _auth = AuthService();
 
 Drawer tassistDrawer(BuildContext context) {
   final user = Provider.of<FirebaseUser>(context);
-  
+
   final snapshot = Provider.of<DocumentSnapshot>(context);
-    var companyInfo = snapshot.data;
-   
-  
+  var companyInfo = snapshot.data;
+
   return Drawer(
       child: ListView(
     children: <Widget>[
@@ -48,25 +50,24 @@ Drawer tassistDrawer(BuildContext context) {
               height: 10.0,
             ),
             Text(
-              user.email,
-              style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .copyWith(color: TassistWhite, 
-                  fontSize: 18.0,
+              user?.email,
+              style: Theme.of(context).textTheme.headline6.copyWith(
+                    color: TassistWhite,
+                    fontSize: 18.0,
                   ),
             ),
             Container(
-              child: Text('Company: ${companyInfo['formal_name']}', 
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-               style: Theme.of(context)
+              child: Text(
+                // 'Company: ${companyInfo['formal_name']}',
+                'Company',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context)
                     .textTheme
                     .bodyText1
                     .copyWith(color: TassistWhite),
               ),
             )
-
           ],
         ),
         decoration: BoxDecoration(
@@ -89,7 +90,6 @@ Drawer tassistDrawer(BuildContext context) {
         title: 'Dashboard',
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
-        
       ),
       DrawerItem(
         icon: Icons.card_membership,
@@ -97,7 +97,7 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: SalesOrderReportScreen(),
         color: TassistPrimaryBackground,
       ),
-       DrawerItem(
+      DrawerItem(
         icon: FontAwesomeIcons.fileInvoice,
         title: 'Vouchers',
         ontap: VouchersHome(),
@@ -115,19 +115,19 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: LedgerScreen(),
         color: TassistPrimaryBackground,
       ),
-       DrawerItem(
+      DrawerItem(
         icon: Icons.call_received,
         title: 'Accounts Receivables',
         ontap: AccountsReceivableScreen(),
         color: TassistPrimaryBackground,
       ),
-       DrawerItem(
+      DrawerItem(
         icon: Icons.call_made,
         title: 'Accounts Payables',
         ontap: AccountsPayableScreen(),
         color: TassistPrimaryBackground,
       ),
-           DrawerItem(
+      DrawerItem(
         icon: Icons.inbox,
         title: 'Purchases',
         ontap: PurchaseOrderReportScreen(),
@@ -139,7 +139,7 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: GstReportScreen(),
         color: TassistInfoGrey,
       ),
-       Padding(
+      Padding(
         padding: spacer.all.xs,
         child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
       ),
@@ -161,34 +161,39 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: CRMScreen(),
         color: TassistInfoGrey,
       ),
-      SizedBox(height: 20.0,),
-       Padding(
-            padding: spacer.y.xxs,
-            child: InkWell(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: spacer.x.xs,
-                    child: Icon(
-                      Icons.lock_open,
-                      color: TassistPrimaryBackground,
-                    ),
-                  ),
-                  Text(
-                    'Sign Out',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline6,
-                  ),
-                ],
+      SizedBox(
+        height: 20.0,
+      ),
+      Padding(
+        padding: spacer.y.xxs,
+        child: InkWell(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: spacer.x.xs,
+                child: Icon(
+                  Icons.lock_open,
+                  color: TassistPrimaryBackground,
+                ),
               ),
-              onTap: () async {
-                await _auth.signOut();
-              },
-            ),
+              Text(
+                'Sign Out',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ],
           ),
+          onTap: () async {
+            await _auth.signOut().then((_) {
+              // Navigator.popUntil(context, );
+              Navigator.of(context).pushAndRemoveUntil(
+                  new MaterialPageRoute(builder: (context) => new MyApp()),
+                  ModalRoute.withName('/'));
+            });
+          },
+        ),
+      ),
     ],
   ));
 }
@@ -225,9 +230,10 @@ class _DrawerItemState extends State<DrawerItem> {
             Text(
               widget.title,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.headline6.copyWith(
-                color: widget.color
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(color: widget.color),
             ),
           ],
         ),

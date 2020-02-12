@@ -77,9 +77,13 @@ class TopWidget extends StatelessWidget {
                 .snapshots()),
       ],
       child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (context) => RootPage()
+        },
         title: _title,
         // home: HomeScreen(),
-        home: RootPage(),
+        // home: RootPage(),
         theme: ThemeData(
           appBarTheme: AppBarTheme(
             textTheme: TextTheme(headline6: primaryAppBarTitle),

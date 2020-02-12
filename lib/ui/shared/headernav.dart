@@ -42,7 +42,7 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
                Container(
                  width: MediaQuery.of(context).size.width /2,
                  child: Text(
-                  companyInfo['formal_name'] ?? '',
+                  '',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                   style: TextStyle(
@@ -53,7 +53,8 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey, context) {
               ),
                ),
               Text(
-                'GSTIN: ${companyInfo['gst_number']}',
+                // 'GSTIN: ${companyInfo['gst_number']}',
+                '',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,

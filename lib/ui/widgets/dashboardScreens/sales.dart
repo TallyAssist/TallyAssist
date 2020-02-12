@@ -106,7 +106,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
   
 
     void shareSales(BuildContext context, double sales) {

@@ -68,12 +68,12 @@ class AuthService {
     });
   }
 
-  void codeSent (String verificationId, [int forceResendingToken]) async {
+  void codeSent(String verificationId, [int forceResendingToken]) async {
     actualCode = verificationId;
     print("\nEnter the code sent");
   }
 
-  void codeAutoRetrievalTimeout (String verificationId) {
+  void codeAutoRetrievalTimeout(String verificationId) {
     actualCode = verificationId;
     print("\nAuto retrieval time out");
   }
@@ -108,9 +108,7 @@ class AuthService {
     _authCredential = PhoneAuthProvider.getCredential(
         verificationId: actualCode, smsCode: smsCode);
 
-    _auth
-        .signInWithCredential(_authCredential)
-        .then((AuthResult result) async {
+    _auth.signInWithCredential(_authCredential).then((AuthResult result) async {
       print('Authentication successful');
       // onAuthenticationSuccessful();
     }).catchError((error) {
@@ -118,7 +116,6 @@ class AuthService {
           'Something has gone wrong, please try later(signInWithPhoneNumber) $error');
     });
   }
-
 
   // sign out
   Future signOut() async {
