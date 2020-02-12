@@ -14,6 +14,7 @@ class InactiveCustomerService {
         .collection('ledger')
         .where('closing_balance', isEqualTo: 0)
         .where('parentcode', isEqualTo: '20')
+        .orderBy('closing_balance', descending: false)
         .snapshots()
         .map(_inactiveCustomerData);
   }

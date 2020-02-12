@@ -24,6 +24,7 @@ class LedgerItem {
   final String totalPurchase;
   final String totalReceipt;
   final String totalReceivables;
+  final String primaryGroupType;
 
 
   LedgerItem({this.name, this.masterId, this.currencyName, this.openingBalance, this.closingBalance,  
@@ -31,5 +32,5 @@ class LedgerItem {
               this.lastPaymentDate, this.lastPurchaseDate, this.lastReceiptDate,
               this.lastSalesDate, this.meanPayment, this.meanPurchase, this.meanReceipt,
               this.meanSales, this.partyGuid, this.totalPayables, this.totalPayment,
-              this.totalPurchase, this.totalReceipt, this.totalReceivables});
+              this.totalPurchase, this.totalReceipt, this.totalReceivables, this.primaryGroupType});
               }

@@ -19,22 +19,6 @@ class LedgerItemTile extends StatelessWidget {
   
   LedgerItemTile({this.ledgerItem});
 
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ExpansibleDetailCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
-//     '# ${ledgerItem.masterId}',
-//      ledgerItem.state, 
-//      'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
-//      'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
-//       title1: 'Contact', 
-//       info1: ledgerItem.contact, 
-//       title2: 'Email', 
-//       info2: ledgerItem.email, 
-//       title3: 'Phone', info3: ledgerItem.phone,);
-//   }
-// }
-
  @override
   Widget build(BuildContext context) {
 

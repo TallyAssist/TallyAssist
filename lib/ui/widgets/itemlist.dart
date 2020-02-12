@@ -46,7 +46,7 @@ _launchURL() async {
               ),
             ),
             SizedBox(width: 5,),
-            Text('Rs. ${ledgerItem.totalReceivables.substring(1, ledgerItem.totalReceivables.length)}'),
+            Text('Rs. ${ledgerItem.totalReceivables}'),
             SizedBox(width: 10,),
             // Container(
             //   padding: spacer.all.xxs,

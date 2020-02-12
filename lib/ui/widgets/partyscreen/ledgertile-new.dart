@@ -23,12 +23,12 @@ class LedgerItemTileNew  extends StatelessWidget {
   Widget build(BuildContext context) {
 
 
-  if (ledgerItem.parentid == '20')  {
+  if (ledgerItem.primaryGroupType == 'Sundry Debtors')  {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.state, 
-     'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
-     'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
+     'Rs ${ledgerItem.closingBalance}', 
+     'Rs. ${ledgerItem.openingBalance}'),
       title1: 'Receivables', 
       info1: ledgerItem.totalReceivables, 
       title2: 'Last Sale ', 
@@ -39,12 +39,12 @@ class LedgerItemTileNew  extends StatelessWidget {
   }
   else {
 
-  if (ledgerItem.parentid == '16') {
+  if (ledgerItem.primaryGroupType == 'Sundry Creditors') {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.state, 
-     'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
-     'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}'),
+     'Rs ${ledgerItem.closingBalance}', 
+     'Rs. ${ledgerItem.openingBalance}'),
         title1: 'Payables', 
       info1: ledgerItem.totalPayables, 
       title2: 'Last Purchase ', 
@@ -58,9 +58,9 @@ class LedgerItemTileNew  extends StatelessWidget {
   else {
     return DetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
-     ledgerItem.parentid, 
-     'Rs ${ledgerItem.closingBalance.substring(1, ledgerItem.closingBalance.length)}', 
-     'Rs. ${ledgerItem.openingBalance.substring(1, ledgerItem.openingBalance.length)}');
+     ledgerItem.primaryGroupType, 
+     'Rs ${ledgerItem.closingBalance}', 
+     'Rs. ${ledgerItem.openingBalance}');
 
   }
   }

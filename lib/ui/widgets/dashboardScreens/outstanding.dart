@@ -67,7 +67,7 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
               ),
             ),
             Text(
-              userDocument['out_actual_rec'].toString().substring(1, userDocument['out_actual_rec'].toString().length),
+              userDocument['out_actual_rec'].toString(),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistMainText
               ),

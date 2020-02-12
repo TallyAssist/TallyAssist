@@ -15,6 +15,7 @@ class PayablesItemService {
         .document(this.uid)
         .collection('ledger')
         .where('restat_total_payables', isGreaterThan: 0)
+        .orderBy('restat_total_payables', descending: true)
         .snapshots()
         .map(_payablesItemData);
   }

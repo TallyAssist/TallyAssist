@@ -14,7 +14,8 @@ class ReceivablesItemService {
     return companyCollection
         .document(this.uid)
         .collection('ledger')
-        .where('restat_total_receivables', isLessThan: 0)
+        .where('restat_total_receivables', isGreaterThan: 0)
+        .orderBy('restat_total_receivables', descending: true)
         .snapshots()
         .map(_receivablesItemData);
   }

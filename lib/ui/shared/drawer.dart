@@ -47,12 +47,14 @@ Drawer tassistDrawer(BuildContext context) {
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              user?.email,
-              style: Theme.of(context).textTheme.headline6.copyWith(
-                    color: TassistWhite,
-                    fontSize: 18.0,
-                  ),
+            FittedBox(
+                          child: Text(
+                user?.email,
+                style: Theme.of(context).textTheme.headline6.copyWith(
+                      color: TassistWhite,
+                      fontSize: 18.0,
+                    ),
+              ),
             ),
             Container(
               child: Text(

@@ -47,7 +47,7 @@ _launchURL() async {
             SizedBox(width: 5,),
             Text('Rs. ${ledgerItem.totalPayables}'),
             SizedBox(width: 10,),
-               Text('Rs. ${ledgerItem.totalPayment.substring(1, ledgerItem.totalPayment.length)}', style: TextStyle(color: TassistInfoGrey),),
+               Text('Rs. ${ledgerItem.totalPayment}', style: TextStyle(color: TassistInfoGrey),),
               IconButton(
                 onPressed: () {
                   _launchURL();

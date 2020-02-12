@@ -14,7 +14,7 @@ class SalesVoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      child: DetailCard(salesVoucher.partyname, salesVoucher.masterid,  salesVoucher.iscancelled, 'Rs. ${salesVoucher.amount.toString().substring(1, salesVoucher.amount.toString().length)}', salesVoucher.date),
+      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.iscancelled, 'Rs. ${salesVoucher.amount.toString()}', salesVoucher.date),
       
     );
   }

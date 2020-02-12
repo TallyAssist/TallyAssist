@@ -105,7 +105,7 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                'ABC Pvt Ltd',
+                'TallyAssist',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -113,7 +113,7 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
                 ),
               ),
               const Text(
-                'GSTIN: 29ABCDE1234F2Z5',
+                'Beta',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,

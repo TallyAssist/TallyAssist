@@ -59,8 +59,7 @@ class _SalesDashboardWidgetContentRowState
                   //   color: TassistInfoGrey,
                   // ),
                   Text(
-                    userDocument['total_sales'].toString().substring(
-                            1, userDocument['total_sales'].toString().length) ??
+                    userDocument['total_sales'].toString() ??
                         '',
                     style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistMainText,
