@@ -96,7 +96,7 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
   }
        else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }

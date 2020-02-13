@@ -102,7 +102,7 @@ class _SalesDashboardWidgetContentRowState
   
 else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }
@@ -193,7 +193,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
 
 else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 

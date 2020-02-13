@@ -100,7 +100,7 @@ class _ReceiptsDashboardWidgetContentRowState
   }
   else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }
@@ -190,7 +190,7 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
   }
   else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
   }

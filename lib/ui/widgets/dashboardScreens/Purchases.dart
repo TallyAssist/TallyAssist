@@ -104,7 +104,7 @@ class _PurchasesDashboardWidgetContentRowState
   
      else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }
@@ -192,7 +192,7 @@ if (snapshot?.data != null) {
 
    else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }

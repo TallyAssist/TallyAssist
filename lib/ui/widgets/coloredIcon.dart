@@ -61,7 +61,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
   }
        else {
   return Container(
-    child: Center(child: Text('Whatever'),),
+    child: Center(child: Text('Loading...'),),
   );
 }
 }

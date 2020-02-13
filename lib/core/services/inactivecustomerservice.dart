@@ -13,7 +13,7 @@ class InactiveCustomerService {
         .document(this.uid)
         .collection('ledger')
         .where('closing_balance', isEqualTo: 0)
-        .where('parentcode', isEqualTo: '20')
+        .where('restat_primary_group_type', isEqualTo: 'Sundry Debtors')
         .orderBy('closing_balance', descending: false)
         .snapshots()
         .map(_inactiveCustomerData);
@@ -49,6 +49,7 @@ class InactiveCustomerService {
           totalPurchase: doc.data['restat_total_purchase'].toString() ?? '',
           totalReceipt: doc.data['restat_total_receipt'].toString() ?? '',
           totalReceivables: doc.data['restat_total_receivables'].toString() ?? '',
+          primaryGroupType: doc.data['restat_primary_group_type'].toString() ?? '',
       );
     }).toList();
   }
