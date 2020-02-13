@@ -3,6 +3,7 @@ import 'package:tassist/core/models/inactivecustomer.dart';
 
 class InactiveCustomerService {
   final String uid;
+  
   InactiveCustomerService({this.uid});
 
   final CollectionReference companyCollection =
