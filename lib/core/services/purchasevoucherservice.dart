@@ -13,7 +13,7 @@ class PurchaseVoucherService {
         .document(this.uid)
         .collection('voucher')
         .where('primary_voucher_type_name', isEqualTo: 'Purchase')
-        .orderBy('amount', descending: false)
+        .orderBy('amount', descending: true)
         .snapshots()
         .map(_purchasevouchersfromSnapshots);
   }
@@ -22,7 +22,7 @@ class PurchaseVoucherService {
     return snapshot.documents.map((doc) {
       return PurchaseVoucher(
         date: doc.data['date'] ?? '',
-        partyname: doc.data['party_ledger_name'] ?? '',
+        partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount'].toInt() ?? 0,
         masterid: doc.data['master_id'] ?? '',
         iscancelled: doc.data['is_cancelled'] ?? '',

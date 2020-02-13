@@ -49,9 +49,9 @@ class _PaymentsDashboardWidgetContentRowState
 
     
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data; 
     
-
+if (snapshot?.data != null) {
     return FittedBox(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -66,7 +66,7 @@ class _PaymentsDashboardWidgetContentRowState
                   //   color: TassistInfoGrey,
                   // ),
                   Text(userDocument['total_payments'].toString() ?? '',
-                  style: Theme.of(context).textTheme.body2.copyWith(
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
                     color: TassistMainText,
                     fontSize: 24,
                     fontWeight: FontWeight.normal
@@ -104,6 +104,12 @@ class _PaymentsDashboardWidgetContentRowState
       ),
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
 }
 
 class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
@@ -116,14 +122,16 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
   Widget build(BuildContext context) {
 
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data;
+ 
   
-   void sharePayments(BuildContext context, int payments) {
+   void sharePayments(BuildContext context, double payments) {
     final String text = "Total Payments is ${userDocument['total_payments'].toString()}, and total number of vouchers ${userDocument['num_payments_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
 
     Share.share(text, subject: "Total Payments ${userDocument['total_payments'].toString()}");
 }
 
+if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -145,7 +153,7 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
                     builder: (BuildContext context) {
                       return  AlertDialog(
                   title: Text('Total Payments'),
-                  content: Text('Total Payments is calculated using sum of all Payments. This represents all payments.'),
+                  content: Text('Total Payments is calculated using sum of all Payments. This represents all payments.', style: Theme.of(context).textTheme.bodyText2,),
                   elevation: 24.0,
                   actions: <Widget>[
                     FlatButton(
@@ -186,5 +194,11 @@ class PaymentsDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
-}
 
+       else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
+}

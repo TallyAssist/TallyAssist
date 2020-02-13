@@ -14,13 +14,16 @@ class ChildDetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
     Row(children: <Widget>[
-    Text(_title1,
-          overflow: TextOverflow.fade,
-          maxLines: 1,
-          style: Theme.of(context).textTheme.title.copyWith(
-        fontSize: 16.0,
-          )
-          ),
+    Container(
+      width: MediaQuery.of(context).size.width / 1.45,
+      child: Text(_title1,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+            style: Theme.of(context).textTheme.headline6.copyWith(
+          fontSize: 16.0,
+            )
+            ),
+    ),
         ]),
       Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -28,10 +31,10 @@ class ChildDetailCard extends StatelessWidget {
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(info1, style: Theme.of(context).textTheme.body1),
+          Text(info1, style: Theme.of(context).textTheme.bodyText1),
           Text(
             info2,
-            style: Theme.of(context).textTheme.body1,
+            style: Theme.of(context).textTheme.bodyText1,
           )
         ],
       ),
@@ -39,10 +42,10 @@ class ChildDetailCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           Text(info3,
-              style: Theme.of(context).textTheme.body1.copyWith(
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
                     fontWeight: FontWeight.bold,
                   )),
-          Text(info4, style: Theme.of(context).textTheme.body1)
+          Text(info4, style: Theme.of(context).textTheme.bodyText1)
         ],
       )
     ],

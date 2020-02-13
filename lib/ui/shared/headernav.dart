@@ -1,14 +1,20 @@
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey) {
+AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey ) {
 // headerNav(_drawerkey);
 
 // GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   bool enabled = true;
+
+  // final snapshot = Provider.of<DocumentSnapshot>(context);
+  //   var companyInfo = snapshot.data;
+   
 
   return AppBar(
       leading: Padding(
@@ -33,16 +39,22 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey) {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
-                'ABC Pvt Ltd',
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 1.0,
-                ),
+               Container(
+                //  width: MediaQuery.of(context).size.width /2,
+                 child: Text(
+                  'TallyAssist',
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.normal,
+                    letterSpacing: 1.0,
+                  ),
               ),
-              const Text(
-                'GSTIN: 29ABCDE1234F2Z5',
+               ),
+              Text(
+                // 'GSTIN: ${companyInfo['gst_number']}',
+                'Beta',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,
@@ -97,7 +109,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
                     value,
                     style: Theme.of(context)
                         .textTheme
-                        .body1
+                        .bodyText1
                         .copyWith(color: TassistPrimaryBackground),
                   ),
                   value: value,
@@ -108,7 +120,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
             selectedValue = selectedMonth;
           });
         },
-        // value: Text(selectedValue.toString(), style: Theme.of(context).textTheme.body1.copyWith(
+        // value: Text(selectedValue.toString(), style: Theme.of(context).textTheme.bodyText1.copyWith(
         //       color: TassistWhite,
         //       fontSize: 12.0,
         //     )),
@@ -116,7 +128,7 @@ class _DropDownMonthsState extends State<DropDownMonths> {
 
         isExpanded: false,
         hint: Text('Period',
-            style: Theme.of(context).textTheme.body1.copyWith(
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
                   color: TassistWhite,
                   fontSize: 12.0,
                 )),

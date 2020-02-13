@@ -45,19 +45,22 @@ class _VouchersHomeState extends State<VouchersHome>
   
    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
   
-    return Scaffold(
-      key: _drawerKey,
-      appBar: headerNavOther(_drawerKey, _tabController),
-      drawer: tassistDrawer(context),
-      body: 
-      TabBarView(
-        controller: _tabController,
-        children: <Widget>[
-         SalesVoucherScreen(),
-         PurchaseVoucherScreen(),
-         ReceiptVoucherScreen(),
-         PaymentVoucherScreen()
-        ],
+    return WillPopScope (
+              onWillPop: () async => false,
+          child: Scaffold(
+        key: _drawerKey,
+        appBar: headerNavOther(_drawerKey, _tabController),
+        drawer: tassistDrawer(context),
+        body: 
+        TabBarView(
+          controller: _tabController,
+          children: <Widget>[
+           SalesVoucherScreen(),
+           PurchaseVoucherScreen(),
+           ReceiptVoucherScreen(),
+           PaymentVoucherScreen()
+          ],
+        ),
       ),
     );
   }
@@ -102,7 +105,7 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               const Text(
-                'ABC Pvt Ltd',
+                'TallyAssist',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,
@@ -110,7 +113,7 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
                 ),
               ),
               const Text(
-                'GSTIN: 29ABCDE1234F2Z5',
+                'Beta',
                 style: TextStyle(
                   color: TassistWhite,
                   fontSize: 12,

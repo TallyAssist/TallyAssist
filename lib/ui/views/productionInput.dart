@@ -33,23 +33,26 @@ class ProductionScreen extends StatelessWidget {
     return StreamProvider<List<Production>>.value(
       //IDFixTODO - pass user to database service
       value: DatabaseService(uid: user.uid).productionData,
-      child: Scaffold(
-        key: _drawerKey,
-        drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
-        // bottomNavigationBar: bottomNav(),
-        body: Column(
-          children: <Widget>[
-            SectionHeader('Daily Production Report'),
-            ProductionList(),
-          ],
-        ),
-        floatingActionButton: Padding(
-          padding: spacer.all.xs,
-          child: FloatingActionButton(
-            child: Icon(Icons.add),
-            backgroundColor: TassistPrimaryBackground,
-            onPressed: () => _showProductionPanel(),
+      child:  WillPopScope (
+              onWillPop: () async => false,
+              child: Scaffold(
+          key: _drawerKey,
+          drawer: tassistDrawer(context),
+          appBar: headerNav(_drawerKey),
+          // bottomNavigationBar: bottomNav(),
+          body: Column(
+            children: <Widget>[
+              SectionHeader('Daily Production Report'),
+              ProductionList(),
+            ],
+          ),
+          floatingActionButton: Padding(
+            padding: spacer.all.xs,
+            child: FloatingActionButton(
+              child: Icon(Icons.add),
+              backgroundColor: TassistPrimaryBackground,
+              onPressed: () => _showProductionPanel(),
+            ),
           ),
         ),
       ),

@@ -40,7 +40,10 @@ class _ReceiptsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+
+  if (snapshot?.data != null) {
 
     return FittedBox(
       child: Row(
@@ -57,7 +60,7 @@ class _ReceiptsDashboardWidgetContentRowState
                   // ),
                   Text(
                     userDocument['total_receipts'].toString() ?? '',
-                    style: Theme.of(context).textTheme.body2.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistMainText,
                         fontSize: 24,
                         fontWeight: FontWeight.normal),
@@ -95,7 +98,13 @@ class _ReceiptsDashboardWidgetContentRowState
       ),
     );
   }
+  else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
 }
+}
+    }
 
 class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
   const ReceiptsDashboardWidgetTitleRow({
@@ -105,7 +114,9 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+
 
     void shareReceipts(BuildContext context, double receipts) {
       final String text =
@@ -115,6 +126,7 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
           subject:
               "Total Receipts ${userDocument['total_receipts'].toString()}");
     }
+  if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +151,7 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
                     return AlertDialog(
                       title: Text('Total Receipts'),
                       content: Text(
-                          'Total Receipts is calculated using sum of Sales Vouchers. This represents all receipts.'),
+                          'Total Receipts is calculated using sum of Sales Vouchers. This represents all receipts.', style: Theme.of(context).textTheme.bodyText2,),
                       elevation: 24.0,
                       actions: <Widget>[
                         FlatButton(
@@ -175,5 +187,11 @@ class ReceiptsDashboardWidgetTitleRow extends StatelessWidget {
         ),
       ],
     );
+  }
+  else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
   }
 }

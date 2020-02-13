@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
@@ -16,10 +18,16 @@ import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 
- final AuthService _auth = AuthService();
+import '../../main.dart';
+
+final AuthService _auth = AuthService();
 
 Drawer tassistDrawer(BuildContext context) {
-  
+  final user = Provider.of<FirebaseUser>(context);
+
+  // final snapshot = Provider.of<DocumentSnapshot>(context);
+  // var companyInfo = snapshot.data;
+
   return Drawer(
       child: ListView(
     children: <Widget>[
@@ -39,20 +47,27 @@ Drawer tassistDrawer(BuildContext context) {
             SizedBox(
               height: 10.0,
             ),
-            Text(
-              'John Doe',
-              style: Theme.of(context)
-                  .textTheme
-                  .title
-                  .copyWith(color: TassistWhite),
+            FittedBox(
+                          child: Text(
+                user?.email,
+                style: Theme.of(context).textTheme.headline6.copyWith(
+                      color: TassistWhite,
+                      fontSize: 18.0,
+                    ),
+              ),
             ),
-            Text('Company: ABC Pvt. Ltd.', 
-             style: Theme.of(context)
-                  .textTheme
-                  .body1
-                  .copyWith(color: TassistWhite),
+            Container(
+              child: Text(
+                // 'Company: ${companyInfo['formal_name']}',
+                'You are awesome!',
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: TassistWhite),
+              ),
             )
-
           ],
         ),
         decoration: BoxDecoration(
@@ -62,7 +77,7 @@ Drawer tassistDrawer(BuildContext context) {
       ),
       Padding(
         padding: spacer.all.xs,
-        child: Text('Reports', style: Theme.of(context).textTheme.body1),
+        child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
       // DrawerItem(
       //   icon: Icons.mail_outline,
@@ -75,7 +90,6 @@ Drawer tassistDrawer(BuildContext context) {
         title: 'Dashboard',
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
-        
       ),
       DrawerItem(
         icon: Icons.card_membership,
@@ -84,18 +98,6 @@ Drawer tassistDrawer(BuildContext context) {
         color: TassistPrimaryBackground,
       ),
       DrawerItem(
-        icon: Icons.inbox,
-        title: 'Purchases',
-        ontap: PurchaseOrderReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: Icons.computer,
-        title: 'GST Report',
-        ontap: GstReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
-       DrawerItem(
         icon: FontAwesomeIcons.fileInvoice,
         title: 'Vouchers',
         ontap: VouchersHome(),
@@ -113,21 +115,33 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: LedgerScreen(),
         color: TassistPrimaryBackground,
       ),
-       DrawerItem(
+      DrawerItem(
         icon: Icons.call_received,
         title: 'Accounts Receivables',
         ontap: AccountsReceivableScreen(),
         color: TassistPrimaryBackground,
       ),
-       DrawerItem(
+      DrawerItem(
         icon: Icons.call_made,
         title: 'Accounts Payables',
         ontap: AccountsPayableScreen(),
         color: TassistPrimaryBackground,
       ),
-       Padding(
+      DrawerItem(
+        icon: Icons.inbox,
+        title: 'Purchases',
+        ontap: PurchaseOrderReportScreen(),
+        color: TassistInfoGrey,
+      ),
+      DrawerItem(
+        icon: Icons.computer,
+        title: 'GST Report',
+        ontap: GstReportScreen(),
+        color: TassistInfoGrey,
+      ),
+      Padding(
         padding: spacer.all.xs,
-        child: Text('Specials', style: Theme.of(context).textTheme.body1),
+        child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
         icon: Icons.lock,
@@ -139,42 +153,47 @@ Drawer tassistDrawer(BuildContext context) {
         icon: Icons.build,
         title: 'Production',
         ontap: ProductionScreen(),
-        color: TassistPrimaryBackground,
+        color: TassistInfoGrey,
       ),
       DrawerItem(
         icon: FontAwesomeIcons.users,
         title: 'CRM',
         ontap: CRMScreen(),
-        color: TassistPrimaryBackground,
+        color: TassistInfoGrey,
       ),
-      SizedBox(height: 20.0,),
-       Padding(
-            padding: spacer.y.xxs,
-            child: InkWell(
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Padding(
-                    padding: spacer.x.xs,
-                    child: Icon(
-                      Icons.lock_open,
-                      color: TassistPrimaryBackground,
-                    ),
-                  ),
-                  Text(
-                    'Sign Out',
-                    textAlign: TextAlign.center,
-                    style: Theme.of(context)
-                        .textTheme
-                        .title,
-                  ),
-                ],
+      SizedBox(
+        height: 20.0,
+      ),
+      Padding(
+        padding: spacer.y.xxs,
+        child: InkWell(
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: spacer.x.xs,
+                child: Icon(
+                  Icons.lock_open,
+                  color: TassistPrimaryBackground,
+                ),
               ),
-              onTap: () async {
-                await _auth.signOut();
-              },
-            ),
+              Text(
+                'Sign Out',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.headline6,
+              ),
+            ],
           ),
+          onTap: () async {
+            await _auth.signOut().then((_) {
+              // Navigator.popUntil(context, );
+              Navigator.of(context).pushAndRemoveUntil(
+                  new MaterialPageRoute(builder: (context) => new MyApp()),
+                  ModalRoute.withName('/'));
+            });
+          },
+        ),
+      ),
     ],
   ));
 }
@@ -211,9 +230,10 @@ class _DrawerItemState extends State<DrawerItem> {
             Text(
               widget.title,
               textAlign: TextAlign.left,
-              style: Theme.of(context).textTheme.title.copyWith(
-                color: widget.color
-              ),
+              style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(color: widget.color),
             ),
           ],
         ),

@@ -32,62 +32,74 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
   Widget build(BuildContext context) {
 
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+
+    if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           children: <Widget>[
-            Text(' '),
-            Text('Payables'),
-            Text('Receivables'),
+            // Text(' '),
+            Text('Payables', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistPrimary
+              )),
+            Text('Receivables', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistPrimary
+              )),
           ],
         ),
+        // Column(
+        //   children: <Widget>[
+        //     Text('Target'),
+        //     Text(userDocument['out_target_pay'].toString()),
+        //     Text(userDocument['out_target_rec'].toString())
+        //   ],
+        // ),
         Column(
           children: <Widget>[
-            Text('Target'),
-            Text(userDocument['out_target_pay'].toString()),
-            Text(userDocument['out_target_rec'].toString())
-          ],
-        ),
-        Column(
-          children: <Widget>[
-            Text('Actual'),
+            // Text('Actual'),
             Text(
               userDocument['out_actual_pay'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
-                color: TassistWarning
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistMainText
               ),
             ),
             Text(
               userDocument['out_actual_rec'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
-                color: TassistWarning
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                color: TassistMainText
               ),
             )
           ],
         ),
-        Column(
-          children: <Widget>[
-            Text('Avg. Delay'),
-            Text(
-              userDocument['out_avgdel_pay'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
-                color: TassistWarning
-              ),
-            ),
-            Text(
-              userDocument['out_avgdel_rec'].toString(),
-              style: Theme.of(context).textTheme.body1.copyWith(
-                color: TassistSuccess
-              ),
-            ),
-          ],
-        ),
+        // Column(
+        //   children: <Widget>[
+        //     Text('Avg. Delay'),
+        //     Text(
+        //       userDocument['out_avgdel_pay'].toString(),
+        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //         color: TassistWarning
+        //       ),
+        //     ),
+        //     Text(
+        //       userDocument['out_avgdel_rec'].toString(),
+        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+        //         color: TassistSuccess
+        //       ),
+        //     ),
+        //   ],
+        // ),
       ],
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
 }
 
 class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
@@ -117,14 +129,14 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
         Container(
           child: Row(
             children: <Widget>[
-              Icon(
-                Icons.favorite,
-                color: TassistPrimaryBackground,
-              ),
-              Icon(
-                Icons.bookmark,
-                color: TassistPrimaryBackground,
-              ),
+              // Icon(
+              //   Icons.favorite,
+              //   color: TassistPrimaryBackground,
+              // ),
+              // Icon(
+              //   Icons.bookmark,
+              //   color: TassistPrimaryBackground,
+              // ),
               Icon(
                 Icons.share,
                 color: TassistPrimaryBackground,

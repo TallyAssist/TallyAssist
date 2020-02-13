@@ -22,9 +22,9 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
 
     final snapshot = Provider.of<DocumentSnapshot>(context);
 
-    var userDocument = snapshot.data; 
+    var userDocument = snapshot?.data; 
 
-
+  if (snapshot?.data != null) {
     return Padding(
       padding: spacer.y.xxs,
       child: Column(
@@ -49,7 +49,7 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
              child: Text(
               widget.mTitle,
               overflow: TextOverflow.fade,
-              style: Theme.of(context).textTheme.title.copyWith(
+              style: Theme.of(context).textTheme.headline6.copyWith(
                 fontSize: 12,
                 color: TassistMainText
               ),
@@ -59,4 +59,10 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
       ),
     );
   }
+       else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
 }

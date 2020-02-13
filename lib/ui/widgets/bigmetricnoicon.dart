@@ -32,7 +32,7 @@ BigMetricNoIcon(this.metric, this.mTitle, this.color);
              child: Text(
               mTitle,
               overflow: TextOverflow.fade,
-              style: Theme.of(context).textTheme.title.copyWith(
+              style: Theme.of(context).textTheme.headline6.copyWith(
                 fontSize: 12,
                 color: TassistMainText
               ),

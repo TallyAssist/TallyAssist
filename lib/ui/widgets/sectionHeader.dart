@@ -43,8 +43,21 @@ class SectionHeader extends StatelessWidget {
                       //   Icons.bookmark,
                       //   color: TassistPrimaryBackground,
                       // ),
-                      Icon(Icons.share,
+                      IconButton(
+                        icon: Icon(Icons.share),
                         color: TassistPrimaryBackground,
+                        onPressed: () => showDialog(
+                          context: context,
+                          builder: (context) {
+                           return AlertDialog(
+                                title: Text('Coming soon!'),
+                                actions: <Widget>[
+                                  FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text('Ill wait :)'))
+                                ]
+                            );
+                          },
+                        
+                        ),
 
                       ),
                     ],

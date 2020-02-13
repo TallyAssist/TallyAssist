@@ -30,7 +30,7 @@ class KhataTile extends StatelessWidget {
            children: <Widget>[
              Row(
               children: <Widget>[
-                Text(khata.partyname, style: Theme.of(context).textTheme.body1.copyWith(
+                Text(khata.partyname, style: Theme.of(context).textTheme.bodyText1.copyWith(
                   fontWeight: FontWeight.bold,
                   fontSize: 15.0,
                 )),
@@ -39,10 +39,10 @@ class KhataTile extends StatelessWidget {
              Row(
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(khata.amount.toString(), style: Theme.of(context).textTheme.body1.copyWith(
+                Text(khata.amount.toString(), style: Theme.of(context).textTheme.bodyText1.copyWith(
                   color: TassistPrimary
                 )),
-                Text(formatter.format(khata.date).toString()),
+                Text(formatter.format(khata.date).toString(), style: Theme.of(context).textTheme.bodyText1 ),
 
               ],
             ),

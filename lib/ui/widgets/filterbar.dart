@@ -23,7 +23,7 @@ class FilterBar extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Text(filterText,
-                        style: Theme.of(context).textTheme.body2.copyWith(
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
                           fontSize: 14
                         )
                         ),
@@ -40,7 +40,7 @@ class FilterBar extends StatelessWidget {
                       child: Row(
                       children: <Widget>[
                         Text(filterType,
-                        style: Theme.of(context).textTheme.body2.copyWith(
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
                           fontSize: 14
                         )
                         ),

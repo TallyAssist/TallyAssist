@@ -31,7 +31,7 @@ class _SignInPhoneState extends State<SignInPhone> {
         title: Text('Get OTP',
             style: Theme.of(context)
                 .textTheme
-                .title
+                .headline6
                 .copyWith(color: TassistWhite)),
         actions: <Widget>[
           FlatButton.icon(
@@ -43,7 +43,7 @@ class _SignInPhoneState extends State<SignInPhone> {
               'Register',
               style: Theme.of(context)
                   .textTheme
-                  .body1
+                  .bodyText1
                   .copyWith(color: TassistWhite),
             ),
             onPressed: () => widget.toggleView(),

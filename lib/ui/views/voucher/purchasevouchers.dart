@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/purchasevoucher.dart';
-import 'package:tassist/core/services/purchasevoucherservice.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -15,17 +13,14 @@ class PurchaseVoucherScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-  final user = Provider.of<FirebaseUser>(context);
+  // final user = Provider.of<FirebaseUser>(context);
 
-    return StreamProvider<List<PurchaseVoucher>>.value (
-          value: PurchaseVoucherService(uid: user.uid).purchaseVoucherData,
-          child:  ListView(
-          children: <Widget>[
-          PurchaseVoucherList()
+    return ListView(
+    children: <Widget>[
+    PurchaseVoucherList()
 
   ],
-)
-    );
+);
   }
 }
 

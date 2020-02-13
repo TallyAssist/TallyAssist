@@ -5,6 +5,11 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/stockscreen/stocktile.dart';
 
 class StockItemList extends StatefulWidget {
+  
+  // Stream<List<StockItem>> stockItemData;
+  
+  // StockItemList({this.stockItemData});
+
   @override
   _StockItemListState createState() => _StockItemListState();
 }
@@ -12,11 +17,31 @@ class StockItemList extends StatefulWidget {
 class _StockItemListState extends State<StockItemList> {
   TextEditingController editingController = TextEditingController();
 
-  List<StockItem> stockItemData = List<StockItem>();
+  List<StockItem> stockItemData;
   List<StockItem> stockItemDataforDisplay = List<StockItem>();
 
   @override
   void initState() {
+    
+    // stockItemData = [];
+    // print('data ayga');
+    // widget.stockItemData.listen((value) {
+    //   print('data!!!!!!!!');
+    //   print(value[0].toString());
+    //   setState(() {
+    //     stockItemData = value;
+    //     stockItemDataforDisplay = value;
+    //     print('data length: ');
+    //     print(stockItemData.length);
+    //   });
+    //   print('data length: ');
+    //   print(stockItemData.length);
+    // });
+
+    
+    // // print('----------+++++---------');
+    // // print(Provider.of(context, listen: false));
+    // // print('----------+++++---------');
     stockItemData = Provider.of<List<StockItem>>(context, listen: false);
     stockItemDataforDisplay.addAll(stockItemData);
 
@@ -62,18 +87,24 @@ class _StockItemListState extends State<StockItemList> {
               padding: spacer.bottom.xs,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: TextField(
-                  onChanged: (value) {
-                    filterSearchResults(value.toLowerCase());
-                  },
-                  controller: editingController,
-                  decoration: InputDecoration(
-                    labelText: "Search",
-                    hintText: "Search",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
+                child: Container(
+                  height: 50.0,
+                  child: TextField(
+                    onChanged: (value) {
+                      filterSearchResults(value.toLowerCase());
+                    },
+                    controller: editingController,
+                    style: Theme.of(context).textTheme.bodyText2,
+                    enableSuggestions: true,
+                    decoration: InputDecoration(
+                      labelText: "Search",
+                      labelStyle: Theme.of(context).textTheme.bodyText2,
+                      counterStyle: Theme.of(context).textTheme.bodyText2,
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
-                        Radius.circular(25.0),
+                          Radius.circular(25.0),
+                        ),
                       ),
                     ),
                   ),

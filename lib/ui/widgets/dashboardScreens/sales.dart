@@ -12,6 +12,7 @@ class SalesDashboardWidget extends StatefulWidget {
 class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
+
     return Container(
       child: Column(
         children: <Widget>[
@@ -38,9 +39,12 @@ class _SalesDashboardWidgetContentRowState
     extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
-    final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
 
+    final snapshot = Provider.of<DocumentSnapshot>(context);
+    var userDocument = snapshot?.data;
+
+    if (snapshot?.data != null) {
+     
     return FittedBox(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -55,10 +59,9 @@ class _SalesDashboardWidgetContentRowState
                   //   color: TassistInfoGrey,
                   // ),
                   Text(
-                    userDocument['total_sales'].toString().substring(
-                            1, userDocument['total_sales'].toString().length) ??
+                    userDocument['total_sales'].toString() ??
                         '',
-                    style: Theme.of(context).textTheme.body2.copyWith(
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistMainText,
                         fontSize: 24,
                         fontWeight: FontWeight.normal),
@@ -96,7 +99,15 @@ class _SalesDashboardWidgetContentRowState
       ),
     );
   }
+  
+else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
 }
+}
+}
+
 
 class SalesDashboardWidgetTitleRow extends StatelessWidget {
   const SalesDashboardWidgetTitleRow({
@@ -106,15 +117,18 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot.data;
+    var userDocument = snapshot?.data;
+  
 
     void shareSales(BuildContext context, double sales) {
       final String text =
-          "Total Sales is ${userDocument['total_sales'].toString()}, and total number of vouchers ${userDocument['num_sales_vouchersr'].toString()}. - Shared via restat.co/tallyassist.in";
+          "Total Sales is ${userDocument['total_sales'].toString()}, and total number of vouchers ${userDocument['num_sales_vouchers']}. - Shared via restat.co/tallyassist.in";
 
       Share.share(text,
           subject: "Total Sales ${userDocument['total_sales'].toString()}");
     }
+
+  if (snapshot?.data != null) {
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -139,7 +153,7 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
                     return AlertDialog(
                       title: Text('Total Sales'),
                       content: Text(
-                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.'),
+                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.', style: Theme.of(context).textTheme.bodyText2,),
                       elevation: 24.0,
                       actions: <Widget>[
                         FlatButton(
@@ -176,4 +190,13 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
+
+else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+
+  }
+
 }

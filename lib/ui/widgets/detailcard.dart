@@ -18,12 +18,16 @@ class DetailCard extends StatelessWidget {
             padding: spacer.all.xs,
             child: Column(children: <Widget>[
         Row(children: <Widget>[
-            Text(_title1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.title.copyWith(
-                    fontSize: 16.0,
-                )
-                ),
+            Container(
+              width: MediaQuery.of(context).size.width / 1.2,
+              child: Text(_title1,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                  style: Theme.of(context).textTheme.headline6.copyWith(
+                      fontSize: 16.0,
+                  )
+                  ),
+            ),
         ]),
         Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -31,10 +35,10 @@ class DetailCard extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(info1, style: Theme.of(context).textTheme.body1),
+                  Text(info1, style: Theme.of(context).textTheme.bodyText1),
                   Text(
                     info2,
-                    style: Theme.of(context).textTheme.body1,
+                    style: Theme.of(context).textTheme.bodyText1,
                   )
                 ],
               ),
@@ -42,10 +46,10 @@ class DetailCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
                   Text(info3,
-                      style: Theme.of(context).textTheme.body1.copyWith(
+                      style: Theme.of(context).textTheme.bodyText1.copyWith(
                             fontWeight: FontWeight.bold,
                           )),
-                  Text(info4, style: Theme.of(context).textTheme.body1)
+                  Text(info4, style: Theme.of(context).textTheme.bodyText1)
                 ],
               )
             ],

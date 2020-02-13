@@ -63,7 +63,7 @@ class _ExpenseDashboardWidgetContentRowState extends State<ExpenseDashboardWidge
                     ),
                     Text(
                       userDocument['total_expenses'].toString(),
-                      style: Theme.of(context).textTheme.body2.copyWith(
+                      style: Theme.of(context).textTheme.bodyText2.copyWith(
                         color: TassistSuccess,
                         fontSize: 24,
                       ),

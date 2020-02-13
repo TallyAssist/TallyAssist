@@ -30,6 +30,7 @@ class _KhataFormState extends State<KhataForm> {
       key: _formKey,
       child: Column(
         children: <Widget>[
+          SizedBox(height: 20.0),
           Text('Apka private khata'),
           SizedBox(
             height: 20.0,
@@ -39,10 +40,11 @@ class _KhataFormState extends State<KhataForm> {
             items: trantype.map((trantype) {
               return DropdownMenuItem(
                 value: trantype,
-                child: Text('$trantype'),
+                child: Text('$trantype', style: Theme.of(context).textTheme.bodyText2,),
               );
             }).toList(),
             decoration: new InputDecoration(
+                hintStyle: Theme.of(context).textTheme.bodyText2,
                 hintText: 'Lia ki Diya?',
                 icon: new Icon(
                   Icons.fast_forward,
@@ -83,8 +85,10 @@ class _KhataFormState extends State<KhataForm> {
           TextFormField(
             initialValue: _currentParty,
             keyboardType: TextInputType.text,
+            style: Theme.of(context).textTheme.bodyText2,
             decoration: new InputDecoration(
                 hintText: 'Enter Party',
+                hintStyle: Theme.of(context).textTheme.bodyText2,
                 icon: new Icon(
                   Icons.person_add,
                   color: TassistBlack,
@@ -95,8 +99,10 @@ class _KhataFormState extends State<KhataForm> {
           SizedBox(height: 20.0),
           TextFormField(
             keyboardType: TextInputType.number,
+            style: Theme.of(context).textTheme.bodyText2,
             decoration: new InputDecoration(
                 hintText: 'Enter Amount',
+                hintStyle: Theme.of(context).textTheme.bodyText2,
                 icon: new Icon(
                   Icons.attach_money,
                   color: TassistBlack,
@@ -112,7 +118,7 @@ class _KhataFormState extends State<KhataForm> {
             child: Text('Submit',
                 style: Theme.of(context)
                     .textTheme
-                    .body1
+                    .bodyText1
                     .copyWith(color: TassistWhite)),
             onPressed: () async {
               if (_formKey.currentState.validate()) {

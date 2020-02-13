@@ -32,7 +32,7 @@ class _SignInState extends State<SignIn> {
         title: Text('Sign In',
             style: Theme.of(context)
                 .textTheme
-                .title
+                .headline6
                 .copyWith(color: TassistWhite)),
         actions: <Widget>[
           FlatButton.icon(
@@ -44,7 +44,7 @@ class _SignInState extends State<SignIn> {
               'Register',
               style: Theme.of(context)
                   .textTheme
-                  .body1
+                  .bodyText1
                   .copyWith(color: TassistWhite),
             ),
             onPressed: () => widget.toggleView(),
@@ -59,9 +59,11 @@ class _SignInState extends State<SignIn> {
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText2,
                 decoration: InputDecoration(
                     icon: Icon(Icons.email, color: TassistPrimaryBackground),
                     hintText: 'Enter your email ID please',
+                    hintStyle: Theme.of(context).textTheme.bodyText2,
                     labelText: 'Email'),
                 validator: (val) => val.isEmpty ? 'Enter an email' : null,
                 onChanged: (val) {
@@ -70,10 +72,12 @@ class _SignInState extends State<SignIn> {
               ),
               SizedBox(height: 20.0),
               TextFormField(
+                style: Theme.of(context).textTheme.bodyText2,
                 obscureText: true,
                 decoration: InputDecoration(
                     icon: Icon(Icons.vpn_key, color: TassistPrimaryBackground),
                     hintText: 'Enter your password please',
+                    hintStyle: Theme.of(context).textTheme.bodyText2,
                     labelText: 'Password'),
                 validator: (val) =>
                     val.length < 6 ? 'Enter a password 6+ chars long' : null,

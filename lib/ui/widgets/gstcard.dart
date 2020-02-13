@@ -24,7 +24,7 @@ GSTCard(this.title, this.row1Title, this.row1Number, this.row2Title, this.row2Nu
         children: <Widget>[
           Row(
             children: <Widget>[
-            Text(title, style: Theme.of(context).textTheme.title.copyWith(
+            Text(title, style: Theme.of(context).textTheme.headline6.copyWith(
               fontSize: 18
             ),)
             ]

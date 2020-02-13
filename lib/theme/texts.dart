@@ -120,8 +120,8 @@ const secondaryListDisc = const TextStyle(
 const secondaryListTitle2 = const TextStyle(
   color: TassistBlack,
   fontFamily: 'Poppins',
-  fontSize: 20,
-  fontWeight: FontWeight.w700,
+  fontSize: 16,
+  fontWeight: FontWeight.w300,
   fontStyle: FontStyle.normal,
   letterSpacing: 1
 );

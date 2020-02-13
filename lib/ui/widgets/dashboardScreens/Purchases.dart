@@ -6,9 +6,6 @@ import 'package:tassist/theme/colors.dart';
 
 
 class PurchasesDashboardWidget extends StatefulWidget {
-
-
-
   @override
   _PurchasesDashboardWidgetState createState() => _PurchasesDashboardWidgetState();
 }
@@ -35,8 +32,6 @@ class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
 }
 
 class PurchasesDashboardWidgetContentRow extends StatefulWidget {
- 
-
   @override
   _PurchasesDashboardWidgetContentRowState createState() =>
       _PurchasesDashboardWidgetContentRowState();
@@ -49,8 +44,9 @@ class _PurchasesDashboardWidgetContentRowState
 
     
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
-    
+  var userDocument = snapshot?.data;
+
+  if (snapshot?.data != null) { 
 
     return FittedBox(
           child: Row(
@@ -66,7 +62,7 @@ class _PurchasesDashboardWidgetContentRowState
                   //   color: TassistInfoGrey,
                   // ),
                   Text(userDocument['total_purchases'].toString() ?? '',
-                  style: Theme.of(context).textTheme.body2.copyWith(
+                  style: Theme.of(context).textTheme.bodyText2.copyWith(
                     color: TassistMainText,
                     fontSize: 24,
                     fontWeight: FontWeight.normal
@@ -103,7 +99,15 @@ class _PurchasesDashboardWidgetContentRowState
         ],
       ),
     );
-  }
+
+    }
+  
+     else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
 }
 
 class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
@@ -111,20 +115,19 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
- 
   @override
   Widget build(BuildContext context) {
 
   final snapshot = Provider.of<DocumentSnapshot>(context);
-  var userDocument = snapshot.data; 
+  var userDocument = snapshot?.data; 
   
-   void sharePurchases(BuildContext context, int purchases) {
+   void sharePurchases(BuildContext context, double purchases) {
     final String text = "Total Purchases is ${userDocument['total_purchases'].toString()}, and total number of vouchers ${userDocument['num_purchases_vouchers'].toString()}. - Shared via restat.co/tallyassist.in";
 
     Share.share(text, subject: "Total Purchases ${userDocument['total_purchases'].toString()}");
 }
 
-
+if (snapshot?.data != null) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -145,7 +148,7 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
                     builder: (BuildContext context) {
                       return  AlertDialog(
                   title: Text('Total Purchases'),
-                  content: Text('Total Purchases is calculated using sum of all Purchase Vouchers. This represents Gross Purcahses, no Debit notes are deducted.'),
+                  content: Text('Total Purchases is calculated using sum of all Purchase Vouchers. This represents Gross Purcahses, no Debit notes are deducted.', style: Theme.of(context).textTheme.bodyText2,),
                   elevation: 24.0,
                   actions: <Widget>[
                     FlatButton(
@@ -186,5 +189,11 @@ class PurchasesDashboardWidgetTitleRow extends StatelessWidget {
       ],
     );
   }
-}
 
+   else {
+  return Container(
+    child: Center(child: Text('Loading...'),),
+  );
+}
+}
+}
