@@ -23,7 +23,7 @@ class _InactiveCustomerListState extends State<InactiveCustomerList> {
           children: <Widget>[
             Padding(
               padding: spacer.all.xxs,
-              child: Text('Total Inactive Customers: ${inactiveCustomerData.length}', style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),),
+              child: Text('Total Inactive Customers: ${inactiveCustomerData?.length}', style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),),
             ),
              Padding(
                   padding: spacer.all.xxs,
