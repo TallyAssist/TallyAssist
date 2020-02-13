@@ -41,3 +41,4 @@ lib/generated_plugin_registrant.dart
 
 # Exclude key file
 *key.properties
+*key.jks
