@@ -20,7 +20,7 @@ TextEditingController editingController = TextEditingController();
 
   @override
   void initState() {
-    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false);
+    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false) ?? [];
     ledgerItemDataforDisplay.addAll(ledgerItemData);
 
     super.initState();

@@ -15,7 +15,7 @@ class InactiveCustomerList extends StatefulWidget {
 class _InactiveCustomerListState extends State<InactiveCustomerList> {
   @override
   Widget build(BuildContext context) {
-    final inactiveCustomerData = Provider.of<List<InactiveCustomer>>(context);
+    final inactiveCustomerData = Provider.of<List<InactiveCustomer>>(context) ?? [];
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -31,7 +31,7 @@ class _InactiveCustomerListState extends State<InactiveCustomerList> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Op Balance', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
+                Text( 'Op Balance  ', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
                 Text ('Recievables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
