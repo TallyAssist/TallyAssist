@@ -74,7 +74,7 @@ class LedgerItemService {
           totalReceipt: doc.data['restat_total_receipt'].toString() ?? '',
           totalReceivables: doc.data['restat_total_receivables'].toString() ?? '',
           primaryGroupType: doc.data['restat_primary_group_type'].toString() ?? '',
-          restatCompanyCode: doc.data['restat_company_Code'].toString() ?? '',
+          restatCompanyCode: doc.data['restat_company_code'].toString() ?? '',
       );
     }).toList();
   }

@@ -15,7 +15,6 @@ class InactiveCustomerService {
         .collection('ledger')
         .where('closing_balance', isEqualTo: 0)
         .where('restat_primary_group_type', isEqualTo: 'Sundry Debtors')
-        .orderBy('closing_balance', descending: false)
         .snapshots()
         .map(_inactiveCustomerData);
   }
