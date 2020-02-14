@@ -26,7 +26,7 @@ class LedgerItemTileNew  extends StatelessWidget {
   if (ledgerItem.primaryGroupType == 'Sundry Debtors')  {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
-     ledgerItem.state, 
+     ledgerItem.restatCompanyCode, 
      'Rs ${ledgerItem.closingBalance}', 
      'Rs. ${ledgerItem.openingBalance}'),
       title1: 'Receivables', 
@@ -42,7 +42,7 @@ class LedgerItemTileNew  extends StatelessWidget {
   if (ledgerItem.primaryGroupType == 'Sundry Creditors') {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
-     ledgerItem.state, 
+     ledgerItem.restatCompanyCode, 
      'Rs ${ledgerItem.closingBalance}', 
      'Rs. ${ledgerItem.openingBalance}'),
         title1: 'Payables', 
