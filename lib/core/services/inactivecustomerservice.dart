@@ -15,7 +15,6 @@ class InactiveCustomerService {
         .collection('ledger')
         .where('closing_balance', isEqualTo: 0)
         .where('restat_primary_group_type', isEqualTo: 'Sundry Debtors')
-        .orderBy('closing_balance', descending: false)
         .snapshots()
         .map(_inactiveCustomerData);
   }
@@ -25,21 +24,21 @@ class InactiveCustomerService {
   List<InactiveCustomer> _inactiveCustomerData(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return InactiveCustomer(
-        name: doc.data['name'] ?? '',
-        masterId: doc.data['master_id'] ?? '',
-        currencyName: doc.data['currencyname'] ?? '',
+        name: doc.data['name'].toString() ?? '',
+        masterId: doc.data['master_id'].toString() ?? '',
+        currencyName: doc.data['currencyname'].toString() ?? '',
         openingBalance: doc.data['opening_balance'].toString() ?? '',
         closingBalance: doc.data['closing_balance'].toString() ?? '',
-        parentid: doc.data['parentcode'] ?? '',
-        contact: doc.data['contact'] ?? '',
-        state: doc.data['state'] ?? '',
-        email: doc.data['email'] ?? '',
-        phone: doc.data['phone'] ?? '',
-        guid: doc.data['guid'] ?? '',
-        lastPaymentDate: doc.data['restat_last_payment_date'] ?? '',
-          lastPurchaseDate: doc.data['restat_last_purchase_date'] ?? '',
-          lastReceiptDate: doc.data['restat_last_receipt_date'] ?? '',
-          lastSalesDate: doc.data['restat_last_sales_date'] ?? '',
+        parentid: doc.data['parentcode'].toString() ?? '',
+        contact: doc.data['contact'].toString() ?? '',
+        state: doc.data['state'].toString() ?? '',
+        email: doc.data['email'].toString() ?? '',
+        phone: doc.data['phone'].toString() ?? '',
+        guid: doc.data['guid'].toString() ?? '',
+        lastPaymentDate: doc.data['restat_last_payment_date'].toString() ?? '',
+          lastPurchaseDate: doc.data['restat_last_purchase_date'].toString() ?? '',
+          lastReceiptDate: doc.data['restat_last_receipt_date'].toString() ?? '',
+          lastSalesDate: doc.data['restat_last_sales_date'].toString() ?? '',
           meanPayment: doc.data['restat_mean_payment'].toString()?? '',
           meanPurchase: doc.data['restat_mean_purchase'].toString() ?? '',
           meanReceipt: doc.data['restat_mean_receipt'].toString() ?? '',

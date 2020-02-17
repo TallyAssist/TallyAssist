@@ -30,9 +30,52 @@ class ReceiptVoucherList extends StatefulWidget {
 }
 
 class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
+
+  TextEditingController editingController = TextEditingController();
+
+  List<ReceiptVoucher> receiptVoucherData;
+  List<ReceiptVoucher> receiptVoucherDataforDisplay= List<ReceiptVoucher>();
+
+  @override
+  void initState() {
+    receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context, listen: false);
+    receiptVoucherDataforDisplay.addAll(receiptVoucherData);
+
+    super.initState();
+  }
+
+  void filterSearchResults(String query) {
+    List<ReceiptVoucher> dummySearchList = List<ReceiptVoucher>();
+    dummySearchList.addAll(receiptVoucherData);
+    if (query.isNotEmpty) {
+      List<ReceiptVoucher> dummyListData = List<ReceiptVoucher>();
+      dummySearchList.forEach((item) {
+        if (item.partyname.toLowerCase().contains(query)) {
+          dummyListData.add(item);
+        }
+      });
+      setState(() {
+        receiptVoucherDataforDisplay.clear();
+        receiptVoucherDataforDisplay.addAll(dummyListData);
+      });
+      return;
+    } else {
+      setState(() {
+        receiptVoucherDataforDisplay.clear();
+        receiptVoucherDataforDisplay.addAll(receiptVoucherData);
+      });
+    }
+  }
+
+
+
+
+
+
+
   @override
   Widget build(BuildContext context) {
-    final receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context);
+    // final receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context);
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -40,15 +83,45 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
           children: <Widget>[
             Padding(
               padding: spacer.all.xxs,
-              child: Text('Total Receipt Vouchers: ${receiptVoucherData.length}'),
+              child: Text('Total Receipt Vouchers: ${receiptVoucherDataforDisplay.length}'),
             ),
+             Container(
+                padding: spacer.bottom.xs,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 50.0,
+                    child: TextField(
+                      onChanged: (value) {
+                        filterSearchResults(value.toLowerCase());
+                      },
+                      controller: editingController,
+                      style: Theme.of(context).textTheme.bodyText2,
+                      enableSuggestions: true,
+                      decoration: InputDecoration(
+                        labelText: "Search",
+                        hintText: "Search by party name...",
+                        hintStyle: Theme.of(context).textTheme.bodyText2,
+                        labelStyle: Theme.of(context).textTheme.bodyText2,
+                        counterStyle: Theme.of(context).textTheme.bodyText2,
+                        prefixIcon: Icon(Icons.search),
+                        border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(25.0),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             Expanded(
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: receiptVoucherData?.length ?? 0,
+                itemCount: receiptVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return ReceiptVoucherTile(receiptVoucher: receiptVoucherData[index]);
+                  return ReceiptVoucherTile(receiptVoucher: receiptVoucherDataforDisplay[index]);
                 },
               ),
             ),
