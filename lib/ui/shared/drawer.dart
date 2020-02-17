@@ -17,6 +17,7 @@ import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
+import 'package:tassist/ui/views/ledgerview.dart';
 
 import '../../main.dart';
 
@@ -101,6 +102,12 @@ Drawer tassistDrawer(BuildContext context) {
         icon: FontAwesomeIcons.fileInvoice,
         title: 'Vouchers',
         ontap: VouchersHome(),
+        color: TassistPrimaryBackground,
+      ),
+      DrawerItem(
+        icon: FontAwesomeIcons.fileInvoice,
+        title: 'Ledger Profile',
+        ontap: LedgerView(),
         color: TassistPrimaryBackground,
       ),
       DrawerItem(

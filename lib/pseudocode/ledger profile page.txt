@@ -1,0 +1,14 @@
+ledger profile page
+
+from ledger service only we get the info, for each ledger item:
+
+basic view that gets info about that 
+
+- contact
+- name 
+- address
+
+
+second view about the vouchers - payment receipts sales purchase that are filtered on the final one. 
+
+third view - stats 

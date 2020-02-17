@@ -20,6 +20,7 @@ import 'package:tassist/core/services/receivablesservice.dart';
 import 'package:tassist/core/services/stockservice.dart';
 import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
+import 'package:tassist/ui/views/vouchers.dart';
 import 'core/models/ledger.dart';
 import 'core/models/purchasevoucher.dart';
 import 'core/services/ledgerservice.dart';
@@ -83,7 +84,8 @@ class TopWidget extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (context) => RootPage()
+          '/': (context) => RootPage(),
+          '/vouchers': (context) => VouchersHome()
         },
         title: _title,
         // home: HomeScreen(),

@@ -186,7 +186,9 @@ else {
                   Text(info4),
                 ],
               ),
-            )
+            ),
+            FlatButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/vouchers')
+  , child: Text('Go to Vouchers'))
           ],
         ),
       ),
