@@ -10,11 +10,10 @@ class SalesVoucherList extends StatefulWidget {
 }
 
 class _SalesVoucherListState extends State<SalesVoucherList> {
-
   TextEditingController editingController = TextEditingController();
 
   List<SalesVoucher> salesVoucherData;
-  List<SalesVoucher> salesVoucherDataforDisplay= List<SalesVoucher>();
+  List<SalesVoucher> salesVoucherDataforDisplay = List<SalesVoucher>();
 
   @override
   void initState() {
@@ -47,64 +46,59 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
-
-  // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
+    // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
 
     return Container(
-      height: MediaQuery.of(context).size.height,
-      child: Column(
-          children: <Widget>[
-            Padding(
-              padding: spacer.all.xxs,
-              child: Text('Total Sales Vouchers: ${salesVoucherDataforDisplay?.length}'),
-            ),
-             Container(
-                padding: spacer.bottom.xs,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 50.0,
-                    child: TextField(
-                      onChanged: (value) {
-                        filterSearchResults(value.toLowerCase());
-                      },
-                      controller: editingController,
-                      style: Theme.of(context).textTheme.bodyText2,
-                      enableSuggestions: true,
-                      decoration: InputDecoration(
-                        labelText: "Search",
-                        hintText: "Search by party name...",
-                        hintStyle: Theme.of(context).textTheme.bodyText2,
-                        labelStyle: Theme.of(context).textTheme.bodyText2,
-                        counterStyle: Theme.of(context).textTheme.bodyText2,
-                        prefixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(25.0),
-                          ),
-                        ),
+        height: MediaQuery.of(context).size.height,
+        child: Column(children: <Widget>[
+          Padding(
+            padding: spacer.all.xxs,
+            child: Text(
+                'Total Sales Vouchers: ${salesVoucherDataforDisplay?.length}'),
+          ),
+          Container(
+            padding: spacer.bottom.xs,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 50.0,
+                child: TextField(
+                  onChanged: (value) {
+                    filterSearchResults(value.toLowerCase());
+                  },
+                  controller: editingController,
+                  style: Theme.of(context).textTheme.bodyText2,
+                  enableSuggestions: true,
+                  decoration: InputDecoration(
+                    labelText: "Search",
+                    hintText: "Search by party name...",
+                    hintStyle: Theme.of(context).textTheme.bodyText2,
+                    labelStyle: Theme.of(context).textTheme.bodyText2,
+                    counterStyle: Theme.of(context).textTheme.bodyText2,
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(25.0),
                       ),
                     ),
                   ),
                 ),
               ),
-            Expanded(child: ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: false,
-        itemCount: salesVoucherDataforDisplay?.length ?? 0,
-        itemBuilder: (context, index) {
-          return SalesVoucherTile(salesVoucher: salesVoucherDataforDisplay[index]);
-        },
-      ),
-      
-    )
-          ]
-      )
-    );
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: false,
+              itemCount: salesVoucherDataforDisplay?.length ?? 0,
+              itemBuilder: (context, index) {
+                return SalesVoucherTile(
+                    salesVoucher: salesVoucherDataforDisplay[index]);
+              },
+            ),
+          )
+        ]));
   }
 }

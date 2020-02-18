@@ -5,6 +5,9 @@ import 'package:share/share.dart';
 import 'package:tassist/theme/colors.dart';
 
 class SalesDashboardWidget extends StatefulWidget {
+  final String timePeriod;
+  SalesDashboardWidget({this.timePeriod});
+
   @override
   _SalesDashboardWidgetState createState() => _SalesDashboardWidgetState();
 }
@@ -12,7 +15,6 @@ class SalesDashboardWidget extends StatefulWidget {
 class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Column(
         children: <Widget>[
@@ -22,7 +24,7 @@ class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
           const SizedBox(
             height: 20,
           ),
-          SalesDashboardWidgetContentRow(),
+          SalesDashboardWidgetContentRow(timePeriod: widget.timePeriod),
         ],
       ),
     );
@@ -30,6 +32,9 @@ class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
 }
 
 class SalesDashboardWidgetContentRow extends StatefulWidget {
+  final String timePeriod;
+  SalesDashboardWidgetContentRow({this.timePeriod});
+
   @override
   _SalesDashboardWidgetContentRowState createState() =>
       _SalesDashboardWidgetContentRowState();
@@ -39,75 +44,76 @@ class _SalesDashboardWidgetContentRowState
     extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
-
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot?.data;
+    var userDocument;
+    if (widget.timePeriod == 'Everything') {
+      userDocument = snapshot?.data;
+    } else {
+      userDocument = snapshot?.data[widget.timePeriod];
+    }
 
     if (snapshot?.data != null) {
-     
-    return FittedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  // Icon(
-                  //   Icons.arrow_drop_up,
-                  //   color: TassistInfoGrey,
-                  // ),
-                  Text(
-                    userDocument['total_sales'].toString() ??
-                        '',
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+      return FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Icon(
+                    //   Icons.arrow_drop_up,
+                    //   color: TassistInfoGrey,
+                    // ),
+                    Text(
+                      userDocument['total_sales'].toString() ?? '',
+                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          color: TassistMainText,
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal),
+                    )
+                  ],
+                ),
+                Text('Total Sales'),
+              ],
+            ),
+            SizedBox(
+              width: 100.0,
+            ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Icon(
+                    //   Icons.arrow_drop_down,
+                    //   color: TassistMainText,
+                    // ),
+                    Text(
+                      userDocument['num_sales_vouchers'].toString() ?? '',
+                      style: TextStyle(
                         color: TassistMainText,
                         fontSize: 24,
-                        fontWeight: FontWeight.normal),
-                  )
-                ],
-              ),
-              Text('Total Sales'),
-            ],
-          ),
-          SizedBox(
-            width: 100.0,
-          ),
-          Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  // Icon(
-                  //   Icons.arrow_drop_down,
-                  //   color: TassistMainText,
-                  // ),
-                  Text(
-                    userDocument['num_sales_vouchers'].toString() ?? '',
-                    style: TextStyle(
-                      color: TassistMainText,
-                      fontSize: 24,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Text('Vouchers'),
-            ],
-          ),
-          // SimpleTimeSeriesChart.withSampleData(),
-        ],
-      ),
-    );
+                  ],
+                ),
+                Text('Vouchers'),
+              ],
+            ),
+            // SimpleTimeSeriesChart.withSampleData(),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
+        ),
+      );
+    }
   }
-  
-else {
-  return Container(
-    child: Center(child: Text('Loading...'),),
-  );
 }
-}
-}
-
 
 class SalesDashboardWidgetTitleRow extends StatelessWidget {
   const SalesDashboardWidgetTitleRow({
@@ -118,7 +124,6 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
     var userDocument = snapshot?.data;
-  
 
     void shareSales(BuildContext context, double sales) {
       final String text =
@@ -128,75 +133,74 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
           subject: "Total Sales ${userDocument['total_sales'].toString()}");
     }
 
-  if (snapshot?.data != null) {
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Sales',
-                style: TextStyle(
-                    color: TassistPrimary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-              SizedBox(width: 5.0),
-              IconButton(
-                icon: Icon(Icons.info_outline),
-                color: Colors.grey[400],
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Total Sales'),
-                      content: Text(
-                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.', style: Theme.of(context).textTheme.bodyText2,),
-                      elevation: 24.0,
-                      actions: <Widget>[
-                        FlatButton(
-                            child: Text('Ok'),
-                            onPressed: () => Navigator.of(context).pop())
-                      ],
-                    );
-                  },
+    if (snapshot?.data != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Sales',
+                  style: TextStyle(
+                      color: TassistPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
-              ),
-            ],
+                SizedBox(width: 5.0),
+                IconButton(
+                  icon: Icon(Icons.info_outline),
+                  color: Colors.grey[400],
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Total Sales'),
+                        content: Text(
+                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        elevation: 24.0,
+                        actions: <Widget>[
+                          FlatButton(
+                              child: Text('Ok'),
+                              onPressed: () => Navigator.of(context).pop())
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              // Icon(
-              //   Icons.favorite,
-              //   color: TassistPrimaryBackground,
-              // ),
-              // Icon(
-              //   Icons.bookmark,
-              //   color: TassistPrimaryBackground,
-              // ),
-              IconButton(
-                icon: Icon(Icons.share),
-                color: TassistPrimaryBackground,
-                onPressed: () =>
-                    shareSales(context, userDocument['total_sales']),
-              ),
-            ],
+          Container(
+            child: Row(
+              children: <Widget>[
+                // Icon(
+                //   Icons.favorite,
+                //   color: TassistPrimaryBackground,
+                // ),
+                // Icon(
+                //   Icons.bookmark,
+                //   color: TassistPrimaryBackground,
+                // ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  color: TassistPrimaryBackground,
+                  onPressed: () =>
+                      shareSales(context, userDocument['total_sales']),
+                ),
+              ],
+            ),
           ),
+        ],
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
         ),
-      ],
-    );
+      );
+    }
   }
-
-else {
-  return Container(
-    child: Center(child: Text('Loading...'),),
-  );
-}
-
-  }
-
 }
