@@ -9,16 +9,24 @@ import 'package:tassist/ui/views/ledgervoucher.dart';
 
 
 class LedgerView extends StatefulWidget {
+
+  final String ledgerId; 
+  final String partyname;
+
+  LedgerView({this.ledgerId, this.partyname});
   
 
   @override
-  _LedgerViewState createState() => _LedgerViewState();
+  _LedgerViewState createState() => _LedgerViewState(ledgerId, partyname);
 }
 
 class _LedgerViewState extends State<LedgerView>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   bool showFab = true;
+  final String ledgerId;
+  final String partyname;
+  _LedgerViewState(this.ledgerId, this.partyname);
   
 
   @override
@@ -47,14 +55,14 @@ class _LedgerViewState extends State<LedgerView>
               onWillPop: () async => false,
           child: Scaffold(
         key: _drawerKey,
-        appBar: headerNavOther(_drawerKey, _tabController),
+        appBar: headerNavOther(_drawerKey, _tabController, context),
         drawer: tassistDrawer(context),
         body: 
         TabBarView(
           controller: _tabController,
           children: <Widget>[
-           LedgerSummary(),
-           LedgerVoucher(),
+           LedgerSummary(ledgerId: ledgerId),
+           LedgerVoucher(ledgerId: ledgerId, partyname: partyname,),
            LedgerStock()
           ],
         ),
@@ -64,18 +72,18 @@ class _LedgerViewState extends State<LedgerView>
 }
 
 
-AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabController) {
+AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabController, BuildContext context) {
   bool enabled = true;
 
   return AppBar(
       leading: Padding(
         padding: EdgeInsets.only(left: 12),
         child: IconButton(
-          icon: Icon(Icons.menu),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             if (enabled) {
 
-              _drawerkey.currentState.openDrawer();
+              Navigator.of(context).pushReplacementNamed('/ledgers');
             }
           },
         ),

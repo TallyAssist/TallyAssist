@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/paymentvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -34,22 +34,22 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
   
   TextEditingController editingController = TextEditingController();
 
-  List<PaymentVoucher> paymentVoucherData;
-  List<PaymentVoucher> paymentVoucherDataforDisplay= List<PaymentVoucher>();
+  Iterable<Voucher> paymentVoucherData;
+  List<Voucher> paymentVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    paymentVoucherData = Provider.of<List<PaymentVoucher>>(context, listen: false);
+    paymentVoucherData = Provider.of<List<Voucher>>(context, listen: false);
     paymentVoucherDataforDisplay.addAll(paymentVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<PaymentVoucher> dummySearchList = List<PaymentVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(paymentVoucherData);
     if (query.isNotEmpty) {
-      List<PaymentVoucher> dummyListData = List<PaymentVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -132,7 +132,7 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
 
 class PaymentVoucherTile extends StatelessWidget {
 
-  final PaymentVoucher paymentVoucher;
+  final Voucher paymentVoucher;
 
   PaymentVoucherTile({this.paymentVoucher});
 
@@ -143,7 +143,7 @@ class PaymentVoucherTile extends StatelessWidget {
     '# ${paymentVoucher.masterid}',
      paymentVoucher.iscancelled, 
      'Rs ${paymentVoucher.amount}', 
-     paymentVoucher.date);
+     paymentVoucher.date.toString());
   }
 }
 

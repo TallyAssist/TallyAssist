@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/purchasevoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -33,22 +33,22 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
   TextEditingController editingController = TextEditingController();
 
-  List<PurchaseVoucher> purchaseVoucherData;
-  List<PurchaseVoucher> purchaseVoucherDataforDisplay= List<PurchaseVoucher>();
+  Iterable<Voucher> purchaseVoucherData;
+  List<Voucher> purchaseVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context, listen: false);
+    purchaseVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Purchase');
     purchaseVoucherDataforDisplay.addAll(purchaseVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<PurchaseVoucher> dummySearchList = List<PurchaseVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(purchaseVoucherData);
     if (query.isNotEmpty) {
-      List<PurchaseVoucher> dummyListData = List<PurchaseVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -130,7 +130,7 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
 class PurchaseVoucherTile extends StatelessWidget {
 
-  final PurchaseVoucher purchaseVoucher;
+  final Voucher purchaseVoucher;
 
   PurchaseVoucherTile({this.purchaseVoucher});
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/core/models/salesvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
 
 class SalesVoucherTile extends StatelessWidget {
 
-    final SalesVoucher salesVoucher;
+    final Voucher salesVoucher;
 
     SalesVoucherTile({this.salesVoucher});
 
@@ -14,7 +14,7 @@ class SalesVoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.iscancelled, 'Rs. ${salesVoucher.amount.toString()}', salesVoucher.date),
+      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.iscancelled, 'Rs. ${salesVoucher.amount.toString()}', salesVoucher.date.toString()),
       
     );
   }

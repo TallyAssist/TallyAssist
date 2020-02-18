@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/receiptvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -33,22 +33,22 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
 
   TextEditingController editingController = TextEditingController();
 
-  List<ReceiptVoucher> receiptVoucherData;
-  List<ReceiptVoucher> receiptVoucherDataforDisplay= List<ReceiptVoucher>();
+  Iterable<Voucher> receiptVoucherData;
+  List<Voucher> receiptVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context, listen: false);
+    receiptVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Receipt');
     receiptVoucherDataforDisplay.addAll(receiptVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<ReceiptVoucher> dummySearchList = List<ReceiptVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(receiptVoucherData);
     if (query.isNotEmpty) {
-      List<ReceiptVoucher> dummyListData = List<ReceiptVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -134,7 +134,7 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
 
 class ReceiptVoucherTile extends StatelessWidget {
 
-  final ReceiptVoucher receiptVoucher;
+  final Voucher receiptVoucher;
 
   ReceiptVoucherTile({this.receiptVoucher});
 
@@ -145,7 +145,7 @@ class ReceiptVoucherTile extends StatelessWidget {
     '# ${receiptVoucher.masterid}',
      receiptVoucher.iscancelled, 
      'Rs ${receiptVoucher.amount}', 
-     receiptVoucher.date);
+     receiptVoucher.date.toString());
   }
 }
 

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/purchasevoucher.dart';
+import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 
@@ -8,61 +11,75 @@ import 'package:tassist/ui/widgets/detailcard.dart';
 
 class LedgerVoucher extends StatelessWidget {
 
+  final String ledgerId;
+  final String partyname;
 
+  LedgerVoucher({this.ledgerId, this.partyname});
+
+  
 
   @override
   Widget build(BuildContext context) {
 
-  // final user = Provider.of<FirebaseUser>(context);
-
     return ListView(
     children: <Widget>[
-    PurchaseVoucherList()
+    VoucherList(ledgerId: ledgerId, partyname: partyname)
 
   ],
 );
   }
 }
 
-class PurchaseVoucherList extends StatefulWidget {
+class VoucherList extends StatefulWidget {
+    
+    final String ledgerId;
+    final String partyname;
+    VoucherList({this.ledgerId, this.partyname});
+
   @override
-  _PurchaseVoucherListState createState() => _PurchaseVoucherListState();
+  _VoucherListState createState() => _VoucherListState(ledgerId, partyname);
 }
 
-class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
+class _VoucherListState extends State<VoucherList> {
+
+  final String ledgerId;
+  final String partyname;
+  _VoucherListState(this.ledgerId, this.partyname);
 
   TextEditingController editingController = TextEditingController();
 
-  List<PurchaseVoucher> purchaseVoucherData;
-  List<PurchaseVoucher> purchaseVoucherDataforDisplay= List<PurchaseVoucher>();
+  Iterable<Voucher> voucherData;
+  List<Voucher> voucherDataforDisplay= List<Voucher>();
+  
 
   @override
   void initState() {
-    purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context, listen: false);
-    purchaseVoucherDataforDisplay.addAll(purchaseVoucherData);
+    voucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucherData) => voucherData.partyname == partyname);
+    voucherDataforDisplay.addAll(voucherData);
+   
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<PurchaseVoucher> dummySearchList = List<PurchaseVoucher>();
-    dummySearchList.addAll(purchaseVoucherData);
+    List<Voucher> dummySearchList = List<Voucher>();
+    dummySearchList.addAll(voucherData);
     if (query.isNotEmpty) {
-      List<PurchaseVoucher> dummyListData = List<PurchaseVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
-        if (item.partyname.toLowerCase().contains(query)) {
+        if (item.primaryVoucherType.toLowerCase().contains(query)) {
           dummyListData.add(item);
         }
       });
       setState(() {
-        purchaseVoucherDataforDisplay.clear();
-        purchaseVoucherDataforDisplay.addAll(dummyListData);
+        voucherDataforDisplay.clear();
+        voucherDataforDisplay.addAll(dummyListData);
       });
       return;
     } else {
       setState(() {
-        purchaseVoucherDataforDisplay.clear();
-        purchaseVoucherDataforDisplay.addAll(purchaseVoucherData);
+        voucherDataforDisplay.clear();
+        voucherDataforDisplay.addAll(voucherData);
       });
     }
   }
@@ -71,15 +88,52 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
   @override
   Widget build(BuildContext context) {
-    // final purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context);
 
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId);
+    print(ledgerItem);
+    LedgerItem ledger = ledgerItem.elementAt(0);
+
+
+   
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
         child: Column(
           children: <Widget>[
+             Padding(
+                                padding: spacer.all.xs,
+                                child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                Row( children: <Widget> [
+                                      Container(
+                                          height: 30.0,
+                                        child: Text(ledger.name, overflow: TextOverflow.ellipsis, maxLines: 1, style: TextStyle(
+                                        color: TassistPrimary
+                                      ),
+                                       )
+                                      )
+                                ] 
+                                ),
+                                Row( 
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: <Widget> [
+                                Text(ledger.gst, style: TextStyle(
+                                  color: TassistInfoGrey
+                                ),),
+                                Icon(FontAwesomeIcons.whatsapp, color: TassistSuccess,)
+                                ])
+                              ],),
+                            ),
+                             Container(
+                                height: 3.0,
+                                color: TassistPrimary
+                              ),
+
+
+
             Padding(
               padding: spacer.all.xxs,
-              child: Text('Total Purchase Vouchers: ${purchaseVoucherDataforDisplay?.length}'),
+              child: Text('Total  Vouchers: ${voucherDataforDisplay?.length}'),
             ),
             Container(
                 padding: spacer.bottom.xs,
@@ -96,7 +150,7 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
                       enableSuggestions: true,
                       decoration: InputDecoration(
                         labelText: "Search",
-                        hintText: "Search by party name...",
+                        hintText: "Search by type...",
                         hintStyle: Theme.of(context).textTheme.bodyText2,
                         labelStyle: Theme.of(context).textTheme.bodyText2,
                         counterStyle: Theme.of(context).textTheme.bodyText2,
@@ -115,9 +169,9 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
               child: ListView.builder(
                 scrollDirection: Axis.vertical,
                 shrinkWrap: true,
-                itemCount: purchaseVoucherDataforDisplay?.length ?? 0,
+                itemCount: voucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return PurchaseVoucherTile(purchaseVoucher: purchaseVoucherDataforDisplay[index]);
+                  return VoucherTile(voucher: voucherDataforDisplay[index]);
                 },
               ),
             ),
@@ -128,20 +182,20 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
 
 
-class PurchaseVoucherTile extends StatelessWidget {
+class VoucherTile extends StatelessWidget {
 
-  final PurchaseVoucher purchaseVoucher;
+  final Voucher voucher;
 
-  PurchaseVoucherTile({this.purchaseVoucher});
+  VoucherTile({this.voucher});
 
 
   @override
   Widget build(BuildContext context) {
-    return  DetailCard(purchaseVoucher.partyname, 
-    '# ${purchaseVoucher.masterid}',
-     purchaseVoucher.iscancelled, 
-     'Rs ${purchaseVoucher.amount}', 
-     '${purchaseVoucher.date}');
+    return  DetailCard('', 
+    '# ${voucher.masterid}',
+     voucher.primaryVoucherType, 
+     'Rs ${voucher.amount}', 
+     '${voucher.date}'); 
   }
 }
 

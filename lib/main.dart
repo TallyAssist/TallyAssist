@@ -4,26 +4,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/inactivecustomer.dart';
 import 'package:tassist/core/models/payables.dart';
-import 'package:tassist/core/models/paymentvoucher.dart';
-import 'package:tassist/core/models/receiptvoucher.dart';
 import 'package:tassist/core/models/receivables.dart';
-import 'package:tassist/core/models/salesvoucher.dart';
 import 'package:tassist/core/models/stockitem.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/core/services/database.dart';
 import 'package:tassist/core/services/inactivecustomerservice.dart';
 import 'package:tassist/core/services/payablesservice.dart';
-import 'package:tassist/core/services/paymentvoucherservice.dart';
-import 'package:tassist/core/services/purchasevoucherservice.dart';
-import 'package:tassist/core/services/receiptvoucherservice.dart';
 import 'package:tassist/core/services/receivablesservice.dart';
 import 'package:tassist/core/services/stockservice.dart';
+import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
+import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 import 'core/models/ledger.dart';
-import 'core/models/purchasevoucher.dart';
 import 'core/services/ledgerservice.dart';
+import 'package:tassist/ui/views/ledgerview.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,14 +64,16 @@ class TopWidget extends StatelessWidget {
             value: PayablesItemService(uid: user?.uid).accountsPayablesData),
         StreamProvider<List<InactiveCustomer>>.value(
             value: InactiveCustomerService(uid: user?.uid).inactiveCustomerData),
-        StreamProvider<List<SalesVoucher>>.value(
-            value: SalesVoucherService(uid: user?.uid).salesVoucherData),
-        StreamProvider<List<PurchaseVoucher>>.value(
-            value: PurchaseVoucherService(uid: user?.uid).purchaseVoucherData),
-        StreamProvider<List<PaymentVoucher>>.value(
-            value: PaymentVoucherService(uid: user?.uid).paymentVoucherData),
-        StreamProvider<List<ReceiptVoucher>>.value(
-            value: ReceiptVoucherService(uid: user?.uid).receiptVoucherData),
+        // StreamProvider<List<SalesVoucher>>.value(
+        //     value: SalesVoucherService(uid: user?.uid).salesVoucherData),
+        // StreamProvider<List<PurchaseVoucher>>.value(
+        //     value: PurchaseVoucherService(uid: user?.uid).purchaseVoucherData),
+        // StreamProvider<List<PaymentVoucher>>.value(
+        //     value: PaymentVoucherService(uid: user?.uid).paymentVoucherData),
+        // StreamProvider<List<ReceiptVoucher>>.value(
+        //     value: ReceiptVoucherService(uid: user?.uid).receiptVoucherData),
+        StreamProvider<List<Voucher>>.value(
+            value: VoucherService(uid: user?.uid).voucherData),
         StreamProvider<DocumentSnapshot>.value(
             value: DatabaseService()
                 .companyCollection
@@ -85,7 +84,9 @@ class TopWidget extends StatelessWidget {
         initialRoute: '/',
         routes: {
           '/': (context) => RootPage(),
-          '/vouchers': (context) => VouchersHome()
+          '/vouchers': (context) => VouchersHome(),
+          '/ledgerview': (context) => LedgerView(),
+          '/ledgers': (context) => LedgerScreen()
         },
         title: _title,
         // home: HomeScreen(),

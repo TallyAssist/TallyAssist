@@ -24,14 +24,16 @@ class LedgerItem {
   final String totalPurchase;
   final String totalReceipt;
   final String totalReceivables;
+  final String totalSales;
   final String primaryGroupType;
   final String restatCompanyCode;
+  final String gst;
 
 
   LedgerItem({this.name, this.masterId, this.currencyName, this.openingBalance, this.closingBalance,  
               this.parentid, this.contact, this.state, this.email, this.phone, this.guid,
-              this.lastPaymentDate, this.lastPurchaseDate, this.lastReceiptDate,
+              this.lastPaymentDate, this.lastPurchaseDate, this.lastReceiptDate, this.gst,
               this.lastSalesDate, this.meanPayment, this.meanPurchase, this.meanReceipt,
-              this.meanSales, this.partyGuid, this.totalPayables, this.totalPayment,
+              this.meanSales, this.partyGuid, this.totalPayables, this.totalPayment, this.totalSales,
               this.totalPurchase, this.totalReceipt, this.totalReceivables, this.primaryGroupType, this.restatCompanyCode});
               }
