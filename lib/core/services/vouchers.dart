@@ -26,6 +26,10 @@ class VoucherService {
         masterid: doc.data['master_id'] ?? '',
         iscancelled: doc.data['is_cancelled'] ?? '',
         primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
+        isInvoice: doc.data['is_invoice'] ?? '',
+        isPostDated: doc.data['is_post_dated'] ?? '',
+        reference: doc.data['reference'] ?? '',
+        type: doc.data['type'] ?? '',
       );
     }).toList();
   }

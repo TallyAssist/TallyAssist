@@ -1,6 +1,22 @@
 class VoucherItem {
-  Map item;
+  
+  final String stockItemName;
+  final String partyLedgerName;
+  final DateTime vDate;
+  final String vMasterId;
+  final String rate;
+  final String primaryVoucherType;
+  final String discount;
+  final String gstPercent;
+  final String billedQty;
+  final String actualQty;
+  final String amount;
+  final String taxAmount;
 
-  VoucherItem({this.item});
+
+
+
+  VoucherItem({this.stockItemName, this.primaryVoucherType, this.actualQty, this.amount, this.billedQty, this.discount, 
+  this.gstPercent, this.partyLedgerName, this.rate, this.vDate, this.vMasterId, this.taxAmount});
 
 }

@@ -5,6 +5,7 @@ import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
 
@@ -94,8 +95,8 @@ class _VoucherListState extends State<VoucherList> {
     Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId);
     LedgerItem ledger = ledgerItem.elementAt(0);
 
+  String voucherIdView;
 
-   
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
         child: Column(
@@ -172,8 +173,21 @@ class _VoucherListState extends State<VoucherList> {
                 shrinkWrap: true,
                 itemCount: voucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return VoucherTile(voucher: voucherDataforDisplay[index]);
-                },
+                   return GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = voucherDataforDisplay[index].masterid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView))
+                        )
+
+                      },
+
+                  child: VoucherTile(voucher: voucherDataforDisplay[index])
+                  );
+                }
               ),
             ),
           ],
