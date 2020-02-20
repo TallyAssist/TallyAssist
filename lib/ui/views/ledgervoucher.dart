@@ -14,10 +14,10 @@ var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
 class LedgerVoucher extends StatelessWidget {
 
-  final String ledgerId;
+  final String ledgerGuid;
   final String partyname;
 
-  LedgerVoucher({this.ledgerId, this.partyname});
+  LedgerVoucher({this.ledgerGuid, this.partyname});
 
   
 
@@ -26,7 +26,7 @@ class LedgerVoucher extends StatelessWidget {
 
     return ListView(
     children: <Widget>[
-    VoucherList(ledgerId: ledgerId, partyname: partyname)
+    VoucherList(ledgerGuid: ledgerGuid, partyname: partyname)
 
   ],
 );
@@ -35,19 +35,19 @@ class LedgerVoucher extends StatelessWidget {
 
 class VoucherList extends StatefulWidget {
     
-    final String ledgerId;
+    final String ledgerGuid;
     final String partyname;
-    VoucherList({this.ledgerId, this.partyname});
+    VoucherList({this.ledgerGuid, this.partyname});
 
   @override
-  _VoucherListState createState() => _VoucherListState(ledgerId, partyname);
+  _VoucherListState createState() => _VoucherListState(ledgerGuid, partyname);
 }
 
 class _VoucherListState extends State<VoucherList> {
 
-  final String ledgerId;
+  final String ledgerGuid;
   final String partyname;
-  _VoucherListState(this.ledgerId, this.partyname);
+  _VoucherListState(this.ledgerGuid, this.partyname);
 
   TextEditingController editingController = TextEditingController();
 
@@ -92,10 +92,11 @@ class _VoucherListState extends State<VoucherList> {
   @override
   Widget build(BuildContext context) {
 
-    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId);
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.guid == ledgerGuid);
     LedgerItem ledger = ledgerItem.elementAt(0);
 
   String voucherIdView;
+  String partyGuid;
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -177,10 +178,12 @@ class _VoucherListState extends State<VoucherList> {
                      
                       onDoubleTap: () => {
                        
-                         voucherIdView = voucherDataforDisplay[index].masterid,
+                         voucherIdView = voucherDataforDisplay[index]?.masterid,
+                         partyGuid = voucherDataforDisplay[index]?.partyGuid,
                         
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView))
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
                         )
 
                       },

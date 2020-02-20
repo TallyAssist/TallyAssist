@@ -17,7 +17,7 @@ import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
-import 'package:tassist/ui/views/voucherview.dart';
+
 
 import '../../main.dart';
 
@@ -85,12 +85,6 @@ Drawer tassistDrawer(BuildContext context) {
         title: 'Dashboard',
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
-      ),
-       DrawerItem(
-        icon: Icons.lock,
-        title: 'Voucher View',
-        ontap: VoucherView(),
-        color: TassistMainText,
       ),
       DrawerItem(
         icon: Icons.card_membership,

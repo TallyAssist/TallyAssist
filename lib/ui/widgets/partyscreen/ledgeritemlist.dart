@@ -54,7 +54,7 @@ TextEditingController editingController = TextEditingController();
   Widget build(BuildContext context) {
 
 
-String ledgerId;
+
 String partyname;
 String ledgerGuid;
 
@@ -105,11 +105,11 @@ String ledgerGuid;
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onDoubleTap: () => {
-                        ledgerId = ledgerItemDataforDisplay[index].masterId,
+            
                         partyname = ledgerItemDataforDisplay[index].name,
                         ledgerGuid = ledgerItemDataforDisplay[index].guid,
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => LedgerView(ledgerId: ledgerId, partyname: partyname, ledgerGuid: ledgerGuid))
+                          MaterialPageRoute(builder: (context) => LedgerView(ledgerGuid: ledgerGuid, partyname: partyname,))
                         )
 
                       },

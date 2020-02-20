@@ -14,27 +14,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class LedgerView extends StatefulWidget {
 
-  final String ledgerId; 
   final String partyname;
   final String ledgerGuid;
 
-  LedgerView({this.ledgerId, this.partyname, this.ledgerGuid});
+  LedgerView({this.partyname, this.ledgerGuid});
 
   
 
   @override
-  _LedgerViewState createState() => _LedgerViewState(ledgerId, partyname, ledgerGuid);
+  _LedgerViewState createState() => _LedgerViewState(partyname, ledgerGuid);
 }
 
 class _LedgerViewState extends State<LedgerView>
     with SingleTickerProviderStateMixin {
   TabController _tabController;
   bool showFab = true;
-  final String ledgerId;
+
   final String partyname;
   final String ledgerGuid;
 
- _LedgerViewState(this.ledgerId, this.partyname, this.ledgerGuid);
+ _LedgerViewState( this.partyname, this.ledgerGuid);
 
  
   
@@ -79,8 +78,8 @@ class _LedgerViewState extends State<LedgerView>
           TabBarView(
             controller: _tabController,
             children: <Widget>[
-             LedgerSummary(ledgerId: ledgerId),
-             LedgerVoucher(ledgerId: ledgerId, partyname: partyname,),
+             LedgerSummary(ledgerGuid: ledgerGuid),
+             LedgerVoucher(ledgerGuid: ledgerGuid, partyname: partyname,),
              LedgerStockView(ledgerGuid: ledgerGuid)
             ],
           ),

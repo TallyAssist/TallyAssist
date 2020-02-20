@@ -7,6 +7,8 @@ import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/ui/views/ledgerview.dart';
+import 'package:tassist/ui/views/ledgervoucher.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/services/voucher-item-service.dart';
@@ -18,8 +20,9 @@ var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 class VoucherView extends StatelessWidget {
 
   final String voucherId;
+  final String partyGuid;
 
-  VoucherView({this.voucherId});
+  VoucherView({this.voucherId, this.partyGuid});
 
 
   @override
@@ -44,7 +47,7 @@ class VoucherView extends StatelessWidget {
         child: Scaffold(
             key: _drawerKey,
             drawer: tassistDrawer(context),
-            appBar: headerNavOther(_drawerKey, context),
+            appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
             body: Column(
               children: <Widget>[
                   Padding(
@@ -187,7 +190,7 @@ _isInvoice(Voucher voucher) {
 
 
 
-AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, BuildContext context) {
+AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey, BuildContext context, Voucher voucher) {
   bool enabled = true;
 
   return AppBar(
@@ -198,7 +201,9 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, BuildContext context)
           onPressed: () {
             if (enabled) {
 
-              Navigator.of(context).pushReplacementNamed('/ledgerview');
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => LedgerView(partyname: voucher.partyname, ledgerGuid: voucher.partyGuid,))
+              );
             }
           },
         ),

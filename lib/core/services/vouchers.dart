@@ -30,6 +30,7 @@ class VoucherService {
         isPostDated: doc.data['is_post_dated'] ?? '',
         reference: doc.data['reference'] ?? '',
         type: doc.data['type'] ?? '',
+        partyGuid: doc.data['party_ledger_name'] ?? '',
       );
     }).toList();
   }

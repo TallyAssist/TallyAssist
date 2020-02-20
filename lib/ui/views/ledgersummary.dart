@@ -24,14 +24,14 @@ var formatter = new DateFormat('dd-MM-yyyy');
 
 class LedgerSummary extends StatelessWidget {
 
-final String ledgerId;
+final String ledgerGuid;
 
-LedgerSummary({this.ledgerId});
+LedgerSummary({this.ledgerGuid});
 
   @override
   Widget build(BuildContext context) {
 
-    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId) ?? [];
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.guid == ledgerGuid) ?? [];
     LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
     
     // final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
