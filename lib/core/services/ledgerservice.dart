@@ -60,10 +60,10 @@ class LedgerItemService {
         phone: doc.data['phone'].toString() ?? '',
         guid: doc.data['guid'].toString() ?? '',
         gst: doc.data['gst'].toString() ?? '',
-        lastPaymentDate: doc.data['restat_last_payment_date'].toString() ?? '',
-          lastPurchaseDate: doc.data['restat_last_purchase_date'].toString() ?? '',
-          lastReceiptDate: doc.data['restat_last_receipt_date'].toString() ?? '',
-          lastSalesDate: doc.data['restat_last_sales_date'].toString() ?? '',
+        lastPaymentDate: doc.data['restat_last_payment_date']?.toDate() ?? null,
+          lastPurchaseDate: doc.data['restat_last_purchase_date']?.toDate() ?? null,
+          lastReceiptDate: doc.data['restat_last_receipt_date']?.toDate() ?? null,
+          lastSalesDate: doc.data['restat_last_sales_date']?.toDate() ?? null,
           meanPayment: doc.data['restat_mean_payment'].toString()?? '',
           meanPurchase: doc.data['restat_mean_purchase'].toString() ?? '',
           meanReceipt: doc.data['restat_mean_receipt'].toString() ?? '',
@@ -77,6 +77,10 @@ class LedgerItemService {
           totalReceivables: doc.data['restat_total_receivables'].toString() ?? '',
           primaryGroupType: doc.data['restat_primary_group_type'].toString() ?? '',
           restatCompanyCode: doc.data['restat_company_code'].toString() ?? '',
+          numPaymentVouchers: doc.data['restat_num_payment_vouchers'].toString() ?? '',
+          numPurchaseVouchers: doc.data['restat_num_purchase_vouchers'].toString() ?? '',
+          numReceiptVouchers: doc.data['restat_num_receipt_vouchers'].toString() ?? '',
+          numSalesVouchers: doc.data['restat_num_sales_vouchers'].toString() ?? '',
       );
     }).toList();
   }

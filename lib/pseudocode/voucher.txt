@@ -1,0 +1,5 @@
+Becuase of the stream provider, I already have all the data, 
+
+Now I need to create a list builder that creates a list based on how many values are there in an array invevntory type, 
+from there, we will access values in the batch allocation value.
+

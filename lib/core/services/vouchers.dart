@@ -12,7 +12,7 @@ class VoucherService {
     return companyCollection
         .document(this.uid)
         .collection('voucher')
-        .orderBy('date', descending: true)
+        // .orderBy('date', descending: true)
         .snapshots()
         .map(_receiptvouchersfromSnapshots);
   }
@@ -20,7 +20,7 @@ class VoucherService {
   List<Voucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Voucher(
-        date: doc.data['date'].toDate() ?? '',
+        date: doc.data['date'].toDate() ?? null,
         partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount'].toInt() ?? 0,
         masterid: doc.data['master_id'] ?? '',

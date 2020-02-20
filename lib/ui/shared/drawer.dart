@@ -17,6 +17,7 @@ import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
+import 'package:tassist/ui/views/voucherview.dart';
 
 import '../../main.dart';
 
@@ -79,17 +80,17 @@ Drawer tassistDrawer(BuildContext context) {
         padding: spacer.all.xs,
         child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
-      // DrawerItem(
-      //   icon: Icons.mail_outline,
-      //   title: 'Notifications',
-      //   ontap: NotificationScreen(),
-      //   color: TassistPrimaryBackground,
-      // ),
       DrawerItem(
         icon: Icons.dashboard,
         title: 'Dashboard',
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
+      ),
+       DrawerItem(
+        icon: Icons.lock,
+        title: 'Voucher View',
+        ontap: VoucherView(),
+        color: TassistMainText,
       ),
       DrawerItem(
         icon: Icons.card_membership,
@@ -149,6 +150,7 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: KhataScreen(),
         color: TassistMainText,
       ),
+      
       DrawerItem(
         icon: Icons.build,
         title: 'Production',

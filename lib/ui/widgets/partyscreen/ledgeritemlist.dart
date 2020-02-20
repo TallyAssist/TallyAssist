@@ -21,7 +21,7 @@ TextEditingController editingController = TextEditingController();
 
   @override
   void initState() {
-    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false) ?? [];
+    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false);
     ledgerItemDataforDisplay.addAll(ledgerItemData);
 
     super.initState();
@@ -56,6 +56,7 @@ TextEditingController editingController = TextEditingController();
 
 String ledgerId;
 String partyname;
+String ledgerGuid;
 
   
     return 
@@ -106,8 +107,9 @@ String partyname;
                       onDoubleTap: () => {
                         ledgerId = ledgerItemDataforDisplay[index].masterId,
                         partyname = ledgerItemDataforDisplay[index].name,
+                        ledgerGuid = ledgerItemDataforDisplay[index].guid,
                         Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => LedgerView(ledgerId: ledgerId, partyname: partyname,))
+                          MaterialPageRoute(builder: (context) => LedgerView(ledgerId: ledgerId, partyname: partyname, ledgerGuid: ledgerGuid))
                         )
 
                       },

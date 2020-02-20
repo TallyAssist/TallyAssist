@@ -3,6 +3,19 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:intl/intl.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
 
 
 
@@ -143,7 +156,7 @@ class PaymentVoucherTile extends StatelessWidget {
     '# ${paymentVoucher.masterid}',
      paymentVoucher.iscancelled, 
      'Rs ${paymentVoucher.amount}', 
-     paymentVoucher.date.toString());
+     _formatDate(paymentVoucher.date));
   }
 }
 

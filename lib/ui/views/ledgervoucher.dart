@@ -6,7 +6,9 @@ import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:intl/intl.dart';
 
+var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
 
 class LedgerVoucher extends StatelessWidget {
@@ -90,7 +92,6 @@ class _VoucherListState extends State<VoucherList> {
   Widget build(BuildContext context) {
 
     Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId);
-    print(ledgerItem);
     LedgerItem ledger = ledgerItem.elementAt(0);
 
 
@@ -117,7 +118,7 @@ class _VoucherListState extends State<VoucherList> {
                                 Row( 
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget> [
-                                Text(ledger.gst, style: TextStyle(
+                                Text('GST: ${ledger.gst}', style: TextStyle(
                                   color: TassistInfoGrey
                                 ),),
                                 Icon(FontAwesomeIcons.whatsapp, color: TassistSuccess,)
@@ -195,7 +196,7 @@ class VoucherTile extends StatelessWidget {
     '# ${voucher.masterid}',
      voucher.primaryVoucherType, 
      'Rs ${voucher.amount}', 
-     '${voucher.date}'); 
+     '${formatter.format(voucher.date)}'); 
   }
 }
 

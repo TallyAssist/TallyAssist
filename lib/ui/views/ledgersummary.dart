@@ -6,6 +6,21 @@ import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:intl/intl.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
+
+
 
 class LedgerSummary extends StatelessWidget {
 
@@ -16,8 +31,8 @@ LedgerSummary({this.ledgerId});
   @override
   Widget build(BuildContext context) {
 
-    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId);
-    LedgerItem ledger = ledgerItem.elementAt(0);
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context).where((item) => item.masterId == ledgerId) ?? [];
+    LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
     
     // final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
@@ -44,7 +59,7 @@ LedgerSummary({this.ledgerId});
                                 Row( 
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: <Widget> [
-                                Text(ledger.gst, style: TextStyle(
+                                Text('GST: ${ledger.gst}', style: TextStyle(
                                   color: TassistInfoGrey
                                 ),),
                                 Icon(FontAwesomeIcons.whatsapp, color: TassistSuccess,)
@@ -110,10 +125,10 @@ LedgerSummary({this.ledgerId});
                                 ),
                               ),
 
-                              LedgerMetric(title: 'Sales', number: 'Bills: 24', date: 'Last: ${ledger.lastSalesDate}', metric: 'Total: ${ledger.totalSales}', average: 'Average: ${ledger.meanSales}'),
-                              LedgerMetric(title: 'Receipts', number: 'Bills: 24', date: 'Last: ${ledger.lastReceiptDate}', metric: 'Total: ${ledger.totalReceipt}', average: 'Average: ${ledger.meanReceipt}'),
-                              LedgerMetric(title: 'Purchases', number: 'Bills: 24', date: 'Last: ${ledger.lastPurchaseDate}', metric: 'Total: ${ledger.totalPurchase}', average: 'Average: ${ledger.meanPurchase}'),
-                              LedgerMetric(title: 'Payment', number: 'Bills: 24', date: 'Last: ${ledger.lastPaymentDate}', metric: 'Total: ${ledger.totalPayment}', average: 'Average: ${ledger.meanPayment}'),
+                              LedgerMetric(title: 'Sales', number: 'Bills: ${ledger.numSalesVouchers}', date: 'Last: ${_formatDate(ledger.lastSalesDate)}', metric: 'Total: ${ledger.totalSales}', average: 'Average: ${ledger.meanSales}'),
+                              LedgerMetric(title: 'Receipts', number: 'Bills: ${ledger.numReceiptVouchers}', date: 'Last: ${_formatDate(ledger.lastReceiptDate)}', metric: 'Total: ${ledger.totalReceipt}', average: 'Average: ${ledger.meanReceipt}'),
+                              LedgerMetric(title: 'Purchases', number: 'Bills: ${ledger.numPurchaseVouchers}', date: 'Last: ${_formatDate(ledger.lastPurchaseDate)}', metric: 'Total: ${ledger.totalPurchase}', average: 'Average: ${ledger.meanPurchase}'),
+                              LedgerMetric(title: 'Payment', number: 'Bills: ${ledger.numPaymentVouchers}', date: 'Last: ${_formatDate(ledger.lastPaymentDate)}', metric: 'Total: ${ledger.totalPayment}', average: 'Average: ${ledger.meanPayment}'),
 
 
                           ]

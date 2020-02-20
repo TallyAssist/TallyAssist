@@ -187,8 +187,11 @@ else {
                 ],
               ),
             ),
-            FlatButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/vouchers')
-  , child: Text('Go to Vouchers'))
+            FlatButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/ledgerview'), 
+            child: Text('View more details', 
+            style: Theme.of(context).textTheme.bodyText1
+            )
+            )
           ],
         ),
       ),

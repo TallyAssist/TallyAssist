@@ -10,10 +10,10 @@ class LedgerItem {
   final String email;
   final String phone;
   final String guid;
-  final String lastPaymentDate;
-  final String lastPurchaseDate;
-  final String lastReceiptDate;
-  final String lastSalesDate;
+  final DateTime lastPaymentDate;
+  final DateTime lastPurchaseDate;
+  final DateTime lastReceiptDate;
+  final DateTime lastSalesDate;
   final String meanPayment;
   final String meanPurchase;
   final String meanReceipt;
@@ -28,6 +28,11 @@ class LedgerItem {
   final String primaryGroupType;
   final String restatCompanyCode;
   final String gst;
+  final String numPaymentVouchers;
+  final String numSalesVouchers;
+  final String numPurchaseVouchers;
+  final String numReceiptVouchers;
+
 
 
   LedgerItem({this.name, this.masterId, this.currencyName, this.openingBalance, this.closingBalance,  
@@ -35,5 +40,6 @@ class LedgerItem {
               this.lastPaymentDate, this.lastPurchaseDate, this.lastReceiptDate, this.gst,
               this.lastSalesDate, this.meanPayment, this.meanPurchase, this.meanReceipt,
               this.meanSales, this.partyGuid, this.totalPayables, this.totalPayment, this.totalSales,
-              this.totalPurchase, this.totalReceipt, this.totalReceivables, this.primaryGroupType, this.restatCompanyCode});
+              this.totalPurchase, this.totalReceipt, this.totalReceivables, this.primaryGroupType, this.restatCompanyCode, 
+              this.numPaymentVouchers, this.numPurchaseVouchers, this.numReceiptVouchers, this.numSalesVouchers });
               }
