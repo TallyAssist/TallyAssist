@@ -126,7 +126,6 @@ class InactiveSupplierList extends StatelessWidget {
   Widget build(BuildContext context) {
 
     inactiveSuppliers = Provider.of<List<LedgerItem>>(context).where((element) => element.closingBalance == '0').where((element) => element.primaryGroupType == 'Sundry Creditors') ?? [];
-
     inactiveSupplierData.addAll(inactiveSuppliers);
     
 

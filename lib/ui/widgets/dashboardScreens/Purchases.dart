@@ -6,6 +6,9 @@ import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class PurchasesDashboardWidget extends StatefulWidget {
+  final String timePeriod;
+  PurchasesDashboardWidget({this.timePeriod});
+
   @override
   _PurchasesDashboardWidgetState createState() =>
       _PurchasesDashboardWidgetState();
@@ -31,6 +34,9 @@ class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
 }
 
 class PurchasesDashboardWidgetContentRow extends StatefulWidget {
+  final String timePeriod;
+  PurchasesDashboardWidgetContentRow({this.timePeriod});
+
   @override
   _PurchasesDashboardWidgetContentRowState createState() =>
       _PurchasesDashboardWidgetContentRowState();
@@ -41,6 +47,12 @@ class _PurchasesDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
+//     var userDocument;
+//     if (widget.timePeriod == 'Everything') {
+//       userDocument = snapshot?.data;
+//     } else {
+//       userDocument = snapshot?.data[widget.timePeriod];
+//     }
     var userDocument = snapshot?.data;
 
     if (snapshot?.data != null) {

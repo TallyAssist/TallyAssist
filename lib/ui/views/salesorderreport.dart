@@ -3,8 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
-import 'package:tassist/theme/colors.dart';
-import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/views/vouchers.dart';
@@ -28,9 +26,9 @@ class SalesOrderReportScreen extends StatelessWidget {
                   .document(user.uid)
                   .snapshots()),
         ],
-        child: WillPopScope (
-              onWillPop: () async => false,
-                  child: Scaffold(
+        child: WillPopScope(
+          onWillPop: () async => false,
+          child: Scaffold(
             key: _drawerKey,
             drawer: tassistDrawer(context),
             appBar: headerNav(_drawerKey),
@@ -100,8 +98,6 @@ class SalesOrderReportScreen extends StatelessWidget {
                 SecondarySectionHeader('Inactive Customer List'),
 
                 InactiveCustomerList()
-
-
               ],
             ),
           ),

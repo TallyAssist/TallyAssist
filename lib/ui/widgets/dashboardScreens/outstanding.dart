@@ -5,12 +5,11 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/core/services/string_format.dart';
 
 class OutstandingsDashboardWidget extends StatelessWidget {
-
+  final String timePeriod;
+  OutstandingsDashboardWidget({this.timePeriod});
 
   @override
   Widget build(BuildContext context) {
-
-    
     return Container(
       child: Column(
         children: <Widget>[
@@ -20,7 +19,9 @@ class OutstandingsDashboardWidget extends StatelessWidget {
           const SizedBox(
             height: 20,
           ),
-          OutstandingsDashboardWidgetContentRow(),
+          OutstandingsDashboardWidgetContentRow(
+            timePeriod: this.timePeriod,
+          ),
         ],
       ),
     );
@@ -28,12 +29,18 @@ class OutstandingsDashboardWidget extends StatelessWidget {
 }
 
 class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
+  final String timePeriod;
+  OutstandingsDashboardWidgetContentRow({this.timePeriod});
 
   @override
   Widget build(BuildContext context) {
-
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument = snapshot?.data;
+    var userDocument;
+    if (this.timePeriod == 'Everything') {
+      userDocument = snapshot?.data;
+    } else {
+      userDocument = snapshot?.data[this.timePeriod];
+    }
 
     if (snapshot?.data != null) {
 
@@ -71,36 +78,43 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
               formatIndianCurrency(userDocument['out_actual_rec'].toString()),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistMainText
-              ),
-            )
-          ],
+              )),
+              Text(
+                userDocument['out_actual_rec'].toString(),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: TassistMainText),
+              )
+            ],
+          ),
+          // Column(
+          //   children: <Widget>[
+          //     Text('Avg. Delay'),
+          //     Text(
+          //       userDocument['out_avgdel_pay'].toString(),
+          //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+          //         color: TassistWarning
+          //       ),
+          //     ),
+          //     Text(
+          //       userDocument['out_avgdel_rec'].toString(),
+          //       style: Theme.of(context).textTheme.bodyText1.copyWith(
+          //         color: TassistSuccess
+          //       ),
+          //     ),
+          //   ],
+          // ),
+        ],
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
         ),
-        // Column(
-        //   children: <Widget>[
-        //     Text('Avg. Delay'),
-        //     Text(
-        //       userDocument['out_avgdel_pay'].toString(),
-        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
-        //         color: TassistWarning
-        //       ),
-        //     ),
-        //     Text(
-        //       userDocument['out_avgdel_rec'].toString(),
-        //       style: Theme.of(context).textTheme.bodyText1.copyWith(
-        //         color: TassistSuccess
-        //       ),
-        //     ),
-        //   ],
-        // ),
-      ],
-    );
+      );
+    }
   }
-       else {
-  return Container(
-    child: Center(child: Text('Loading...'),),
-  );
-}
-}
 }
 
 class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
@@ -149,4 +163,3 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
     );
   }
 }
-
