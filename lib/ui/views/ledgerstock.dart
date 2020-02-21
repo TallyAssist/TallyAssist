@@ -45,7 +45,7 @@ class LedgerStockTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DetailCard('${ledgerStock.itemName} (${ledgerStock.numVouchers})', 'Last Date: ${formatter.format(ledgerStock.lastDate)}',
+    return DetailCard('${ledgerStock.itemName}    (${ledgerStock.numVouchers} vouchers)', 'Last Date: ${formatter.format(ledgerStock.lastDate)}',
      'Last: ${ledgerStock.lastAmount} @ ${ledgerStock.lastRate}',
       'T Amt: ${ledgerStock.totalAmount}', 'T Qty: ${ledgerStock.totalBilledQty}'
      

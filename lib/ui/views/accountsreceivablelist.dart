@@ -4,7 +4,7 @@ import 'package:tassist/core/models/receivables.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/itemlist.dart';
-
+import 'package:tassist/ui/views/ledgerview.dart';
 
 class ARLedgerItemList extends StatefulWidget {
   @override
@@ -52,6 +52,9 @@ TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+    String partyname;
+    String ledgerGuid;
   
               return  Container(
             height: MediaQuery.of(context).size.height / 1.1,
@@ -96,7 +99,7 @@ TextEditingController editingController = TextEditingController();
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Receivables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),),
+                Text( 'Outstandings', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),),
                 Text ('Receipts', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
@@ -108,7 +111,17 @@ TextEditingController editingController = TextEditingController();
                     shrinkWrap: true,
                     itemCount: ledgerItemDataforDisplay?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return SingleItem(ledgerItem: ledgerItemDataforDisplay[index]);
+                      return GestureDetector(
+                      onDoubleTap: () => {
+            
+                        partyname = ledgerItemDataforDisplay[index].name,
+                        ledgerGuid = ledgerItemDataforDisplay[index].guid,
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => LedgerView(ledgerGuid: ledgerGuid, partyname: partyname,))
+                        )
+                      },
+                      child: SingleItem(ledgerItem: ledgerItemDataforDisplay[index])
+                      );
                     },
                   ),
                 ),

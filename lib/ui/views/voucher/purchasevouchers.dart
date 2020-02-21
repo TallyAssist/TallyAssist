@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/views/voucherview.dart';
 import 'package:intl/intl.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
@@ -83,8 +84,10 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
   @override
   Widget build(BuildContext context) {
-    // final purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context);
 
+     String voucherIdView;
+  String partyGuid;
+    
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
         child: Column(
@@ -129,7 +132,23 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
                 shrinkWrap: true,
                 itemCount: purchaseVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return PurchaseVoucherTile(purchaseVoucher: purchaseVoucherDataforDisplay[index]);
+                  return GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = purchaseVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = purchaseVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                  
+                  
+                  child: PurchaseVoucherTile(purchaseVoucher: purchaseVoucherDataforDisplay[index])
+                  );
                 },
               ),
             ),

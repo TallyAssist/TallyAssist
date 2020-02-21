@@ -46,36 +46,7 @@ class AccountsPayableScreen extends StatelessWidget {
             ),
             SecondarySectionHeader('List of parties'),
             APLedgerItemList(),
-            // Padding(
-            //   padding: spacer.y.xs,
-            //   child: Row(
-            //       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            //       crossAxisAlignment: CrossAxisAlignment.center,
-            //       children: <Widget>[
-            //         Column(
-            //           children: <Widget>[
-            //           Icon(Icons.mail, color: TassistPrimary,),
-            //           Text('Email All', style: Theme.of(context).textTheme.bodyText1,)
-            //           ]
-            //         ),
-            //         Column(
-            //           children: <Widget>[
-            //           Icon(Icons.timer, color: TassistPrimary,),
-            //           Text('Remind All', style: Theme.of(context).textTheme.bodyText1,)
-            //           ]
-            //         ),
-            //         Column(
-            //           children: <Widget>[
-            //           Icon(Icons.add_alert, color: TassistPrimary,),
-            //           Text('Alert Sales', style: Theme.of(context).textTheme.bodyText1,)
-            //           ]
-            //         )
-            //       ]
-            //   ),
-            // ),
-            // GoToBar('Purchase Order Report', PurchaseOrderReportScreen())
-            
-
+      
           ],
 
 

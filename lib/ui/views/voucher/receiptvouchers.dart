@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/views/voucherview.dart';
 import 'package:intl/intl.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
@@ -89,6 +90,8 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
   @override
   Widget build(BuildContext context) {
     // final receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context);
+    String voucherIdView;
+    String partyGuid;
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -134,7 +137,22 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
                 shrinkWrap: true,
                 itemCount: receiptVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return ReceiptVoucherTile(receiptVoucher: receiptVoucherDataforDisplay[index]);
+                  return  GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = receiptVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = receiptVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                  
+                  child: ReceiptVoucherTile(receiptVoucher: receiptVoucherDataforDisplay[index])
+                  );
                 },
               ),
             ),

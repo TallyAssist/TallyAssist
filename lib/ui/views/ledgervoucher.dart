@@ -180,6 +180,8 @@ class _VoucherListState extends State<VoucherList> {
                        
                          voucherIdView = voucherDataforDisplay[index]?.masterid,
                          partyGuid = voucherDataforDisplay[index]?.partyGuid,
+                         print(voucherIdView),
+                         print(partyGuid),
                         
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)

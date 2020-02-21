@@ -119,10 +119,7 @@ class VoucherView extends StatelessWidget {
                     color: TassistGray
                   ),
                    VoucherItemView(),
-                   Container(
-                    height: 3.0,
-                    color: TassistGray
-                  ),
+                  
                   Text('Tax Summary'),
                   Container(
                     height: 20,
@@ -150,6 +147,7 @@ class VoucherItemView extends StatelessWidget {
 
     List<VoucherItem> voucherItemList = Provider.of<List<VoucherItem>>(context) ?? [];
 
+    if (voucherItemList.length > 0) {
     return Column(
       children: <Widget>[
         Text('Item Details'),
@@ -157,13 +155,24 @@ class VoucherItemView extends StatelessWidget {
           shrinkWrap: true,
           itemCount: voucherItemList?.length,
           itemBuilder: (context, index){
-            return VoucherItemTile(voucherItem: voucherItemList[index]);
+            return Padding(
+              padding: spacer.y.xxs,
+              child: VoucherItemTile(voucherItem: voucherItemList[index]),
+            );
           }
-          )
+          ),
+           Container(
+                    height: 3.0,
+                    color: TassistGray
+                  ),
       ],
 
       
     );
+    }
+    else {
+      return Container();
+    }
   }
 }
 
@@ -186,6 +195,9 @@ _isInvoice(Voucher voucher) {
                   fontWeight: FontWeight.bold,
                 ));
                       }
+  else {
+   return Container();
+  }
 }
 
 
@@ -200,7 +212,6 @@ AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey, BuildContext c
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             if (enabled) {
-
               Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => LedgerView(partyname: voucher.partyname, ledgerGuid: voucher.partyGuid,))
               );
