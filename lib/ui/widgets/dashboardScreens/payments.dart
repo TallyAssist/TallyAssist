@@ -41,6 +41,12 @@ class _PaymentsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
+//     var userDocument;
+//     if (widget.timePeriod == 'Everything') {
+//       userDocument = snapshot?.data;
+//     } else {
+//       userDocument = snapshot?.data[widget.timePeriod];
+//     }
     var userDocument = snapshot?.data;
 
     if (snapshot?.data != null) {
