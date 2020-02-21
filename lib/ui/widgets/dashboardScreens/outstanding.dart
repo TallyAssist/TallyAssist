@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/core/services/string_format.dart';
 
 class OutstandingsDashboardWidget extends StatelessWidget {
 
@@ -61,13 +62,13 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
           children: <Widget>[
             // Text('Actual'),
             Text(
-              userDocument['out_actual_pay'].toString(),
+              formatIndianCurrency(userDocument['out_actual_pay'].toString()),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistMainText
               ),
             ),
             Text(
-              userDocument['out_actual_rec'].toString(),
+              formatIndianCurrency(userDocument['out_actual_rec'].toString()),
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                 color: TassistMainText
               ),

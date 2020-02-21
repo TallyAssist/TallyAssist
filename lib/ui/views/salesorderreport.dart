@@ -38,41 +38,41 @@ class SalesOrderReportScreen extends StatelessWidget {
             body: ListView(
               children: <Widget>[
                 SectionHeader('Sales Report'),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Expanded(
-                        child: Container(
-                          padding: spacer.x.xs,
-                          margin: spacer.all.xxs,
-                          color: TassistBgBlue,
-                          child: Row(
-                            children: <Widget>[
-                              Text('Product'),
-                              Icon(Icons.arrow_drop_down,
-                                  color: Colors.purple[800]),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: spacer.x.xs,
-                          margin: spacer.all.xxs,
-                          color: TassistBgBlue,
-                          child: Row(
-                            children: <Widget>[
-                              Text('Customer'),
-                              Icon(Icons.arrow_drop_down,
-                                  color: Colors.purple[800]),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // Container(
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: <Widget>[
+                //       Expanded(
+                //         child: Container(
+                //           padding: spacer.x.xs,
+                //           margin: spacer.all.xxs,
+                //           color: TassistBgBlue,
+                //           child: Row(
+                //             children: <Widget>[
+                //               Text('Product'),
+                //               Icon(Icons.arrow_drop_down,
+                //                   color: Colors.purple[800]),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //       Expanded(
+                //         child: Container(
+                //           padding: spacer.x.xs,
+                //           margin: spacer.all.xxs,
+                //           color: TassistBgBlue,
+                //           child: Row(
+                //             children: <Widget>[
+                //               Text('Customer'),
+                //               Icon(Icons.arrow_drop_down,
+                //                   color: Colors.purple[800]),
+                //             ],
+                //           ),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -80,15 +80,15 @@ class SalesOrderReportScreen extends StatelessWidget {
                       children: <Widget>[
                         ColoredIconNumberRow('total_sales', 'Amount Sold'),
                         // ColoredIconNumberRow('open_sales_orders', 'Open Orders'),
-                        ColoredIconNumberRow('amt_sales_return', 'Sales Return'),
+                        ColoredIconNumberRow('num_sales_vouchers', '# Vouchers'),
                       ],
                     ),
                     Column(
                       children: <Widget>[
                         // ColoredIconNumberRow('qty_sales_order', 'Ordered Qty'),
                         // ColoredIconNumberRow('qty_sales_due', 'Quantity Due'),
-                        ColoredIconNumberRow('open_sales_orders', 'Open Orders'),                
-                        ColoredIconNumberRow('sales_discount', 'Discount'),
+                        ColoredIconNumberRow('total_receipts', 'Total Receipts'),                
+                        ColoredIconNumberRow('num_receipts_vouchers', '# Vouchers'),
                       ],
                     )
                   ],

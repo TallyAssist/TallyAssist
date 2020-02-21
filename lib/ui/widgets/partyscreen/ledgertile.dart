@@ -7,10 +7,10 @@ import 'package:tassist/theme/colors.dart';
 // import 'package:tassist/ui/widgets/childdetailcard.dart';
 // import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:tassist/core/services/string_format.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
-// TODO
-var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
+
 
 
 class LedgerItemTile extends StatelessWidget {
@@ -52,10 +52,10 @@ _launchURL() async {
               ),
             ),
             SizedBox(width: 5,),
-            Text('Rs. ${ledgerItem.openingBalance}', style: TextStyle(color: TassistInfoGrey)),
+            Text(formatIndianCurrency(ledgerItem.openingBalance ?? ''), style: TextStyle(color: TassistInfoGrey)),
             SizedBox(width: 10,),
     
-               Text('Rs. ${ledgerItem.totalReceivables}',),
+               Text(formatIndianCurrency(ledgerItem.totalReceivables ?? ''),),
               IconButton(
                 onPressed: () {
                   _launchURL();

@@ -4,7 +4,7 @@ import 'package:tassist/core/models/ledger.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
-
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgercard.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
@@ -37,10 +37,10 @@ class LedgerItemTileNew  extends StatelessWidget {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Sales: Rs. ${ledgerItem.totalSales}', 
-     'Receipt: Rs. ${ledgerItem.totalReceipt}'),
+     'Sales: ${formatIndianCurrency(ledgerItem.totalSales)}', 
+     'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt)}'),
       title1: 'Receivables', 
-      info1: ledgerItem.totalReceivables, 
+      info1: formatIndianCurrency(ledgerItem.totalReceivables), 
       title2: 'Last Sale ', 
       info2: _formatDate(ledgerItem.lastSalesDate), 
       title3: 'Last Receipt', info3: _formatDate(ledgerItem.lastReceiptDate),
@@ -53,10 +53,10 @@ class LedgerItemTileNew  extends StatelessWidget {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Purchsase: Rs ${ledgerItem.totalPurchase}', 
-     'Payment: Rs. ${ledgerItem.totalPayment}'),
+     'Purchsase: ${formatIndianCurrency(ledgerItem.totalPurchase)}', 
+     'Payment: ${formatIndianCurrency(ledgerItem.totalPayment)}'),
         title1: 'Payables', 
-      info1: ledgerItem.totalPayables, 
+      info1: formatIndianCurrency(ledgerItem.totalPayables), 
       title2: 'Last Purchase ', 
       info2: _formatDate(ledgerItem.lastPurchaseDate), 
       title3: 'Last Payment', info3: _formatDate(ledgerItem.lastPaymentDate),
@@ -69,8 +69,8 @@ class LedgerItemTileNew  extends StatelessWidget {
     return DetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Closing: Rs ${ledgerItem.closingBalance}', 
-     'Opening: Rs. ${ledgerItem.openingBalance}');
+     'Closing: ${formatIndianCurrency(ledgerItem.closingBalance)}', 
+     'Opening: Rs. ${formatIndianCurrency(ledgerItem.openingBalance)}');
 
   }
   }
