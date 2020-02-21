@@ -43,49 +43,48 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
     }
 
     if (snapshot?.data != null) {
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            // Text(' '),
-            Text('Payables', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistPrimary
-              )),
-            Text('Receivables', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistPrimary
-              )),
-          ],
-        ),
-        // Column(
-        //   children: <Widget>[
-        //     Text('Target'),
-        //     Text(userDocument['out_target_pay'].toString()),
-        //     Text(userDocument['out_target_rec'].toString())
-        //   ],
-        // ),
-        Column(
-          children: <Widget>[
-            // Text('Actual'),
-            Text(
-              formatIndianCurrency(userDocument['out_actual_pay'].toString()),
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistMainText
-              ),
-            ),
-            Text(
-              formatIndianCurrency(userDocument['out_actual_rec'].toString()),
-              style: Theme.of(context).textTheme.bodyText1.copyWith(
-                color: TassistMainText
-              )),
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              // Text(' '),
+              Text('Payables',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: TassistPrimary)),
+              Text('Receivables',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: TassistPrimary)),
+            ],
+          ),
+          // Column(
+          //   children: <Widget>[
+          //     Text('Target'),
+          //     Text(userDocument['out_target_pay'].toString()),
+          //     Text(userDocument['out_target_rec'].toString())
+          //   ],
+          // ),
+          Column(
+            children: <Widget>[
+              // Text('Actual'),
               Text(
-                userDocument['out_actual_rec'].toString(),
+                formatIndianCurrency(userDocument['out_actual_pay'].toString()),
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
                     .copyWith(color: TassistMainText),
-              )
+              ),
+              Text(
+                formatIndianCurrency(userDocument['out_actual_rec'].toString()),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: TassistMainText),
+              ),
             ],
           ),
           // Column(

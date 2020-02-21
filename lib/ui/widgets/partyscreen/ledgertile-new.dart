@@ -70,7 +70,7 @@ class LedgerItemTileNew  extends StatelessWidget {
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
      'Closing: ${formatIndianCurrency(ledgerItem.closingBalance)}', 
-     'Opening: Rs. ${formatIndianCurrency(ledgerItem.openingBalance)}');
+     'Opening: ${formatIndianCurrency(ledgerItem.openingBalance)}');
 
   }
   }
