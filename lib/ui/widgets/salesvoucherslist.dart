@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/salesvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/salesvouchertile.dart';
 
 class SalesVoucherList extends StatefulWidget {
@@ -12,22 +13,22 @@ class SalesVoucherList extends StatefulWidget {
 class _SalesVoucherListState extends State<SalesVoucherList> {
   TextEditingController editingController = TextEditingController();
 
-  List<SalesVoucher> salesVoucherData;
-  List<SalesVoucher> salesVoucherDataforDisplay = List<SalesVoucher>();
+  Iterable<Voucher> salesVoucherData;
+  List<Voucher> salesVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    salesVoucherData = Provider.of<List<SalesVoucher>>(context, listen: false);
+    salesVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Sales');
     salesVoucherDataforDisplay.addAll(salesVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<SalesVoucher> dummySearchList = List<SalesVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(salesVoucherData);
     if (query.isNotEmpty) {
-      List<SalesVoucher> dummyListData = List<SalesVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -48,8 +49,9 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
 
   @override
   Widget build(BuildContext context) {
-    // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
-
+  // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
+  String voucherIdView;
+  String partyGuid;
     return Container(
         height: MediaQuery.of(context).size.height,
         child: Column(children: <Widget>[
@@ -86,19 +88,33 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
                   ),
                 ),
               ),
-            ),
-          ),
-          Expanded(
-            child: ListView.builder(
-              scrollDirection: Axis.vertical,
-              shrinkWrap: false,
-              itemCount: salesVoucherDataforDisplay?.length ?? 0,
-              itemBuilder: (context, index) {
-                return SalesVoucherTile(
-                    salesVoucher: salesVoucherDataforDisplay[index]);
-              },
-            ),
-          )
-        ]));
+            Expanded(child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: false,
+        itemCount: salesVoucherDataforDisplay?.length ?? 0,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = salesVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = salesVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                      
+            child: SalesVoucherTile(salesVoucher: salesVoucherDataforDisplay[index])
+           );
+        },
+      ),
+      
+    )
+          ]
+      )
+    );
   }
 }

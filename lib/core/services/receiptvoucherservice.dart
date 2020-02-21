@@ -15,10 +15,10 @@ class ReceiptVoucherService {
         .where('primary_voucher_type_name', isEqualTo: 'Receipt')
         .orderBy('amount', descending: true)
         .snapshots()
-        .map(_purchasevouchersfromSnapshots);
+        .map(_receiptvouchersfromSnapshots);
   }
 
-  List<ReceiptVoucher> _purchasevouchersfromSnapshots(QuerySnapshot snapshot) {
+  List<ReceiptVoucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return ReceiptVoucher(
         date: doc.data['date'] ?? '',

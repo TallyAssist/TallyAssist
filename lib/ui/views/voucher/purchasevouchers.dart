@@ -1,9 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/purchasevoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/views/voucherview.dart';
+import 'package:intl/intl.dart';
 
+var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
 
 
 class PurchaseVoucherScreen extends StatelessWidget {
@@ -33,22 +46,22 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
   TextEditingController editingController = TextEditingController();
 
-  List<PurchaseVoucher> purchaseVoucherData;
-  List<PurchaseVoucher> purchaseVoucherDataforDisplay= List<PurchaseVoucher>();
+  Iterable<Voucher> purchaseVoucherData;
+  List<Voucher> purchaseVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context, listen: false);
+    purchaseVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Purchase');
     purchaseVoucherDataforDisplay.addAll(purchaseVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<PurchaseVoucher> dummySearchList = List<PurchaseVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(purchaseVoucherData);
     if (query.isNotEmpty) {
-      List<PurchaseVoucher> dummyListData = List<PurchaseVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -71,8 +84,10 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
   @override
   Widget build(BuildContext context) {
-    // final purchaseVoucherData = Provider.of<List<PurchaseVoucher>>(context);
 
+     String voucherIdView;
+  String partyGuid;
+    
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
         child: Column(
@@ -117,7 +132,23 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
                 shrinkWrap: true,
                 itemCount: purchaseVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return PurchaseVoucherTile(purchaseVoucher: purchaseVoucherDataforDisplay[index]);
+                  return GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = purchaseVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = purchaseVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                  
+                  
+                  child: PurchaseVoucherTile(purchaseVoucher: purchaseVoucherDataforDisplay[index])
+                  );
                 },
               ),
             ),
@@ -130,7 +161,7 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
 
 class PurchaseVoucherTile extends StatelessWidget {
 
-  final PurchaseVoucher purchaseVoucher;
+  final Voucher purchaseVoucher;
 
   PurchaseVoucherTile({this.purchaseVoucher});
 
@@ -141,7 +172,7 @@ class PurchaseVoucherTile extends StatelessWidget {
     '# ${purchaseVoucher.masterid}',
      purchaseVoucher.iscancelled, 
      'Rs ${purchaseVoucher.amount}', 
-     '${purchaseVoucher.date}');
+     _formatDate(purchaseVoucher.date));
   }
 }
 

@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/receiptvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/views/voucherview.dart';
+import 'package:intl/intl.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
 
 
 
@@ -33,22 +47,22 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
 
   TextEditingController editingController = TextEditingController();
 
-  List<ReceiptVoucher> receiptVoucherData;
-  List<ReceiptVoucher> receiptVoucherDataforDisplay= List<ReceiptVoucher>();
+  Iterable<Voucher> receiptVoucherData;
+  List<Voucher> receiptVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context, listen: false);
+    receiptVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Receipt');
     receiptVoucherDataforDisplay.addAll(receiptVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<ReceiptVoucher> dummySearchList = List<ReceiptVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(receiptVoucherData);
     if (query.isNotEmpty) {
-      List<ReceiptVoucher> dummyListData = List<ReceiptVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -76,6 +90,8 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
   @override
   Widget build(BuildContext context) {
     // final receiptVoucherData = Provider.of<List<ReceiptVoucher>>(context);
+    String voucherIdView;
+    String partyGuid;
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -121,7 +137,22 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
                 shrinkWrap: true,
                 itemCount: receiptVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return ReceiptVoucherTile(receiptVoucher: receiptVoucherDataforDisplay[index]);
+                  return  GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = receiptVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = receiptVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                  
+                  child: ReceiptVoucherTile(receiptVoucher: receiptVoucherDataforDisplay[index])
+                  );
                 },
               ),
             ),
@@ -134,7 +165,7 @@ class _ReceiptVoucherListState extends State<ReceiptVoucherList> {
 
 class ReceiptVoucherTile extends StatelessWidget {
 
-  final ReceiptVoucher receiptVoucher;
+  final Voucher receiptVoucher;
 
   ReceiptVoucherTile({this.receiptVoucher});
 
@@ -145,7 +176,7 @@ class ReceiptVoucherTile extends StatelessWidget {
     '# ${receiptVoucher.masterid}',
      receiptVoucher.iscancelled, 
      'Rs ${receiptVoucher.amount}', 
-     receiptVoucher.date);
+     _formatDate(receiptVoucher.date));
   }
 }
 

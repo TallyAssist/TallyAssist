@@ -186,6 +186,11 @@ else {
                   Text(info4),
                 ],
               ),
+            ),
+            FlatButton(onPressed: () => Navigator.of(context).pushReplacementNamed('/ledgerview'), 
+            child: Text('View more details', 
+            style: Theme.of(context).textTheme.bodyText1
+            )
             )
           ],
         ),

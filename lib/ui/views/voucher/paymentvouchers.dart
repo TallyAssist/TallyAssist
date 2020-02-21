@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/paymentvoucher.dart';
+import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
+import 'package:tassist/ui/views/voucherview.dart';
+import 'package:intl/intl.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
 
 
 
@@ -34,22 +48,22 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
   
   TextEditingController editingController = TextEditingController();
 
-  List<PaymentVoucher> paymentVoucherData;
-  List<PaymentVoucher> paymentVoucherDataforDisplay= List<PaymentVoucher>();
+  Iterable<Voucher> paymentVoucherData;
+  List<Voucher> paymentVoucherDataforDisplay= List<Voucher>();
 
   @override
   void initState() {
-    paymentVoucherData = Provider.of<List<PaymentVoucher>>(context, listen: false);
+    paymentVoucherData = Provider.of<List<Voucher>>(context, listen: false);
     paymentVoucherDataforDisplay.addAll(paymentVoucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<PaymentVoucher> dummySearchList = List<PaymentVoucher>();
+    List<Voucher> dummySearchList = List<Voucher>();
     dummySearchList.addAll(paymentVoucherData);
     if (query.isNotEmpty) {
-      List<PaymentVoucher> dummyListData = List<PaymentVoucher>();
+      List<Voucher> dummyListData = List<Voucher>();
       dummySearchList.forEach((item) {
         if (item.partyname.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -73,6 +87,8 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
   @override
   Widget build(BuildContext context) {
     // final paymentVoucherData = Provider.of<List<PaymentVoucher>>(context);
+  String voucherIdView;
+  String partyGuid;
 
     return Container(
         height: MediaQuery.of(context).size.height / 1.1,
@@ -119,7 +135,22 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
                 shrinkWrap: true,
                 itemCount: paymentVoucherDataforDisplay?.length ?? 0,
                 itemBuilder: (context, index) {
-                  return PaymentVoucherTile(paymentVoucher: paymentVoucherDataforDisplay[index]);
+                  return GestureDetector(
+                     
+                      onDoubleTap: () => {
+                       
+                         voucherIdView = paymentVoucherDataforDisplay[index]?.masterid,
+                         partyGuid = paymentVoucherDataforDisplay[index]?.partyGuid,
+                        
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
+                        )
+                        )
+
+                      },
+                  
+                 child: PaymentVoucherTile(paymentVoucher: paymentVoucherDataforDisplay[index])
+                  );
                 },
               ),
             ),
@@ -132,7 +163,7 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
 
 class PaymentVoucherTile extends StatelessWidget {
 
-  final PaymentVoucher paymentVoucher;
+  final Voucher paymentVoucher;
 
   PaymentVoucherTile({this.paymentVoucher});
 
@@ -143,7 +174,7 @@ class PaymentVoucherTile extends StatelessWidget {
     '# ${paymentVoucher.masterid}',
      paymentVoucher.iscancelled, 
      'Rs ${paymentVoucher.amount}', 
-     paymentVoucher.date);
+     _formatDate(paymentVoucher.date));
   }
 }
 

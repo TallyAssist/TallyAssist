@@ -4,6 +4,7 @@ import 'package:tassist/core/models/payables.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/accountspayables/apitemlist.dart';
+import 'package:tassist/ui/views/ledgerview.dart';
 
 
 class APLedgerItemList extends StatefulWidget {
@@ -52,6 +53,9 @@ TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+  String ledgerGuid;
+  String partyname;
+
   
               return  Container(
             height: MediaQuery.of(context).size.height / 1.1,
@@ -109,7 +113,18 @@ TextEditingController editingController = TextEditingController();
                     shrinkWrap: true,
                     itemCount: ledgerItemDataforDisplay?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return APSingleItem(ledgerItem: ledgerItemDataforDisplay[index]);
+                      return GestureDetector(
+                      onDoubleTap: () => {
+            
+                        partyname = ledgerItemDataforDisplay[index].name,
+                        ledgerGuid = ledgerItemDataforDisplay[index].guid,
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => LedgerView(ledgerGuid: ledgerGuid, partyname: partyname,))
+                        )
+                      },
+                      
+                     child: APSingleItem(ledgerItem: ledgerItemDataforDisplay[index])
+                      );
                     },
                   ),
                 ),

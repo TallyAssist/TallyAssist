@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class SalesDashboardWidget extends StatefulWidget {
@@ -67,7 +68,7 @@ class _SalesDashboardWidgetContentRowState
                     //   color: TassistInfoGrey,
                     // ),
                     Text(
-                      userDocument['total_sales'].toString() ?? '',
+                      formatIndianCurrency(userDocument['total_sales'].toString()) ?? '',
                       style: Theme.of(context).textTheme.bodyText2.copyWith(
                           color: TassistMainText,
                           fontSize: 24,

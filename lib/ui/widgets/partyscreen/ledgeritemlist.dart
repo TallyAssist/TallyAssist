@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/ui/views/ledgerview.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgertile-new.dart';
 
 
@@ -20,7 +21,7 @@ TextEditingController editingController = TextEditingController();
 
   @override
   void initState() {
-    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false) ?? [];
+    ledgerItemData = Provider.of<List<LedgerItem>>(context, listen: false);
     ledgerItemDataforDisplay.addAll(ledgerItemData);
 
     super.initState();
@@ -51,6 +52,11 @@ TextEditingController editingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+
+
+
+String partyname;
+String ledgerGuid;
 
   
     return 
@@ -97,7 +103,17 @@ TextEditingController editingController = TextEditingController();
                   shrinkWrap: true,
                   itemCount: ledgerItemDataforDisplay?.length ?? 0,
                   itemBuilder: (context, index) {
-                    return LedgerItemTileNew(ledgerItem: ledgerItemDataforDisplay[index]);
+                    return GestureDetector(
+                      onDoubleTap: () => {
+            
+                        partyname = ledgerItemDataforDisplay[index].name,
+                        ledgerGuid = ledgerItemDataforDisplay[index].guid,
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(builder: (context) => LedgerView(ledgerGuid: ledgerGuid, partyname: partyname,))
+                        )
+
+                      },
+                      child: LedgerItemTileNew(ledgerItem: ledgerItemDataforDisplay[index]));
                   },
                 ),
               ),
@@ -105,3 +121,4 @@ TextEditingController editingController = TextEditingController();
           ));
   }
 }
+

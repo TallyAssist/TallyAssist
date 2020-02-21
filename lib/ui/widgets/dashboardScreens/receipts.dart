@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class ReceiptsDashboardWidget extends StatefulWidget {
@@ -46,12 +47,13 @@ class _ReceiptsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument;
-    if (widget.timePeriod == 'Everything') {
-      userDocument = snapshot?.data;
-    } else {
-      userDocument = snapshot?.data[widget.timePeriod];
-    }
+//     var userDocument;
+//     if (widget.timePeriod == 'Everything') {
+//       userDocument = snapshot?.data;
+//     } else {
+//       userDocument = snapshot?.data[widget.timePeriod];
+//     }
+    var userDocument = snapshot?.data;
 
     if (snapshot?.data != null) {
       return FittedBox(
@@ -68,7 +70,9 @@ class _ReceiptsDashboardWidgetContentRowState
                     //   color: TassistInfoGrey,
                     // ),
                     Text(
-                      userDocument['total_receipts'].toString() ?? '',
+                      formatIndianCurrency(
+                              userDocument['total_receipts'].toString()) ??
+                          '',
                       style: Theme.of(context).textTheme.bodyText2.copyWith(
                           color: TassistMainText,
                           fontSize: 24,

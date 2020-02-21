@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class PaymentsDashboardWidget extends StatefulWidget {
-  final String timePeriod;
-  PaymentsDashboardWidget({this.timePeriod});
-
   @override
   _PaymentsDashboardWidgetState createState() =>
       _PaymentsDashboardWidgetState();
@@ -25,7 +23,7 @@ class _PaymentsDashboardWidgetState extends State<PaymentsDashboardWidget> {
           const SizedBox(
             height: 20,
           ),
-          PaymentsDashboardWidgetContentRow(timePeriod: widget.timePeriod),
+          PaymentsDashboardWidgetContentRow(),
         ],
       ),
     );
@@ -33,9 +31,6 @@ class _PaymentsDashboardWidgetState extends State<PaymentsDashboardWidget> {
 }
 
 class PaymentsDashboardWidgetContentRow extends StatefulWidget {
-  final String timePeriod;
-  PaymentsDashboardWidgetContentRow({this.timePeriod});
-
   @override
   _PaymentsDashboardWidgetContentRowState createState() =>
       _PaymentsDashboardWidgetContentRowState();
@@ -46,12 +41,13 @@ class _PaymentsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-    var userDocument;
-    if (widget.timePeriod == 'Everything') {
-      userDocument = snapshot?.data;
-    } else {
-      userDocument = snapshot?.data[widget.timePeriod];
-    }
+//     var userDocument;
+//     if (widget.timePeriod == 'Everything') {
+//       userDocument = snapshot?.data;
+//     } else {
+//       userDocument = snapshot?.data[widget.timePeriod];
+//     }
+    var userDocument = snapshot?.data;
 
     if (snapshot?.data != null) {
       return FittedBox(
@@ -68,7 +64,9 @@ class _PaymentsDashboardWidgetContentRowState
                     //   color: TassistInfoGrey,
                     // ),
                     Text(
-                      userDocument['total_payments'].toString() ?? '',
+                      formatIndianCurrency(
+                              userDocument['total_payments'].toString()) ??
+                          '',
                       style: Theme.of(context).textTheme.bodyText2.copyWith(
                           color: TassistMainText,
                           fontSize: 24,
