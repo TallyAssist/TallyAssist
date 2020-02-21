@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class SalesDashboardWidget extends StatefulWidget {
@@ -12,7 +13,6 @@ class SalesDashboardWidget extends StatefulWidget {
 class _SalesDashboardWidgetState extends State<SalesDashboardWidget> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
       child: Column(
         children: <Widget>[
@@ -39,75 +39,71 @@ class _SalesDashboardWidgetContentRowState
     extends State<SalesDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
-
     final snapshot = Provider.of<DocumentSnapshot>(context);
     var userDocument = snapshot?.data;
 
     if (snapshot?.data != null) {
-     
-    return FittedBox(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  // Icon(
-                  //   Icons.arrow_drop_up,
-                  //   color: TassistInfoGrey,
-                  // ),
-                  Text(
-                    userDocument['total_sales'].toString() ??
-                        '',
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+      return FittedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Icon(
+                    //   Icons.arrow_drop_up,
+                    //   color: TassistInfoGrey,
+                    // ),
+                    Text(
+                      formatIndianCurrency(userDocument['total_sales'].toString()) ?? '',
+                      style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          color: TassistMainText,
+                          fontSize: 24,
+                          fontWeight: FontWeight.normal),
+                    )
+                  ],
+                ),
+                Text('Total Sales'),
+              ],
+            ),
+            SizedBox(
+              width: 100.0,
+            ),
+            Column(
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    // Icon(
+                    //   Icons.arrow_drop_down,
+                    //   color: TassistMainText,
+                    // ),
+                    Text(
+                      userDocument['num_sales_vouchers'].toString() ?? '',
+                      style: TextStyle(
                         color: TassistMainText,
                         fontSize: 24,
-                        fontWeight: FontWeight.normal),
-                  )
-                ],
-              ),
-              Text('Total Sales'),
-            ],
-          ),
-          SizedBox(
-            width: 100.0,
-          ),
-          Column(
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  // Icon(
-                  //   Icons.arrow_drop_down,
-                  //   color: TassistMainText,
-                  // ),
-                  Text(
-                    userDocument['num_sales_vouchers'].toString() ?? '',
-                    style: TextStyle(
-                      color: TassistMainText,
-                      fontSize: 24,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Text('Vouchers'),
-            ],
-          ),
-          // SimpleTimeSeriesChart.withSampleData(),
-        ],
-      ),
-    );
+                  ],
+                ),
+                Text('Vouchers'),
+              ],
+            ),
+            // SimpleTimeSeriesChart.withSampleData(),
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
+        ),
+      );
+    }
   }
-  
-else {
-  return Container(
-    child: Center(child: Text('Loading...'),),
-  );
 }
-}
-}
-
 
 class SalesDashboardWidgetTitleRow extends StatelessWidget {
   const SalesDashboardWidgetTitleRow({
@@ -118,7 +114,6 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
     var userDocument = snapshot?.data;
-  
 
     void shareSales(BuildContext context, double sales) {
       final String text =
@@ -128,75 +123,74 @@ class SalesDashboardWidgetTitleRow extends StatelessWidget {
           subject: "Total Sales ${userDocument['total_sales'].toString()}");
     }
 
-  if (snapshot?.data != null) {
-
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Container(
-          child: Row(
-            children: <Widget>[
-              Text(
-                'Sales',
-                style: TextStyle(
-                    color: TassistPrimary,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20),
-              ),
-              SizedBox(width: 5.0),
-              IconButton(
-                icon: Icon(Icons.info_outline),
-                color: Colors.grey[400],
-                onPressed: () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text('Total Sales'),
-                      content: Text(
-                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.', style: Theme.of(context).textTheme.bodyText2,),
-                      elevation: 24.0,
-                      actions: <Widget>[
-                        FlatButton(
-                            child: Text('Ok'),
-                            onPressed: () => Navigator.of(context).pop())
-                      ],
-                    );
-                  },
+    if (snapshot?.data != null) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            child: Row(
+              children: <Widget>[
+                Text(
+                  'Sales',
+                  style: TextStyle(
+                      color: TassistPrimary,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20),
                 ),
-              ),
-            ],
+                SizedBox(width: 5.0),
+                IconButton(
+                  icon: Icon(Icons.info_outline),
+                  color: Colors.grey[400],
+                  onPressed: () => showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Total Sales'),
+                        content: Text(
+                          'Total Sales is calculated using sum of Sales Vouchers. This represents Gross Sales.',
+                          style: Theme.of(context).textTheme.bodyText2,
+                        ),
+                        elevation: 24.0,
+                        actions: <Widget>[
+                          FlatButton(
+                              child: Text('Ok'),
+                              onPressed: () => Navigator.of(context).pop())
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
           ),
-        ),
-        Container(
-          child: Row(
-            children: <Widget>[
-              // Icon(
-              //   Icons.favorite,
-              //   color: TassistPrimaryBackground,
-              // ),
-              // Icon(
-              //   Icons.bookmark,
-              //   color: TassistPrimaryBackground,
-              // ),
-              IconButton(
-                icon: Icon(Icons.share),
-                color: TassistPrimaryBackground,
-                onPressed: () =>
-                    shareSales(context, userDocument['total_sales']),
-              ),
-            ],
+          Container(
+            child: Row(
+              children: <Widget>[
+                // Icon(
+                //   Icons.favorite,
+                //   color: TassistPrimaryBackground,
+                // ),
+                // Icon(
+                //   Icons.bookmark,
+                //   color: TassistPrimaryBackground,
+                // ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  color: TassistPrimaryBackground,
+                  onPressed: () =>
+                      shareSales(context, userDocument['total_sales']),
+                ),
+              ],
+            ),
           ),
+        ],
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
         ),
-      ],
-    );
+      );
+    }
   }
-
-else {
-  return Container(
-    child: Center(child: Text('Loading...'),),
-  );
-}
-
-  }
-
 }
