@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/ledgerstock.dart';
+import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
+import 'package:tassist/ui/widgets/myboxdecoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/models/ledgerstock.dart';
 import 'package:tassist/ui/views/ledgersummary.dart';
@@ -28,6 +30,8 @@ class _LedgerViewState extends State<LedgerView>
 
   final String partyname;
   final String ledgerGuid;
+
+  String timePeriod = 'Everything';
 
   _LedgerViewState(this.partyname, this.ledgerGuid);
 
@@ -61,21 +65,72 @@ class _LedgerViewState extends State<LedgerView>
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
-          key: _drawerKey,
-          appBar: headerNavOther(_drawerKey, _tabController, context),
-          drawer: tassistDrawer(context),
-          body: TabBarView(
-            controller: _tabController,
-            children: <Widget>[
-              LedgerSummary(ledgerGuid: ledgerGuid),
-              LedgerVoucher(
-                ledgerGuid: ledgerGuid,
-                partyname: partyname,
+            key: _drawerKey,
+            appBar: headerNavOther(_drawerKey, _tabController, context),
+            drawer: tassistDrawer(context),
+            body: SizedBox(
+              height: MediaQuery.of(context).size.height / 1.1,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: myBoxDecorationBottomBorder(),
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Select timeperiod",
+                            style: secondaryListTitle2,
+                          ),
+                          PopupMenuButton<String>(
+                            icon: Icon(Icons.av_timer),
+                            onSelected: (value) {
+                              setState(() {
+                                timePeriod = value;
+                              });
+                            },
+                            itemBuilder: (BuildContext context) {
+                              return timePeriodList.map(
+                                (String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    child: Text(
+                                      choice,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14.0),
+                                    ),
+                                  );
+                                },
+                              ).toList();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    // color: Colors.blueGrey[100],
+                    width: MediaQuery.of(context).size.width,
+                    height: 35,
+                  ),
+                  Expanded(
+                    child: TabBarView(
+                      controller: _tabController,
+                      children: <Widget>[
+                        LedgerSummary(ledgerGuid: ledgerGuid),
+                        LedgerVoucher(
+                          ledgerGuid: ledgerGuid,
+                          partyname: partyname,
+                          timePeriod: timePeriod,
+                        ),
+                        LedgerStockView(ledgerGuid: ledgerGuid)
+                      ],
+                    ),
+                  )
+                ],
               ),
-              LedgerStockView(ledgerGuid: ledgerGuid)
-            ],
-          ),
-        ),
+            )),
       ),
     );
   }
