@@ -5,10 +5,12 @@ List<String> timePeriodList = [
   'Today',
   'This month',
   'Current FY',
+  'FY 2018-19',
   'FY 2017-18'
 ];
 
-Iterable<Voucher> filterVouchersByTimePeriod(Iterable<Voucher> voucherList, String period) {
+Iterable<Voucher> filterVouchersByTimePeriod(
+    Iterable<Voucher> voucherList, String period) {
   // TODO: Handle timezone differences
 
   var now = new DateTime.now();
@@ -42,8 +44,16 @@ Iterable<Voucher> filterVouchersByTimePeriod(Iterable<Voucher> voucherList, Stri
         (voucher) => voucher.date.isAfter(DateTime(now.year, 3, 31)),
       );
     }
-
-    // print(voucherList);
+  } else if (period == "FY 2018-19") {
+    voucherList = voucherList.where(
+      (voucher) => (voucher.date.isAfter(DateTime(2018, 3, 31)) &&
+          voucher.date.isBefore(DateTime(2019, 4, 1))),
+    );
+  } else if (period == "FY 2017-18") {
+    voucherList = voucherList.where(
+      (voucher) => (voucher.date.isAfter(DateTime(2017, 3, 31)) &&
+          voucher.date.isBefore(DateTime(2018, 4, 1))),
+    );
   }
   // else if (period == "Last FY") {
   // }
