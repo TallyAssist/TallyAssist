@@ -6,6 +6,7 @@ import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgercard.dart';
+import 'package:tassist/ui/shared/debitcredit.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -69,8 +70,8 @@ class LedgerItemTileNew  extends StatelessWidget {
     return DetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Closing: ${formatIndianCurrency(ledgerItem.closingBalance)}', 
-     'Opening: ${formatIndianCurrency(ledgerItem.openingBalance)}');
+     'Closing: ${debitCredit(ledgerItem.closingBalance)}', 
+    'Opening: ${debitCredit(ledgerItem.openingBalance)}');
 
   }
   }

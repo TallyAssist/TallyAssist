@@ -6,6 +6,7 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/ui/views/voucherview.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/string_format.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 

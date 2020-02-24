@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/models/ledgerstock.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/string_format.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
@@ -46,8 +47,8 @@ class LedgerStockTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DetailCard('${ledgerStock.itemName}    (${ledgerStock.numVouchers} vouchers)', 'Last Date: ${formatter.format(ledgerStock.lastDate)}',
-     'Last: ${ledgerStock.lastAmount} @ ${ledgerStock.lastRate}',
-      'T Amt: ${ledgerStock.totalAmount}', 'T Qty: ${ledgerStock.totalBilledQty}'
+     'Last: ${formatIndianCurrency(ledgerStock.lastAmount.toString())} @ ${formatIndianCurrency(ledgerStock.lastRate.toString())}',
+      'T Amt: ${formatIndianCurrency(ledgerStock.totalAmount.toString())}', 'T Qty: ${ledgerStock.totalBilledQty}'
      
     );
   }

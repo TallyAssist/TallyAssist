@@ -2,8 +2,8 @@ class LedgerItem {
   final String name;
   final String masterId;
   final String currencyName;
-  final String openingBalance;
-  final String closingBalance;
+  final int openingBalance;
+  final int closingBalance;
   final String parentid;
   final String contact;
   final String state;

@@ -13,6 +13,11 @@ import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/services/voucher-item-service.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/ledgerparty.dart';
+import 'package:tassist/core/models/ledgerparty.dart';
+import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
+import 'package:tassist/ui/shared/debitcredit.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
@@ -34,20 +39,22 @@ class VoucherView extends StatelessWidget {
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return MultiProvider(
-      providers: [
-        StreamProvider<List<VoucherItem>>.value(
-          value: VoucherItemService(uid: user?.uid, voucherId: voucherId)
-              .voucherItemData,
-        )
-      ],
-      child: WillPopScope(
-          onWillPop: () async => false,
-          child: Scaffold(
-              key: _drawerKey,
-              drawer: tassistDrawer(context),
-              appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
-              body: Column(
-                children: <Widget>[
+          providers: [
+            StreamProvider<List<VoucherItem>>.value(
+              value: VoucherItemService(uid: user?.uid, voucherId: voucherId).voucherItemData,
+            ),
+             StreamProvider<List<LedgerParty>>.value(
+              value: LedgerPartyService(uid: user?.uid, voucherId: voucherId).voucherLedgerData,
+            ),
+          ],
+          child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+            key: _drawerKey,
+            drawer: tassistDrawer(context),
+            appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
+            body: Column(
+              children: <Widget>[
                   Padding(
                     padding: spacer.all.xxs,
                     child: Text(
@@ -82,14 +89,11 @@ class VoucherView extends StatelessWidget {
                       children: <Widget>[
                         Column(
                           children: <Widget>[
-                            Text(voucher.amount.toString() ?? '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.bold)),
-                            Text('Amount')
+                              Text(formatIndianCurrency(positiveAmount(voucher.amount).toString()) ?? '', style: Theme.of(context).textTheme.bodyText1.copyWith(
+                                fontSize: 24.0,
+                                fontWeight: FontWeight.bold
+                              )) ,
+                              Text('Amount')
                           ],
                         ),
                         Column(
@@ -115,22 +119,104 @@ class VoucherView extends StatelessWidget {
                           Text('Reference: ${voucher.reference}' ?? '')
                         ]),
                   ),
-                  Container(height: 3.0, color: TassistGray),
-                  VoucherItemView(),
-                  Text('Tax Summary'),
                   Container(
-                    height: 20,
+                    height: 3.0,
+                    color: TassistGray
                   ),
-                  Container(height: 3.0, color: TassistGray),
-                  Text(
-                    'Total Invoice: ${voucher.amount}',
-                    style: Theme.of(context).textTheme.bodyText2,
-                  )
-                ],
-              ))),
+                   Container(
+                     height: MediaQuery.of(context).size.height / 4.5,
+                     child: SingleChildScrollView (child: VoucherItemView())),
+                  
+                  SingleChildScrollView(
+                  child: LedgerPartyView()),
+                  //  Container(
+                  //   height: 3.0,
+                  //   color: TassistGray
+                  // ),
+                  // Text('Total Invoice: ${voucher.amount}', style: Theme.of(context).textTheme.bodyText2,)
+
+              ],
+            )
+         
+
+            )
+        
+      ),
     );
   }
 }
+
+// _itemHeight(height, context, voucherItemList) {
+// if (voucherItemList != []) 
+// { return height = (MediaQuery.of(context).size.height / 4.5);
+// } 
+// else {
+//  return height = 0;}
+// }
+
+// Tax summary
+class LedgerPartyView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+
+    List<LedgerParty> ledgerPartyList = Provider.of<List<LedgerParty>>(context) ?? [];
+    print(ledgerPartyList);
+    
+
+    if (ledgerPartyList.length > 0) {
+    return Column(
+      children: <Widget>[
+        Text('Ledger Summary'),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: ledgerPartyList?.length,
+          itemBuilder: (context, index){
+            return LedgerPartyTile(ledgerParty: ledgerPartyList[index]);
+          }
+          ),
+           Container(
+                    height: 3.0,
+                    color: TassistGray
+                  ),
+      ],
+
+      
+    );
+    }
+    else {
+      return Container();
+    }
+  }
+}
+
+class LedgerPartyTile extends StatelessWidget {
+
+   final LedgerParty ledgerParty;
+
+    LedgerPartyTile({this.ledgerParty});
+  @override
+  Widget build(BuildContext context) {
+
+    return Card(child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          width: MediaQuery.of(context).size.width / 1.5,
+          child: Text(ledgerParty.ledgerName,
+          overflow: TextOverflow.ellipsis,
+          )),
+        Text(debitCredit(ledgerParty.amount)),
+
+      ],
+    )
+  ,);
+  }
+}
+
+
+
+
+// Item Summary
 
 class VoucherItemView extends StatelessWidget {
   @override
@@ -166,12 +252,8 @@ class VoucherItemTile extends StatelessWidget {
   VoucherItemTile({this.voucherItem});
   @override
   Widget build(BuildContext context) {
-    return DetailCard(
-        voucherItem.stockItemName,
-        '${voucherItem.billedQty} Qty @ ${voucherItem.rate}/item',
-        'GST @ ${voucherItem.gstPercent}%: ${voucherItem.taxAmount}',
-        'Amount: ${voucherItem.amount}',
-        'Discount: ${voucherItem.discount}');
+
+    return DetailCard(voucherItem.stockItemName, '${positiveAmount(voucherItem.billedQty)} Qty @ ${voucherItem.rate}/item', 'GST @ ${voucherItem.gstPercent}%: ${formatIndianCurrency(voucherItem.taxAmount.toString())}',  'Amount: ${formatIndianCurrency(positiveAmount(voucherItem.amount).toString())}', 'Discount: ${voucherItem.discount}');
   }
 }
 

@@ -7,6 +7,7 @@ import 'package:tassist/theme/colors.dart';
 
 class SalesDashboardWidget extends StatefulWidget {
   final String timePeriod;
+  
   SalesDashboardWidget({this.timePeriod});
 
   @override

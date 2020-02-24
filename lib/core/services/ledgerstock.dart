@@ -34,7 +34,7 @@ class LedgerStockService {
           itemName: doc.data['restat_stock_item_name'].toString() ?? '',
           totalAmount: doc.data['total_amount'].toString() ?? '',
           totalActualQty: doc.data['total_actualqty'].toString() ?? '',
-          totalBilledQty: doc.data['total_billedqty'].toString() ?? '',
+          totalBilledQty: doc.data['total_billedqty'].toInt() ?? 0,
           numVouchers: doc.data['num_vouchers'].toString() ?? '',
       );
     }).toList();

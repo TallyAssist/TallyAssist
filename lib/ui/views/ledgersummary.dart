@@ -6,6 +6,9 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/debitcredit.dart';
+
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -78,7 +81,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Receivables'),
-                          Text(ledger.totalReceivables)
+                          Text(formatIndianCurrency(ledger.totalReceivables))
                         ],
                       ),
                     ),
@@ -88,7 +91,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Payables'),
-                          Text(ledger.totalPayables)
+                          Text(formatIndianCurrency(ledger.totalPayables))
                         ],
                       ),
                     ),
@@ -98,7 +101,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Closing Balance'),
-                          Text(ledger.closingBalance)
+                          Text('${debitCredit(ledger.closingBalance)}')
                         ],
                       ),
                     ),
@@ -108,7 +111,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Opening Balance'),
-                          Text(ledger.openingBalance)
+                          Text('${debitCredit(ledger.openingBalance)}')
                         ],
                       ),
                     ),
@@ -120,26 +123,26 @@ class LedgerSummary extends StatelessWidget {
                 title: 'Sales',
                 number: 'Bills: ${ledger.numSalesVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastSalesDate)}',
-                metric: 'Total: ${ledger.totalSales}',
-                average: 'Average: ${ledger.meanSales}'),
+                metric: 'Total: ${formatIndianCurrency(ledger.totalSales)}',
+                average: 'Average: ${formatIndianCurrency(ledger.meanSales)}'),
             LedgerMetric(
                 title: 'Receipts',
                 number: 'Bills: ${ledger.numReceiptVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastReceiptDate)}',
-                metric: 'Total: ${ledger.totalReceipt}',
-                average: 'Average: ${ledger.meanReceipt}'),
+                metric: 'Total: ${formatIndianCurrency(ledger.totalReceipt)}',
+                average: 'Average: ${formatIndianCurrency(ledger.meanReceipt)}'),
             LedgerMetric(
                 title: 'Purchases',
                 number: 'Bills: ${ledger.numPurchaseVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastPurchaseDate)}',
-                metric: 'Total: ${ledger.totalPurchase}',
-                average: 'Average: ${ledger.meanPurchase}'),
+                metric: 'Total: ${formatIndianCurrency(ledger.totalPurchase)}',
+                average: 'Average: ${formatIndianCurrency(ledger.meanPurchase)}'),
             LedgerMetric(
                 title: 'Payment',
                 number: 'Bills: ${ledger.numPaymentVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastPaymentDate)}',
-                metric: 'Total: ${ledger.totalPayment}',
-                average: 'Average: ${ledger.meanPayment}'),
+                metric: 'Total: ${formatIndianCurrency(ledger.totalPayment)}',
+                average: 'Average: ${formatIndianCurrency(ledger.meanPayment)}'),
           ]),
         ));
   }
