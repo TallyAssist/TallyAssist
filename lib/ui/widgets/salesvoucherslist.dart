@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/salesvouchertile.dart';
 
+
 class SalesVoucherList extends StatefulWidget {
+  final String timePeriod;
+  SalesVoucherList({this.timePeriod});
+
   @override
   _SalesVoucherListState createState() => _SalesVoucherListState();
 }
@@ -14,11 +19,15 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
   TextEditingController editingController = TextEditingController();
 
   Iterable<Voucher> salesVoucherData;
-  List<Voucher> salesVoucherDataforDisplay= List<Voucher>();
+  List<Voucher> salesVoucherDataforDisplay = List<Voucher>();
 
   @override
   void initState() {
-    salesVoucherData = Provider.of<List<Voucher>>(context, listen: false).where((voucher) => voucher.primaryVoucherType == 'Sales');
+    salesVoucherData = Provider.of<List<Voucher>>(context, listen: false)
+        .where((voucher) => voucher.primaryVoucherType == 'Sales');
+    // .where((voucher) => voucher.date == new DateTime(2015, 10, 09));
+    salesVoucherData =
+        filterVouchersByTimePeriod(salesVoucherData, widget.timePeriod);
     salesVoucherDataforDisplay.addAll(salesVoucherData);
 
     super.initState();
@@ -49,9 +58,10 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
 
   @override
   Widget build(BuildContext context) {
-  // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
-  String voucherIdView;
-  String partyGuid;
+    // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
+
+    String voucherIdView;
+    String partyGuid;
     return Container(
         height: MediaQuery.of(context).size.height,
         child: Column(children: <Widget>[
@@ -87,6 +97,7 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
                     ),
                   ),
                 ),
+<<<<<<< HEAD
               )
             )
           ),
@@ -119,5 +130,34 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
         
       )
     );
+=======
+              ),
+            ),
+          ),
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              shrinkWrap: false,
+              itemCount: salesVoucherDataforDisplay?.length ?? 0,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                    onDoubleTap: () => {
+                          voucherIdView =
+                              salesVoucherDataforDisplay[index]?.masterid,
+                          partyGuid =
+                              salesVoucherDataforDisplay[index]?.partyGuid,
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => VoucherView(
+                                      voucherId: voucherIdView,
+                                      partyGuid: partyGuid)))
+                        },
+                    child: SalesVoucherTile(
+                        salesVoucher: salesVoucherDataforDisplay[index]));
+              },
+            ),
+          )
+        ]));
+>>>>>>> fe94c2fb777f64496f660f99d05e3e3578754ac4
   }
 }

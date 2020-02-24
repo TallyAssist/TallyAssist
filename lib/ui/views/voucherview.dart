@@ -21,25 +21,22 @@ import 'package:tassist/ui/shared/debitcredit.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
-
 class VoucherView extends StatelessWidget {
-
   final String voucherId;
   final String partyGuid;
 
   VoucherView({this.voucherId, this.partyGuid});
 
-
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FirebaseUser>(context);
 
-    
-  final user = Provider.of<FirebaseUser>(context);
-
-    Iterable<Voucher> voucherList = Provider.of<List<Voucher>>(context).where((item) => item.masterid == voucherId) ?? [];
+    Iterable<Voucher> voucherList = Provider.of<List<Voucher>>(context)
+            .where((item) => item.masterid == voucherId) ??
+        [];
     Voucher voucher = voucherList.elementAt(0) ?? [];
-    
-     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return MultiProvider(
           providers: [
@@ -60,28 +57,28 @@ class VoucherView extends StatelessWidget {
               children: <Widget>[
                   Padding(
                     padding: spacer.all.xxs,
-                    child: Text(voucher.partyname, style: Theme.of(context).textTheme.headline6,),
+                    child: Text(
+                      voucher.partyname,
+                      style: Theme.of(context).textTheme.headline6,
+                    ),
                   ),
-                   Container(
-                    height: 3.0,
-                    color: TassistGray
-                  ),
+                  Container(height: 3.0, color: TassistGray),
                   Padding(
                     padding: spacer.all.xxs,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                            Container(
-                        padding: spacer.all.xxs,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          color: TassistBgLightPurple,
+                        Container(
+                          padding: spacer.all.xxs,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: TassistBgLightPurple,
+                          ),
+                          child: Text(voucher.primaryVoucherType),
                         ),
-                        child: Text(voucher.primaryVoucherType),
-                      ),
-                      // SizedBox(width: 20),
-                      Text(voucher.type),
-                      _isInvoice(voucher),
+                        // SizedBox(width: 20),
+                        Text(voucher.type),
+                        _isInvoice(voucher),
                       ],
                     ),
                   ),
@@ -99,28 +96,28 @@ class VoucherView extends StatelessWidget {
                               Text('Amount')
                           ],
                         ),
-
-                         Column(
+                        Column(
                           children: <Widget>[
-                              Text(formatter.format(voucher.date) ?? 'NA', style: Theme.of(context).textTheme.bodyText1.copyWith(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold
-                              )) ,
-                              Text('Due Date')
+                            Text(formatter.format(voucher.date) ?? 'NA',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyText1
+                                    .copyWith(
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold)),
+                            Text('Due Date')
                           ],
                         )
-                      
                       ],
                     ),
                   ),
                   Padding(
                     padding: spacer.all.xxs,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[ 
-                      Text('Reference: ${voucher.reference}' ?? '')
-                      ]
-                      ),
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          Text('Reference: ${voucher.reference}' ?? '')
+                        ]),
                   ),
                   Container(
                     height: 3.0,
@@ -224,43 +221,35 @@ class LedgerPartyTile extends StatelessWidget {
 class VoucherItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
-    List<VoucherItem> voucherItemList = Provider.of<List<VoucherItem>>(context) ?? [];
+    List<VoucherItem> voucherItemList =
+        Provider.of<List<VoucherItem>>(context) ?? [];
 
     if (voucherItemList.length > 0) {
-    return Column(
-      children: <Widget>[
-        Text('Item Details'),
-        ListView.builder(
-          shrinkWrap: true,
-          itemCount: voucherItemList?.length,
-          itemBuilder: (context, index){
-            return Padding(
-              padding: spacer.y.xxs,
-              child: VoucherItemTile(voucherItem: voucherItemList[index]),
-            );
-          }
-          ),
-           Container(
-                    height: 3.0,
-                    color: TassistGray
-                  ),
-      ],
-
-      
-    );
-    }
-    else {
+      return Column(
+        children: <Widget>[
+          Text('Item Details'),
+          ListView.builder(
+              shrinkWrap: true,
+              itemCount: voucherItemList?.length,
+              itemBuilder: (context, index) {
+                return Padding(
+                  padding: spacer.y.xxs,
+                  child: VoucherItemTile(voucherItem: voucherItemList[index]),
+                );
+              }),
+          Container(height: 3.0, color: TassistGray),
+        ],
+      );
+    } else {
       return Container();
     }
   }
 }
 
 class VoucherItemTile extends StatelessWidget {
+  final VoucherItem voucherItem;
 
-   final VoucherItem voucherItem;
-
-    VoucherItemTile({this.voucherItem});
+  VoucherItemTile({this.voucherItem});
   @override
   Widget build(BuildContext context) {
 
@@ -269,26 +258,19 @@ class VoucherItemTile extends StatelessWidget {
 }
 
 _isInvoice(Voucher voucher) {
-   if (voucher.isInvoice == '1') {
-                return   Text('Invoice', style: TextStyle(
-                  color: TassistBgPurple,
-                  fontWeight: FontWeight.bold,
-                ));
-                      }
-  else {
-   return Container();
+  if (voucher.isInvoice == '1') {
+    return Text('Invoice',
+        style: TextStyle(
+          color: TassistBgPurple,
+          fontWeight: FontWeight.bold,
+        ));
+  } else {
+    return Container();
   }
 }
 
-
-
-
-
-
-
-// App header et al.
-
-AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey, BuildContext context, Voucher voucher) {
+AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
+    BuildContext context, Voucher voucher) {
   bool enabled = true;
 
   return AppBar(
@@ -298,14 +280,20 @@ AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey, BuildContext c
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             if (enabled) {
+              // Navigator.pop(context);
               Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => LedgerView(partyname: voucher.partyname, ledgerGuid: voucher.partyGuid,))
+                MaterialPageRoute(
+                  builder: (context) => LedgerView(
+                    partyname: voucher.partyname,
+                    ledgerGuid: voucher.partyGuid,
+                  ),
+                ),
               );
             }
           },
         ),
       ),
-      elevation: 0.7,    
+      elevation: 0.7,
       title: Row(
         children: <Widget>[
           Column(
@@ -327,21 +315,21 @@ AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey, BuildContext c
                   letterSpacing: 1.0,
                 ),
               ),
-          ],
-        ),
-        Spacer(),
-        Text('Help?', style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),),
-        IconButton(
-        icon: Icon(FontAwesomeIcons.whatsapp),
-        onPressed: () => _launchURL()
-            )
-        // DropDownMonths(),
-      ],
-    ),
-    backgroundColor: TassistMenuBg
-  );
+            ],
+          ),
+          Spacer(),
+          Text(
+            'Help?',
+            style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),
+          ),
+          IconButton(
+              icon: Icon(FontAwesomeIcons.whatsapp),
+              onPressed: () => _launchURL())
+          // DropDownMonths(),
+        ],
+      ),
+      backgroundColor: TassistMenuBg);
 }
-
 
 _launchURL() async {
   const url = 'https://api.whatsapp.com/send?phone=+917759091029';

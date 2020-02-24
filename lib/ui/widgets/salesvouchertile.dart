@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
@@ -30,7 +31,11 @@ class SalesVoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
+<<<<<<< HEAD
       child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.type, formatIndianCurrency(positiveAmount(salesVoucher.amount).toString()), _formatDate(salesVoucher.date),)
+=======
+      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.iscancelled, '${formatIndianCurrency(salesVoucher.amount.toString())}', _formatDate(salesVoucher.date),)
+>>>>>>> fe94c2fb777f64496f660f99d05e3e3578754ac4
       
     );
   }
