@@ -3,22 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
 
-
-
 class ExpenseDashboardWidget extends StatefulWidget {
-
-
   @override
   _ExpenseDashboardWidgetState createState() => _ExpenseDashboardWidgetState();
 }
 
 class _ExpenseDashboardWidgetState extends State<ExpenseDashboardWidget> {
-
-
   @override
   Widget build(BuildContext context) {
-
-  return Container(
+    return Container(
       child: Column(
         children: <Widget>[
           Container(
@@ -35,70 +28,69 @@ class _ExpenseDashboardWidgetState extends State<ExpenseDashboardWidget> {
 }
 
 class ExpenseDashboardWidgetContentRow extends StatefulWidget {
-
   @override
-  _ExpenseDashboardWidgetContentRowState createState() => _ExpenseDashboardWidgetContentRowState();
+  _ExpenseDashboardWidgetContentRowState createState() =>
+      _ExpenseDashboardWidgetContentRowState();
 }
 
-class _ExpenseDashboardWidgetContentRowState extends State<ExpenseDashboardWidgetContentRow> {
+class _ExpenseDashboardWidgetContentRowState
+    extends State<ExpenseDashboardWidgetContentRow> {
   @override
   Widget build(BuildContext context) {
+    final snapshot = Provider.of<DocumentSnapshot>(context);
 
-
-      final snapshot = Provider.of<DocumentSnapshot>(context);
-
-      var userDocument = snapshot.data;
+    var userDocument = snapshot.data;
 
     return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Container(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.arrow_drop_up,
-                      color: TassistSuccess,
-                    ),
-                    Text(
-                      userDocument['total_expenses'].toString(),
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                        color: TassistSuccess,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-                Text('Total Expenses'),
-              ],
-            ),
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.arrow_drop_up,
+                    color: TassistSuccess,
+                  ),
+                  Text(
+                    userDocument['total_expenses'].toString(),
+                    style: Theme.of(context).textTheme.bodyText2.copyWith(
+                          color: TassistSuccess,
+                          fontSize: 24,
+                        ),
+                  ),
+                ],
+              ),
+              Text('Total Expenses'),
+            ],
           ),
-          Container(
-            child: Column(
-              children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.arrow_drop_down,
+        ),
+        Container(
+          child: Column(
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.arrow_drop_down,
+                    color: Colors.red,
+                  ),
+                  Text(
+                    userDocument['unpaid_expenses'].toString(),
+                    style: TextStyle(
                       color: Colors.red,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 24,
                     ),
-                    Text(
-                      userDocument['unpaid_expenses'].toString(),
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-                Text('Unpaid expenses'),
-              ],
-            ),
+                  ),
+                ],
+              ),
+              Text('Unpaid expenses'),
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }
 
@@ -131,15 +123,15 @@ class ExpenseDashboardWidgetTitleRow extends StatelessWidget {
             children: <Widget>[
               Icon(
                 Icons.favorite,
-                color:TassistPrimaryBackground,
+                color: TassistPrimaryBackground,
               ),
               Icon(
                 Icons.bookmark,
-                color:TassistPrimaryBackground,
+                color: TassistPrimaryBackground,
               ),
               Icon(
                 Icons.share,
-                color:TassistPrimaryBackground,
+                color: TassistPrimaryBackground,
               ),
             ],
           ),

@@ -26,7 +26,7 @@ class _PaymentsDashboardWidgetState extends State<PaymentsDashboardWidget> {
           const SizedBox(
             height: 20,
           ),
-          PaymentsDashboardWidgetContentRow(),
+          PaymentsDashboardWidgetContentRow(timePeriod: widget.timePeriod),
         ],
       ),
     );
@@ -34,6 +34,9 @@ class _PaymentsDashboardWidgetState extends State<PaymentsDashboardWidget> {
 }
 
 class PaymentsDashboardWidgetContentRow extends StatefulWidget {
+  final String timePeriod;
+  PaymentsDashboardWidgetContentRow({this.timePeriod});
+
   @override
   _PaymentsDashboardWidgetContentRowState createState() =>
       _PaymentsDashboardWidgetContentRowState();
@@ -44,15 +47,15 @@ class _PaymentsDashboardWidgetContentRowState
   @override
   Widget build(BuildContext context) {
     final snapshot = Provider.of<DocumentSnapshot>(context);
-//     var userDocument;
-//     if (widget.timePeriod == 'Everything') {
-//       userDocument = snapshot?.data;
-//     } else {
-//       userDocument = snapshot?.data[widget.timePeriod];
-//     }
-    var userDocument = snapshot?.data;
+    var userDocument;
+    if (widget.timePeriod == 'Everything') {
+      userDocument = snapshot?.data;
+    } else {
+      userDocument = snapshot?.data[widget.timePeriod];
+    }
+    // var userDocument = snapshot?.data;
 
-    if (snapshot?.data != null) {
+    if (userDocument != null) {
       return FittedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

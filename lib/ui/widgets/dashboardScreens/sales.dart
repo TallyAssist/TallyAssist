@@ -53,7 +53,7 @@ class _SalesDashboardWidgetContentRowState
       userDocument = snapshot?.data[widget.timePeriod];
     }
 
-    if (snapshot?.data != null) {
+    if (userDocument != null) {
       return FittedBox(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +68,9 @@ class _SalesDashboardWidgetContentRowState
                     //   color: TassistInfoGrey,
                     // ),
                     Text(
-                      formatIndianCurrency(userDocument['total_sales'].toString()) ?? '',
+                      formatIndianCurrency(
+                              userDocument['total_sales'].toString()) ??
+                          '',
                       style: Theme.of(context).textTheme.bodyText2.copyWith(
                           color: TassistMainText,
                           fontSize: 24,

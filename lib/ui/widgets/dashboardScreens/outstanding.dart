@@ -42,7 +42,7 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
       userDocument = snapshot?.data[this.timePeriod];
     }
 
-    if (snapshot?.data != null) {
+    if (userDocument != null) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -131,7 +131,10 @@ class OutstandingsDashboardWidgetTitleRow extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Outstandings',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                style: TextStyle(
+                    color: TassistPrimary,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20),
               ),
               Icon(
                 Icons.info_outline,
