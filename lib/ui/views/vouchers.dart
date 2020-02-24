@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/texts.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/views/voucher/paymentvouchers.dart';
 import 'package:tassist/ui/views/voucher/purchasevouchers.dart';
 import 'package:tassist/ui/views/voucher/receiptvouchers.dart';
 import 'package:tassist/ui/views/voucher/salesvouchers.dart';
+import 'package:tassist/ui/widgets/myboxdecoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class VouchersHome extends StatefulWidget {
@@ -51,34 +53,46 @@ class _VouchersHomeState extends State<VouchersHome>
           child: Column(
             children: <Widget>[
               Container(
+                decoration: myBoxDecorationBottomBorder(),
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                  child: PopupMenuButton<String>(
-                    onSelected: (value) {
-                      setState(() {
-                        timePeriod = value;
-                      });
-                    },
-                    itemBuilder: (BuildContext context) {
-                      return timePeriodList.map(
-                        (String choice) {
-                          return PopupMenuItem<String>(
-                            value: choice,
-                            child: Text(
-                              choice,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  fontSize: 14.0),
-                            ),
-                          );
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Select timeperiod",
+                        style: secondaryListTitle2,
+                      ),
+                      PopupMenuButton<String>(
+                        icon: Icon(Icons.av_timer),
+                        onSelected: (value) {
+                          setState(() {
+                            timePeriod = value;
+                          });
                         },
-                      ).toList();
-                    },
+                        itemBuilder: (BuildContext context) {
+                          return timePeriodList.map(
+                            (String choice) {
+                              return PopupMenuItem<String>(
+                                value: choice,
+                                child: Text(
+                                  choice,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 14.0),
+                                ),
+                              );
+                            },
+                          ).toList();
+                        },
+                      ),
+                    ],
                   ),
                 ),
-                color: Colors.blueGrey[100],
+                // color: Colors.blueGrey[100],
                 width: MediaQuery.of(context).size.width,
-                height: 30,
+                height: 35,
               ),
               Expanded(
                 child: TabBarView(

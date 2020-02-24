@@ -59,8 +59,6 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
   @override
   Widget build(BuildContext context) {
     // final salesVoucherData  = Provider.of<List<SalesVoucher>>(context);
-    print(salesVoucherData.first.date);
-    print(DateTime(2015, 10, 09));
 
     String voucherIdView;
     String partyGuid;

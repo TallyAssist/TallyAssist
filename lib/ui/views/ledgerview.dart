@@ -11,15 +11,11 @@ import 'package:tassist/ui/views/ledgerstock.dart';
 import 'package:tassist/ui/views/ledgervoucher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class LedgerView extends StatefulWidget {
-
   final String partyname;
   final String ledgerGuid;
 
   LedgerView({this.partyname, this.ledgerGuid});
-
-  
 
   @override
   _LedgerViewState createState() => _LedgerViewState(partyname, ledgerGuid);
@@ -33,10 +29,7 @@ class _LedgerViewState extends State<LedgerView>
   final String partyname;
   final String ledgerGuid;
 
- _LedgerViewState( this.partyname, this.ledgerGuid);
-
- 
-  
+  _LedgerViewState(this.partyname, this.ledgerGuid);
 
   @override
   void initState() {
@@ -53,34 +46,33 @@ class _LedgerViewState extends State<LedgerView>
     });
   }
 
-  
-  
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<FirebaseUser>(context);
 
-  final user = Provider.of<FirebaseUser>(context);
-  
-   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-  
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+
     return MultiProvider(
-          providers: [
-            StreamProvider<List<LedgerStock>>.value(
-
-            value: LedgerStockService(uid: user?.uid, ledgerId: ledgerGuid).ledgerStockData),
-          ],
-          child: WillPopScope (
-                onWillPop: () async => false,
-            child: Scaffold(
+      providers: [
+        StreamProvider<List<LedgerStock>>.value(
+            value: LedgerStockService(uid: user?.uid, ledgerId: ledgerGuid)
+                .ledgerStockData),
+      ],
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
           key: _drawerKey,
           appBar: headerNavOther(_drawerKey, _tabController, context),
           drawer: tassistDrawer(context),
-          body: 
-          TabBarView(
+          body: TabBarView(
             controller: _tabController,
             children: <Widget>[
-             LedgerSummary(ledgerGuid: ledgerGuid),
-             LedgerVoucher(ledgerGuid: ledgerGuid, partyname: partyname,),
-             LedgerStockView(ledgerGuid: ledgerGuid)
+              LedgerSummary(ledgerGuid: ledgerGuid),
+              LedgerVoucher(
+                ledgerGuid: ledgerGuid,
+                partyname: partyname,
+              ),
+              LedgerStockView(ledgerGuid: ledgerGuid)
             ],
           ),
         ),
@@ -89,8 +81,8 @@ class _LedgerViewState extends State<LedgerView>
   }
 }
 
-
-AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabController, BuildContext context) {
+AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey,
+    TabController _tabController, BuildContext context) {
   bool enabled = true;
 
   return AppBar(
@@ -100,7 +92,6 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             if (enabled) {
-
               Navigator.of(context).pushReplacementNamed('/ledgers');
             }
           },
@@ -108,17 +99,18 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
       ),
       elevation: 0.7,
       bottom: TabBar(
-          controller: _tabController,
-          indicatorColor: Colors.white,
-          tabs: <Widget>[
-            Tab(text: 'Summary',),
-            Tab(text: 'Vouchers'),
-            Tab(
-              text: 'Stock',
-            ),
-          ],
-        ),
-        
+        controller: _tabController,
+        indicatorColor: Colors.white,
+        tabs: <Widget>[
+          Tab(
+            text: 'Summary',
+          ),
+          Tab(text: 'Vouchers'),
+          Tab(
+            text: 'Stock',
+          ),
+        ],
+      ),
       title: Row(
         children: <Widget>[
           Column(
@@ -140,21 +132,21 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey, TabController _tabCon
                   letterSpacing: 1.0,
                 ),
               ),
-          ],
-        ),
-        Spacer(),
-        Text('Help?', style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),),
-        IconButton(
-        icon: Icon(FontAwesomeIcons.whatsapp),
-        onPressed: () => _launchURL()
-            )
-        // DropDownMonths(),
-      ],
-    ),
-    backgroundColor: TassistMenuBg
-  );
+            ],
+          ),
+          Spacer(),
+          Text(
+            'Help?',
+            style: TextStyle(fontSize: 14.0, letterSpacing: 1.0),
+          ),
+          IconButton(
+              icon: Icon(FontAwesomeIcons.whatsapp),
+              onPressed: () => _launchURL())
+          // DropDownMonths(),
+        ],
+      ),
+      backgroundColor: TassistMenuBg);
 }
-
 
 _launchURL() async {
   const url = 'https://api.whatsapp.com/send?phone=+917759091029';

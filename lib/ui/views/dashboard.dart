@@ -7,6 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/database.dart';
+import 'package:tassist/core/services/timeperiod_filter_service.dart';
+import 'package:tassist/theme/theme.dart';
 // import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
@@ -23,6 +25,7 @@ import 'package:tassist/ui/widgets/dashboardScreens/sales.dart';
 import 'package:tassist/ui/widgets/gotobar.dart';
 // import 'package:tassist/ui/widgets/dashboardScreens/cash.dart';
 import 'package:tassist/ui/widgets/dashboardScreens/outstanding.dart';
+import 'package:tassist/ui/widgets/myboxdecoration.dart';
 
 class DashboardScreen extends StatefulWidget {
   DashboardScreen({Key key, this.userId}) : super(key: key);
@@ -77,34 +80,46 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   // Container 0 - Timeperiod picker
                   Container(
+                    decoration: myBoxDecorationBottomBorder(),
                     child: Padding(
                       padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: PopupMenuButton<String>(
-                        onSelected: (value) {
-                          setState(() {
-                            timePeriod = value;
-                          });
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return <String>['Everything', 'FY 2017-18'].map(
-                            (String choice) {
-                              return PopupMenuItem<String>(
-                                value: choice,
-                                child: Text(
-                                  choice,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14.0),
-                                ),
-                              );
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Select timeperiod",
+                            style: secondaryListTitle2,
+                          ),
+                          PopupMenuButton<String>(
+                            icon: Icon(Icons.av_timer),
+                            onSelected: (value) {
+                              setState(() {
+                                timePeriod = value;
+                              });
                             },
-                          ).toList();
-                        },
+                            itemBuilder: (BuildContext context) {
+                              return timePeriodList.map(
+                                (String choice) {
+                                  return PopupMenuItem<String>(
+                                    value: choice,
+                                    child: Text(
+                                      choice,
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.normal,
+                                          fontSize: 14.0),
+                                    ),
+                                  );
+                                },
+                              ).toList();
+                            },
+                          ),
+                        ],
                       ),
                     ),
-                    color: Colors.blueGrey[100],
+                    // color: Colors.blueGrey[100],
                     width: MediaQuery.of(context).size.width,
-                    height: 30,
+                    height: 35,
                   ),
                   // Container 1 - Sales
                   Container(
@@ -112,7 +127,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       timePeriod: timePeriod,
                     ),
                     margin: const EdgeInsets.all(15.0),
-                    // decoration: myBoxDecoration()
+                    // decoration: myBoxDecorationTopBorder()
                   ),
                   GoToBar('Check Sales', SalesOrderReportScreen()),
                   // Container 2 - Purchases
@@ -121,7 +136,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       timePeriod: timePeriod,
                     ),
                     margin: const EdgeInsets.all(20.0),
-                    // decoration: myBoxDecoration()
+                    // decoration: myBoxDecorationTopBorder()
                   ),
                   GoToBar('Check Receipts', VouchersHome()),
                   Container(
@@ -129,7 +144,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       timePeriod: timePeriod,
                     ),
                     margin: const EdgeInsets.all(20.0),
-                    // decoration: myBoxDecoration()
+                    // decoration: myBoxDecorationTopBorder()
                   ),
                   GoToBar('Check Purchases', PurchaseOrderReportScreen()),
                   Container(
@@ -137,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       timePeriod: timePeriod,
                     ),
                     margin: const EdgeInsets.all(20.0),
-                    // decoration: myBoxDecoration()
+                    // decoration: myBoxDecorationTopBorder()
                   ),
                   GoToBar('Check Payments', VouchersHome()),
                   // Column(
@@ -155,7 +170,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   // Container(
                   //   child: ExpenseDashboardWidget(),
                   //   margin: const EdgeInsets.all(15.0),
-                  //   // decoration: myBoxDecoration()
+                  //   // decoration: myBoxDecorationTopBorder()
                   // ),
                   // GoToBar('Check Expenses', DashboardScreen()),
                   // Container(
@@ -168,7 +183,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       timePeriod: timePeriod,
                     ),
                     margin: const EdgeInsets.all(15.0),
-                    // decoration: myBoxDecoration()
+                    // decoration: myBoxDecorationTopBorder()
                   ),
                   GoToBar('Accounts Payables', AccountsPayableScreen()),
                   GoToBar('Accounts Receivables', AccountsReceivableScreen())

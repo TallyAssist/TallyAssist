@@ -18,7 +18,6 @@ import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 
-
 import '../../main.dart';
 
 final AuthService _auth = AuthService();
@@ -49,7 +48,7 @@ Drawer tassistDrawer(BuildContext context) {
               height: 10.0,
             ),
             FittedBox(
-                          child: Text(
+              child: Text(
                 user?.email,
                 style: Theme.of(context).textTheme.headline6.copyWith(
                       color: TassistWhite,
@@ -144,7 +143,6 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: KhataScreen(),
         color: TassistMainText,
       ),
-      
       DrawerItem(
         icon: Icons.build,
         title: 'Production',
