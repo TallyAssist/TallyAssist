@@ -6,6 +6,10 @@ import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
 
 class PaymentsDashboardWidget extends StatefulWidget {
+
+  final String timePeriod;
+  PaymentsDashboardWidget({this.timePeriod});
+
   @override
   _PaymentsDashboardWidgetState createState() =>
       _PaymentsDashboardWidgetState();

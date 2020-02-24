@@ -34,9 +34,9 @@ class VoucherItemService {
           primaryVoucherType: doc.data['primary_voucher_type_name'].toString() ?? '',
           discount: doc.data['discount'].toString() ?? '',
           gstPercent: doc.data['gstpercent'].toString() ?? '',
-          billedQty: doc.data['billedqty'].toString() ?? '',
+          billedQty: doc.data['billedqty'].toInt() ?? 0,
           actualQty: doc.data['actualqty'].toString() ?? '',
-          amount: doc.data['amount'].toString() ?? '',
+          amount: doc.data['amount'].toInt() ?? 0,
           taxAmount: doc.data['taxamount'].toString() ?? '',
       );
     }).toList();

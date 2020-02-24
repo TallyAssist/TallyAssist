@@ -87,7 +87,9 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
                     ),
                   ),
                 ),
-              ),
+              )
+            )
+          ),
             Expanded(child: ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: false,
@@ -112,8 +114,9 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
         },
       ),
       
-    )
-          ]
+    ),
+        ]
+        
       )
     );
   }

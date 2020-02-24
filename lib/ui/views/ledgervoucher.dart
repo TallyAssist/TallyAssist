@@ -8,6 +8,8 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
@@ -180,8 +182,6 @@ class _VoucherListState extends State<VoucherList> {
                        
                          voucherIdView = voucherDataforDisplay[index]?.masterid,
                          partyGuid = voucherDataforDisplay[index]?.partyGuid,
-                         print(voucherIdView),
-                         print(partyGuid),
                         
                         Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => VoucherView(voucherId: voucherIdView, partyGuid: partyGuid)
@@ -214,9 +214,8 @@ class VoucherTile extends StatelessWidget {
     return  DetailCard('', 
     '# ${voucher.masterid}',
      voucher.primaryVoucherType, 
-     'Rs ${voucher.amount}', 
-     '${formatter.format(voucher.date)}'); 
+     formatIndianCurrency(positiveAmount(voucher.amount).toString()), 
+     formatter.format(voucher.date)); 
   }
 }
-
 

@@ -8,9 +8,9 @@ class VoucherItem {
   final String primaryVoucherType;
   final String discount;
   final String gstPercent;
-  final String billedQty;
+  final int billedQty;
   final String actualQty;
-  final String amount;
+  final int amount;
   final String taxAmount;
 
 

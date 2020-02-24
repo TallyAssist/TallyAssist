@@ -5,6 +5,9 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/ui/views/voucherview.dart';
 import 'package:intl/intl.dart';
+import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
+
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -170,8 +173,8 @@ class PurchaseVoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return  DetailCard(purchaseVoucher.partyname, 
     '# ${purchaseVoucher.masterid}',
-     purchaseVoucher.iscancelled, 
-     'Rs ${purchaseVoucher.amount}', 
+     purchaseVoucher.type, 
+     formatIndianCurrency(positiveAmount(purchaseVoucher.amount).toString()), 
      _formatDate(purchaseVoucher.date));
   }
 }
