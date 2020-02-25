@@ -22,7 +22,7 @@ class VoucherService {
       return Voucher(
         date: doc.data['date'].toDate() ?? null,
         partyname: doc.data['restat_party_ledger_name'] ?? '',
-        amount: doc.data['amount'].toInt() ?? 0,
+        amount: doc.data['amount']?.toInt() ?? 0,
         masterid: doc.data['master_id'] ?? '',
         iscancelled: doc.data['is_cancelled'] ?? '',
         primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
