@@ -48,7 +48,7 @@ Drawer tassistDrawer(BuildContext context) {
               height: 10.0,
             ),
             FittedBox(
-                          child: Text(
+              child: Text(
                 user?.email,
                 style: Theme.of(context).textTheme.headline6.copyWith(
                       color: TassistWhite,
@@ -79,12 +79,6 @@ Drawer tassistDrawer(BuildContext context) {
         padding: spacer.all.xs,
         child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
-      // DrawerItem(
-      //   icon: Icons.mail_outline,
-      //   title: 'Notifications',
-      //   ontap: NotificationScreen(),
-      //   color: TassistPrimaryBackground,
-      // ),
       DrawerItem(
         icon: Icons.dashboard,
         title: 'Dashboard',

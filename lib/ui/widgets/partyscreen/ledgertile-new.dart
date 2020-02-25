@@ -4,10 +4,21 @@ import 'package:tassist/core/models/ledger.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
-
+import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgercard.dart';
+import 'package:tassist/ui/shared/debitcredit.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
+
+ _formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  }
+  else {
+    return 'NA';
+  }
+
+}
 // TODO
 var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
 
@@ -27,14 +38,14 @@ class LedgerItemTileNew  extends StatelessWidget {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Rs ${ledgerItem.closingBalance}', 
-     'Rs. ${ledgerItem.openingBalance}'),
+     'Sales: ${formatIndianCurrency(ledgerItem.totalSales)}', 
+     'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt)}'),
       title1: 'Receivables', 
-      info1: ledgerItem.totalReceivables, 
+      info1: formatIndianCurrency(ledgerItem.totalReceivables), 
       title2: 'Last Sale ', 
-      info2: ledgerItem.lastSalesDate, 
-      title3: 'Last Receipt', info3: ledgerItem.lastReceiptDate,
-      title4: 'Last Price Sold', info4: 'Coming Soon!',
+      info2: _formatDate(ledgerItem.lastSalesDate), 
+      title3: 'Last Receipt', info3: _formatDate(ledgerItem.lastReceiptDate),
+      title4: 'Top Item', info4: 'Coming Soon!',
       ledgerItem: ledgerItem,);
   }
   else {
@@ -43,14 +54,14 @@ class LedgerItemTileNew  extends StatelessWidget {
      return LedgerCard(childdetailCard: ChildDetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
      ledgerItem.restatCompanyCode.toString(), 
-     'Rs ${ledgerItem.closingBalance}', 
-     'Rs. ${ledgerItem.openingBalance}'),
+     'Purchsase: ${formatIndianCurrency(ledgerItem.totalPurchase)}', 
+     'Payment: ${formatIndianCurrency(ledgerItem.totalPayment)}'),
         title1: 'Payables', 
-      info1: ledgerItem.totalPayables, 
+      info1: formatIndianCurrency(ledgerItem.totalPayables), 
       title2: 'Last Purchase ', 
-      info2: ledgerItem.lastPurchaseDate, 
-      title3: 'Last Payment', info3: ledgerItem.lastPaymentDate,
-      title4: 'Last Price Bought', info4: 'Coming Soon!',
+      info2: _formatDate(ledgerItem.lastPurchaseDate), 
+      title3: 'Last Payment', info3: _formatDate(ledgerItem.lastPaymentDate),
+      title4: 'Top Item', info4: 'Coming Soon!',
       ledgerItem: ledgerItem,);
     
 
@@ -58,9 +69,9 @@ class LedgerItemTileNew  extends StatelessWidget {
   else {
     return DetailCard(ledgerItem.name, 
     '# ${ledgerItem.masterId}',
-     ledgerItem.primaryGroupType, 
-     'Rs ${ledgerItem.closingBalance}', 
-     'Rs. ${ledgerItem.openingBalance}');
+     ledgerItem.restatCompanyCode.toString(), 
+     'Closing: ${debitCredit(ledgerItem.closingBalance)}', 
+    'Opening: ${debitCredit(ledgerItem.openingBalance)}');
 
   }
   }

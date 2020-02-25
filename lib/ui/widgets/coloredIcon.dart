@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
+import 'package:tassist/core/services/string_format.dart';
+
 
 
 class ColoredIconNumberRow extends StatefulWidget {
@@ -10,6 +12,8 @@ class ColoredIconNumberRow extends StatefulWidget {
   final String mTitle;
   ColoredIconNumberRow(this.metric, this.mTitle);
 
+
+  
   @override
   _ColoredIconNumberRowState createState() =>
       _ColoredIconNumberRowState();
@@ -24,26 +28,47 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
 
     var userDocument = snapshot?.data; 
 
+ _metric () {
+
+if (widget.metric == 'total_sales' || widget.metric == 'total_receipts' || widget.metric == 'total_purchases' || widget.metric == 'total_payments') {
+           return  Text(
+                  formatIndianCurrency(userDocument[widget.metric].toString() ?? '0'),
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.normal,
+                      color: TassistSuccess),
+                );
+                }
+                else {
+                return   Text(
+                  formatNumber(userDocument[widget.metric].toString() ?? '0'),
+                  style: TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.normal,
+                      color: TassistSuccess),
+                );
+                }
+
+
+    }
+
   if (snapshot?.data != null) {
     return Padding(
       padding: spacer.y.xxs,
       child: Column(
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Icon(
-                Icons.arrow_drop_up,
-                color: TassistSuccess,
-                size: 30.0,
-              ),
-              Text(
-                userDocument[widget.metric].toString(),
-                style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.normal,
-                    color: TassistSuccess),
-              ),
-            ],
+          FittedBox(
+                      child: Row(
+              children: <Widget>[
+                // Icon(
+                //   Icons.arrow_drop_up,
+                //   color: TassistSuccess,
+                //   size: 30.0,
+                // ),
+                _metric(),
+               
+              ],
+            ),
           ),
           Container(
              child: Text(
@@ -66,3 +91,4 @@ class _ColoredIconNumberRowState extends State<ColoredIconNumberRow> {
 }
 }
 }
+
