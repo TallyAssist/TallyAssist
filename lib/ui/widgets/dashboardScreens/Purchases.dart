@@ -26,7 +26,7 @@ class _PurchasesDashboardWidgetState extends State<PurchasesDashboardWidget> {
           const SizedBox(
             height: 20,
           ),
-          PurchasesDashboardWidgetContentRow(),
+          PurchasesDashboardWidgetContentRow(timePeriod: widget.timePeriod),
         ],
       ),
     );
