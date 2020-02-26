@@ -6,7 +6,6 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/salesvouchertile.dart';
 
-
 class SalesVoucherList extends StatefulWidget {
   final String timePeriod;
   SalesVoucherList({this.timePeriod});
@@ -112,11 +111,20 @@ class _SalesVoucherListState extends State<SalesVoucherList> {
                               salesVoucherDataforDisplay[index]?.masterid,
                           partyGuid =
                               salesVoucherDataforDisplay[index]?.partyGuid,
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) => VoucherView(
-                                      voucherId: voucherIdView,
-                                      partyGuid: partyGuid)))
+                          Navigator.pushNamed(
+                            context,
+                            '/voucherview',
+                            arguments: {
+                              'voucher_id_view': voucherIdView,
+                              'party_guid': partyGuid,
+                            },
+                          ),
+
+                          // Navigator.of(context).pushReplacement(
+                          //     MaterialPageRoute(
+                          //         builder: (context) => VoucherView(
+                          //             voucherId: voucherIdView,
+                          //             partyGuid: partyGuid)))
                         },
                     child: SalesVoucherTile(
                         salesVoucher: salesVoucherDataforDisplay[index]));

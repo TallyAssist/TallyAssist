@@ -9,7 +9,6 @@ import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/shared/positiveamount.dart';
 
-
 var formatter = new DateFormat('dd-MM-yyyy');
 
 _formatDate(DateTime date) {
@@ -142,11 +141,19 @@ class _PurchaseVoucherListState extends State<PurchaseVoucherList> {
                                 purchaseVoucherDataforDisplay[index]?.masterid,
                             partyGuid =
                                 purchaseVoucherDataforDisplay[index]?.partyGuid,
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => VoucherView(
-                                        voucherId: voucherIdView,
-                                        partyGuid: partyGuid)))
+                            Navigator.pushNamed(
+                              context,
+                              '/voucherview',
+                              arguments: {
+                                'voucher_id_view': voucherIdView,
+                                'party_guid': partyGuid,
+                              },
+                            ),
+                            // Navigator.of(context).pushReplacement(
+                            //     MaterialPageRoute(
+                            //         builder: (context) => VoucherView(
+                            //             voucherId: voucherIdView,
+                            //             partyGuid: partyGuid)))
                           },
                       child: PurchaseVoucherTile(
                           purchaseVoucher:
@@ -166,10 +173,11 @@ class PurchaseVoucherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DetailCard(purchaseVoucher.partyname, 
-    '# ${purchaseVoucher.masterid}',
-     purchaseVoucher.type, 
-     formatIndianCurrency(positiveAmount(purchaseVoucher.amount).toString()), 
-     _formatDate(purchaseVoucher.date));
+    return DetailCard(
+        purchaseVoucher.partyname,
+        '# ${purchaseVoucher.masterid}',
+        purchaseVoucher.type,
+        formatIndianCurrency(positiveAmount(purchaseVoucher.amount).toString()),
+        _formatDate(purchaseVoucher.date));
   }
 }

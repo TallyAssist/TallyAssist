@@ -25,7 +25,10 @@ class LedgerVoucher extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(
       children: <Widget>[
-        VoucherList(ledgerGuid: ledgerGuid, partyname: partyname, timePeriod: timePeriod)
+        VoucherList(
+            ledgerGuid: ledgerGuid,
+            partyname: partyname,
+            timePeriod: timePeriod)
       ],
     );
   }
@@ -55,8 +58,7 @@ class _VoucherListState extends State<VoucherList> {
   void initState() {
     voucherData = Provider.of<List<Voucher>>(context, listen: false)
         .where((voucherData) => voucherData.partyname == partyname);
-    voucherData =
-        filterVouchersByTimePeriod(voucherData, widget.timePeriod);
+    voucherData = filterVouchersByTimePeriod(voucherData, widget.timePeriod);
     voucherDataforDisplay.addAll(voucherData);
 
     super.initState();
@@ -170,21 +172,27 @@ class _VoucherListState extends State<VoucherList> {
                   itemCount: voucherDataforDisplay?.length ?? 0,
                   itemBuilder: (context, index) {
                     return GestureDetector(
-                        onDoubleTap: () => {
-                              voucherIdView =
-                                  voucherDataforDisplay[index]?.masterid,
-                              partyGuid =
-                                  voucherDataforDisplay[index]?.partyGuid,
-                              print(voucherIdView),
-                              print(partyGuid),
-                              Navigator.of(context).pushReplacement(
-                                  MaterialPageRoute(
-                                      builder: (context) => VoucherView(
-                                          voucherId: voucherIdView,
-                                          partyGuid: partyGuid)))
-                            },
-                        child:
-                            VoucherTile(voucher: voucherDataforDisplay[index]));
+                      onDoubleTap: () => {
+                        voucherIdView = voucherDataforDisplay[index]?.masterid,
+                        partyGuid = voucherDataforDisplay[index]?.partyGuid,
+                        print(voucherIdView),
+                        print(partyGuid),
+                        Navigator.pushNamed(
+                          context,
+                          '/voucherview',
+                          arguments: {
+                            'voucher_id_view': voucherIdView,
+                            'party_guid': partyGuid,
+                          },
+                        ),
+                        // Navigator.of(context).pushReplacement(
+                        //     MaterialPageRoute(
+                        //         builder: (context) => VoucherView(
+                        //             voucherId: voucherIdView,
+                        //             partyGuid: partyGuid)))
+                      },
+                      child: VoucherTile(voucher: voucherDataforDisplay[index]),
+                    );
                   }),
             ),
           ],
@@ -199,11 +207,11 @@ class VoucherTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  DetailCard('', 
-    '# ${voucher.masterid}',
-     voucher.primaryVoucherType, 
-     formatIndianCurrency(positiveAmount(voucher.amount).toString()), 
-     formatter.format(voucher.date)); 
+    return DetailCard(
+        '',
+        '# ${voucher.masterid}',
+        voucher.primaryVoucherType,
+        formatIndianCurrency(positiveAmount(voucher.amount).toString()),
+        formatter.format(voucher.date));
   }
 }
-

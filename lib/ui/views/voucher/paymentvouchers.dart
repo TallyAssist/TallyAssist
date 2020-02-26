@@ -138,11 +138,22 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
                                 paymentVoucherDataforDisplay[index]?.masterid,
                             partyGuid =
                                 paymentVoucherDataforDisplay[index]?.partyGuid,
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => VoucherView(
-                                        voucherId: voucherIdView,
-                                        partyGuid: partyGuid)))
+                            Navigator.pushNamed(
+                              context,
+                              '/voucherview',
+                              arguments: {
+                                'voucher_id_view': voucherIdView,
+                                'party_guid': partyGuid,
+                              },
+                            ),
+                            // Navigator.of(context).pushReplacement(
+                            //   MaterialPageRoute(
+                            //     builder: (context) => VoucherView(
+                            //       voucherId: voucherIdView,
+                            //       partyGuid: partyGuid,
+                            //     ),
+                            //   ),
+                            // )
                           },
                       child: PaymentVoucherTile(
                           paymentVoucher: paymentVoucherDataforDisplay[index]));

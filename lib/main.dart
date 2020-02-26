@@ -14,6 +14,7 @@ import 'package:tassist/core/services/payablesservice.dart';
 import 'package:tassist/core/services/receivablesservice.dart';
 import 'package:tassist/core/services/stockservice.dart';
 import 'package:tassist/core/services/vouchers.dart';
+import 'package:tassist/route_generator.dart';
 import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
@@ -83,13 +84,14 @@ class TopWidget extends StatelessWidget {
       ],
       child: MaterialApp(
         initialRoute: '/',
-        routes: {
-          '/': (context) => RootPage(),
-          '/vouchers': (context) => VouchersHome(),
-          '/voucherview': (context) => VoucherView(),
-          '/ledgerview': (context) => LedgerView(),
-          '/ledgers': (context) => LedgerScreen()
-        },
+        onGenerateRoute: RouteGenerator.generateRoute,
+        // routes: {
+        //   '/': (context) => RootPage(),
+        //   '/vouchers': (context) => VouchersHome(),
+        //   '/voucherview': (context) => VoucherView(),
+        //   '/ledgerview': (context) => LedgerView(),
+        //   '/ledgers': (context) => LedgerScreen()
+        // },
         title: _title,
         // home: HomeScreen(),
         // home: RootPage(),
