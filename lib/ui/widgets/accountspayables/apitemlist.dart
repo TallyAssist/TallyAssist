@@ -44,14 +44,14 @@ class APSingleItem extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text('${formatIndianCurrency(ledgerItem.totalPayables)}'),
+            Text('${formatIndianCurrency(ledgerItem.closingBalance)}'),
             SizedBox(
               width: 10,
             ),
-            Text(
-              '${formatIndianCurrency(ledgerItem.totalPayment)}',
-              style: TextStyle(color: TassistInfoGrey),
-            ),
+            // Text(
+            //   '${formatIndianCurrency(ledgerItem.totalPayment)}',
+            //   style: TextStyle(color: TassistInfoGrey),
+            // ),
             IconButton(
               onPressed: () {
                 _launchURL();
