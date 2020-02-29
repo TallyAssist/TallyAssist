@@ -12,7 +12,9 @@ class VoucherService {
     return companyCollection
         .document(this.uid)
         .collection('voucher')
-        // .orderBy('date', descending: true)
+        .orderBy('date', descending: true)
+        .endBefore([DateTime(2019, 9, 30)])
+        // .limit(1000)
         .snapshots()
         .map(_receiptvouchersfromSnapshots);
   }
