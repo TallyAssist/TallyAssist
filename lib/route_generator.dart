@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tassist/main.dart';
 import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/ledgerview.dart';

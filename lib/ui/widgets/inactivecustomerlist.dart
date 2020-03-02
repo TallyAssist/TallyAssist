@@ -31,8 +31,8 @@ class _InactiveCustomerListState extends State<InactiveCustomerList> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Op Balance  ', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
-                Text ('Recievables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold ),),
+                // Text( 'Op Balance  ', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
+                Text ('Differences', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
             ),

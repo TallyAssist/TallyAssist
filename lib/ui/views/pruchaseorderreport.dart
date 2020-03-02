@@ -125,7 +125,7 @@ class InactiveSupplierList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    inactiveSuppliers = Provider.of<List<LedgerItem>>(context).where((element) => element.closingBalance == '0').where((element) => element.primaryGroupType == 'Sundry Creditors') ?? [];
+  final inactiveSuppliers = Provider.of<List<LedgerItem>>(context).where((element) => element.closingBalance == 0).where((element) => element.primaryGroupType == 'Sundry Creditors') ?? [];
     inactiveSupplierData.addAll(inactiveSuppliers);
     
 
@@ -135,7 +135,7 @@ class InactiveSupplierList extends StatelessWidget {
           children: <Widget>[
             Padding(
               padding: spacer.all.xxs,
-              child: Text('Total Suppliers Customers: ${inactiveSupplierData?.length}', style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),),
+              child: Text('Total Inactive Suppliers: ${inactiveSupplierData?.length}', style: Theme.of(context).textTheme.bodyText1.copyWith(fontWeight: FontWeight.normal),),
             ),
              Padding(
                   padding: spacer.all.xxs,
@@ -143,8 +143,8 @@ class InactiveSupplierList extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Op Balance  ', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
-                Text ('Outstandings', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold ),),
+                // Text( 'Op Balance  ', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold),),
+                Text ('Difference', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
             ),
@@ -204,10 +204,10 @@ _launchURL() async {
               ),
             ),
             SizedBox(width: 5,),
-            Text(formatIndianCurrency(ledgerItem.openingBalance), style: TextStyle(color: TassistInfoGrey)),
+            // Text(formatIndianCurrency(ledgerItem.openingBalance), style: TextStyle(color: TassistInfoGrey)),
             SizedBox(width: 10,),
     
-               Text(formatIndianCurrency(ledgerItem.totalReceivables)),
+               Text(formatIndianCurrency(ledgerItem.totalPayables)),
               IconButton(
                 onPressed: () {
                   _launchURL();

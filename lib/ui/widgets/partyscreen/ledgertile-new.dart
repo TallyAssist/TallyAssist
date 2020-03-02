@@ -19,8 +19,7 @@ var formatter = new DateFormat('dd-MM-yyyy');
   }
 
 }
-// TODO
-var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
+
 
 
 class LedgerItemTileNew  extends StatelessWidget {
@@ -57,7 +56,7 @@ class LedgerItemTileNew  extends StatelessWidget {
      'Purchsase: ${formatIndianCurrency(ledgerItem.totalPurchase)}', 
      'Payment: ${formatIndianCurrency(ledgerItem.totalPayment)}'),
         title1: 'Payables', 
-      info1: formatIndianCurrency(ledgerItem.closingBalance), 
+      info1: formatIndianCurrency(ledgerItem.closingBalance.toString()), 
       title2: 'Last Purchase ', 
       info2: _formatDate(ledgerItem.lastPurchaseDate), 
       title3: 'Last Payment', info3: _formatDate(ledgerItem.lastPaymentDate),

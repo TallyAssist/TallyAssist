@@ -3,7 +3,6 @@ import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
-import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/shared/positiveamount.dart';
 
 
@@ -31,7 +30,7 @@ class SalesVoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.masterid}',  salesVoucher.type, formatIndianCurrency(positiveAmount(salesVoucher.amount).toString()), _formatDate(salesVoucher.date),)
+      child: DetailCard(salesVoucher.partyname, '# ${salesVoucher.number}',  salesVoucher.type, formatIndianCurrency(positiveAmount(salesVoucher.amount).toString()), _formatDate(salesVoucher.date),)
       
     );
   }

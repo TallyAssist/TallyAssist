@@ -4,9 +4,9 @@ import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
-import 'package:tassist/ui/views/voucherview.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -19,8 +19,9 @@ _formatDate(DateTime date) {
 }
 
 class PaymentVoucherScreen extends StatelessWidget {
-  final String timePeriod;
   PaymentVoucherScreen({this.timePeriod});
+
+  final String timePeriod;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +36,9 @@ class PaymentVoucherScreen extends StatelessWidget {
 }
 
 class PaymentVoucherList extends StatefulWidget {
-  final String timePeriod;
   PaymentVoucherList({this.timePeriod});
+
+  final String timePeriod;
 
   @override
   _PaymentVoucherListState createState() => _PaymentVoucherListState();
@@ -44,13 +46,13 @@ class PaymentVoucherList extends StatefulWidget {
 
 class _PaymentVoucherListState extends State<PaymentVoucherList> {
   TextEditingController editingController = TextEditingController();
-
   Iterable<Voucher> paymentVoucherData;
   List<Voucher> paymentVoucherDataforDisplay = List<Voucher>();
 
   @override
   void initState() {
-    paymentVoucherData = Provider.of<List<Voucher>>(context, listen: false);
+    paymentVoucherData = Provider.of<List<Voucher>>(context, listen: false)
+     .where((voucher) => voucher.primaryVoucherType == 'Payment');
     paymentVoucherData =
         filterVouchersByTimePeriod(paymentVoucherData, widget.timePeriod);
     paymentVoucherDataforDisplay.addAll(paymentVoucherData);
@@ -166,17 +168,17 @@ class _PaymentVoucherListState extends State<PaymentVoucherList> {
 }
 
 class PaymentVoucherTile extends StatelessWidget {
-  final Voucher paymentVoucher;
-
   PaymentVoucherTile({this.paymentVoucher});
+
+  final Voucher paymentVoucher;
 
   @override
   Widget build(BuildContext context) {
     return DetailCard(
         paymentVoucher.partyname,
-        '# ${paymentVoucher.masterid}',
-        paymentVoucher.iscancelled,
-        'Rs ${paymentVoucher.amount}',
+        '# ${paymentVoucher.number}',
+        paymentVoucher.type,
+        formatIndianCurrency(positiveAmount(paymentVoucher.amount).toString()),
         _formatDate(paymentVoucher.date));
   }
 }

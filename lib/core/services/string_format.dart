@@ -1,5 +1,5 @@
 import 'package:intl/intl.dart';
-// TODO: Better handle nulls and data types
+
 
 String formatNumber(dynamic inputNumber) {
   List<String> nullList = ['null', ''];

@@ -33,6 +33,7 @@ class VoucherService {
         reference: doc.data['reference'] ?? '',
         type: doc.data['type'] ?? '',
         partyGuid: doc.data['party_ledger_name'] ?? '',
+        number: doc.data['number'] ?? '',
       );
     }).toList();
   }

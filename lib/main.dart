@@ -15,14 +15,10 @@ import 'package:tassist/core/services/receivablesservice.dart';
 import 'package:tassist/core/services/stockservice.dart';
 import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/route_generator.dart';
-import 'package:tassist/ui/root_page.dart';
 import 'package:tassist/theme/texts.dart';
-import 'package:tassist/ui/views/ledgerscreen.dart';
-import 'package:tassist/ui/views/vouchers.dart';
-import 'package:tassist/ui/views/voucherview.dart';
 import 'core/models/ledger.dart';
 import 'core/services/ledgerservice.dart';
-import 'package:tassist/ui/views/ledgerview.dart';
+
 
 void main() {
   runApp(MyApp());

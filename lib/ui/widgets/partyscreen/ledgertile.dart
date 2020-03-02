@@ -52,7 +52,7 @@ _launchURL() async {
               ),
             ),
             SizedBox(width: 5,),
-            Text(formatIndianCurrency(ledgerItem.openingBalance ?? ''), style: TextStyle(color: TassistInfoGrey)),
+            // Text(formatIndianCurrency(ledgerItem.openingBalance ?? ''), style: TextStyle(color: TassistInfoGrey)),
             SizedBox(width: 10,),
     
                Text(formatIndianCurrency(ledgerItem.totalReceivables ?? ''),),
