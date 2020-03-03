@@ -6,8 +6,7 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:intl/intl.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
-// TODO
-var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
+
 
 
 class KhataTile extends StatelessWidget {
@@ -55,7 +54,6 @@ class KhataTile extends StatelessWidget {
   }
 }
 
-// TODO
 class IconSwitchKhata extends StatefulWidget {
 
     final Khata khata;

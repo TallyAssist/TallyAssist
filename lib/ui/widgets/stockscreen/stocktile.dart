@@ -6,8 +6,7 @@ import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
-// TODO
-var numberFormatter = new NumberFormat('##,##,##,##,###.##', "en_US");
+
 
 class StockItemTile extends StatelessWidget {
   final StockItem stockItem;

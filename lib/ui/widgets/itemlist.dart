@@ -44,7 +44,7 @@ class SingleItem extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text('${formatIndianCurrency(ledgerItem.totalReceivables)}'),
+            Text('${formatIndianCurrency(ledgerItem.closingBalance.toString().substring(1, ledgerItem.closingBalance.length))}'),
             SizedBox(
               width: 10,
             ),
@@ -96,10 +96,10 @@ class SingleItem extends StatelessWidget {
             //     color: TassistGray
             //   )
             //   ),
-            Text(
-              '${formatIndianCurrency(ledgerItem.totalReceipt)}',
-              style: TextStyle(color: TassistInfoGrey),
-            ),
+            // Text(
+            //   '${formatIndianCurrency(ledgerItem.totalReceipt)}',
+            //   style: TextStyle(color: TassistInfoGrey),
+            // ),
             IconButton(
               onPressed: () {
                 _launchURL();

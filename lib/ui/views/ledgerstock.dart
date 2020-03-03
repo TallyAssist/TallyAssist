@@ -4,17 +4,15 @@ import 'package:tassist/core/models/ledgerstock.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
 
 class LedgerStockView extends StatelessWidget {
-
-  final String ledgerGuid;
-
   LedgerStockView({this.ledgerGuid});
 
-
+  final String ledgerGuid;
 
   @override
   Widget build(BuildContext context) {
@@ -39,16 +37,15 @@ class LedgerStockView extends StatelessWidget {
 }
 
 class LedgerStockTile extends StatelessWidget {
-  
-  final LedgerStock ledgerStock;
-
   LedgerStockTile({this.ledgerStock});
+
+  final LedgerStock ledgerStock;
 
   @override
   Widget build(BuildContext context) {
     return DetailCard('${ledgerStock.itemName}    (${ledgerStock.numVouchers} vouchers)', 'Last Date: ${formatter.format(ledgerStock.lastDate)}',
      'Last: ${formatIndianCurrency(ledgerStock.lastAmount.toString())} @ ${formatIndianCurrency(ledgerStock.lastRate.toString())}',
-      'T Amt: ${formatIndianCurrency(ledgerStock.totalAmount.toString())}', 'T Qty: ${ledgerStock.totalBilledQty}'
+      'T Amt: ${formatIndianCurrency(ledgerStock.totalAmount.toString())}', 'T Qty: ${positiveAmount(ledgerStock.totalBilledQty)}'
      
     );
   }

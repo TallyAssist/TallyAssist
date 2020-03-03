@@ -7,8 +7,6 @@ import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/theme/colors.dart';
-import 'package:tassist/ui/views/ledgerview.dart';
-import 'package:tassist/ui/views/ledgervoucher.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/services/voucher-item-service.dart';
@@ -22,10 +20,10 @@ import 'package:tassist/ui/shared/debitcredit.dart';
 var formatter = new DateFormat('dd-MM-yyyy') ?? null;
 
 class VoucherView extends StatelessWidget {
-  final String voucherId;
-  final String partyGuid;
-
   VoucherView({this.voucherId, this.partyGuid});
+
+  final String partyGuid;
+  final String voucherId;
 
   @override
   Widget build(BuildContext context) {
@@ -55,103 +53,102 @@ class VoucherView extends StatelessWidget {
               key: _drawerKey,
               drawer: tassistDrawer(context),
               appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
-              body: Column(
-                children: <Widget>[
-                  Padding(
-                    padding: spacer.all.xxs,
-                    child: Text(
-                      voucher.partyname,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                  Container(height: 3.0, color: TassistGray),
-                  Padding(
-                    padding: spacer.all.xxs,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Container(
-                          padding: spacer.all.xxs,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: TassistBgLightPurple,
-                          ),
-                          child: Text(voucher.primaryVoucherType),
+              body: SingleChildScrollView(
+                              child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                        padding: spacer.all.xxs,
+                        child: Text(
+                          voucher.partyname,
+                          style: Theme.of(context).textTheme.headline6,
                         ),
-                        // SizedBox(width: 20),
-                        Text(voucher.type),
-                        _isInvoice(voucher),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: spacer.all.xxs,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
+                        
+                      ),
+                      Text(voucher.number),
+                      Container(height: 3.0, color: TassistGray),
+                      Padding(
+                        padding: spacer.all.xxs,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(
-                                formatIndianCurrency(
-                                        positiveAmount(voucher.amount)
-                                            .toString()) ??
-                                    '',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(
-                                        fontSize: 24.0,
-                                        fontWeight: FontWeight.bold)),
-                            Text('Amount')
+                            Container(
+                              padding: spacer.all.xxs,
+                              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                color: TassistBgLightPurple,
+                              ),
+                              child: Text(voucher.primaryVoucherType),
+                            ),
+                            // SizedBox(width: 20),
+                            Text(voucher.type),
+                            _isInvoice(voucher),
                           ],
                         ),
-                        Column(
+                      ),
+                      Padding(
+                        padding: spacer.all.xxs,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
-                            Text(formatter.format(voucher.date) ?? 'NA',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyText1
-                                    .copyWith(
-                                        fontSize: 20.0,
-                                        fontWeight: FontWeight.bold)),
-                            Text('Due Date')
+                            Column(
+                              children: <Widget>[
+                Text(
+                    formatIndianCurrency(
+                            positiveAmount(voucher.amount)
+                                .toString()) ??
+                        '',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.bold)),
+                Text('Amount')
+                              ],
+                            ),
+                            Column(
+                              children: <Widget>[
+                Text(formatter.format(voucher.date) ?? 'NA',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold)),
+                Text('Date')
+                              ],
+                            )
                           ],
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: spacer.all.xxs,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: <Widget>[
-                          Text('Reference: ${voucher.reference}' ?? '')
-                        ]),
-                  ),
-                  Container(height: 3.0, color: TassistGray),
-                  Container(
-                      height: MediaQuery.of(context).size.height / 4.5,
-                      child: SingleChildScrollView(child: VoucherItemView())),
+                        ),
+                      ),
+                      Padding(
+                        padding: spacer.all.xxs,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Reference: ${voucher.reference}' ?? '')
+                            ]),
+                      ),
+                      Container(height: 3.0, color: TassistGray),
+                      Container(
+                          child: VoucherItemView()),
 
-                  SingleChildScrollView(child: LedgerPartyView()),
-                  //  Container(
-                  //   height: 3.0,
-                  //   color: TassistGray
-                  // ),
-                  // Text('Total Invoice: ${voucher.amount}', style: Theme.of(context).textTheme.bodyText2,)
-                ],
-              ))),
+                      LedgerPartyView(),
+                      //  Container(
+                      //   height: 3.0,
+                      //   color: TassistGray
+                      // ),
+                      // Text('Total Invoice: ${voucher.amount}', style: Theme.of(context).textTheme.bodyText2,)
+                    ],
+                  ),
+              )
+            )
+          ),
     );
   }
 }
 
-// _itemHeight(height, context, voucherItemList) {
-// if (voucherItemList != [])
-// { return height = (MediaQuery.of(context).size.height / 4.5);
-// }
-// else {
-//  return height = 0;}
-// }
 
 // Tax summary
 class LedgerPartyView extends StatelessWidget {
@@ -159,14 +156,15 @@ class LedgerPartyView extends StatelessWidget {
   Widget build(BuildContext context) {
     List<LedgerParty> ledgerPartyList =
         Provider.of<List<LedgerParty>>(context) ?? [];
-    print(ledgerPartyList);
 
     if (ledgerPartyList.length > 0) {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text('Ledger Summary'),
           ListView.builder(
               shrinkWrap: true,
+               physics: NeverScrollableScrollPhysics(),
               itemCount: ledgerPartyList?.length,
               itemBuilder: (context, index) {
                 return LedgerPartyTile(ledgerParty: ledgerPartyList[index]);
@@ -181,9 +179,10 @@ class LedgerPartyView extends StatelessWidget {
 }
 
 class LedgerPartyTile extends StatelessWidget {
+  LedgerPartyTile({this.ledgerParty});
+
   final LedgerParty ledgerParty;
 
-  LedgerPartyTile({this.ledgerParty});
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -211,12 +210,15 @@ class VoucherItemView extends StatelessWidget {
     List<VoucherItem> voucherItemList =
         Provider.of<List<VoucherItem>>(context) ?? [];
 
+
     if (voucherItemList.length > 0) {
       return Column(
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Text('Item Details'),
           ListView.builder(
               shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
               itemCount: voucherItemList?.length,
               itemBuilder: (context, index) {
                 return Padding(
@@ -234,9 +236,10 @@ class VoucherItemView extends StatelessWidget {
 }
 
 class VoucherItemTile extends StatelessWidget {
+  VoucherItemTile({this.voucherItem});
+
   final VoucherItem voucherItem;
 
-  VoucherItemTile({this.voucherItem});
   @override
   Widget build(BuildContext context) {
     return DetailCard(

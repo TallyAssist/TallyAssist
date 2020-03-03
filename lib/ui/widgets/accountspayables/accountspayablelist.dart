@@ -101,7 +101,7 @@ TextEditingController editingController = TextEditingController();
               children: <Widget>[
                 Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
                 Text( 'Payables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),),
-                Text ('Payment', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold ),),
+                // Text ('Payment', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
             ),

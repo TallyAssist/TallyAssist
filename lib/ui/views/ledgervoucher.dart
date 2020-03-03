@@ -6,7 +6,6 @@ import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
@@ -209,7 +208,7 @@ class VoucherTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return DetailCard(
         '',
-        '# ${voucher.masterid}',
+        '# ${voucher.number}',
         voucher.primaryVoucherType,
         formatIndianCurrency(positiveAmount(voucher.amount).toString()),
         formatter.format(voucher.date));

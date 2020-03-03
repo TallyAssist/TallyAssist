@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/dimensions.dart';
-import 'package:tassist/ui/views/voucherview.dart';
 import 'package:tassist/ui/widgets/salesvouchertile.dart';
 
 class SalesVoucherList extends StatefulWidget {

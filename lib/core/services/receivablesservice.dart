@@ -13,8 +13,10 @@ class ReceivablesItemService {
     return companyCollection
         .document(this.uid)
         .collection('ledger')
-        .where('restat_total_receivables', isGreaterThan: 0)
-        .orderBy('restat_total_receivables', descending: true)
+        .where('restat_primary_group_type',
+            whereIn: ['Sundry Debtors', 'Sundry Creditors'])
+        .where('closing_balance', isLessThan: 0)
+        .orderBy('closing_balance', descending: false)
         .snapshots()
         .map(_receivablesItemData);
   }
@@ -34,7 +36,8 @@ class ReceivablesItemService {
         phone: doc.data['phone'].toString() ?? '',
         guid: doc.data['guid'].toString() ?? '',
         lastPaymentDate: doc.data['restat_last_payment_date'].toString() ?? '',
-        lastPurchaseDate: doc.data['restat_last_purchase_date'].toString() ?? '',
+        lastPurchaseDate:
+            doc.data['restat_last_purchase_date'].toString() ?? '',
         lastReceiptDate: doc.data['restat_last_receipt_date'].toString() ?? '',
         lastSalesDate: doc.data['restat_last_sales_date'].toString() ?? '',
         meanPayment: doc.data['restat_mean_payment'].toString() ?? '',

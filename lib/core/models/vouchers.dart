@@ -12,9 +12,10 @@ class Voucher {
   final String isPostDated;
   final String reference;
   final String partyGuid;
+  final String number;
 
 
   Voucher ({this.date, this.partyname, this.amount, this.masterid, this.iscancelled, this.primaryVoucherType,
-  this.isInvoice, this.isPostDated, this.reference, this.type, this.partyGuid
+  this.isInvoice, this.isPostDated, this.reference, this.type, this.partyGuid, this.number
   });
 }
