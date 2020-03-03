@@ -1,8 +1,7 @@
-positiveAmount(int inputAmount) {
+positiveAmount(double inputAmount) {
   if (inputAmount < 0) {
     return inputAmount.toString().substring(1, inputAmount.toString().length);
-  }
-  else {
+  } else {
     return inputAmount;
   }
 }

@@ -6,10 +6,17 @@ class LedgerStock {
   final String itemName;
   final String totalAmount;
   final String totalActualQty;
-  final int totalBilledQty;
+  final double totalBilledQty;
   final String numVouchers;
 
-  LedgerStock({this.itemName, this.lastAmount, this.lastDate, this.lastDiscount,
-  this.lastRate, this.numVouchers, this.totalActualQty, this.totalAmount, this.totalBilledQty});
-
+  LedgerStock(
+      {this.itemName,
+      this.lastAmount,
+      this.lastDate,
+      this.lastDiscount,
+      this.lastRate,
+      this.numVouchers,
+      this.totalActualQty,
+      this.totalAmount,
+      this.totalBilledQty});
 }

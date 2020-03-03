@@ -2,7 +2,7 @@ class PaymentVoucher {
 
   final String date;
   final String partyname;
-  final int amount;
+  final double amount;
   final String masterid;
   final String iscancelled;
 
