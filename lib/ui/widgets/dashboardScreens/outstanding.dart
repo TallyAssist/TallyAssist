@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 class OutstandingsDashboardWidget extends StatelessWidget {
   final String timePeriod;
@@ -72,7 +73,7 @@ class OutstandingsDashboardWidgetContentRow extends StatelessWidget {
             children: <Widget>[
               // Text('Actual'),
               Text(
-                formatIndianCurrency(userDocument['out_actual_pay'].toString()),
+                formatIndianCurrency(positiveAmount(userDocument['out_actual_pay'])),
                 style: Theme.of(context)
                     .textTheme
                     .bodyText1
