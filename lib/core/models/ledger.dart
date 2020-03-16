@@ -2,8 +2,8 @@ class LedgerItem {
   final String name;
   final String masterId;
   final String currencyName;
-  final int openingBalance;
-  final int closingBalance;
+  final double openingBalance;
+  final double closingBalance;
   final String parentid;
   final String contact;
   final String state;
@@ -33,13 +33,38 @@ class LedgerItem {
   final String numPurchaseVouchers;
   final String numReceiptVouchers;
 
-
-
-  LedgerItem({this.name, this.masterId, this.currencyName, this.openingBalance, this.closingBalance,  
-              this.parentid, this.contact, this.state, this.email, this.phone, this.guid,
-              this.lastPaymentDate, this.lastPurchaseDate, this.lastReceiptDate, this.gst,
-              this.lastSalesDate, this.meanPayment, this.meanPurchase, this.meanReceipt,
-              this.meanSales, this.partyGuid, this.totalPayables, this.totalPayment, this.totalSales,
-              this.totalPurchase, this.totalReceipt, this.totalReceivables, this.primaryGroupType, this.restatCompanyCode, 
-              this.numPaymentVouchers, this.numPurchaseVouchers, this.numReceiptVouchers, this.numSalesVouchers });
-              }
+  LedgerItem(
+      {this.name,
+      this.masterId,
+      this.currencyName,
+      this.openingBalance,
+      this.closingBalance,
+      this.parentid,
+      this.contact,
+      this.state,
+      this.email,
+      this.phone,
+      this.guid,
+      this.lastPaymentDate,
+      this.lastPurchaseDate,
+      this.lastReceiptDate,
+      this.gst,
+      this.lastSalesDate,
+      this.meanPayment,
+      this.meanPurchase,
+      this.meanReceipt,
+      this.meanSales,
+      this.partyGuid,
+      this.totalPayables,
+      this.totalPayment,
+      this.totalSales,
+      this.totalPurchase,
+      this.totalReceipt,
+      this.totalReceivables,
+      this.primaryGroupType,
+      this.restatCompanyCode,
+      this.numPaymentVouchers,
+      this.numPurchaseVouchers,
+      this.numReceiptVouchers,
+      this.numSalesVouchers});
+}

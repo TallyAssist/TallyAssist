@@ -1,6 +1,5 @@
 class LedgerParty {
-
-  final int amount;
+  final double amount;
   final String isDeemedPositive;
   final String isPartyLedger;
   final String ledgerGuid;
@@ -14,8 +13,18 @@ class LedgerParty {
   final DateTime date;
   final String voucherMasterID;
 
-  LedgerParty({this.amount, this.primaryVoucherType, this.date, this.isDeemedPositive, this.isPartyLedger,
-  this.ledgerGuid, this.ledgerMasterId, this.ledgerName, this.ledgerRefMasterId, this.ledgerRefName,
-  this.partyName, this.primaryGroup, this.voucherMasterID });
-
+  LedgerParty(
+      {this.amount,
+      this.primaryVoucherType,
+      this.date,
+      this.isDeemedPositive,
+      this.isPartyLedger,
+      this.ledgerGuid,
+      this.ledgerMasterId,
+      this.ledgerName,
+      this.ledgerRefMasterId,
+      this.ledgerRefName,
+      this.partyName,
+      this.primaryGroup,
+      this.voucherMasterID});
 }

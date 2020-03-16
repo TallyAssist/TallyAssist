@@ -17,26 +17,27 @@ class VouchersHome extends StatefulWidget {
 }
 
 class _VouchersHomeState extends State<VouchersHome>
-    with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  bool showFab = true;
+    // with SingleTickerProviderStateMixin 
+    {
+  // TabController _tabController;
+  // bool showFab = true;
 
   String timePeriod = "Tomorrow";
 
-  @override
-  void initState() {
-    super.initState();
+  // @override
+  // void initState() {
+  //   super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 4);
-    _tabController.addListener(() {
-      if (_tabController.index == 0) {
-        showFab = true;
-      } else {
-        showFab = false;
-      }
-      setState(() {});
-    });
-  }
+  //   _tabController = TabController(vsync: this, initialIndex: 0, length: 4);
+  //   _tabController.addListener(() {
+  //     if (_tabController.index == 0) {
+  //       showFab = true;
+  //     } else {
+  //       showFab = false;
+  //     }
+  //     setState(() {});
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -44,68 +45,72 @@ class _VouchersHomeState extends State<VouchersHome>
 
     return WillPopScope(
       onWillPop: () async => false,
-      child: Scaffold(
-        key: _drawerKey,
-        appBar: headerNavOther(_drawerKey, _tabController),
-        drawer: tassistDrawer(context),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height / 1.1,
-          child: Column(
-            children: <Widget>[
-              Container(
-                decoration: myBoxDecorationBottomBorder(),
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.center,
+      child: DefaultTabController(
+        length: 4,
+              child: Scaffold(
+          key: _drawerKey,
+          appBar: headerNavOther(_drawerKey),
+          // , _tabController),
+          drawer: tassistDrawer(context),
+          body: SizedBox(
+            // height: MediaQuery.of(context).size.height / 1.1,
+            child: Column(
+              children: <Widget>[
+                Container(
+                  decoration: myBoxDecorationBottomBorder(),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Select timeperiod",
+                          style: secondaryListTitle2,
+                        ),
+                        PopupMenuButton<String>(
+                          icon: Icon(Icons.av_timer),
+                          onSelected: (value) {
+                            setState(() {
+                              timePeriod = value;
+                            });
+                          },
+                          itemBuilder: (BuildContext context) {
+                            return timePeriodList.map(
+                              (String choice) {
+                                return PopupMenuItem<String>(
+                                  value: choice,
+                                  child: Text(
+                                    choice,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 14.0),
+                                  ),
+                                );
+                              },
+                            ).toList();
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  // color: Colors.blueGrey[100],
+                  // width: MediaQuery.of(context).size.width,
+                  height: 35,
+                ),
+                Expanded(
+                  child: TabBarView(
+                    // controller: _tabController,
                     children: <Widget>[
-                      Text(
-                        "Select timeperiod",
-                        style: secondaryListTitle2,
-                      ),
-                      PopupMenuButton<String>(
-                        icon: Icon(Icons.av_timer),
-                        onSelected: (value) {
-                          setState(() {
-                            timePeriod = value;
-                          });
-                        },
-                        itemBuilder: (BuildContext context) {
-                          return timePeriodList.map(
-                            (String choice) {
-                              return PopupMenuItem<String>(
-                                value: choice,
-                                child: Text(
-                                  choice,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 14.0),
-                                ),
-                              );
-                            },
-                          ).toList();
-                        },
-                      ),
+                      SalesVoucherScreen(timePeriod: timePeriod),
+                      PurchaseVoucherScreen(timePeriod: timePeriod),
+                      ReceiptVoucherScreen(timePeriod: timePeriod),
+                      PaymentVoucherScreen(timePeriod: timePeriod),
                     ],
                   ),
                 ),
-                // color: Colors.blueGrey[100],
-                width: MediaQuery.of(context).size.width,
-                height: 35,
-              ),
-              Expanded(
-                child: TabBarView(
-                  controller: _tabController,
-                  children: <Widget>[
-                    SalesVoucherScreen(timePeriod: timePeriod),
-                    PurchaseVoucherScreen(timePeriod: timePeriod),
-                    ReceiptVoucherScreen(timePeriod: timePeriod),
-                    PaymentVoucherScreen(timePeriod: timePeriod),
-                  ],
-                ),
-              ),
-            ], // child:
+              ], // child:
+            ),
           ),
         ),
       ),
@@ -114,7 +119,9 @@ class _VouchersHomeState extends State<VouchersHome>
 }
 
 AppBar headerNavOther(
-    GlobalKey<ScaffoldState> _drawerkey, TabController _tabController) {
+    GlobalKey<ScaffoldState> _drawerkey)
+    // , TabController _tabController) 
+    {
   bool enabled = true;
 
   return AppBar(
@@ -131,7 +138,7 @@ AppBar headerNavOther(
       ),
       elevation: 0.7,
       bottom: TabBar(
-        controller: _tabController,
+        // controller: _tabController,
         indicatorColor: Colors.white,
         tabs: <Widget>[
           Tab(
