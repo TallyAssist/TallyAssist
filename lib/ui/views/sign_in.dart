@@ -57,7 +57,7 @@ class _SignInState extends State<SignIn> {
         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 50.0),
         child: Form(
           key: _formKey,
-          child: Column(
+          child: ListView(
             children: <Widget>[
               SizedBox(height: 20.0),
               TextFormField(
