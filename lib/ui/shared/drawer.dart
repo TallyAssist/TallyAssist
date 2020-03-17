@@ -17,6 +17,7 @@ import 'package:tassist/ui/views/pruchaseorderreport.dart';
 import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
 
@@ -39,9 +40,9 @@ Drawer tassistDrawer(BuildContext context) {
               child: Icon(
                 Icons.person_outline,
                 color: TassistInfoGrey,
-                size: 50.0,
+                size: 40.0,
               ),
-              radius: 30.0,
+              radius: 25.0,
               backgroundColor: TassistWhite,
             ),
             SizedBox(
@@ -52,22 +53,33 @@ Drawer tassistDrawer(BuildContext context) {
                 user?.email,
                 style: Theme.of(context).textTheme.headline6.copyWith(
                       color: TassistWhite,
-                      fontSize: 18.0,
+                      fontSize: 14.0,
                     ),
               ),
             ),
-            Container(
-              child: Text(
-                // 'Company: ${companyInfo['formal_name']}',
-                'You are awesome!',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: TassistWhite),
-              ),
-            )
+            // Container(
+            //   child: Text(
+            //     // 'Company: ${companyInfo['formal_name']}',
+            //     'You are awesome!',
+            //     maxLines: 1,
+            //     overflow: TextOverflow.ellipsis,
+            //     style: Theme.of(context)
+            //         .textTheme
+            //         .bodyText1
+            //         .copyWith(color: TassistWhite),
+            //   ),
+            // )
+
+                 RaisedButton( 
+                   color: TassistWhite,
+                   child:
+                   Row(children: <Widget>[
+                  Icon(FontAwesomeIcons.laptop),
+                  SizedBox(width: 20),
+                  Text('Install Tally Connector')
+
+                   ]),
+                onPressed: () => _launchURL(),)
           ],
         ),
         decoration: BoxDecoration(
@@ -238,5 +250,15 @@ class _DrawerItemState extends State<DrawerItem> {
         ));
       },
     );
+  }
+}
+
+
+_launchURL() async {
+  const url = 'https://restat.co/tallyassist/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

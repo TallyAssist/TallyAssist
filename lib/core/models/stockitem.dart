@@ -3,7 +3,7 @@ class StockItem {
   final String name;
   final String masterId;
   final String closingBalance;
-  final double closingValue;
+  final String closingValue;
   final String baseUnit;
   final String closingRate;
   final String standardCost;

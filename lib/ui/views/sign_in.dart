@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/root_page.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -117,10 +119,38 @@ class _SignInState extends State<SignIn> {
                 error,
                 style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
+              Text(
+                  'Have you installed the Tally Connector yet?',
+                  style: Theme.of(context)
+                  .textTheme
+                  .headline6
+                  .copyWith(fontSize: 18.0, color: TassistMainText),
+                ),
+                SizedBox(height: 30),
+                 RaisedButton( 
+                   color: TassistBgLightPurple,
+                   child:
+                   Row(children: <Widget>[
+                  Icon(FontAwesomeIcons.laptop),
+                  SizedBox(width: 30),
+                  Text('Launch the Tally Connector website')
+
+                   ]),
+                onPressed: () => _launchURL(),)
             ],
           ),
         ),
       ),
     );
+  }
+}
+
+
+_launchURL() async {
+  const url = 'https://restat.co/tallyassist/';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

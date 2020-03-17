@@ -22,7 +22,7 @@ class StockItemTile extends StatelessWidget {
         '# ${stockItem.masterId}',
         'CR: ${formatIndianCurrency(stockItem.closingRate.toString())}',
         '${stockItem.closingBalance.toString()} ${stockItem.baseUnit}',
-        'CV: ${formatIndianCurrency(positiveAmount(stockItem.closingValue))}',
+        'CV: ${formatIndianCurrency(stockItem.closingValue)}',
 
       ),
       title1: 'Standard Cost',

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tassist/core/models/stockitem.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 class StockItemService {
   final String uid;
@@ -23,7 +24,7 @@ class StockItemService {
         name: doc.data['name'] ?? '',
         masterId: doc.data['master_id'] ?? '',
         closingBalance: doc.data['closingbalance'].toString() ?? '',
-        closingValue: doc.data['closingvalue'].toDouble() ?? 0,
+        closingValue: doc.data['closingvalue'].toString() ?? 0,
         baseUnit: doc.data['baseunits'].toString() ?? '',
         closingRate: doc.data['closingrate'].toString() ?? '',
         standardCost: doc.data['standardcost'].toString() ?? '',
@@ -32,3 +33,4 @@ class StockItemService {
     }).toList();
   }
 }
+
