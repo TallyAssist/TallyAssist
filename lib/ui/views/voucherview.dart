@@ -1,8 +1,13 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
+ import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/theme.dart';
@@ -173,6 +178,35 @@ class LedgerPartyView extends StatelessWidget {
   }
 }
 
+viewPdf(context) async {
+  final pdf = createSamplePdf();
+
+  final String dir = (await getExternalStorageDirectory()).path;
+  final path = "$dir/example.pdf";
+  print(path);
+  final file = File(path);
+  await file.writeAsBytes(pdf.save());
+  // return PdfViewerPage(path: path);
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (_) => PdfViewerPage(path: path),
+    ),
+  );
+}
+
+class PdfViewerPage extends StatelessWidget {
+  final String path;
+  const PdfViewerPage({Key key, this.path}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PDFViewerScaffold(
+      path: path,
+    );
+  }
+}
+
+
 class LedgerPartyTile extends StatelessWidget {
   LedgerPartyTile({this.ledgerParty});
 
@@ -262,6 +296,12 @@ AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
   bool enabled = true;
 
   return AppBar(
+            actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.picture_as_pdf),
+            onPressed: () => viewPdf(context),
+          )
+        ],
       leading: Padding(
         padding: EdgeInsets.only(left: 12),
         child: IconButton(
