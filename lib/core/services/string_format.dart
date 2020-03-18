@@ -19,8 +19,12 @@ String formatIndianCurrency(dynamic inputNumber) {
   // final formatter = new NumberFormat.decimalPattern();
   if (nullList.contains(inputNumber)) {
     return '';
-  } else {
+  } else if (inputNumber.runtimeType.toString() == 'String') {
     var formatter = NumberFormat('##,##,##,##,###.##', 'en_IN');
     return '\u20B9' + formatter.format(double.parse(inputNumber));
+  } 
+  else {
+    var formatter = NumberFormat('##,##,##,##,###.##', 'en_IN');
+    return '\u20B9' + formatter.format(inputNumber);
   }
 }
