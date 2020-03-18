@@ -1,8 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/ledger.dart';
-import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/models/ledgervoucher.dart';
+// import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/ledgervoucherservice.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
@@ -50,24 +53,29 @@ class _VoucherListState extends State<VoucherList> {
 
   TextEditingController editingController = TextEditingController();
 
-  Iterable<Voucher> voucherData;
-  List<Voucher> voucherDataforDisplay = List<Voucher>();
+  List<LedgerVoucherModel> voucherData;
+  List<LedgerVoucherModel> voucherDataforDisplay = List<LedgerVoucherModel>();
+
+  String uid;
 
   @override
   void initState() {
-    voucherData = Provider.of<List<Voucher>>(context, listen: false)
-        .where((voucherData) => voucherData.partyname == partyname);
-    voucherData = filterVouchersByTimePeriod(voucherData, widget.timePeriod);
+    uid = Provider.of<FirebaseUser>(context, listen: false).uid;
+
+    // Get all vouchers for current party/ledger
+    voucherData = Provider.of<List<LedgerVoucherModel>>(context, listen: false);
+        // .where((voucherData) => voucherData.partyname == partyname);
+    // voucherData = filterVouchersByTimePeriod(voucherData, widget.timePeriod);
     voucherDataforDisplay.addAll(voucherData);
 
     super.initState();
   }
 
   void filterSearchResults(String query) {
-    List<Voucher> dummySearchList = List<Voucher>();
+    List<LedgerVoucherModel> dummySearchList = List<LedgerVoucherModel>();
     dummySearchList.addAll(voucherData);
     if (query.isNotEmpty) {
-      List<Voucher> dummyListData = List<Voucher>();
+      List<LedgerVoucherModel> dummyListData = List<LedgerVoucherModel>();
       dummySearchList.forEach((item) {
         if (item.primaryVoucherType.toLowerCase().contains(query)) {
           dummyListData.add(item);
@@ -200,7 +208,7 @@ class _VoucherListState extends State<VoucherList> {
 }
 
 class VoucherTile extends StatelessWidget {
-  final Voucher voucher;
+  final LedgerVoucherModel voucher;
 
   VoucherTile({this.voucher});
 

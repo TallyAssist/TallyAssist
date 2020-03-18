@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/services/ledgerstock.dart';
+import 'package:tassist/core/services/ledgervoucherservice.dart';
 import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
@@ -59,8 +61,17 @@ class _LedgerViewState extends State<LedgerView>
     return MultiProvider(
       providers: [
         StreamProvider<List<LedgerStock>>.value(
-            value: LedgerStockService(uid: user?.uid, ledgerId: ledgerGuid)
-                .ledgerStockData),
+          value: LedgerStockService(
+            uid: user?.uid,
+            ledgerId: ledgerGuid,
+          ).ledgerStockData,
+        ),
+        StreamProvider<List<LedgerVoucherModel>>.value(
+          value: LedgerVoucherService(
+            partyName: partyname,
+            uid: user?.uid,
+          ).ledgerVoucherData,
+        )
       ],
       child: WillPopScope(
         onWillPop: () async => false,
