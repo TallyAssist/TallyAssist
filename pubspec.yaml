@@ -35,6 +35,7 @@ dependencies:
   flutter_full_pdf_viewer: ^1.0.6
   # flutter_login: ^1.0.10+1
   # charts_flutter: ^0.8.1
+  esys_flutter_share: ^1.0.2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

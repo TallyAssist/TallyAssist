@@ -1,13 +1,17 @@
 import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/company.dart';
+import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
- import 'package:tassist/templates/invoice_pdf_template.dart';
+import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/theme.dart';
@@ -33,7 +37,9 @@ class VoucherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<FirebaseUser>(context);
+    final company = Provider.of<Company>(context);
 
+    // TODO: Replace usage of Voucher with LedgerVoucher
     Iterable<Voucher> voucherList = Provider.of<List<Voucher>>(context)
             .where((item) => item.masterid == voucherId) ??
         [];
@@ -43,10 +49,12 @@ class VoucherView extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        // inventory entries
         StreamProvider<List<VoucherItem>>.value(
           value: VoucherItemService(uid: user?.uid, voucherId: voucherId)
               .voucherItemData,
         ),
+        // ledger entries
         StreamProvider<List<LedgerParty>>.value(
           value: LedgerPartyService(uid: user?.uid, voucherId: voucherId)
               .voucherLedgerData,
@@ -57,7 +65,9 @@ class VoucherView extends StatelessWidget {
           child: Scaffold(
               key: _drawerKey,
               drawer: tassistDrawer(context),
-              appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
+              // Invoice PDF gets shared from here
+              appBar:
+                  headerNavOtherVoucher(_drawerKey, context, voucher, company),
               body: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -178,35 +188,6 @@ class LedgerPartyView extends StatelessWidget {
   }
 }
 
-viewPdf(context) async {
-  final pdf = createSamplePdf();
-
-  final String dir = (await getExternalStorageDirectory()).path;
-  final path = "$dir/example.pdf";
-  print(path);
-  final file = File(path);
-  await file.writeAsBytes(pdf.save());
-  // return PdfViewerPage(path: path);
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (_) => PdfViewerPage(path: path),
-    ),
-  );
-}
-
-class PdfViewerPage extends StatelessWidget {
-  final String path;
-  const PdfViewerPage({Key key, this.path}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return PDFViewerScaffold(
-      path: path,
-    );
-  }
-}
-
-
 class LedgerPartyTile extends StatelessWidget {
   LedgerPartyTile({this.ledgerParty});
 
@@ -291,17 +272,68 @@ _isInvoice(Voucher voucher) {
   }
 }
 
+viewPdf(context, voucher, company) async {
+  final pdf = createInvoicePdf(
+    invoiceNumber: voucher.number,
+    invoiceDate: voucher.date.toString().substring(0, 10),
+    companyName: company.formalName,
+    companyAddress: company.address,
+    companyPincode: company.pincode,
+  );
+
+  final String dir = (await getExternalStorageDirectory()).path;
+  final path = "$dir/example.pdf";
+  print(path);
+  final file = File(path);
+  await file.writeAsBytes(pdf.save());
+
+  try {
+    final Uint8List bytes1 = await file.readAsBytes();
+    //  rootBundle.load('assets/image1.png');
+
+    await Share.files(
+        'esys images',
+        {
+          'esys.pdf': bytes1,
+        },
+        '*/*',
+        text: 'My optional text.');
+  } catch (e) {
+    print('error: $e');
+  }
+
+  // return PdfViewerPage(path: path);
+
+  // Navigator.of(context).push(
+  //   MaterialPageRoute(
+  //     builder: (_) => PdfViewerPage(path: path),
+  //   ),
+  // );
+}
+
+class PdfViewerPage extends StatelessWidget {
+  final String path;
+  const PdfViewerPage({Key key, this.path}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PDFViewerScaffold(
+      path: path,
+    );
+  }
+}
+
 AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
-    BuildContext context, Voucher voucher) {
+    BuildContext context, Voucher voucher, Company company) {
   bool enabled = true;
 
   return AppBar(
-            actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.picture_as_pdf),
-            onPressed: () => viewPdf(context),
-          )
-        ],
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.picture_as_pdf),
+          onPressed: () => viewPdf(context, voucher, company),
+        )
+      ],
       leading: Padding(
         padding: EdgeInsets.only(left: 12),
         child: IconButton(
