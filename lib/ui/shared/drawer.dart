@@ -26,9 +26,6 @@ final AuthService _auth = AuthService();
 Drawer tassistDrawer(BuildContext context) {
   final user = Provider.of<FirebaseUser>(context);
 
-  // final snapshot = Provider.of<DocumentSnapshot>(context);
-  // var companyInfo = snapshot.data;
-
   return Drawer(
       child: ListView(
     children: <Widget>[
@@ -59,7 +56,6 @@ Drawer tassistDrawer(BuildContext context) {
             ),
             // Container(
             //   child: Text(
-            //     // 'Company: ${companyInfo['formal_name']}',
             //     'You are awesome!',
             //     maxLines: 1,
             //     overflow: TextOverflow.ellipsis,

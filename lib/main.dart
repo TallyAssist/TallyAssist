@@ -16,7 +16,9 @@ import 'package:tassist/core/services/stockservice.dart';
 import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/route_generator.dart';
 import 'package:tassist/theme/texts.dart';
+import 'core/models/company.dart';
 import 'core/models/ledger.dart';
+import 'core/services/companyservice.dart';
 import 'core/services/ledgerservice.dart';
 
 
@@ -72,6 +74,8 @@ class TopWidget extends StatelessWidget {
         //     value: ReceiptVoucherService(uid: user?.uid).receiptVoucherData),
         StreamProvider<List<Voucher>>.value(
             value: VoucherService(uid: user?.uid).voucherData),
+        StreamProvider<Company>.value(
+            value: CompanyService(uid: user?.uid).companyData),
         StreamProvider<DocumentSnapshot>.value(
             value: DatabaseService()
                 .companyCollection

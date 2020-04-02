@@ -11,9 +11,6 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey ) {
 
 // GlobalKey<ScaffoldState> _drawerKey = GlobalKey();
   bool enabled = true;
-
-  // final snapshot = Provider.of<DocumentSnapshot>(context);
-  //   var companyInfo = snapshot.data;
    
 
   return AppBar(
@@ -53,7 +50,6 @@ AppBar headerNav(GlobalKey<ScaffoldState> _drawerkey ) {
               ),
                ),
               Text(
-                // 'GSTIN: ${companyInfo['gst_number']}',
                 'Beta',
                 style: TextStyle(
                   color: TassistWhite,
