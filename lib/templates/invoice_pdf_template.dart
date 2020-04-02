@@ -1,7 +1,21 @@
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
-createSamplePdf() {
+createInvoicePdf({
+  String companyName,
+  String companyAddress,
+  String companyPincode,
+  // String companyPan,
+  // String partyName,
+  // String partyAddress,
+  // String partyDistrict,
+  // String partyState,
+  // String partyGST,
+  String invoiceNumber,
+  String invoiceDate,
+  // List<String> itemList,
+}) {
+
   final pdf = Document();
   pdf.addPage(
     MultiPage(
@@ -60,9 +74,9 @@ createSamplePdf() {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Paragraph(text: 'Dayal Industries'),
-                      Paragraph(text: 'Khasra No 1561/1 & 166/2'),
-                      Paragraph(text: 'Acchronda, Gogoi Road'),
+                      Paragraph(text: companyName),
+                      Paragraph(text: companyAddress),
+                      Paragraph(text: companyPincode),
                     ],
                   ),
                 ),
@@ -90,8 +104,8 @@ createSamplePdf() {
                 crossAxisCount: 2,
                 childAspectRatio: 0.3,
                 children: <Widget>[
-                  gridChild('Invoice No.', '19/20/NK/0192'),
-                  gridChild('Dated', '5-Feb-2020'),
+                  gridChild('Invoice No.', invoiceNumber),
+                  gridChild('Dated', invoiceDate),
                   gridChild('Delivery Notes', ''),
                   gridChild('Mode/Terms of Payment', ''),
                   gridChild('Suppliers Ref', ''),
@@ -157,7 +171,7 @@ createSamplePdf() {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    Text('For Dayal Crop Care Pvt Ltd'),
+                    Text('For $companyName'),
                     SizedBox(height: 25),
                     Text('Authorised Signatory'),
                   ],
