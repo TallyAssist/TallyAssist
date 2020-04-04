@@ -11,6 +11,8 @@ class LedgerVoucherModel {
   final String reference;
   final String partyGuid;
   final String number;
+  final List ledgerEntries;
+  final List inventoryEntries;
 
   LedgerVoucherModel(
       {this.date,
@@ -24,5 +26,7 @@ class LedgerVoucherModel {
       this.reference,
       this.type,
       this.partyGuid,
-      this.number});
+      this.number,
+      this.ledgerEntries,
+      this.inventoryEntries});
 }

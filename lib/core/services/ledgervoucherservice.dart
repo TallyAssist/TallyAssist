@@ -37,6 +37,10 @@ class LedgerVoucherService {
           type: doc.data['type'] ?? '',
           partyGuid: doc.data['party_ledger_name'] ?? '',
           number: doc.data['number'] ?? '',
+          ledgerEntries: doc.data['ledger_entries'] ?? [],
+          inventoryEntries: doc.data['inventory_entries'] != ''
+              ? (doc.data['inventory_entries'] ?? [])
+              : [0],
         );
       },
     ).toList();
