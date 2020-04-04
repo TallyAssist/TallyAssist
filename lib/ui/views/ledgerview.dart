@@ -60,12 +60,14 @@ class _LedgerViewState extends State<LedgerView>
 
     return MultiProvider(
       providers: [
+        // Gets ledger stock metrics (calculated)
         StreamProvider<List<LedgerStock>>.value(
           value: LedgerStockService(
             uid: user?.uid,
             ledgerId: ledgerGuid,
           ).ledgerStockData,
         ),
+        // Gets all vouchers for current ledger
         StreamProvider<List<LedgerVoucherModel>>.value(
           value: LedgerVoucherService(
             partyName: partyname,
