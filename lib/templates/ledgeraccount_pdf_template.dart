@@ -6,7 +6,7 @@ createLedgerPdf({
   String partyName,
   String startDate,
   String endDate,
-  // List<List<String>> ledgerList,
+  List<List<String>> ledgerList,
   // String openingBalance,
   // String closingBalance,
   // String totalCreditWithoutClosingBalance,
@@ -88,10 +88,10 @@ createLedgerPdf({
         //     ['Date', 'Particulars', 'Vch Type', 'Vch No.', 'Debit', 'Credit'],
         //   ],
         // ),
-        // Table.fromTextArray(
-        //   context: context,
-        //   data: ledgerList,
-        // ),
+        Table.fromTextArray(
+          context: context,
+          data: ledgerList,
+        ),
         SizedBox(height: 30),
         Padding(padding: const EdgeInsets.all(10)),
       ],
