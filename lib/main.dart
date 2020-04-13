@@ -56,6 +56,7 @@ class TopWidget extends StatelessWidget {
         StreamProvider<List<ReceivablesItem>>.value(
           // initialData: List<ReceivablesItem>(),
           value: ReceivablesItemService(uid: user?.uid).accountsReceivableData,),
+        // LEDGER/PARTY DATA
         StreamProvider<List<LedgerItem>>.value(
             value: LedgerItemService(uid: user?.uid).ledgerItemData),
         StreamProvider<List<StockItem>>.value(

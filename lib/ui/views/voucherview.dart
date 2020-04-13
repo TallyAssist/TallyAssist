@@ -8,6 +8,7 @@ import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/company.dart';
+import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
@@ -45,6 +46,12 @@ class VoucherView extends StatelessWidget {
         [];
     Voucher voucher = voucherList.elementAt(0) ?? [];
 
+    // Get ledger data for voucher's counterparty
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context)
+            .where((item) => item.guid == voucher.partyGuid) ??
+        [];
+    LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
+
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return MultiProvider(
@@ -66,8 +73,8 @@ class VoucherView extends StatelessWidget {
               key: _drawerKey,
               drawer: tassistDrawer(context),
               // Invoice PDF gets shared from here
-              appBar:
-                  headerNavOtherVoucher(_drawerKey, context, voucher, company),
+              appBar: headerNavOtherVoucher(
+                  _drawerKey, context, voucher, company, ledger),
               body: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -272,17 +279,22 @@ _isInvoice(Voucher voucher) {
   }
 }
 
-viewPdf(context, voucher, company) async {
+viewPdf(context, voucher, company, ledger) async {
   final pdf = createInvoicePdf(
     invoiceNumber: voucher.number,
     invoiceDate: voucher.date.toString().substring(0, 10),
     companyName: company.formalName,
     companyAddress: company.address,
     companyPincode: company.pincode,
+    partyName: ledger.name,
+    partyAddress: ledger.address,
+    partyPincode: ledger.pincode,
+    partyState: ledger.state,
+    partyGST: ledger.gst,
   );
 
   final String dir = (await getExternalStorageDirectory()).path;
-  final path = "$dir/example.pdf";
+  final path = "$dir/invoice_tallyassist.pdf";
   print(path);
   final file = File(path);
   await file.writeAsBytes(pdf.save());
@@ -294,7 +306,7 @@ viewPdf(context, voucher, company) async {
     await Share.files(
         'esys images',
         {
-          'esys.pdf': bytes1,
+          'invoice_tallyassist.pdf': bytes1,
         },
         '*/*',
         text: 'My optional text.');
@@ -324,14 +336,14 @@ class PdfViewerPage extends StatelessWidget {
 }
 
 AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
-    BuildContext context, Voucher voucher, Company company) {
+    BuildContext context, Voucher voucher, Company company, LedgerItem ledger) {
   bool enabled = true;
 
   return AppBar(
       actions: <Widget>[
         IconButton(
           icon: Icon(Icons.picture_as_pdf),
-          onPressed: () => viewPdf(context, voucher, company),
+          onPressed: () => viewPdf(context, voucher, company, ledger),
         )
       ],
       leading: Padding(
