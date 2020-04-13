@@ -55,6 +55,8 @@ class LedgerItemService {
         closingBalance: doc.data['closing_balance'].toDouble() ?? 0,
         parentid: doc.data['parentcode'].toString() ?? '',
         contact: doc.data['contact'].toString() ?? '',
+        address: doc.data['address'].toString() ?? '',
+        pincode: doc.data['pincode'].toString() ?? '',
         state: doc.data['state'].toString() ?? '',
         email: doc.data['email'].toString() ?? '',
         phone: doc.data['phone'].toString() ?? '',
