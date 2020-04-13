@@ -313,13 +313,56 @@ _isInvoice(Voucher voucher) {
   }
 }
 
-createInvoiceItemList(voucher) {}
+_createInvoiceItemList(voucher, inventoryEntries) {
+  List<List<String>> itemList = [
+    [
+      'SI No.',
+      'Description of Goods',
+      'HSN/SAC',
+      'Quantity',
+      'Rate',
+      'per',
+      'Disc',
+      'Amount'
+    ]
+  ];
+
+  // We add relevant data to itemList
+  for (var i = 0; i < inventoryEntries.length; i++) {
+    String serialNo = (i + 1).toString();
+    String itemDescription = inventoryEntries[i]['stockItemName'];
+    String hsnSac = "";
+    String quantity = inventoryEntries[i]['actualQty'].toString();
+    String rate = inventoryEntries[i]['rate'].toString();
+    String unit = "";
+    String discount = inventoryEntries[i]['discount'].toString();
+    String amount = positiveAmount(inventoryEntries[i]['amount'].toDouble());
+    String taxAmount =
+        positiveAmount(inventoryEntries[i]['taxAmount'].toDouble());
+
+    itemList.add([
+      serialNo,
+      itemDescription,
+      hsnSac,
+      quantity,
+      rate,
+      unit,
+      discount,
+      amount
+    ]);
+    itemList.add(["", "Tax", "", "", "", "", taxAmount]);
+  }
+
+  itemList.add(["", "Total", "", "", "", "", "", "", voucher.amount.toString()]);
+
+  return itemList;
+}
 
 viewPdf(context, voucher, company, ledger) async {
   List<VoucherItem> inventoryEntries =
       Provider.of<List<VoucherItem>>(context, listen: false);
 
-  final itemList = createInvoiceItemList(voucher);
+  final itemList = _createInvoiceItemList(voucher, inventoryEntries);
 
   final pdf = createInvoicePdf(
     invoiceNumber: voucher.number,
@@ -332,6 +375,7 @@ viewPdf(context, voucher, company, ledger) async {
     partyPincode: ledger.pincode,
     partyState: ledger.state,
     partyGST: ledger.gst,
+    itemList: itemList,
   );
 
   final String dir = (await getExternalStorageDirectory()).path;
