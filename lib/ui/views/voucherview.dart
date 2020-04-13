@@ -12,6 +12,7 @@ import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/ledgervoucherservice.dart';
 import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,9 +42,10 @@ class VoucherView extends StatelessWidget {
     final company = Provider.of<Company>(context);
 
     // TODO: Replace usage of Voucher with LedgerVoucher
-    Iterable<Voucher> voucherList = Provider.of<List<Voucher>>(context)
-            .where((item) => item.masterid == voucherId) ??
-        [];
+    Iterable<Voucher> voucherList =
+        Provider.of<List<Voucher>>(context, listen: false)
+                .where((item) => item.masterid == voucherId) ??
+            [];
     Voucher voucher = voucherList.elementAt(0) ?? [];
 
     // Get ledger data for voucher's counterparty
@@ -86,7 +88,16 @@ class VoucherView extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
-                    Text(voucher.number),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: <Widget>[
+                          Text(voucher.number),
+                          InvoiceButton(
+                            voucher: voucher,
+                            company: company,
+                            ledger: ledger,
+                          ),
+                        ]),
                     Container(height: 3.0, color: TassistGray),
                     Padding(
                       padding: spacer.all.xxs,
@@ -163,6 +174,29 @@ class VoucherView extends StatelessWidget {
                   ],
                 ),
               ))),
+    );
+  }
+}
+
+class InvoiceButton extends StatelessWidget {
+  InvoiceButton({this.voucher, this.company, this.ledger});
+
+  final Voucher voucher;
+  final Company company;
+  final LedgerItem ledger;
+
+  @override
+  Widget build(BuildContext context) {
+    return // PDF Sharing button
+        IconButton(
+      icon: Icon(Icons.picture_as_pdf),
+      onPressed: () => viewPdf(
+        context,
+        voucher,
+        company,
+        ledger,
+        // inventoryEntries,
+      ),
     );
   }
 }
@@ -279,7 +313,14 @@ _isInvoice(Voucher voucher) {
   }
 }
 
+createInvoiceItemList(voucher) {}
+
 viewPdf(context, voucher, company, ledger) async {
+  List<VoucherItem> inventoryEntries =
+      Provider.of<List<VoucherItem>>(context, listen: false);
+
+  final itemList = createInvoiceItemList(voucher);
+
   final pdf = createInvoicePdf(
     invoiceNumber: voucher.number,
     invoiceDate: voucher.date.toString().substring(0, 10),
@@ -340,12 +381,12 @@ AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
   bool enabled = true;
 
   return AppBar(
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.picture_as_pdf),
-          onPressed: () => viewPdf(context, voucher, company, ledger),
-        )
-      ],
+      // actions: <Widget>[
+      //   IconButton(
+      //     icon: Icon(Icons.picture_as_pdf),
+      //     onPressed: () => viewPdf(context, voucher, company, ledger),
+      //   )
+      // ],
       leading: Padding(
         padding: EdgeInsets.only(left: 12),
         child: IconButton(
