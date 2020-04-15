@@ -135,3 +135,12 @@ const secondaryDrawerText = const TextStyle(
   letterSpacing: 3,
     
 );
+
+const secondaryHint = const TextStyle(
+  color: TassistGray,
+  fontFamily: 'Poppins',
+  fontSize: 14,
+  fontWeight: FontWeight.w300,
+  fontStyle: FontStyle.normal,
+  letterSpacing: 1
+);

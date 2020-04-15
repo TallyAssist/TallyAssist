@@ -9,7 +9,7 @@ import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/crm.dart';
 import 'package:tassist/ui/views/dashboard.dart';
-import 'package:tassist/ui/views/gstreportscreen.dart';
+import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/productionInput.dart';
@@ -137,8 +137,8 @@ Drawer tassistDrawer(BuildContext context) {
       ),
       DrawerItem(
         icon: Icons.computer,
-        title: 'GST Report',
-        ontap: GstReportScreen(),
+        title: 'Make New Invoice',
+        ontap: LedgerInputScreen(),
         color: TassistInfoGrey,
       ),
       Padding(

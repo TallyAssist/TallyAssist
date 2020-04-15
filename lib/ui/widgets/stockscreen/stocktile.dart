@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
-import 'package:tassist/ui/shared/positiveamount.dart';
 import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 

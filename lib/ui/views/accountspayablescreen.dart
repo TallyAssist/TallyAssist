@@ -32,19 +32,19 @@ class AccountsPayableScreen extends StatelessWidget {
         body: ListView(
           children: <Widget>[
             SectionHeader('Accounts Payables'),
-            Text('Dummy data, coming soon!'),
-            Padding(
-              padding: spacer.all.xs,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                 BigMetricNoIcon('30', '<30 days', TassistSuccess),
-                 BigMetricNoIcon('12', '30-45 days', TassistWarning),
-                 BigMetricNoIcon('16', '45-60 days', TassistDanger),
-                ],
-              ),
-            ),
-            SecondarySectionHeader('List of parties'),
+            // Text('Dummy data, coming soon!'),
+            // Padding(
+            //   padding: spacer.all.xs,
+            //   child: Row(
+            //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            //     children: <Widget>[
+            //      BigMetricNoIcon('30', '<30 days', TassistSuccess),
+            //      BigMetricNoIcon('12', '30-45 days', TassistWarning),
+            //      BigMetricNoIcon('16', '45-60 days', TassistDanger),
+            //     ],
+            //   ),
+            // ),
+            // SecondarySectionHeader('List of parties'),
             APLedgerItemList(),
       
           ],

@@ -44,7 +44,7 @@ class SectionHeader extends StatelessWidget {
                       //   color: TassistPrimaryBackground,
                       // ),
                       IconButton(
-                        icon: Icon(Icons.share),
+                        icon: Icon(Icons.picture_as_pdf),
                         color: TassistPrimaryBackground,
                         onPressed: () => showDialog(
                           context: context,

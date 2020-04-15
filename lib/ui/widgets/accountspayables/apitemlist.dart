@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/models/payables.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class APSingleItem extends StatelessWidget {
@@ -38,13 +39,13 @@ class APSingleItem extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
-                    .copyWith(fontSize: 14, color: TassistPrimaryBackground),
+                    .copyWith(fontSize: 12, color: TassistPrimaryBackground),
               ),
             ),
             SizedBox(
               width: 5,
             ),
-            Text('${formatIndianCurrency(ledgerItem.closingBalance)}'),
+            Text('${formatIndianCurrency(ledgerItem.closingBalance)}', style: secondaryListDisc,),
             SizedBox(
               width: 10,
             ),
