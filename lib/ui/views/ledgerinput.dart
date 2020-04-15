@@ -7,16 +7,14 @@ import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/productcard.dart';
 
 class LedgerInputScreen extends StatefulWidget {
-  
-
   @override
   _LedgerInputScreenState createState() => _LedgerInputScreenState();
 }
 
 class _LedgerInputScreenState extends State<LedgerInputScreen> {
-      final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-
       bool checkboxValue = false;
+
+      final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                   hintText: 'Select customer',
                   hintStyle: secondaryHint,
                   labelText: 'Customer name',
-                  labelStyle: secondaryListTitle
+                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
                 ),
               ),
             ),
@@ -91,7 +89,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     hintText: 'Add product',
                     hintStyle: secondaryHint,
                     labelText: 'Product to be billed',
-                    labelStyle: secondaryListTitle
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16)
                   ),
               ),
                 ),
@@ -182,13 +180,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
 
         ],),
 
-        Column(
-          children: <Widget>[
-            Text('Total: 1000', style: secondaryListTitle),
-            Text('Tax: 50', style: secondaryListTitle2,)
-          ],
+        Padding(
+          padding: spacer.all.xxs,
+          child: Column(
+            children: <Widget>[
+              Text('Total: 1000', style: secondaryListTitle.copyWith(fontSize: 18)),
+              Text('Tax: 50', style: secondaryListTitle2,)
+            ],
 
   
+          ),
         )
         ],),
          

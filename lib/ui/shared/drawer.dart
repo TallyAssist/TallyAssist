@@ -7,14 +7,15 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
-import 'package:tassist/ui/views/crm.dart';
+// import 'package:tassist/ui/views/crm.dart';
 import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
-import 'package:tassist/ui/views/productionInput.dart';
-import 'package:tassist/ui/views/pruchaseorderreport.dart';
-import 'package:tassist/ui/views/salesorderreport.dart';
+import 'package:tassist/ui/views/settingsscreen.dart';
+// import 'package:tassist/ui/views/productionInput.dart';
+// import 'package:tassist/ui/views/pruchaseorderreport.dart';
+// import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -33,18 +34,21 @@ Drawer tassistDrawer(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+          
+             
             CircleAvatar(
-              child: Icon(
-                Icons.person_outline,
-                color: TassistInfoGrey,
-                size: 40.0,
+                child: Icon(
+                  Icons.person_outline,
+                  color: TassistInfoGrey,
+                  size: 40.0,
+                ),
+                radius: 25.0,
+                backgroundColor: TassistWhite,
               ),
-              radius: 25.0,
-              backgroundColor: TassistWhite,
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
+            SizedBox(width: 70,),
+            
+            
+           
             FittedBox(
               child: Text(
                 user?.email,
@@ -54,17 +58,6 @@ Drawer tassistDrawer(BuildContext context) {
                     ),
               ),
             ),
-            // Container(
-            //   child: Text(
-            //     'You are awesome!',
-            //     maxLines: 1,
-            //     overflow: TextOverflow.ellipsis,
-            //     style: Theme.of(context)
-            //         .textTheme
-            //         .bodyText1
-            //         .copyWith(color: TassistWhite),
-            //   ),
-            // )
 
                  RaisedButton( 
                    color: TassistWhite,
@@ -84,7 +77,7 @@ Drawer tassistDrawer(BuildContext context) {
         ),
       ),
       Padding(
-        padding: spacer.all.xs,
+        padding: spacer.all.xxs,
         child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
@@ -93,27 +86,10 @@ Drawer tassistDrawer(BuildContext context) {
         ontap: DashboardScreen(),
         color: TassistPrimaryBackground,
       ),
-      DrawerItem(
-        icon: Icons.card_membership,
-        title: 'Sales',
-        ontap: SalesOrderReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.fileInvoice,
-        title: 'Vouchers',
-        ontap: VouchersHome(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.warehouse,
-        title: 'Stock',
-        ontap: StockScreen(),
-        color: TassistPrimaryBackground,
-      ),
+      
       DrawerItem(
         icon: FontAwesomeIcons.listAlt,
-        title: 'Ledgers',
+        title: 'Ledgers / Parties',
         ontap: LedgerScreen(),
         color: TassistPrimaryBackground,
       ),
@@ -130,38 +106,39 @@ Drawer tassistDrawer(BuildContext context) {
         color: TassistPrimaryBackground,
       ),
       DrawerItem(
-        icon: Icons.inbox,
-        title: 'Purchases',
-        ontap: PurchaseOrderReportScreen(),
-        color: TassistInfoGrey,
-      ),
-      DrawerItem(
-        icon: Icons.computer,
+        icon: Icons.receipt,
         title: 'Make New Invoice',
         ontap: LedgerInputScreen(),
-        color: TassistInfoGrey,
+        color: TassistPrimary,
       ),
+      DrawerItem(
+        icon: FontAwesomeIcons.warehouse,
+        title: 'Stock',
+        ontap: StockScreen(),
+        color: TassistPrimaryBackground,
+      ),
+      DrawerItem(
+        icon: FontAwesomeIcons.fileInvoice,
+        title: 'Vouchers',
+        ontap: VouchersHome(),
+        color: TassistPrimaryBackground,
+      ),
+      
       Padding(
-        padding: spacer.all.xs,
+        padding: spacer.all.xxs,
         child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
         icon: Icons.lock,
-        title: 'Apka Secret Khata',
+        title: 'Bahi Khata',
         ontap: KhataScreen(),
         color: TassistMainText,
       ),
       DrawerItem(
-        icon: Icons.build,
-        title: 'Production',
-        ontap: ProductionScreen(),
-        color: TassistInfoGrey,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.users,
-        title: 'CRM',
-        ontap: CRMScreen(),
-        color: TassistInfoGrey,
+        icon: Icons.settings,
+        title: 'Settings',
+        ontap: SettingsScreen(),
+        color: TassistMainText,
       ),
       SizedBox(
         height: 20.0,
@@ -182,7 +159,7 @@ Drawer tassistDrawer(BuildContext context) {
               Text(
                 'Sign Out',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16 ),
               ),
             ],
           ),
@@ -235,7 +212,7 @@ class _DrawerItemState extends State<DrawerItem> {
               style: Theme.of(context)
                   .textTheme
                   .headline6
-                  .copyWith(color: widget.color),
+                  .copyWith(color: widget.color, fontSize: 16),
             ),
           ],
         ),

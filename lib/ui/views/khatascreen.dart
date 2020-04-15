@@ -44,7 +44,7 @@ class KhataScreen extends StatelessWidget {
           // bottomNavigationBar: bottomNav(),
           body: Column(
             children: <Widget>[
-              SectionHeader('Your Secret Khata'),
+              SectionHeader('Apka Bahi Khata'),
               Container(
                 child: Text('  Not syncing with Tally :) Swipe to delete.'),
                 color: TassistWarningShadow,
