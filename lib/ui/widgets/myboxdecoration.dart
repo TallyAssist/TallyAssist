@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tassist/theme/colors.dart';
 
 BoxDecoration myBoxDecorationTopBorder() {
   return BoxDecoration(
@@ -14,11 +15,13 @@ BoxDecoration myBoxDecorationTopBorder() {
 
 BoxDecoration myBoxDecorationBottomBorder() {
   return BoxDecoration(
-    border: Border(
-      bottom: BorderSide(
-        color: Colors.blueGrey,
-        width: 3.0,
-      ),
-    ),
+    // border: Border(
+    //   bottom: BorderSide(
+    //     color: Colors.blueGrey,
+    //     width: 3.0,
+    //   ),
+    // ),
+    color: TassistBgLightPurple,
+    shape: BoxShape.rectangle,
   );
 }

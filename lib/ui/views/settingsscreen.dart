@@ -16,6 +16,7 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+   
    File _imageFile;
 
       Future<void> _pickImage(ImageSource source) async {
