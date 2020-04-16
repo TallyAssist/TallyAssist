@@ -21,6 +21,9 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
        String _currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
        String _dueDate = DateFormat('dd-MM-yyyy').format(DateTime.now().add(new Duration(days: 30)));
        bool isSwitched = true;
+  //      final List<String> discountPerCent = ['5','10', '15', '20'];
+
+  // String _currentDiscount;
     
     cashCredit(bool isSwitched) {
       if (isSwitched == true) {
@@ -64,7 +67,18 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2001),
-                          lastDate: DateTime(2022))
+                          lastDate: DateTime(2022),
+                          builder: (BuildContext context, Widget child) {
+    return Theme(
+        data: ThemeData.light().copyWith(
+              //OK/Cancel button text color
+          primaryColor: const Color(0xFF4A5BF6),//Head background
+          accentColor: const Color(0xFF4A5BF6)//selection color
+          //dialogBackgroundColor: Colors.white,//Background color
+           ),     
+          child: child,
+    );
+  },)
                       .then((date) {
                     _currentDate = DateFormat('dd-MM-yyyy').format(date);
                   });
@@ -86,7 +100,19 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                             context: context,
                             initialDate: DateTime.now().add(new Duration(days: 30)),
                             firstDate: DateTime(2001),
-                            lastDate: DateTime(2022))
+                            lastDate: DateTime(2022),
+                            builder: (BuildContext context, Widget child) {
+    return Theme(
+        data: ThemeData.light().copyWith(//OK/Cancel button text color
+          primaryColor: const Color(0xFF4A5BF6),//Head background
+          accentColor: const Color(0xFF4A5BF6)//selection color
+          //dialogBackgroundColor: Colors.white,//Background color
+           ),     
+          child: child,
+    );
+  },
+                            )
+                          
                         .then((date) {
                       _dueDate = DateFormat('dd-MM-yyyy').format(date);
                     });
@@ -274,7 +300,27 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
         activeColor: TassistPrimary,
         ),
         Text('Include payment link', style: secondaryListDisc,)
-        ],)
+        ],),
+       
+            //     child: DropdownButtonFormField(
+            //   value: _currentDiscount,
+            //   items: discountPerCent.map((trantype) {
+            //     return DropdownMenuItem(
+            //       value: discountPerCent,
+            //       child: Text('$discountPerCent', style: secondaryListDisc),
+            //     );
+            //   }).toList(),
+            //   decoration: new InputDecoration(
+                
+            //       hintStyle: secondaryListDisc,
+            //       hintText: 'Discount %',
+            //       icon: new Icon(
+            //         Icons.save,
+            //         color: TassistBlack,
+            //       )),
+            //   onChanged: (val) => setState(() => _currentDate = val),
+            // ),
+      
 
 
         ],),
