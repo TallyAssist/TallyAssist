@@ -13,6 +13,21 @@ class CompanyService {
     return companyCollection.document(this.uid).snapshots().map(_companydata);
   }
 
+  Future updateCompanyRecord(
+      {String upiAddress,
+      String companyName,
+      String phoneNumber,
+      String gstNumber,
+      String registeredAddress}) async {
+    return await companyCollection.document(this.uid).setData({
+      'upi_address': upiAddress,
+      'name': companyName,
+      'phonenumber': phoneNumber,
+      'gst_number': gstNumber,
+      'address': registeredAddress,
+    }, merge: true);
+  }
+
   Company _companydata(DocumentSnapshot snapshot) {
     Map companyData = snapshot.data;
 
