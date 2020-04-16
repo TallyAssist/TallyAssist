@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/texts.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/widgets/productcard.dart';
+
 
 class LedgerInputScreen extends StatefulWidget {
   @override
@@ -15,6 +17,21 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
       bool checkboxValue = false;
 
       final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+      
+       String _currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
+       String _dueDate = DateFormat('dd-MM-yyyy').format(DateTime.now().add(new Duration(days: 30)));
+       bool isSwitched = true;
+    
+    cashCredit(bool isSwitched) {
+      if (isSwitched == true) {
+        return Text('Cash');
+      }
+      else {
+        return Text('Credit');
+      }
+    }
+
+   
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +47,88 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
         body: ListView(
           children: <Widget>[
             Padding(
+              padding: spacer.x.xxs,
+              child: Row(children: <Widget>[
+               Text('Invoice ', style: secondaryListDisc.copyWith(color: TassistPrimary)),
+               Text('#12345'),
+               SizedBox(
+                width: 20.0,
+              ),
+              Text('Date: $_currentDate'),
+              IconButton(
+                icon: Icon(Icons.date_range),
+                
+                color: TassistPrimary,
+                onPressed: () {
+                  showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(2001),
+                          lastDate: DateTime(2022))
+                      .then((date) {
+                    _currentDate = DateFormat('dd-MM-yyyy').format(date);
+                  });
+                },
+              )
+               ])
+            ),
+               Padding(
+                 padding: spacer.x.xxs,
+                 child: Row(children: <Widget>[
+            
+              Text('Due Date: $_dueDate'),
+              IconButton(
+                  icon: Icon(Icons.date_range),
+                  
+                  color: TassistPrimary,
+                  onPressed: () {
+                    showDatePicker(
+                            context: context,
+                            initialDate: DateTime.now().add(new Duration(days: 30)),
+                            firstDate: DateTime(2001),
+                            lastDate: DateTime(2022))
+                        .then((date) {
+                      _dueDate = DateFormat('dd-MM-yyyy').format(date);
+                    });
+                  },
+              ),
+              SizedBox(width: 10),
+              cashCredit(isSwitched),
+             Switch(
+  value: isSwitched,
+  onChanged: (value) {
+    setState(() {
+      isSwitched = value;
+
+    });
+  },
+  activeTrackColor: TassistBgLightPurple, 
+  activeColor: TassistPrimary,
+),
+                 ]
+                 ),
+               ),   
+            Padding(
               padding: spacer.all.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.person_add, color: TassistPrimary,),
-                  hintText: 'Select customer',
-                  hintStyle: secondaryHint,
-                  labelText: 'Customer name',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+              child: Container(
+                child: Padding(
+                  padding: spacer.all.xxs,
+                  child: TextFormField(
+                    style: secondaryListDisc,
+                    decoration: InputDecoration(
+                      icon: Icon(Icons.person_add, color: TassistPrimary,),
+                      hintText: 'Select customer',
+                      hintStyle: secondaryHint,
+                      labelText: 'Customer name',
+                      labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                    ),
+                  ),
                 ),
+                 decoration: BoxDecoration(
+                  border: Border.all(color: TassistPrimary ),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: TassistBgLightPurple
+                )
               ),
             ),
             Padding(
@@ -72,17 +161,20 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
               ),
             ),
 
-            Container(
-              color: TassistInfoGrey,
-              height: 2,
-            ),
+            // Container(
+            //   color: TassistInfoGrey,
+            //   height: 2,
+            // ),
             Padding(
               padding: spacer.left.xxs,
               child: 
               Row(children: <Widget>[
                 Flexible(
                   flex: 3,
-                                  child: TextFormField(
+                                  child: Container(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: TextFormField(
                   style: secondaryListDisc,
                   decoration: InputDecoration(
                     icon: Icon(Icons.playlist_add, color: TassistPrimary,),
@@ -92,6 +184,13 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     labelStyle: secondaryListTitle.copyWith(fontSize: 16)
                   ),
               ),
+                                    ),
+                                      decoration: BoxDecoration(
+                  border: Border.all(color: TassistPrimary ),
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  color: TassistBgLightPurple
+                )
+                                  ),
                 ),
               SizedBox(width: 20),
                Flexible(
@@ -205,7 +304,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
             minWidth: MediaQuery.of(context).size.width / 2,
                       child: RaisedButton(
               onPressed: () {},
-            child: Text('Draft!', style: TextStyle(fontSize: 20)),
+            child: Text('Draft', style: TextStyle(fontSize: 20)),
             color: TassistInfoGrey,
             textColor: Colors.white,
             elevation: 5,),
@@ -216,21 +315,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
           
           child: ButtonTheme(
                         minWidth: MediaQuery.of(context).size.width / 2,
-
-
-                      child: RaisedButton(
+                    child: RaisedButton(
 
               onPressed: () {},
-            child: Text('Send!', style: TextStyle(fontSize: 20)),
+            child: Text('Send', style: TextStyle(fontSize: 20)),
             color: TassistPrimary,
             textColor: Colors.white,
             elevation: 5,),
           ),
-        )        
-        ,
-
-
-        ],)
+        )  ,
+       ],)
         
         
        
