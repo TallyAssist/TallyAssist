@@ -7,7 +7,7 @@ import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
-
+import 'package:signature/signature.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -25,6 +25,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
   });
 }
 
+final SignatureController _controller = SignatureController(penStrokeWidth: 5, penColor: Colors.red);
+
+  @override
+  void initState() {
+    super.initState();
+    _controller.addListener(() => print("Value changed"));
+  }
 
 
   @override
@@ -68,8 +75,115 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
             ),
-            SizedBox(height: 50),
-           Padding(
+            Padding(
+              padding: spacer.all.xxs,
+              child: TextFormField(
+                style: secondaryListDisc,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.business, color: TassistPrimary,),
+                  hintText: 'Company Name to be displayed',
+                  hintStyle: secondaryHint,
+                  labelText: 'Your Company Name',
+                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                ),
+              ),
+            ),
+            Padding(
+              padding: spacer.all.xxs,
+              child: TextFormField(
+                style: secondaryListDisc,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.phone_android, color: TassistPrimary,),
+                  hintText: 'Contact number',
+                  hintStyle: secondaryHint,
+                  labelText: 'Your phone number',
+                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                ),
+              ),
+            ),
+            Padding(
+              padding: spacer.all.xxs,
+              child: TextFormField(
+                style: secondaryListDisc,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.chrome_reader_mode, color: TassistPrimary,),
+                  hintText: 'Input 12-digit GSTIN',
+                  hintStyle: secondaryHint,
+                  labelText: 'Your GSTIN',
+                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                ),
+              ),
+            ),
+            Padding(
+              padding: spacer.all.xxs,
+              child: TextFormField(
+                style: secondaryListDisc,
+                decoration: InputDecoration(
+                  icon: Icon(Icons.add_location, color: TassistPrimary,),
+                  hintText: 'Input your registered address',
+                  hintStyle: secondaryHint,
+                  labelText: 'Your registered address',
+                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                ),
+              ),
+            ),
+            Padding(
+              padding: spacer.all.xs,
+              child: Text('Record your signature'),
+            ),
+              //SIGNATURE CANVAS
+              Padding(
+                padding: spacer.all.xs,
+                child: Signature(controller: _controller, height: 200, backgroundColor: TassistInfoLight),
+              ),
+              //OK AND CLEAR BUTTONS
+              Container(
+                padding: spacer.all.xs,
+                decoration: const BoxDecoration(color: TassistBgLightPurple),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    //SHOW EXPORTED IMAGE IN NEW ROUTE
+                    IconButton(
+                      icon: const Icon(Icons.check),
+                      color: TassistSuccess,
+                      onPressed: () async {
+                        if (_controller.isNotEmpty) {
+                          var data = await _controller.toPngBytes();
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (BuildContext context) {
+                                return Scaffold(
+                                  appBar: headerNav(_drawerKey),
+                                  body: Center(child: Container(color: TassistBgLightPurple, child: Image.memory(data))),
+                                );
+                              },
+                            ),
+                          );
+                        }
+                      },
+                    ),
+                    //CLEAR CANVAS
+                    IconButton(
+                      icon: const Icon(Icons.clear),
+                      color: TassistWarning,
+                      onPressed: () {
+                        setState(() => _controller.clear());
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              
+
+           
+          
+           
+
+
+          ]
+        ),
+        bottomNavigationBar:  Padding(
              padding: spacer.all.xs,
              child: RaisedButton(
                onPressed: () => showDialog(
@@ -90,12 +204,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               textColor: Colors.white,
               elevation: 5,),
            ),
-
-           
-
-
-          ]
-        )
           )
     );
   }
