@@ -67,14 +67,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Row(
                 children: <Widget>[
                   IconButton(
-                      icon: Icon(Icons.photo, color: TassistPrimaryDarkButtonShadow),
+                      icon: Icon(Icons.photo, color: TassistPrimaryBackground),
                       onPressed: () => _pickImage(ImageSource.gallery)),
                   Text('Select your company logo')
                 ],
               ),
               // SAVE LOGO BUTTON
               RaisedButton(
-                color: TassistPrimary,
+                color: TassistPrimaryDarkButtonShadow,
                 child: Text('Save logo',
                     style: Theme.of(context)
                         .textTheme
@@ -208,7 +208,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               ),
               // SAVE INFO BUTTON
               RaisedButton(
-                color: TassistPrimary,
+                color: TassistPrimaryDarkButtonShadow,
                 child: Text('Submit company info',
                     style: Theme.of(context)
                         .textTheme
@@ -247,43 +247,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 padding: spacer.all.xs,
                 child: Text('Record your signature (for GST Invoice)'),
               ),
-
-              //SIGNATURE CANVAS
-              Padding(
+               RaisedButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      title: Text(
+                        'Sign here',
+                        style: secondaryListTitle,
+                      ),
+                      content:  Padding(
                 padding: spacer.all.xs,
                 child: Signature(
                     controller: _controller,
                     height: 200,
                     backgroundColor: TassistInfoLight),
               ),
-              // OK AND CLEAR BUTTONS
-              Container(
-                padding: spacer.x.xs,
-                decoration: const BoxDecoration(color: TassistBgLightPurple),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    //SHOW EXPORTED IMAGE IN NEW ROUTE
-                    IconButton(
+                      actions: <Widget>[
+                       IconButton(
                       icon: const Icon(Icons.check),
                       color: TassistSuccess,
                       onPressed: () async {
                         if (_controller.isNotEmpty) {
                           var data = await _controller.toPngBytes();
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (BuildContext context) {
-                                return Scaffold(
-                                  appBar: headerNav(_drawerKey),
-                                  body: Center(
-                                      child: Container(
-                                          color: TassistWhite,
-                                          child: Image.memory(data))),
-                                );
-                              },
-                            ),
-                          );
+                          Navigator.of(context).pop();
+                            // MaterialPageRoute(
+                            //   builder: (BuildContext context) {
+                            //     return Scaffold(
+                            //       appBar: headerNav(_drawerKey),
+                            //       body: Center(
+                            //           child: Container(
+                            //               color: TassistWhite,
+                            //               child: Column(
+                            //                 children: <Widget>[
+                            //                   Image.memory(data),
+                            //                   FlatButton(
+                            // onPressed: () => Navigator.of(context).pop(),
+                            // child: Text(
+                            //   'Close',
+                            //   style: secondaryListDisc,
+                            // )
+                            // )
+                            //                 ],
+                            //               )
+                            //           )
+                            //       )
+                            //     );
+                                
+                            //   },
+                            // ),
+                          // );
                         }
+                       
                       },
                     ),
                     //CLEAR CANVAS
@@ -292,11 +307,67 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: TassistWarning,
                       onPressed: () {
                         setState(() => _controller.clear());
+                        Navigator.of(context).pop();
                       },
                     ),
-                  ],
-                ),
+                      ]);
+                },
               ),
+
+              child: Text('Record Sign', style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: TassistWhite)),
+              color: TassistPrimaryDarkButtonShadow,
+              textColor: Colors.white,
+              elevation: 5,
+            ),
+              
+
+
+              //SIGNATURE CANVAS
+             
+              // OK AND CLEAR BUTTONS
+              // Container(
+              //   padding: spacer.x.xs,
+              //   decoration: const BoxDecoration(color: TassistBgLightPurple),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              //     children: <Widget>[
+              //       //SHOW EXPORTED IMAGE IN NEW ROUTE
+              //       IconButton(
+              //         icon: const Icon(Icons.check),
+              //         color: TassistSuccess,
+              //         onPressed: () async {
+              //           if (_controller.isNotEmpty) {
+              //             var data = await _controller.toPngBytes();
+              //             Navigator.of(context).push(
+              //               MaterialPageRoute(
+              //                 builder: (BuildContext context) {
+              //                   return Scaffold(
+              //                     appBar: headerNav(_drawerKey),
+              //                     body: Center(
+              //                         child: Container(
+              //                             color: TassistWhite,
+              //                             child: Image.memory(data))),
+              //                   );
+              //                 },
+              //               ),
+              //             );
+              //           }
+              //         },
+              //       ),
+              //       //CLEAR CANVAS
+              //       IconButton(
+              //         icon: const Icon(Icons.clear),
+              //         color: TassistWarning,
+              //         onPressed: () {
+              //           setState(() => _controller.clear());
+              //         },
+              //       ),
+              //     ],
+              //   ),
+              // ),
                           ]),
 
           ),
