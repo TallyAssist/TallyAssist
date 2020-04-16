@@ -67,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               Row(
                 children: <Widget>[
                   IconButton(
-                      icon: Icon(Icons.photo, color: TassistPrimary),
+                      icon: Icon(Icons.photo, color: TassistPrimaryDarkButtonShadow),
                       onPressed: () => _pickImage(ImageSource.gallery)),
                   Text('Select your company logo')
                 ],
@@ -82,6 +82,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .copyWith(color: TassistWhite)),
                 onPressed: () async {
                   await UploadService().uploadFile(_imageFile, uid + '_logo');
+                  // return AlertDialog(
+                  //     title: Text(
+                  //       'Your logo has been uploaded',
+                  //       style: secondaryListTitle,
+                  //     ),
+                  //     actions: <Widget>[
+                  //       FlatButton(
+                  //           onPressed: () => Navigator.of(context).pop(),
+                  //           child: Text(
+                  //             'Awesome!',
+                  //             style: secondaryListDisc,
+                  //           )),
+                  //     ]);
                 },
               ),
               // UPI Address
@@ -180,6 +193,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   onChanged: (val) => setState(() => _registeredAddress = val),
                 ),
               ),
+              Padding(
+                padding: spacer.all.xxs,
+                child: TextField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    contentPadding: spacer.all.xxs,
+                     hintText: 'This will be shown on GST invoice',
+                      hintStyle: secondaryHint,
+                      labelText: 'Terms & Conditions for GST invoice',
+                      labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                ),
+              ),
               // SAVE INFO BUTTON
               RaisedButton(
                 color: TassistPrimary,
@@ -198,9 +224,25 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       phoneNumber: _phoneNumber,
                       registeredAddress: _registeredAddress,
                     );
+                    // return AlertDialog(
+                    //   title: Text(
+                    //     'Company info uploaded successfully?',
+                    //     style: secondaryListTitle,
+                    //   ),
+                    //   actions: <Widget>[
+                    //     FlatButton(
+                    //         onPressed: () => Navigator.of(context).pop(),
+                    //         child: Text(
+                    //           'Awesome!',
+                    //           style: secondaryListDisc,
+                    //         )),
+
+                    //   ]);
                   }
                 },
               ),
+              
+
               Padding(
                 padding: spacer.all.xs,
                 child: Text('Record your signature (for GST Invoice)'),
@@ -255,7 +297,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   ],
                 ),
               ),
-            ]),
+                          ]),
+
           ),
           // DELETE (EVERYTHING) BUTTON
           bottomNavigationBar: Padding(
@@ -285,6 +328,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ]);
                 },
               ),
+
               child: Text('Delete Account', style: TextStyle(fontSize: 20)),
               color: TassistWarning,
               textColor: Colors.white,
