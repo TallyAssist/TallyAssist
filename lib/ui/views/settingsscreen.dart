@@ -25,7 +25,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   });
 }
 
-final SignatureController _controller = SignatureController(penStrokeWidth: 5, penColor: Colors.red);
+final SignatureController _controller = SignatureController(penStrokeWidth: 3, penColor: TassistBlack);
 
   @override
   void initState() {
@@ -51,7 +51,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
           children: <Widget>[
             
             SectionHeader('Settings'),
-            SizedBox(height: 20,),
+            SizedBox(height: 10,),
             Row(
                 children: <Widget>[
                    IconButton(icon: Icon(Icons.photo, color: TassistPrimary),
@@ -63,7 +63,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
                 ],
               ),
               Padding(
-              padding: spacer.all.xxs,
+              padding: spacer.x.xxs,
               child: TextFormField(
                 style: secondaryListDisc,
                 decoration: InputDecoration(
@@ -76,7 +76,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
               ),
             ),
             Padding(
-              padding: spacer.all.xxs,
+              padding: spacer.x.xxs,
               child: TextFormField(
                 style: secondaryListDisc,
                 decoration: InputDecoration(
@@ -89,7 +89,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
               ),
             ),
             Padding(
-              padding: spacer.all.xxs,
+              padding: spacer.x.xxs,
               child: TextFormField(
                 style: secondaryListDisc,
                 decoration: InputDecoration(
@@ -102,7 +102,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
               ),
             ),
             Padding(
-              padding: spacer.all.xxs,
+              padding: spacer.x.xxs,
               child: TextFormField(
                 style: secondaryListDisc,
                 decoration: InputDecoration(
@@ -115,7 +115,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
               ),
             ),
             Padding(
-              padding: spacer.all.xxs,
+              padding: spacer.x.xxs,
               child: TextFormField(
                 style: secondaryListDisc,
                 decoration: InputDecoration(
@@ -129,7 +129,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
             ),
             Padding(
               padding: spacer.all.xs,
-              child: Text('Record your signature'),
+              child: Text('Record your signature (for GST Invoice)'),
             ),
               //SIGNATURE CANVAS
               Padding(
@@ -138,7 +138,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
               ),
               //OK AND CLEAR BUTTONS
               Container(
-                padding: spacer.all.xs,
+                padding: spacer.x.xs,
                 decoration: const BoxDecoration(color: TassistBgLightPurple),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -155,7 +155,7 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
                               builder: (BuildContext context) {
                                 return Scaffold(
                                   appBar: headerNav(_drawerKey),
-                                  body: Center(child: Container(color: TassistBgLightPurple, child: Image.memory(data))),
+                                  body: Center(child: Container(color: TassistWhite, child: Image.memory(data))),
                                 );
                               },
                             ),
@@ -174,13 +174,6 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 5, p
                   ],
                 ),
               ),
-              
-
-           
-          
-           
-
-
           ]
         ),
         bottomNavigationBar:  Padding(
