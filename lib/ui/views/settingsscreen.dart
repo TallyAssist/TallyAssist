@@ -1,6 +1,10 @@
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tassist/core/services/companyservice.dart';
+import 'package:tassist/core/services/storageuploadservice.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
@@ -15,17 +19,25 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-   File _imageFile;
+  final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-      Future<void> _pickImage(ImageSource source) async {
-  File selected = await ImagePicker.pickImage(source: source);
-  setState(() {
-    _imageFile = selected;
-  });
-}
+  File _imageFile;
+  String _upiAddress;
+  String _companyName;
+  String _phoneNumber;
+  String _gstNumber;
+  String _registeredAddress;
 
-final SignatureController _controller = SignatureController(penStrokeWidth: 3, penColor: TassistBlack);
+  Future<void> _pickImage(ImageSource source) async {
+    File selected = await ImagePicker.pickImage(source: source);
+    setState(() {
+      _imageFile = selected;
+    });
+  }
+
+  final SignatureController _controller =
+      SignatureController(penStrokeWidth: 3, penColor: TassistBlack);
 
   @override
   void initState() {
@@ -33,110 +45,176 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 3, p
     _controller.addListener(() => print("Value changed"));
   }
 
-
   @override
   Widget build(BuildContext context) {
+    final uid = Provider.of<FirebaseUser>(context).uid;
 
-    
-
-
-    return WillPopScope (
-              onWillPop: () async => false,
-          child: Scaffold(
-        key: _drawerKey,
-        drawer: tassistDrawer(context),
-        appBar: headerNav(_drawerKey),
-        // bottomNavigationBar: bottomNav(),
-        body: ListView(
-          children: <Widget>[
-            
-            SectionHeader('Settings'),
-            SizedBox(height: 10,),
-            Row(
+    return WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: _drawerKey,
+          drawer: tassistDrawer(context),
+          appBar: headerNav(_drawerKey),
+          // bottomNavigationBar: bottomNav(),
+          body: Form(
+            key: _formKey,
+            child: ListView(children: <Widget>[
+              SectionHeader('Settings'),
+              SizedBox(
+                height: 10,
+              ),
+              // LOGO PICKER
+              Row(
                 children: <Widget>[
-                   IconButton(icon: Icon(Icons.photo, color: TassistPrimary),
-               
-              onPressed: () => _pickImage(ImageSource.gallery)),
-              Text('Select your company logo')
-
-
+                  IconButton(
+                      icon: Icon(Icons.photo, color: TassistPrimary),
+                      onPressed: () => _pickImage(ImageSource.gallery)),
+                  Text('Select your company logo')
                 ],
               ),
+              // SAVE LOGO BUTTON
+              RaisedButton(
+                color: TassistPrimary,
+                child: Text('Save logo',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: TassistWhite)),
+                onPressed: () async {
+                  await UploadService().uploadFile(_imageFile, uid + '_logo');
+                },
+              ),
+              // UPI Address
               Padding(
-              padding: spacer.x.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.payment, color: TassistPrimary,),
-                  hintText: 'Input UPI account',
-                  hintStyle: secondaryHint,
-                  labelText: 'Your UPI address',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+                padding: spacer.x.xxs,
+                child: TextFormField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.payment,
+                      color: TassistPrimary,
+                    ),
+                    hintText: 'Input UPI account',
+                    hintStyle: secondaryHint,
+                    labelText: 'Your UPI address',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                  validator: (val) =>
+                      val.isEmpty ? 'Please enter UPI ID' : null,
+                  onChanged: (val) => setState(() => _upiAddress = val),
                 ),
               ),
-            ),
-            Padding(
-              padding: spacer.x.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.business, color: TassistPrimary,),
-                  hintText: 'Company Name to be displayed',
-                  hintStyle: secondaryHint,
-                  labelText: 'Your Company Name',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+              // COMPANY NAME
+              Padding(
+                padding: spacer.x.xxs,
+                child: TextFormField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.business,
+                      color: TassistPrimary,
+                    ),
+                    hintText: 'Company Name to be displayed',
+                    hintStyle: secondaryHint,
+                    labelText: 'Your Company Name',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                  validator: (val) =>
+                      val.isEmpty ? 'Please enter company name' : null,
+                  onChanged: (val) => setState(() => _companyName = val),
                 ),
               ),
-            ),
-            Padding(
-              padding: spacer.x.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.phone_android, color: TassistPrimary,),
-                  hintText: 'Contact number',
-                  hintStyle: secondaryHint,
-                  labelText: 'Your phone number',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+              // CONTACT NUMBER
+              Padding(
+                padding: spacer.x.xxs,
+                child: TextFormField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.phone_android,
+                      color: TassistPrimary,
+                    ),
+                    hintText: 'Contact number',
+                    hintStyle: secondaryHint,
+                    labelText: 'Your phone number',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                  validator: (val) =>
+                      val.isEmpty ? 'Please enter phone number' : null,
+                  onChanged: (val) => setState(() => _phoneNumber = val),
                 ),
               ),
-            ),
-            Padding(
-              padding: spacer.x.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.chrome_reader_mode, color: TassistPrimary,),
-                  hintText: 'Input 12-digit GSTIN',
-                  hintStyle: secondaryHint,
-                  labelText: 'Your GSTIN',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+              Padding(
+                padding: spacer.x.xxs,
+                child: TextFormField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.chrome_reader_mode,
+                      color: TassistPrimary,
+                    ),
+                    hintText: 'Input 12-digit GSTIN',
+                    hintStyle: secondaryHint,
+                    labelText: 'Your GSTIN',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                  validator: (val) => val.isEmpty ? 'Please enter party' : null,
+                  onChanged: (val) => setState(() => _gstNumber = val),
                 ),
               ),
-            ),
-            Padding(
-              padding: spacer.x.xxs,
-              child: TextFormField(
-                style: secondaryListDisc,
-                decoration: InputDecoration(
-                  icon: Icon(Icons.add_location, color: TassistPrimary,),
-                  hintText: 'Input your registered address',
-                  hintStyle: secondaryHint,
-                  labelText: 'Your registered address',
-                  labelStyle: secondaryListTitle.copyWith(fontSize: 16)
+              Padding(
+                padding: spacer.x.xxs,
+                child: TextFormField(
+                  style: secondaryListDisc,
+                  decoration: InputDecoration(
+                    icon: Icon(
+                      Icons.add_location,
+                      color: TassistPrimary,
+                    ),
+                    hintText: 'Input your registered address',
+                    hintStyle: secondaryHint,
+                    labelText: 'Your registered address',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                  ),
+                  validator: (val) => val.isEmpty ? 'Please enter party' : null,
+                  onChanged: (val) => setState(() => _registeredAddress = val),
                 ),
               ),
-            ),
-            Padding(
-              padding: spacer.all.xs,
-              child: Text('Record your signature (for GST Invoice)'),
-            ),
+              // SAVE INFO BUTTON
+              RaisedButton(
+                color: TassistPrimary,
+                child: Text('Submit company info',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(color: TassistWhite)),
+                onPressed: () async {
+                  if (_formKey.currentState.validate()) {
+                    // await UploadService().uploadFile(_imageFile, uid+'_logo');
+                    await CompanyService(uid: uid).updateCompanyRecord(
+                      upiAddress: _upiAddress,
+                      companyName: _companyName,
+                      gstNumber: _gstNumber,
+                      phoneNumber: _phoneNumber,
+                      registeredAddress: _registeredAddress,
+                    );
+                  }
+                },
+              ),
+              Padding(
+                padding: spacer.all.xs,
+                child: Text('Record your signature (for GST Invoice)'),
+              ),
+
               //SIGNATURE CANVAS
               Padding(
                 padding: spacer.all.xs,
-                child: Signature(controller: _controller, height: 200, backgroundColor: TassistInfoLight),
+                child: Signature(
+                    controller: _controller,
+                    height: 200,
+                    backgroundColor: TassistInfoLight),
               ),
-              //OK AND CLEAR BUTTONS
+              // OK AND CLEAR BUTTONS
               Container(
                 padding: spacer.x.xs,
                 decoration: const BoxDecoration(color: TassistBgLightPurple),
@@ -155,7 +233,10 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 3, p
                               builder: (BuildContext context) {
                                 return Scaffold(
                                   appBar: headerNav(_drawerKey),
-                                  body: Center(child: Container(color: TassistWhite, child: Image.memory(data))),
+                                  body: Center(
+                                      child: Container(
+                                          color: TassistWhite,
+                                          child: Image.memory(data))),
                                 );
                               },
                             ),
@@ -174,31 +255,42 @@ final SignatureController _controller = SignatureController(penStrokeWidth: 3, p
                   ],
                 ),
               ),
-          ]
-        ),
-        bottomNavigationBar:  Padding(
-             padding: spacer.all.xs,
-             child: RaisedButton(
-               onPressed: () => showDialog(
-                            context: context,
-                            builder: (context) {
-                             return AlertDialog(
-                                  title: Text('Are you sure?', style: secondaryListTitle,),
-                                  actions: <Widget>[
-                                    FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text('Yes', style: secondaryListDisc,)),
-                                    FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text('Cancel', style: secondaryListDisc,))
-                                  ]
-                              );
-                            },
-                          ),
-
+            ]),
+          ),
+          // DELETE (EVERYTHING) BUTTON
+          bottomNavigationBar: Padding(
+            padding: spacer.all.xs,
+            child: RaisedButton(
+              onPressed: () => showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                      title: Text(
+                        'Are you sure?',
+                        style: secondaryListTitle,
+                      ),
+                      actions: <Widget>[
+                        FlatButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text(
+                              'Yes',
+                              style: secondaryListDisc,
+                            )),
+                        FlatButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            child: Text(
+                              'Cancel',
+                              style: secondaryListDisc,
+                            ))
+                      ]);
+                },
+              ),
               child: Text('Delete Account', style: TextStyle(fontSize: 20)),
               color: TassistWarning,
               textColor: Colors.white,
-              elevation: 5,),
-           ),
-          )
-    );
+              elevation: 5,
+            ),
+          ),
+        ));
   }
 }
-
