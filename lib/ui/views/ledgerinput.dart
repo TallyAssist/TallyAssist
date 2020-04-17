@@ -55,7 +55,9 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
               child: Column(children: <Widget>[
                 Padding(
                     padding: spacer.x.xxs,
-                    child: Row(children: <Widget>[
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
                       Text('Invoice ',
                           style: secondaryListDisc.copyWith(
                               color: TassistPrimary)),
@@ -63,7 +65,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       SizedBox(
                         width: 20.0,
                       ),
-                      Text('Date: $_currentDate'),
+                      Text('Date: $_currentDate', style: TextStyle(color: TassistInfoGrey)),
                       IconButton(
                         icon: Icon(Icons.date_range),
                         color: TassistPrimary,

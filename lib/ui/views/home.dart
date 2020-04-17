@@ -16,6 +16,7 @@ import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
+import 'package:tassist/ui/views/customerinput.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/settingsscreen.dart';
@@ -201,7 +202,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                         children: <Widget>[
                         ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice'),
                         ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate'),
-                        ActionButton(Icon(Icons.person_outline), LedgerScreen(), 'Party'),
+                        ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party'),
                         ActionButton(Icon(Icons.add_shopping_cart), StockScreen(), 'Product'),
                         ],
                       ),
