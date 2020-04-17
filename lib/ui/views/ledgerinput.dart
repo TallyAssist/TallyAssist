@@ -1,5 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+import 'package:tassist/core/models/ledger.dart';
+import 'package:tassist/core/models/stockitem.dart';
+import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/texts.dart';
 import 'package:tassist/theme/theme.dart';
@@ -20,21 +25,24 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String _customerName;
+  // Product details
   String _productName;
   String _gstPercentage;
   String _productPrice;
   String _productQuantity;
+  double _totalProductPrice = 0;
+  double _totalTax = 0;
 
   String _currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String _dueDate = DateFormat('dd-MM-yyyy')
       .format(DateTime.now().add(new Duration(days: 30)));
-  bool isSwitched = true;
+  bool isCashSwitched = true;
   //      final List<String> discountPerCent = ['5','10', '15', '20'];
 
   // String _currentDiscount;
 
-  cashCredit(bool isSwitched) {
-    if (isSwitched == true) {
+  cashCredit(bool isCashSwitched) {
+    if (isCashSwitched == true) {
       return Text('Cash');
     } else {
       return Text('Credit');
@@ -43,6 +51,10 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var uid = Provider.of<FirebaseUser>(context).uid;
+    var ledgerList = Provider.of<List<LedgerItem>>(context, listen: false);
+    var stockList = Provider.of<List<StockItem>>(context, listen: false);
+
     return WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(
@@ -126,12 +138,12 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       },
                     ),
                     SizedBox(width: 10),
-                    cashCredit(isSwitched),
+                    cashCredit(isCashSwitched),
                     Switch(
-                      value: isSwitched,
+                      value: isCashSwitched,
                       onChanged: (value) {
                         setState(() {
-                          isSwitched = value;
+                          isCashSwitched = value;
                         });
                       },
                       activeTrackColor: TassistBgLightPurple,
@@ -144,18 +156,25 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                   child: Container(
                       child: Padding(
                         padding: spacer.all.xxs,
-                        child: TextFormField(
+                        child: DropdownButtonFormField(
+                          items: ledgerList.map((l) {
+                            return DropdownMenuItem(
+                              child: Text(l.name),
+                              value: l.name,
+                            );
+                          }).toList(),
                           style: secondaryListDisc,
                           decoration: InputDecoration(
-                              icon: Icon(
-                                Icons.person_add,
-                                color: TassistPrimary,
-                              ),
-                              hintText: 'Select customer',
-                              hintStyle: secondaryHint,
-                              labelText: 'Customer name',
-                              labelStyle:
-                                  secondaryListTitle.copyWith(fontSize: 16)),
+                            icon: Icon(
+                              Icons.person_add,
+                              color: TassistPrimary,
+                            ),
+                            hintText: 'Select customer',
+                            hintStyle: secondaryHint,
+                            labelText: 'Customer name',
+                            labelStyle:
+                                secondaryListTitle.copyWith(fontSize: 16),
+                          ),
                           onChanged: (val) =>
                               setState(() => _customerName = val),
                         ),
@@ -208,7 +227,13 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           child: Container(
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
+                                child: DropdownButtonFormField(
+                                  items: stockList.map((p) {
+                                    return DropdownMenuItem(
+                                      child: Text(p.name),
+                                      value: p.name,
+                                    );
+                                  }).toList(),
                                   style: secondaryListDisc,
                                   decoration: InputDecoration(
                                       icon: Icon(
@@ -291,8 +316,10 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                             //       'GST @ 5%: 50',
                             //       'Amount: 1000',
                             //       'Discount: 10'
-                            double amount = double.parse(_productQuantity) * double.parse(_productPrice);
-                            double gstAmount = ((double.parse(_gstPercentage))/100) * amount;
+                            double amount = double.parse(_productQuantity) *
+                                double.parse(_productPrice);
+                            double gstAmount =
+                                ((double.parse(_gstPercentage)) / 100) * amount;
                             List tempList = [
                               _productName,
                               'HSN Code: ',
@@ -302,6 +329,8 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                               'Discount: ',
                             ];
                             setState(() {
+                              _totalProductPrice += amount;
+                              _totalTax += gstAmount;
                               productList.add(tempList);
                             });
                           },
@@ -332,6 +361,27 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     },
                   ),
                 ),
+                // DropdownButtonFormField(
+                //   // value: "16",
+                //   items: <DropdownMenuItem>[
+                //     DropdownMenuItem(value: "1", child: Text("1"),),
+                //   ],
+                // ['16', '2'].map((trantype) {
+                //   return DropdownMenuItem(
+                //     value: "22",
+                //     child: Text('16', style: secondaryListDisc),
+                //   );
+                // }).toList(),
+                // decoration: new InputDecoration(
+                //     hintStyle: secondaryListDisc,
+                //     hintText: 'Discount %',
+                //     icon: new Icon(
+                //       Icons.save,
+                //       color: TassistBlack,
+                //     )),
+                //   onChanged: (val) => setState(() => _currentDate = val),
+                // ),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
@@ -355,35 +405,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                             )
                           ],
                         ),
-
-                        //     child: DropdownButtonFormField(
-                        //   value: _currentDiscount,
-                        //   items: discountPerCent.map((trantype) {
-                        //     return DropdownMenuItem(
-                        //       value: discountPerCent,
-                        //       child: Text('$discountPerCent', style: secondaryListDisc),
-                        //     );
-                        //   }).toList(),
-                        //   decoration: new InputDecoration(
-
-                        //       hintStyle: secondaryListDisc,
-                        //       hintText: 'Discount %',
-                        //       icon: new Icon(
-                        //         Icons.save,
-                        //         color: TassistBlack,
-                        //       )),
-                        //   onChanged: (val) => setState(() => _currentDate = val),
-                        // ),
                       ],
                     ),
                     Padding(
                       padding: spacer.all.xxs,
                       child: Column(
                         children: <Widget>[
-                          Text('Total: 1000',
+                          Text('Total: $_totalProductPrice',
                               style: secondaryListTitle.copyWith(fontSize: 18)),
                           Text(
-                            'Tax: 50',
+                            'Tax: $_totalTax',
                             style: secondaryListTitle2,
                           )
                         ],
@@ -399,8 +430,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                   child: ButtonTheme(
                     minWidth: MediaQuery.of(context).size.width / 2,
                     child: RaisedButton(
-                      onPressed: () {},
-                      child: Text('Draft', style: TextStyle(fontSize: 20)),
+                      onPressed: () async {
+                        await VoucherService(uid: uid).saveVoucherRecord(
+                          amount: (_totalProductPrice + _totalTax),
+                          isInvoice: '1',
+                          partyname: _customerName,
+                          primaryVoucherType: 'Sales',
+                          type: 'Sales',
+                        );
+                      },
+                      child: Text('Preview', style: TextStyle(fontSize: 20)),
                       color: TassistInfoGrey,
                       textColor: Colors.white,
                       elevation: 5,
@@ -412,7 +451,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     minWidth: MediaQuery.of(context).size.width / 2,
                     child: RaisedButton(
                       onPressed: () {},
-                      child: Text('Send', style: TextStyle(fontSize: 20)),
+                      child: Text('Save', style: TextStyle(fontSize: 20)),
                       color: TassistPrimary,
                       textColor: Colors.white,
                       elevation: 5,
