@@ -69,6 +69,7 @@ Color changePartyButtonDebtor() {
                   ),
                   TextFormField(
                     style: secondaryListDisc,
+                    keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
                       labelText: 'Phone Number',
                       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
@@ -146,6 +147,7 @@ Color changePartyButtonDebtor() {
                     style: secondaryListDisc,
                     decoration: InputDecoration(
                       labelText: 'Input 12 digit GST ',
+                      // TO DO put validation for 12 digits. 
                       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
                     ),
                   ),

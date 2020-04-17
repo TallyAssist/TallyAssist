@@ -17,6 +17,7 @@ import 'package:tassist/ui/shared/headernav.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 import 'package:tassist/ui/views/customerinput.dart';
+import 'package:tassist/ui/views/productinput.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
 import 'package:tassist/ui/views/settingsscreen.dart';

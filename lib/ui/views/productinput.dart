@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
@@ -43,15 +44,19 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                     children: <Widget>[
                       TextFormField(
                     style: secondaryListDisc,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Standard Price',
+                      // Validate number 
                       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
                     ),
                   ),
                   TextFormField(
                     style: secondaryListDisc,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Standard Cost',
+                      // Validate number
                       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
                     ),
                   )
@@ -62,6 +67,7 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                     children: <Widget>[
                       TextFormField(
                     style: secondaryListDisc,
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
                       labelText: 'Initial Stock',
                       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
@@ -111,6 +117,7 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                            child: Text('+ Save Item', style: secondaryListDisc.copyWith(color: TassistWhite)),
                            color: TassistPrimaryDarkButtonShadow,
                       onPressed: () {Navigator.of(context).pop();
+                      // Need to add updaterecord
                       }
                     ),
                 )          
