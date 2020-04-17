@@ -31,24 +31,37 @@ class CompanyService {
   Company _companydata(DocumentSnapshot snapshot) {
     Map companyData = snapshot.data;
 
-    return Company(
-        address: companyData['address'],
+    if (companyData != null) {
+      return Company(
+        address: companyData['address'] ?? '',
         // booksFrom: ,
         // corporateidentityNumber: ,
-        countryName: companyData['country_name'],
+        countryName: companyData['country_name'] ?? '',
         // currencyName: ,
         // currencySymbol: ,
-        email: companyData['email'],
-        formalName: companyData['formal_name'],
-        gstNumber: companyData['gst_number'],
+        email: companyData['email'] ?? '',
+        formalName: companyData['formal_name'] ?? '',
+        gstNumber: companyData['gst_number'] ?? '',
         // guid: ,
         // incometaxNumber: ,
         // interstatestNumber: ,
         // name: ,
         // ownerName: ,
         // phoneNumber: ,
-        pincode: companyData['pincode'],
+        pincode: companyData['pincode'] ?? '',
         // startingFrom: ,
-        stateName: companyData['state_name']);
+        stateName: companyData['state_name'] ?? '',
+      );
+    } else {
+      return Company(
+        address: '',
+        countryName: '',
+        email: '',
+        formalName: '',
+        gstNumber: '',
+        pincode: '',
+        stateName: '',
+      );
+    }
   }
 }
