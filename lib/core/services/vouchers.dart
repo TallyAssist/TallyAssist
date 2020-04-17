@@ -19,6 +19,33 @@ class VoucherService {
         .map(_receiptvouchersfromSnapshots);
   }
 
+  Future saveVoucherRecord({
+    number,
+    masterId,
+    date,
+    partyname,
+    amount,
+    primaryVoucherType,
+    isInvoice,
+    type,
+  }) async {
+    return await companyCollection
+        .document(this.uid)
+        .collection('voucher')
+        .document(masterId)
+        .setData({
+      'number': number,
+      'masterId': masterId,
+      'date': date,
+      'partyname': partyname,
+      'amount': amount,
+      'primaryVoucherType': primaryVoucherType,
+      'isInvoice': isInvoice,
+      'type': type,
+      'fromTally': '0',
+    });
+  }
+
   List<Voucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Voucher(
