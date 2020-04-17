@@ -203,7 +203,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                         ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice'),
                         ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate'),
                         ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party'),
-                        ActionButton(Icon(Icons.add_shopping_cart), StockScreen(), 'Product'),
+                        ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product'),
                         ],
                       ),
                     )

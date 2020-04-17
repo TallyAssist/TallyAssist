@@ -134,12 +134,21 @@ Color changePartyButtonDebtor() {
                     _partyType == 'Creditor'
                   }
                   )
-
-
                     ],
 
                   ),
                 ),
+                 Padding(
+                   padding: spacer.top.sm,
+                   child: Text('GSTIN (Optional)', style: secondaryListTitle,),
+                 ),
+                  TextFormField(
+                    style: secondaryListDisc,
+                    decoration: InputDecoration(
+                      labelText: 'Input 12 digit GST ',
+                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                    ),
+                  ),
 
 
                 Container(
@@ -147,17 +156,12 @@ Color changePartyButtonDebtor() {
                   alignment: Alignment.center,
                   width: MediaQuery.of(context).size.width / 2,
                   child: RaisedButton(
-                           child: Text('Save Party', style: secondaryListDisc.copyWith(color: TassistWhite)),
+                           child: Text('+ Save Party', style: secondaryListDisc.copyWith(color: TassistWhite)),
                            color: TassistPrimaryDarkButtonShadow,
                       onPressed: () {Navigator.of(context).pop();
                       }
                     ),
-                )
-
-               
-                 
-
-           
+                )          
                 ]
               ),
             ),
