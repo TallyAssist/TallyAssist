@@ -40,48 +40,60 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      TextFormField(
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2.3 ,
+                        child: TextFormField(
                     style: secondaryListDisc,
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      labelText: 'Standard Price',
-                      // Validate number 
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                        labelText: 'Standard Price',
+                        // Validate number 
+                        labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
                     ),
                   ),
-                  TextFormField(
-                    style: secondaryListDisc,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: 'Standard Cost',
-                      // Validate number
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                      ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2.3,
+                    child: TextFormField(
+                      style: secondaryListDisc,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        labelText: 'Standard Cost',
+                        // Validate number
+                        labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                      ),
                     ),
                   )
                     ],
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      TextFormField(
-                    style: secondaryListDisc,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      labelText: 'Initial Stock',
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
-                    ),
-                  ),
-                  TextFormField(
-                    style: secondaryListDisc,
-                    decoration: InputDecoration(
-                      labelText: 'Unit',
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
-                    ),
-                  )
-                    ],
-                  )
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.3 ,
+                            child: TextFormField(
+                        style: secondaryListDisc,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            labelText: 'Initial Stock',
+                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                        ),
+                      ),
+                          ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2.3 ,
+                        child: TextFormField(
+                          style: secondaryListDisc,
+                          decoration: InputDecoration(
+                            labelText: 'Unit',
+                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                          ),
+                        ),
+                      )
+                        ],
+                      )
                   
                 ],),
                
@@ -90,29 +102,36 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                    child: Text('Optional', style: secondaryListTitle,),
                  ),
                  Row(
-                   children: <Widget>[
-                      TextFormField(
-                    style: secondaryListDisc,
-                    decoration: InputDecoration(
-                      labelText: 'Min Stock',
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
-                    ),
-                  ),
-                  TextFormField(
-                    style: secondaryListDisc,
-                    decoration: InputDecoration(
-                      labelText: 'Reorder Value',
-                      labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
-                    ),
-                  ),
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: <Widget>[
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.3 ,
+                            child: TextFormField(
+                        style: secondaryListDisc,
+                        decoration: InputDecoration(
+                            labelText: 'Min Stock',
+                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                        ),
+                      ),
+                          ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width / 2.3 ,
+                        child: TextFormField(
+                          style: secondaryListDisc,
+                          decoration: InputDecoration(
+                            labelText: 'Reorder Value',
+                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
+                          ),
+                        ),
+                      ),
 
-                   ],
-                 ),
+                       ],
+                     ),
    
                 Container(
                   padding: spacer.top.sm,
                   alignment: Alignment.center,
-                  width: MediaQuery.of(context).size.width / 2,
+                  width: MediaQuery.of(context).size.width / 2.5,
                   child: RaisedButton(
                            child: Text('+ Save Item', style: secondaryListDisc.copyWith(color: TassistWhite)),
                            color: TassistPrimaryDarkButtonShadow,
