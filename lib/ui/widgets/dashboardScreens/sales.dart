@@ -62,22 +62,24 @@ class _SalesDashboardWidgetContentRowState
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                Row(
-                  children: <Widget>[
-                    // Icon(
-                    //   Icons.arrow_drop_up,
-                    //   color: TassistInfoGrey,
-                    // ),
-                    Text(
-                      formatIndianCurrency(
-                              userDocument['total_sales'].toString()) ??
-                          '',
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          color: TassistMainText,
-                          fontSize: 24,
-                          fontWeight: FontWeight.normal),
-                    )
-                  ],
+                Card(
+                                  child: Row(
+                    children: <Widget>[
+                      // Icon(
+                      //   Icons.arrow_drop_up,
+                      //   color: TassistInfoGrey,
+                      // ),
+                      Text(
+                        formatIndianCurrency(
+                                userDocument['total_sales'].toString()) ??
+                            '',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            color: TassistMainText,
+                            fontSize: 24,
+                            fontWeight: FontWeight.normal),
+                      )
+                    ],
+                  ),
                 ),
                 Text('Total Sales'),
               ],

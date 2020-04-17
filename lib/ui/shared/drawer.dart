@@ -9,6 +9,7 @@ import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 // import 'package:tassist/ui/views/crm.dart';
 import 'package:tassist/ui/views/dashboard.dart';
+import 'package:tassist/ui/views/home.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
@@ -82,8 +83,8 @@ Drawer tassistDrawer(BuildContext context) {
       ),
       DrawerItem(
         icon: Icons.dashboard,
-        title: 'Dashboard',
-        ontap: DashboardScreen(),
+        title: 'Home',
+        ontap: HomeDashboardScreen(),
         color: TassistPrimaryBackground,
       ),
       
