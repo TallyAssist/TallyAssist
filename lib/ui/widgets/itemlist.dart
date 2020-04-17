@@ -21,96 +21,107 @@ class SingleItem extends StatelessWidget {
       }
     }
 
-    return FittedBox(
-      child: Card(
-        borderOnForeground: true,
+    return Card(
+      borderOnForeground: true,
+      child: FittedBox(
         child: Row(
-          children: <Widget>[
-            SizedBox(
-              width: 5,
-            ),
-            Container(
-              width: MediaQuery.of(context).size.width / 2.5,
-              child: Text(
-                ledgerItem.name,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 14, color: TassistPrimaryBackground),
+            children: <Widget>[
+              SizedBox(
+        width: 5,
               ),
-            ),
-            SizedBox(
-              width: 5,
-            ),
-            Text('${formatIndianCurrency(ledgerItem.closingBalance.toString().substring(1, ledgerItem.closingBalance.length))}'),
-            SizedBox(
-              width: 10,
-            ),
-            // Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistGray
-            //   )
-            //   ),
-            //     Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistGray
-            //   )
-            //   ),
-            //     Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistGray
-            //   )
-            //   ),
-            //     Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistSuccess
-            //   )
-            //   ),
-            //     Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistSuccessLight
-            //   )
-            //   ),
-            //     Container(
-            //   padding: spacer.all.xxs,
-            //   margin: EdgeInsets.all(1),
-            //   decoration: BoxDecoration(
-            //     shape: BoxShape.circle,
-            //     color: TassistGray
-            //   )
-            //   ),
-            // Text(
-            //   '${formatIndianCurrency(ledgerItem.totalReceipt)}',
-            //   style: TextStyle(color: TassistInfoGrey),
-            // ),
-            IconButton(
-              onPressed: () {
-                _launchURL();
-              },
-              icon: Icon(
-                FontAwesomeIcons.whatsapp,
-                color: TassistSuccess,
-              ),
-            )
-          ],
+              Container(
+        width: MediaQuery.of(context).size.width / 1.8,
+        child: Text(
+          ledgerItem.name,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          style: Theme.of(context)
+              .textTheme
+              .bodyText2
+              .copyWith(fontSize: 14, color: TassistPrimaryBackground),
         ),
+              ),
+              SizedBox(
+        width: 5,
+              ),
+              Container(
+                width: 80,
+                child: Text('${formatIndianCurrency(ledgerItem.closingBalance.toString().substring(1, ledgerItem.closingBalance.length))}',
+                style: Theme.of(context)
+                .textTheme
+                .bodyText2
+                .copyWith(fontSize: 14, color: TassistBlack),
+                
+                 ),
+              ),
+              SizedBox(
+        width: 10,
+              ),
+              // Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistGray
+              //   )
+              //   ),
+              //     Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistGray
+              //   )
+              //   ),
+              //     Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistGray
+              //   )
+              //   ),
+              //     Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistSuccess
+              //   )
+              //   ),
+              //     Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistSuccessLight
+              //   )
+              //   ),
+              //     Container(
+              //   padding: spacer.all.xxs,
+              //   margin: EdgeInsets.all(1),
+              //   decoration: BoxDecoration(
+              //     shape: BoxShape.circle,
+              //     color: TassistGray
+              //   )
+              //   ),
+              // Text(
+              //   '${formatIndianCurrency(ledgerItem.totalReceipt)}',
+              //   style: TextStyle(color: TassistInfoGrey),
+              // ),
+
+              IconButton(
+        onPressed: () {
+          _launchURL();
+        },
+        iconSize: 20,
+        icon: Icon(
+          FontAwesomeIcons.whatsapp,
+          color: TassistSuccess,
+        ),
+                )
+            ],
+          ),
       ),
     );
   }

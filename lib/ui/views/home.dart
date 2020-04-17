@@ -7,9 +7,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:tassist/core/models/vouchers.dart';
+// import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/database.dart';
-import 'package:tassist/core/services/timeperiod_filter_service.dart';
+// import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/theme.dart';
 // import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/shared/drawer.dart';
@@ -102,6 +102,17 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             key: _drawerKey,
             appBar: headerNav(_drawerKey),
             drawer: tassistDrawer(context),
+          // //   bottomNavigationBar:
+          // //   FloatingActionButton(
+          // //     child: Icon(FontAwesomeIcons.fileInvoice),
+          // //     backgroundColor: TassistPrimaryDarkButtonShadow,
+          // //     onPressed:  () {Navigator.of(context).pushReplacement(
+          // //     MaterialPageRoute(
+          // //             builder: (context) => LedgerInputScreen()
+          // //           )
+          // // );
+          // //       })
+          //   ,
             body: SafeArea(
               child: ListView(
                 children: <Widget>[

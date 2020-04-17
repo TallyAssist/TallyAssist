@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 // import 'package:tassist/core/models/ledger.dart';
 // import 'package:tassist/core/services/ledgerservice.dart';
-import 'package:tassist/theme/colors.dart';
-import 'package:tassist/theme/dimensions.dart';
+// import 'package:tassist/theme/colors.dart';
+// import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
 // import 'package:tassist/ui/views/salesorderreport.dart';
-import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
+// import 'package:tassist/ui/widgets/bigmetricnoicon.dart';
 // import 'package:tassist/ui/widgets/gotobar.dart';
 import 'package:tassist/ui/views/accountsreceivablelist.dart';
-import 'package:tassist/ui/widgets/secondarysectionheader.dart';
+// import 'package:tassist/ui/widgets/secondarysectionheader.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
 
 
@@ -34,19 +34,19 @@ class AccountsReceivableScreen extends StatelessWidget {
         body: ListView(
     children: <Widget>[
       SectionHeader('Accounts Receivables'),
-      Text('Dummy data, coming soon!'),
-      Padding(
-        padding: spacer.all.xs,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-           BigMetricNoIcon('30', '<30 days', TassistSuccess),
-           BigMetricNoIcon('12', '30-45 days', TassistWarning),
-           BigMetricNoIcon('16', '45-60 days', TassistDanger),
-          ],
-        ),
-      ),
-      SecondarySectionHeader('List of parties'),
+      // Text('Dummy data, coming soon!'),
+      // Padding(
+      //   padding: spacer.all.xs,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: <Widget>[
+      //      BigMetricNoIcon('30', '<30 days', TassistSuccess),
+      //      BigMetricNoIcon('12', '30-45 days', TassistWarning),
+      //      BigMetricNoIcon('16', '45-60 days', TassistDanger),
+      //     ],
+      //   ),
+      // ),
+      // SecondarySectionHeader('List of parties'),
     
       ARLedgerItemList(),
       // Padding(

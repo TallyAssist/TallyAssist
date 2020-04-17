@@ -99,8 +99,12 @@ TextEditingController editingController = TextEditingController();
                   child:   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Payables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),),
+                Container(
+                  width: MediaQuery.of(context).size.width / 1.9,
+                  child: Text('Party Name', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),)),
+                Container(
+                  width: 90,
+                  child: Text( 'Payables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),)),
                 // Text ('Payment', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]

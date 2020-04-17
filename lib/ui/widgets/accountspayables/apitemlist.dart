@@ -22,16 +22,16 @@ class APSingleItem extends StatelessWidget {
       }
     }
 
-    return FittedBox(
-      child: Card(
-        borderOnForeground: true,
-        child: Row(
+    return Card(
+      borderOnForeground: true,
+      child: FittedBox(
+              child: Row(
           children: <Widget>[
             SizedBox(
               width: 5,
             ),
             Container(
-              width: MediaQuery.of(context).size.width / 2.5,
+              width: MediaQuery.of(context).size.width / 1.8,
               child: Text(
                 ledgerItem.name,
                 maxLines: 2,
@@ -39,13 +39,20 @@ class APSingleItem extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .bodyText2
-                    .copyWith(fontSize: 12, color: TassistPrimaryBackground),
+                    .copyWith(fontSize: 14, color: TassistPrimaryBackground),
               ),
             ),
             SizedBox(
               width: 5,
             ),
-            Text('${formatIndianCurrency(ledgerItem.closingBalance)}', style: secondaryListDisc,),
+            Container(
+              width: 80,
+              child: Text('${formatIndianCurrency(ledgerItem.closingBalance)}', style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontSize: 14, color: TassistBlack),
+                ),
+            ),
             SizedBox(
               width: 10,
             ),
@@ -57,6 +64,7 @@ class APSingleItem extends StatelessWidget {
               onPressed: () {
                 _launchURL();
               },
+              iconSize: 20,
               icon: Icon(
                 FontAwesomeIcons.whatsapp,
                 color: TassistSuccess,
