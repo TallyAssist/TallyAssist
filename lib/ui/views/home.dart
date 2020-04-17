@@ -180,31 +180,31 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   ),
                     Padding(
                       padding: spacer.all.xs,
-                      child: Text('View', style: secondaryListTitle,),
+                      child: Text('View / जानकारी देखें', style: secondaryListTitle,),
                     ),
                     Padding(
                       padding: spacer.x.xs,
                       child: Row(
                         children: <Widget>[
-                        ActionButton(Icon(FontAwesomeIcons.listAlt), LedgerScreen(), 'Parties'),
-                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), VouchersHome(), 'Vouchers'),
-                        ActionButton(Icon(FontAwesomeIcons.warehouse), StockScreen(), 'Stock'),
-                        ActionButton(Icon(Icons.settings), SettingsScreen(), 'Settings'),
+                        ActionButton(Icon(FontAwesomeIcons.listAlt), LedgerScreen(), 'Parties   पार्टी'),
+                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), VouchersHome(), 'Vouchers  वाउचर'),
+                        ActionButton(Icon(FontAwesomeIcons.warehouse), StockScreen(), 'Stock  स्टॉक'),
+                        ActionButton(Icon(Icons.settings), SettingsScreen(), 'Settings  सैटिंग्स'),
                         ],
                       ),
                     ),
                      Padding(
                       padding: spacer.all.xs,
-                      child: Text('Create', style: secondaryListTitle,),
+                      child: Text('Create / नया बनाएँ', style: secondaryListTitle,),
                     ),
                     Padding(
                       padding: spacer.x.xs,
                       child: Row(
                         children: <Widget>[
-                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice'),
-                        ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate'),
-                        ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party'),
-                        ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product'),
+                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice बिल'),
+                        ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate  कच्चा'),
+                        ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party  पार्टी'),
+                        ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product  उत्पाद'),
                         ],
                       ),
                     )
@@ -271,7 +271,7 @@ class _DashboardCardState
                                 fontWeight: FontWeight.normal),
                         ),
                 
-                  Text('Total Sales', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                  Text('Sales सेल्स ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
                   
                 ],
               ),
@@ -311,7 +311,7 @@ class _DashboardCardState
                           fontSize: 18,
                           fontWeight: FontWeight.normal),
                     ),
-                Text('Total Receipts', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                Text('Receipts प्राप्तियाँ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
               ],
             ),
                           )
@@ -388,7 +388,7 @@ class _DashboardCard2State
                                 fontWeight: FontWeight.normal),
                         ),
                 
-                  Text('Receivables', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                  Text('Receivables लेन ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
                   
                 ],
               ),
@@ -430,7 +430,7 @@ class _DashboardCard2State
                           fontWeight: FontWeight.normal),
                     ),
                
-                Text('Payables', style: secondaryListDisc.copyWith(color: TassistPrimary),),
+                Text('Payables देन', style: secondaryListDisc.copyWith(color: TassistPrimary),),
               ],
             ),
                           )
@@ -478,7 +478,7 @@ ActionButton(this.icon, this.widget, this.title);
             IconButton(icon: icon, 
             iconSize: 30,
             padding: const EdgeInsets.all(4.0),
-            color: TassistInfoGrey,
+            color: Colors.grey[800],
             onPressed: () {Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                       builder: (context) => widget,

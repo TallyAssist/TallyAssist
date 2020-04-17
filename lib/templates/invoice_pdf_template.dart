@@ -5,6 +5,7 @@ createInvoicePdf({
   String companyName,
   String companyAddress,
   String companyPincode,
+  // Need to add Company GST, signature, terms and conditions, payment link.. 
   // String companyPan,
   String partyName,
   String partyAddress,
@@ -20,7 +21,7 @@ createInvoicePdf({
   pdf.addPage(
     MultiPage(
       pageFormat:
-          PdfPageFormat.letter.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
+          PdfPageFormat.a4.copyWith(marginBottom: 1.5 * PdfPageFormat.cm),
       crossAxisAlignment: CrossAxisAlignment.start,
       header: (Context context) {
         if (context.pageNumber == 1) {
@@ -51,9 +52,10 @@ createInvoicePdf({
         Header(
           level: 0,
           child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text('GST Invoice', textScaleFactor: 2),
+                Text('Company logo', ),
+                Text('GST Invoice',textScaleFactor: 2),
                 // PdfLogo()
               ]),
         ),
