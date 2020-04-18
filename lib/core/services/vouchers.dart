@@ -14,7 +14,7 @@ class VoucherService {
         .collection('voucher')
         .orderBy('date', descending: true)
         // .endBefore([DateTime(2019, 9, 30)])
-        .limit(2000)
+        // .limit(2000)
         .snapshots()
         .map(_receiptvouchersfromSnapshots);
   }
