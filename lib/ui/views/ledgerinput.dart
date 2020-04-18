@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 import 'dart:typed_data';
 
 import 'package:esys_flutter_share/esys_flutter_share.dart';
@@ -12,6 +13,7 @@ import 'package:tassist/core/models/company.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:tassist/core/models/voucher-item.dart';
+import 'package:tassist/core/services/voucher-item-service.dart';
 import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/theme/colors.dart';
@@ -33,7 +35,8 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _invoiceNumber = '';
+  String _invoiceNumber = Random().nextInt(10000).toString();
+  String _masterId = Random().nextInt(100000).toString();
   // Customer details
   LedgerItem _customerLedger;
   String _customerName = '';
@@ -48,7 +51,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   double _totalProductPrice = 0;
   double _totalTax = 0;
 
-  DateTime _invoiceDateRaw;
+  DateTime _invoiceDateRaw = DateTime.now();
   String _currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
   String _dueDate = DateFormat('dd-MM-yyyy')
       .format(DateTime.now().add(new Duration(days: 30)));
@@ -517,12 +520,15 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     child: RaisedButton(
                       onPressed: () async {
                         await viewPdf(
-                            company: company,
-                            context: context,
-                            invoiceDate: _currentDate,
-                            ledger: _customerLedger,
-                            inventoryEntries: _inventoryEntries,
-                            totalAmount: _totalProductPrice);
+                          company: company,
+                          context: context,
+                          invoiceDate: _currentDate,
+                          ledger: _customerLedger,
+                          inventoryEntries: _inventoryEntries,
+                          totalAmount: (_totalProductPrice + _totalTax),
+                          invoiceNumber: _invoiceNumber,
+                          preview: true,
+                        );
                       },
                       child: Text('Preview', style: TextStyle(fontSize: 20)),
                       color: TassistInfoGrey,
@@ -543,6 +549,39 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           partyname: _customerName,
                           primaryVoucherType: 'Sales',
                           type: 'Sales',
+                          date: _invoiceDateRaw,
+                          number: _invoiceNumber,
+                          masterId: _masterId,
+                        );
+
+                        for (var i = 0; i < _inventoryEntries.length; i++) {
+                          await VoucherItemService(uid: uid)
+                              .saveVoucherItemRecord(
+                            actualqty: _inventoryEntries[i].actualQty,
+                            amount: _inventoryEntries[i].amount,
+                            billedQty: _inventoryEntries[i].billedQty,
+                            gstPercent: _inventoryEntries[i].gstPercent,
+                            partyLedgerName:
+                                _inventoryEntries[i].partyLedgerName,
+                            primaryVoucherType:
+                                _inventoryEntries[i].primaryVoucherType,
+                            rate: _inventoryEntries[i].rate,
+                            stockItemName: _inventoryEntries[i].stockItemName,
+                            taxAmount: _inventoryEntries[i].taxAmount,
+                            vdate: _inventoryEntries[i].vDate,
+                            vMasterId: _inventoryEntries[i].vMasterId,
+                          );
+                        }
+
+                        await viewPdf(
+                          company: company,
+                          context: context,
+                          invoiceDate: _currentDate,
+                          ledger: _customerLedger,
+                          inventoryEntries: _inventoryEntries,
+                          totalAmount: (_totalProductPrice + _totalTax),
+                          invoiceNumber: _invoiceNumber,
+                          preview: false,
                         );
                       },
                       child: Text('Save', style: TextStyle(fontSize: 20)),
@@ -563,14 +602,16 @@ viewPdf(
     company,
     ledger,
     invoiceDate,
-    totalAmount}) async {
+    totalAmount,
+    invoiceNumber,
+    preview}) async {
   // List<VoucherItem> inventoryEntries =
   //     Provider.of<List<VoucherItem>>(context, listen: false);
 
   final itemList = _createInvoiceItemList(inventoryEntries, totalAmount);
 
   final pdf = createInvoicePdf(
-    invoiceNumber: '#12345',
+    invoiceNumber: invoiceNumber,
     invoiceDate: invoiceDate,
     companyName: company.formalName,
     companyAddress: company.address,
@@ -589,28 +630,30 @@ viewPdf(
   final file = File(path);
   await file.writeAsBytes(pdf.save());
 
-  try {
-    final Uint8List bytes1 = await file.readAsBytes();
-    //  rootBundle.load('assets/image1.png');
+  if (preview) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (_) => PdfViewerPage(path: path),
+      ),
+    );
+  } else {
+    try {
+      final Uint8List bytes1 = await file.readAsBytes();
+      //  rootBundle.load('assets/image1.png');
 
-    await Share.files(
-        'esys images',
-        {
-          'invoice_tallyassist.pdf': bytes1,
-        },
-        '*/*',
-        text: 'My optional text.');
-  } catch (e) {
-    print('error: $e');
+      await Share.files(
+          'esys images',
+          {
+            'invoice_tallyassist.pdf': bytes1,
+          },
+          '*/*',
+          text: 'My optional text.');
+    } catch (e) {
+      print('error: $e');
+    }
   }
 
   // return PdfViewerPage(path: path);
-
-  // Navigator.of(context).push(
-  //   MaterialPageRoute(
-  //     builder: (_) => PdfViewerPage(path: path),
-  //   ),
-  // );
 }
 
 class PdfViewerPage extends StatelessWidget {
