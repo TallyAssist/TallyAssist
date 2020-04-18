@@ -22,6 +22,38 @@ class VoucherItemService {
         .map(_voucherItemData);
   }
 
+  Future saveVoucherItemRecord({
+    stockItemName,
+    partyLedgerName,
+    vdate,
+    vMasterId,
+    rate,
+    primaryVoucherType,
+    gstPercent,
+    billedQty,
+    actualqty,
+    amount,
+    taxAmount,
+  }) async {
+    return await companyCollection
+        .document(this.uid)
+        .collection('inventory_entries')
+        .document()
+        .setData({
+      'restat_stock_item_name': stockItemName,
+      'restat_party_ledger_name': partyLedgerName,
+      'voucher_date': vdate,
+      'voucher_master_id': vMasterId,
+      'rate': rate,
+      'primary_voucher_type_name': primaryVoucherType,
+      'gstpercent': gstPercent,
+      'billedqty': billedQty,
+      'actualQty': actualqty,
+      'amount': amount,
+      'taxamount': taxAmount,
+    });
+  }
+
   List<VoucherItem> _voucherItemData(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return VoucherItem(
