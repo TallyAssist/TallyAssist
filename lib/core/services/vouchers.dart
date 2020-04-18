@@ -49,7 +49,7 @@ class VoucherService {
   List<Voucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Voucher(
-        date: doc.data['date'].toDate() ?? null,
+        date: doc.data['date']?.toDate() ?? null,
         partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount']?.toDouble() ?? 0,
         masterid: doc.data['master_id'] ?? '',
