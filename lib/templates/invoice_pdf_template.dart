@@ -41,12 +41,20 @@ createInvoicePdf({
       },
       footer: (Context context) {
         return Container(
-            alignment: Alignment.centerRight,
             margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
-            child: Text('Page ${context.pageNumber} of ${context.pagesCount}',
+            child: 
+            Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget> [
+            Text('Generated using TallyAssist',  style: TextStyle(color: PdfColors.purple400, font: Font.timesItalic())),
+            Text('Page ${context.pageNumber} of ${context.pagesCount}',
                 style: Theme.of(context)
                     .defaultTextStyle
-                    .copyWith(color: PdfColors.grey)));
+                    .copyWith(color: PdfColors.grey))
+          ]
+        ),
+            
+            );
       },
       build: (Context context) => <Widget>[
         Header(
@@ -81,6 +89,7 @@ createInvoicePdf({
                       Text('GST Invoice', style: TextStyle(fontWeight: FontWeight.bold,)),
                       Text('Invoice No.: $invoiceNumber'),
                       Text('Invoice Date: $invoiceDate'),
+                       Text('Place of supply:' ),
                     ],
                   ), // Need this to be 
                
@@ -106,7 +115,8 @@ createInvoicePdf({
                   Text(partyName),
                   Text(partyAddress),
                   Text(partyPincode),
-          
+                 
+
                 ],
               ),
             ),
@@ -116,8 +126,8 @@ createInvoicePdf({
                 children: [
                   Text('Customer GSTIN',style: TextStyle(fontWeight: FontWeight.bold,) ),
                   Text(partyGST),
-                  Text('Customer State',style: TextStyle(fontWeight: FontWeight.bold,) ),
-                  Text(partyState)
+                  Text('State: $partyState',style: TextStyle(fontWeight: FontWeight.bold,) ),
+                  Text('Due Date:', style: TextStyle(fontWeight: FontWeight.bold,)) //TODO need to add due date from invoice 
                 ],
               )
               ],
@@ -206,12 +216,8 @@ createInvoicePdf({
             ),
           ],
         ),
-        SizedBox(height: 10),
-        Row(
-          children: <Widget> [
-            Text('Generated using TallyASsist',  style: TextStyle(color: PdfColors.indigo500))
-          ]
-        ),
+        // SizedBox(height: 20),
+        
         Padding(padding: const EdgeInsets.all(10)),
       ],
     ),
