@@ -328,15 +328,15 @@ _createInvoiceItemList(voucher, inventoryEntries) {
   // We add relevant data to itemList
   for (var i = 0; i < inventoryEntries.length; i++) {
     String serialNo = (i + 1).toString();
-    String itemDescription = inventoryEntries[i]['stockItemName'];
+    String itemDescription = inventoryEntries[i]?.stockItemName ?? "";
     String hsnSac = "";
-    String quantity = inventoryEntries[i]['actualQty'].toString();
-    String rate = inventoryEntries[i]['rate'].toString();
+    String quantity = inventoryEntries[i]?.actualQty.toString() ?? "";
+    String rate = inventoryEntries[i]?.rate.toString() ?? "";
     String unit = "";
-    String discount = inventoryEntries[i]['discount'].toString();
-    String amount = positiveAmount(inventoryEntries[i]['amount'].toDouble());
+    String discount = inventoryEntries[i]?.discount.toString() ?? "";
+    String amount = inventoryEntries[i]?.amount.toString() ?? "";
     String taxAmount =
-        positiveAmount(inventoryEntries[i]['taxAmount'].toDouble());
+        inventoryEntries[i]?.taxAmount?.toString() ?? "";
 
     itemList.add([
       serialNo,
