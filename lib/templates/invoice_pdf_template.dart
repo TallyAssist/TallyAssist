@@ -206,6 +206,12 @@ createInvoicePdf({
             ),
           ],
         ),
+        SizedBox(height: 10),
+        Row(
+          children: <Widget> [
+            Text('Generated using TallyASsist',  style: TextStyle(color: PdfColors.indigo500))
+          ]
+        ),
         Padding(padding: const EdgeInsets.all(10)),
       ],
     ),
