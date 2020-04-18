@@ -35,12 +35,12 @@ class VoucherService {
         .document(masterId)
         .setData({
       'number': number,
-      'masterId': masterId,
+      'master_id': masterId,
       'date': date,
-      'partyname': partyname,
+      'restat_party_ledger_name': partyname,
       'amount': amount,
-      'primaryVoucherType': primaryVoucherType,
-      'isInvoice': isInvoice,
+      'primary_voucher_type_name': primaryVoucherType,
+      'is_invoice': isInvoice,
       'type': type,
       'fromTally': '0',
     });
