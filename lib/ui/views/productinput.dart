@@ -31,7 +31,7 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                  Text('Create new product', style: secondaryListTitle,),
+                  Text('Create new product/service', style: secondaryListTitle,),
                   TextFormField(
                     style: secondaryListDisc,
                     decoration: InputDecoration(
@@ -71,17 +71,18 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                   Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width / 2.3 ,
-                            child: TextFormField(
-                        style: secondaryListDisc,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                            labelText: 'Initial Stock',
-                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey)
-                        ),
-                      ),
-                          ),
+                      //     SizedBox(
+                      //       width: MediaQuery.of(context).size.width / 2.3 ,
+                      //       child: TextFormField(
+                      //   style: secondaryListDisc,
+                      //   keyboardType: TextInputType.number,
+                      //   decoration: InputDecoration(
+                      //       labelText: 'Initial Stock',
+                      //       labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey),
+                      //       hintText: 'Leave blank for service'
+                      //   ),
+                      // ),
+                      //     ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2.3 ,
                         child: TextFormField(
@@ -101,10 +102,21 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                    padding: spacer.top.sm,
                    child: Text('Optional', style: secondaryListTitle,),
                  ),
-                 Row(
-                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: <Widget>[
+                  Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
                           SizedBox(
+                            width: MediaQuery.of(context).size.width / 2.3 ,
+                            child: TextFormField(
+                        style: secondaryListDisc,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(
+                            labelText: 'Initial Stock',
+                            labelStyle: secondaryListTitle2.copyWith(color: TassistInfoGrey),
+                        ),
+                      ),
+                          ),
+                           SizedBox(
                             width: MediaQuery.of(context).size.width / 2.3 ,
                             child: TextFormField(
                         style: secondaryListDisc,
@@ -114,6 +126,12 @@ class _ProductInputScreenState extends State<ProductInputScreen> {
                         ),
                       ),
                           ),
+                        ]
+                  ),
+                 Row(
+                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                       children: <Widget>[
+                         
                       SizedBox(
                         width: MediaQuery.of(context).size.width / 2.3 ,
                         child: TextFormField(

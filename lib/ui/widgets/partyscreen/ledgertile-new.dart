@@ -44,7 +44,7 @@ class LedgerItemTileNew  extends StatelessWidget {
       title2: 'Last Sale ', 
       info2: _formatDate(ledgerItem.lastSalesDate), 
       title3: 'Last Receipt', info3: _formatDate(ledgerItem.lastReceiptDate),
-      title4: 'Top Item', info4: 'Coming Soon!',
+      // title4: 'Top Item', info4: 'Coming Soon!',
       ledgerItem: ledgerItem,);
   }
   else {
@@ -60,7 +60,7 @@ class LedgerItemTileNew  extends StatelessWidget {
       title2: 'Last Purchase ', 
       info2: _formatDate(ledgerItem.lastPurchaseDate), 
       title3: 'Last Payment', info3: _formatDate(ledgerItem.lastPaymentDate),
-      title4: 'Top Item', info4: 'Coming Soon!',
+      // title4: 'Top Item', info4: 'Coming Soon!',
       ledgerItem: ledgerItem,);
     
 
