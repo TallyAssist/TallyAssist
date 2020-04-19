@@ -90,10 +90,13 @@ class VoucherView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: <Widget>[
                           Text(voucher.number),
-                          InvoiceButton(
-                            voucher: voucher,
-                            company: company,
-                            ledger: ledger,
+                          Visibility(
+                            visible: voucher.primaryVoucherType == "Sales",
+                            child: InvoiceButton(
+                              voucher: voucher,
+                              company: company,
+                              ledger: ledger,
+                            ),
                           ),
                         ]),
                     Container(height: 3.0, color: TassistGray),
@@ -335,8 +338,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
     String unit = "";
     String discount = inventoryEntries[i]?.discount.toString() ?? "";
     String amount = inventoryEntries[i]?.amount.toString() ?? "";
-    String taxAmount =
-        inventoryEntries[i]?.taxAmount?.toString() ?? "";
+    String taxAmount = inventoryEntries[i]?.taxAmount?.toString() ?? "";
 
     itemList.add([
       serialNo,
@@ -351,7 +353,8 @@ _createInvoiceItemList(voucher, inventoryEntries) {
     itemList.add(["", "Tax", "", "", "", "", taxAmount]);
   }
 
-  itemList.add(["", "Total", "", "", "", "", "", "", voucher.amount.toString()]);
+  itemList
+      .add(["", "Total", "", "", "", "", "", "", voucher.amount.toString()]);
 
   return itemList;
 }

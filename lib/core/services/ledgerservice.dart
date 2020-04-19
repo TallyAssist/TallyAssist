@@ -45,6 +45,19 @@ class LedgerItemService {
         .map(_ledgerItemData);
   }
 
+  Future saveLedger({masterId, name, phone, gst, partyType}) async {
+    return await companyCollection
+        .document(this.uid)
+        .collection('ledger')
+        .document(masterId)
+        .setData({
+      'name': name,
+      'phone': phone,
+      'gst': gst,
+      'party_type': partyType,
+    });
+  }
+
   List<LedgerItem> _ledgerItemData(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return LedgerItem(
