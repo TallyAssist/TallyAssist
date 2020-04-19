@@ -184,13 +184,15 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                     ),
                     Padding(
                       padding: spacer.x.xs,
-                      child: Row(
-                        children: <Widget>[
-                        ActionButton(Icon(FontAwesomeIcons.listAlt), LedgerScreen(), 'Parties   पार्टी'),
-                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), VouchersHome(), 'Vouchers  वाउचर'),
-                        ActionButton(Icon(FontAwesomeIcons.warehouse), StockScreen(), 'Stock  स्टॉक'),
-                        ActionButton(Icon(Icons.settings), SettingsScreen(), 'Settings  सैटिंग्स'),
-                        ],
+                      child: FittedBox(
+                                              child: Row(
+                          children: <Widget>[
+                          ActionButton(Icon(FontAwesomeIcons.listAlt), LedgerScreen(), 'Parties','पार्टी'),
+                          ActionButton(Icon(FontAwesomeIcons.fileInvoice), VouchersHome(), 'Vouchers', 'वाउचर'),
+                          ActionButton(Icon(FontAwesomeIcons.warehouse), StockScreen(), 'Stock', 'स्टॉक'),
+                          ActionButton(Icon(Icons.settings), SettingsScreen(), 'Settings','सैटिंग्स'),
+                          ],
+                        ),
                       ),
                     ),
                      Padding(
@@ -199,13 +201,15 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                     ),
                     Padding(
                       padding: spacer.x.xs,
-                      child: Row(
-                        children: <Widget>[
-                        ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice बिल'),
-                        ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate  कच्चा'),
-                        ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party  पार्टी'),
-                        ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product  उत्पाद'),
-                        ],
+                      child: FittedBox(
+                                              child: Row(
+                          children: <Widget>[
+                          ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice', 'बिल'),
+                          ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate','कच्चा'),
+                          ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party','पार्टी'),
+                          ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product','उत्पाद'),
+                          ],
+                        ),
                       ),
                     )
                     
@@ -238,90 +242,92 @@ class _DashboardCardState
     }
 
     if (userDocument != null) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-         Card(
-                elevation: 5,
-                child:           
-          Container(
-            width: 170,
-            height: 70,
-            child: InkWell(
-              onTap: () {Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-                    builder: (context) => VouchersHome(),
-                  )
-        );
-              },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
+      return FittedBox(
+              child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+           Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width:  MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => VouchersHome(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+              
+                          Text(
+                              formatIndianCurrency(
+                                      userDocument['total_sales'].toString()) ??
+                                  '',
+                              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                  color: TassistMainText,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal),
+                          ),
+                  
+                    Text('Sales सेल्स ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    
+                  ],
+                ),
+                            ),
+              ),
+            ),
+              ),
+            SizedBox(
+              width: 20.0,
+            ),
+             Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width:  MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => VouchersHome(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-            
-                        Text(
-                            formatIndianCurrency(
-                                    userDocument['total_sales'].toString()) ??
-                                '',
-                            style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                color: TassistMainText,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal),
-                        ),
-                
-                  Text('Sales सेल्स ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
-                  
+                      Text(
+                        formatIndianCurrency(
+                                userDocument['total_receipts'].toString()) ??
+                            '',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            color: TassistMainText,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      ),
+                  Text('Receipts प्राप्तियाँ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
                 ],
               ),
-                          ),
-            ),
-          ),
-            ),
-          SizedBox(
-            width: 20.0,
-          ),
-           Card(
-                elevation: 5,
-                child:           
-          Container(
-            width: 170,
-            height: 70,
-            child: InkWell(
-              onTap: () {Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-                    builder: (context) => VouchersHome(),
-                  )
-        );
-              },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:
-             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                    Text(
-                      formatIndianCurrency(
-                              userDocument['total_receipts'].toString()) ??
-                          '',
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          color: TassistMainText,
-                          fontSize: 18,
-                          fontWeight: FontWeight.normal),
-                    ),
-                Text('Receipts प्राप्तियाँ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
-              ],
-            ),
-                          )
-            ),
-          )
-           )
-          // SimpleTimeSeriesChart.withSampleData(),
-       
-       
-        ],
+                            )
+              ),
+            )
+             )
+            // SimpleTimeSeriesChart.withSampleData(),
+         
+         
+          ],
+        ),
       );
     } else {
       return Container(
@@ -355,92 +361,94 @@ class _DashboardCard2State
     }
 
     if (userDocument != null) {
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-         Card(
-                elevation: 5,
-                child:           
-          Container(
-            width: 170,
-            height: 70,
-            child: InkWell(
-              onTap: () {Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-                    builder: (context) => AccountsReceivableScreen(),
-                  )
-        );
-              },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
+      return FittedBox(
+              child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+           Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width: MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => AccountsReceivableScreen(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                  
+                          Text(
+                              formatIndianCurrency(
+                                      userDocument['out_actual_rec'].toString()) ??
+                                  '',
+                              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                  color: TassistMainText,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal),
+                          ),
+                  
+                    Text('Receivables लेन ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    
+                  ],
+                ),
+                            ),
+              ),
+            ),
+              ),
+            SizedBox(
+              width: 20.0,
+            ),
+             Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width:  MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => AccountsPayableScreen(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                 
-                        Text(
-                            formatIndianCurrency(
-                                    userDocument['out_actual_rec'].toString()) ??
-                                '',
-                            style: Theme.of(context).textTheme.bodyText2.copyWith(
-                                color: TassistMainText,
-                                fontSize: 18,
-                                fontWeight: FontWeight.normal),
-                        ),
-                
-                  Text('Receivables लेन ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
-                  
+                      Text(
+                        formatIndianCurrency(
+                                userDocument['out_actual_pay'].toString()) ??
+                            '',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            color: TassistMainText,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      ),
+                 
+                  Text('Payables देन', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                 ],
               ),
-                          ),
-            ),
-          ),
-            ),
-          SizedBox(
-            width: 20.0,
-          ),
-           Card(
-                elevation: 5,
-                child:           
-          Container(
-            width: 170,
-            height: 70,
-            child: InkWell(
-              onTap: () {Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-                    builder: (context) => AccountsPayableScreen(),
-                  )
-        );
-              },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child:
-             Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-              
-                    Text(
-                      formatIndianCurrency(
-                              userDocument['out_actual_pay'].toString()) ??
-                          '',
-                      style: Theme.of(context).textTheme.bodyText2.copyWith(
-                          color: TassistMainText,
-                          fontSize: 18,
-                          fontWeight: FontWeight.normal),
-                    ),
-               
-                Text('Payables देन', style: secondaryListDisc.copyWith(color: TassistPrimary),),
-              ],
-            ),
-                          )
-            ),
-          )
-           )
-          // SimpleTimeSeriesChart.withSampleData(),
-       
-       
-        ],
+                            )
+              ),
+            )
+             )
+            // SimpleTimeSeriesChart.withSampleData(),
+         
+         
+          ],
+        ),
       );
     } else {
       return Container(
@@ -460,8 +468,9 @@ class ActionButton extends StatelessWidget {
 final Icon icon;
 final Widget widget;
 final String title;
+final String hindiTitle;
   
-ActionButton(this.icon, this.widget, this.title);
+ActionButton(this.icon, this.widget, this.title, this.hindiTitle);
 
   @override
   Widget build(BuildContext context) {
@@ -469,7 +478,7 @@ ActionButton(this.icon, this.widget, this.title);
       elevation: 3,
       child: Container(
         padding: const EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-        width: 85,
+        width: MediaQuery.of(context).size.width /4.5,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -485,7 +494,8 @@ ActionButton(this.icon, this.widget, this.title);
                     )
           );
                 }),
-              Text(title, style: secondaryListDisc.copyWith(fontSize: 12, color: TassistPrimary),)
+              Text(title, style: secondaryListDisc.copyWith(fontSize: 12, color: TassistPrimary),),
+              Text(hindiTitle, style: secondaryListDisc.copyWith(fontSize: 12, color: TassistPrimary),)
 
           ]
         ),

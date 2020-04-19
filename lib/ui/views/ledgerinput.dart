@@ -233,17 +233,17 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     //     color: TassistBgLightPurple)
                   ),
                 ),
-                Padding(
-                  padding: spacer.x.xxs,
-                  child: Text(
-                    _customerName,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 12.0,
-                        ),
-                  ),
-                ),
+                // Padding(
+                //   padding: spacer.x.xxs,
+                //   child: Text(
+                //     _customerName,
+                //     overflow: TextOverflow.ellipsis,
+                //     maxLines: 2,
+                //     style: Theme.of(context).textTheme.headline6.copyWith(
+                //           fontSize: 12.0,
+                //         ),
+                //   ),
+                // ),
                 Padding(
                   padding: spacer.x.xxs,
                   child: Row(
@@ -325,17 +325,17 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: spacer.x.xxs,
-                  child: Text(
-                    _productName,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                    style: Theme.of(context).textTheme.headline6.copyWith(
-                          fontSize: 12.0,
-                        ),
-                  ),
-                ),
+                // Padding(
+                //   padding: spacer.x.xxs,
+                //   child: Text(
+                //     _productName,
+                //     overflow: TextOverflow.ellipsis,
+                //     maxLines: 2,
+                //     style: Theme.of(context).textTheme.headline6.copyWith(
+                //           fontSize: 12.0,
+                //         ),
+                //   ),
+                // ),
                 Padding(
                   padding: spacer.x.xs,
                   child: new Row(

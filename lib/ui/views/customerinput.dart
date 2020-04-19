@@ -7,7 +7,8 @@ import 'package:tassist/core/services/ledgerservice.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:tassist/ui/shared/headernav.dart';
-import 'package:contact_picker/contact_picker.dart';
+// import 'package:contact_picker/contact_picker.dart';
+import 'package:native_contact_picker/native_contact_picker.dart';
 
 class CustomerInputScreen extends StatefulWidget {
   @override
@@ -15,10 +16,9 @@ class CustomerInputScreen extends StatefulWidget {
 }
 
 class _CustomerInputScreenState extends State<CustomerInputScreen> {
-  final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
-  final ContactPicker _contactPicker = new ContactPicker();
 
-  // Customer details
+    final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
+     final NativeContactPicker _contactPicker = new NativeContactPicker();
   Contact _contact;
   String _partyType;
   String _customerName;
