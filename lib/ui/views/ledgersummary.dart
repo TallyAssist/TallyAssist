@@ -220,12 +220,13 @@ viewPdf(context, voucherData, company, ledger) async {
 
   final pdf = createLedgerPdf(
     companyName: company.formalName,
-    startDate: '01-04-2019', //TODO need to make this
-    endDate: '31-03-2020', // TODO need to make this dynamic
+    startDate: '01-04-2020', //TODO need to make this
+    endDate: DateFormat('dd-MM-yyyy')
+        .format(DateTime.now()), // TODO need to make this dynamic
     partyName: ledger.name,
     ledgerList: ledgerList,
-    // openingBalance: ledger.openingBalance.toString(),
-    // closingBalance: ledger.closingBalance.toString()
+    openingBalance: ledger.openingBalance.toString(),
+    closingBalance: ledger.closingBalance.toString(),
   );
 
   // print("Voucher Data");

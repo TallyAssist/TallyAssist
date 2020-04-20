@@ -9,10 +9,6 @@ createLedgerPdf({
   List<List<String>> ledgerList,
   String openingBalance,
   String closingBalance,
-  // String totalCreditWithoutClosingBalance,
-  // String totalDebitWithoutClosingBalance,
-  // String totalCredit,
-  // String totalDebit
 }) {
   final pdf = Document();
   pdf.addPage(
