@@ -39,10 +39,12 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      // Firestore.instance
-      //     .collection('metrics')
-      //     .document(user.uid)
-      //     .setData({'total_sales': 0});
+      Firestore.instance.collection('metrics').document(user.uid).setData({
+        'total_sales': 0.0,
+        'total_payments': 0.0,
+        'total_purchases': 0.0,
+        'total_receipts': 0.0,
+      });
 
       // Company
       Firestore.instance.collection('company').document(user.uid).setData({
