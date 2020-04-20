@@ -118,7 +118,7 @@ TextEditingController editingController = TextEditingController();
                     itemCount: ledgerItemDataforDisplay?.length ?? 0,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                      onDoubleTap: () => {
+                      onTap: () => {
             
                         partyname = ledgerItemDataforDisplay[index].name,
                         ledgerGuid = ledgerItemDataforDisplay[index].guid,

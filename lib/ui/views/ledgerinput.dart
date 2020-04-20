@@ -584,7 +584,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           preview: false,
                         );
                       },
-                      child: Text('Save', style: TextStyle(fontSize: 20)),
+                      child: Text('Send', style: TextStyle(fontSize: 20)),
                       color: TassistPrimary,
                       textColor: Colors.white,
                       elevation: 5,
@@ -625,7 +625,7 @@ viewPdf(
   );
 
   final String dir = (await getExternalStorageDirectory()).path;
-  final path = "$dir/invoice_tallyassist.pdf";
+  final path = "$dir/invoice_$invoiceNumber.pdf";
   print(path);
   final file = File(path);
   await file.writeAsBytes(pdf.save());
@@ -644,10 +644,11 @@ viewPdf(
       await Share.files(
           'esys images',
           {
-            'invoice_tallyassist.pdf': bytes1,
+            'invoice_$invoiceNumber.pdf': bytes1,
           },
-          '*/*',
-          text: 'My optional text.');
+          '*/*', 
+          text: 'Please find $invoiceNumber worth $totalAmount from $company. It was great doing business with you! - shared via TallyAssist');
+
     } catch (e) {
       print('error: $e');
     }
