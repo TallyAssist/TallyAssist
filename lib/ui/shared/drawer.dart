@@ -8,7 +8,6 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 // import 'package:tassist/ui/views/crm.dart';
-import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/home.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
@@ -66,7 +65,7 @@ Drawer tassistDrawer(BuildContext context) {
                    Row(children: <Widget>[
                   Icon(FontAwesomeIcons.laptop),
                   SizedBox(width: 20),
-                  Text('Install Tally Connector')
+                  Text('Get Tally Connector')
 
                    ]),
                 onPressed: () => _launchURL(),)
@@ -229,7 +228,7 @@ class _DrawerItemState extends State<DrawerItem> {
 
 
 _launchURL() async {
-  const url = 'https://restat.co/tallyassist/';
+  const url = 'https://share.hsforms.com/1zpdLYOX4TDydLlHGzP50Zg3txai';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

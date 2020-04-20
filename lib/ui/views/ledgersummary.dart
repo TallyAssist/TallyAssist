@@ -230,10 +230,10 @@ viewPdf(context, voucherData, company, ledger) async {
   );
 
   // print("Voucher Data");
-  String partyNamePDF = ledger.name;
+  // String partyNamePDF = ledger.name;
 
   final String dir = (await getExternalStorageDirectory()).path;
-  final path = "$dir/example.pdf";
+  final path = "$dir/Statement_tallyassist.pdf";
   print(path);
   final file = File(path);
   await file.writeAsBytes(pdf.save());
@@ -245,10 +245,10 @@ viewPdf(context, voucherData, company, ledger) async {
     await Share.files(
         'esys images',
         {
-          'Statement_$partyNamePDF.pdf': bytes1,
+          'Statement_tallyassist.pdf': bytes1,
         },
         '*/*',
-        text: 'My optional text.');
+        text: 'Please find your party statement. Thanks for doing business with us!');
   } catch (e) {
     print('error: $e');
   }

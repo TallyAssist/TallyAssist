@@ -40,6 +40,7 @@ dependencies:
   firebase_storage: ^3.1.5
   # contact_picker: ^0.0.2
   native_contact_picker: ^0.0.6
+  # screenshot_and_share: ^0.0.1
   http: ^0.12.0+4
   printing: ^3.3.1
 
@@ -74,6 +75,9 @@ flutter:
   assets:
     - graphics/rumi-gate.jpg
     - graphics/dataanalysis.png
+    - assets/images/ledgers.png
+    - assets/images/invoice.png
+    - assets/images/invoice-maker.png
 
   fonts: 
     - family: Montserrat
