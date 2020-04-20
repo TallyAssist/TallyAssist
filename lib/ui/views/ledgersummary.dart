@@ -46,6 +46,7 @@ class LedgerSummary extends StatelessWidget {
 
     Company company;
     company = Provider.of<Company>(context, listen: false);
+    
 
     // final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
@@ -185,7 +186,7 @@ viewPdf(context, voucherData, company, ledger) async {
   print(voucherData);
   // initiate an empty list with column headers
   List<List<String>> ledgerList = [
-    ['Date', 'Particulars', 'Vch Type', 'Vch No.', 'Debit', 'Credit']
+    ['Date', 'Vch No.',  'Vch Type', 'Dr./Cr.', 'Debit', 'Credit']
   ];
   // for each voucher:
   // 1. create a list of date, nature (credit/debit), ledger name, voucher type, voucher no, amount (debit/credit)
@@ -202,14 +203,14 @@ viewPdf(context, voucherData, company, ledger) async {
     } else {
       natureTransaction = 'Cr';
     }
-    tempList = [voucherData[i].date.toString(), natureTransaction, voucherData[i].ledgerEntries[0]['ledgerrefname'], voucherData[i].primaryVoucherType, voucherData[i].number.toString(), voucherData[i].amount.toString()];
+    tempList = [ _formatDate(voucherData[i].date), voucherData[i].ledgerEntries[0]['ledgerrefname'],  voucherData[i].number.toString(), voucherData[i].primaryVoucherType, natureTransaction, voucherData[i].amount.toString()];
     ledgerList.add(tempList);
   }
 
   final pdf = createLedgerPdf(
     companyName: company.formalName,
-    startDate: '01-04-2020',
-    endDate: '31-03-2020',
+    startDate: voucherData.date.min(), //TODO need to make this 
+    endDate: voucherData.date.max(), // TODO need to make this dynamic
     partyName: ledger.name,
     ledgerList: ledgerList,
   );

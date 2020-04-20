@@ -201,16 +201,14 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                     ),
                     Padding(
                       padding: spacer.x.xs,
-                      child: FittedBox(
-                                              child: Row(
+                      child: Row(
                           children: <Widget>[
                           ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice', 'बिल'),
-                          ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate','कच्चा'),
-                          ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party','पार्टी'),
-                          ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product','उत्पाद'),
+                          // ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate','कच्चा'),
+                          // ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party','पार्टी'),
+                          // ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product','उत्पाद'),
                           ],
                         ),
-                      ),
                     )
                     
                                 ],
