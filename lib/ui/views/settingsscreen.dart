@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/services/companyservice.dart';
-import 'package:tassist/core/services/storageuploadservice.dart';
+import 'package:tassist/core/services/storageservice.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
@@ -81,7 +81,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .bodyText1
                         .copyWith(color: TassistWhite)),
                 onPressed: () async {
-                  await UploadService().uploadFile(_imageFile, uid + '_logo');
+                  await StorageService().uploadFile(_imageFile, uid + '_logo');
                   // return AlertDialog(
                   //     title: Text(
                   //       'Your logo has been uploaded',

@@ -40,6 +40,8 @@ dependencies:
   firebase_storage: ^3.1.5
   # contact_picker: ^0.0.2
   native_contact_picker: ^0.0.6
+  http: ^0.12.0+4
+  printing: ^3.3.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
