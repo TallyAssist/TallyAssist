@@ -1,5 +1,4 @@
 class StockItem {
-
   final String name;
   final String masterId;
   final String closingBalance;
@@ -9,5 +8,14 @@ class StockItem {
   final String standardCost;
   final String standardPrice;
 
-  StockItem({this.name, this.masterId, this.closingBalance, this.closingValue, this.baseUnit, this.closingRate, this.standardCost, this.standardPrice});
+  StockItem({
+    this.name,
+    this.masterId,
+    this.closingBalance,
+    this.closingValue,
+    this.baseUnit,
+    this.closingRate,
+    this.standardCost,
+    this.standardPrice,
+  });
 }

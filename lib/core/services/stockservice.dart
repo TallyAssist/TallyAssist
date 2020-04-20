@@ -48,14 +48,14 @@ class StockItemService {
       return StockItem(
         name: doc.data['name'] ?? '',
         masterId: doc.data['master_id'] ?? '',
-        closingBalance: doc.data['closingbalance'].toString() ?? '',
+        closingBalance: doc.data['closingbalance']?.toString() ?? '',
         closingValue: doc.data['closingvalue'] != ''
             ? (doc.data['closingvalue']?.toDouble() ?? 0)
             : 0,
-        baseUnit: doc.data['baseunits'].toString() ?? '',
-        closingRate: doc.data['closingrate'].toString() ?? '',
-        standardCost: doc.data['standardcost'].toString() ?? '',
-        standardPrice: doc.data['standardprice'].toString() ?? '',
+        baseUnit: doc.data['baseunits']?.toString() ?? '',
+        closingRate: doc.data['closingrate']?.toString() ?? '',
+        standardCost: doc.data['standardcost']?.toString() ?? '',
+        standardPrice: doc.data['standardprice']?.toString() ?? '',
       );
     }).toList();
   }

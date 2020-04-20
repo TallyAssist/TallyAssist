@@ -311,7 +311,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       SizedBox(width: 20),
                       Flexible(
                         flex: 1,
-                        child: new TextFormField(
+                        child: new TextFormField(                                   
                           keyboardType: TextInputType.number,
                           style: secondaryListDisc,
                           decoration: InputDecoration(
