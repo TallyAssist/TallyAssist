@@ -75,48 +75,48 @@ class _VouchersHomeState extends State<VouchersHome>
                   // width: MediaQuery.of(context).size.width,
                   height: 35,
                 ),
-                Container(
-                  decoration: myBoxDecorationBottomBorder(),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          "Select timeperiod",
-                          style: secondaryListTitle2,
-                        ),
-                        PopupMenuButton<String>(
-                          icon: Icon(Icons.av_timer),
-                          onSelected: (value) {
-                            setState(() {
-                              timePeriod = value;
-                            });
-                          },
-                          itemBuilder: (BuildContext context) {
-                            return timePeriodList.map(
-                              (String choice) {
-                                return PopupMenuItem<String>(
-                                  value: choice,
-                                  child: Text(
-                                    choice,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.normal,
-                                        fontSize: 14.0),
-                                  ),
-                                );
-                              },
-                            ).toList();
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  // color: Colors.blueGrey[100],
-                  // width: MediaQuery.of(context).size.width,
-                  height: 35,
-                ),
+                // Container(
+                //   decoration: myBoxDecorationBottomBorder(),
+                //   child: Padding(
+                //     padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                //     child: Row(
+                //       crossAxisAlignment: CrossAxisAlignment.end,
+                //       mainAxisAlignment: MainAxisAlignment.center,
+                //       children: <Widget>[
+                //         Text(
+                //           "Select timeperiod",
+                //           style: secondaryListTitle2,
+                //         ),
+                //         PopupMenuButton<String>(
+                //           icon: Icon(Icons.av_timer),
+                //           onSelected: (value) {
+                //             setState(() {
+                //               timePeriod = value;
+                //             });
+                //           },
+                //           itemBuilder: (BuildContext context) {
+                //             return timePeriodList.map(
+                //               (String choice) {
+                //                 return PopupMenuItem<String>(
+                //                   value: choice,
+                //                   child: Text(
+                //                     choice,
+                //                     style: TextStyle(
+                //                         fontWeight: FontWeight.normal,
+                //                         fontSize: 14.0),
+                //                   ),
+                //                 );
+                //               },
+                //             ).toList();
+                //           },
+                //         ),
+                //       ],
+                //     ),
+                //   ),
+                //   // color: Colors.blueGrey[100],
+                //   // width: MediaQuery.of(context).size.width,
+                //   height: 35,
+                // ),
                 Expanded(
                   child: TabBarView(
                     // controller: _tabController,
