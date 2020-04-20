@@ -17,6 +17,7 @@ import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/shared/debitcredit.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -40,6 +41,7 @@ class LedgerSummary extends StatelessWidget {
         [];
     LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
 
+    
     // Here we get all vouchers for current ledger
     List<LedgerVoucherModel> voucherData;
     voucherData = Provider.of<List<LedgerVoucherModel>>(context, listen: false);
@@ -61,11 +63,11 @@ class LedgerSummary extends StatelessWidget {
                 children: <Widget>[
                   Row(children: <Widget>[
                     Container(
-                        height: 30.0,
+                        width: MediaQuery.of(context).size.width / 1.1,
                         child: Text(
                           ledger.name,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: 2,
                           style: TextStyle(color: TassistPrimary),
                         ))
                   ]),
@@ -186,7 +188,7 @@ viewPdf(context, voucherData, company, ledger) async {
   print(voucherData);
   // initiate an empty list with column headers
   List<List<String>> ledgerList = [
-    ['Date', 'Vch No.',  'Vch Type', 'Dr./Cr.', 'Debit', 'Credit']
+    ['Date', 'Vch No.',  'Vch Type', 'Dr./Cr.', 'Amount']
   ];
   // for each voucher:
   // 1. create a list of date, nature (credit/debit), ledger name, voucher type, voucher no, amount (debit/credit)
@@ -199,23 +201,29 @@ viewPdf(context, voucherData, company, ledger) async {
 
     // TODO: what if amount is equal to 0?
     if (voucherData[i].amount > 0) {
-      natureTransaction = 'Dr';
+      natureTransaction = 'Dr.';
     } else {
-      natureTransaction = 'Cr';
+      natureTransaction = 'Cr.';
     }
-    tempList = [ _formatDate(voucherData[i].date), voucherData[i].ledgerEntries[0]['ledgerrefname'],  voucherData[i].number.toString(), voucherData[i].primaryVoucherType, natureTransaction, voucherData[i].amount.toString()];
+    tempList = [ _formatDate(voucherData[i].date), voucherData[i].number.toString(), voucherData[i].primaryVoucherType, natureTransaction, positiveAmount(voucherData[i].amount)];
     ledgerList.add(tempList);
   }
 
   final pdf = createLedgerPdf(
     companyName: company.formalName,
-    startDate: voucherData.date.min(), //TODO need to make this 
-    endDate: voucherData.date.max(), // TODO need to make this dynamic
+    startDate: '01-04-2019', //TODO need to make this 
+    endDate: '31-03-2020', // TODO need to make this dynamic
     partyName: ledger.name,
     ledgerList: ledgerList,
+    // openingBalance: ledger.openingBalance.toString(),
+    // closingBalance: ledger.closingBalance.toString()
+   
+
   );
 
   // print("Voucher Data");
+  String partyNamePDF = ledger.name;
+
 
   final String dir = (await getExternalStorageDirectory()).path;
   final path = "$dir/example.pdf";
@@ -230,7 +238,7 @@ viewPdf(context, voucherData, company, ledger) async {
     await Share.files(
         'esys images',
         {
-          'esys.pdf': bytes1,
+          'Statement_$partyNamePDF.pdf': bytes1,
         },
         '*/*',
         text: 'My optional text.');
