@@ -27,13 +27,6 @@ createInvoicePdf({
     height: 40,
   );
 
-  // final logoImage = PdfImage(
-  //   pdf.document,
-  //   image: File(logoPath).readAsBytesSync(),
-  //   width: 49,
-  //   height: 49,
-  // );
-
   pdf.addPage(
     MultiPage(
       pageFormat:

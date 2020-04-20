@@ -115,11 +115,12 @@ class AuthService {
         'restat_party_ledger_name': 'XYZ Ltd',
         'amount': 10000,
         'master_id': '1',
+        'guid': '1',
         'is_cancelled': '0',
         'primary_voucher_type_name': 'Sales',
         'is_invoice': '1',
         'type': 'Sales',
-        'party_legger_name': '1',
+        'party_ledger_name': '1',
         'number': '1',
         'inventory_entries': [
           {

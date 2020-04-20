@@ -11,6 +11,7 @@ import 'package:tassist/core/models/company.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/storageservice.dart';
 import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -188,17 +189,25 @@ class InvoiceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String uid = Provider.of<FirebaseUser>(context).uid;
+
     return // PDF Sharing button
         IconButton(
-      icon: Icon(Icons.picture_as_pdf),
-      onPressed: () => viewPdf(
-        context,
-        voucher,
-        company,
-        ledger,
-        // inventoryEntries,
-      ),
-    );
+            icon: Icon(Icons.picture_as_pdf),
+            onPressed: () async {
+              await StorageService().downloadFile(uid + '_logo');
+              String logoPath =
+                  Directory.systemTemp.path.toString() + '/' + uid + '_logo';
+
+              viewPdf(
+                context,
+                voucher,
+                company,
+                ledger,
+                logoPath,
+                // inventoryEntries,
+              );
+            });
   }
 }
 
@@ -359,7 +368,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
   return itemList;
 }
 
-viewPdf(context, voucher, company, ledger) async {
+viewPdf(context, voucher, company, ledger, logoPath) async {
   List<VoucherItem> inventoryEntries =
       Provider.of<List<VoucherItem>>(context, listen: false);
 
@@ -377,6 +386,7 @@ viewPdf(context, voucher, company, ledger) async {
     partyState: ledger.state,
     partyGST: ledger.gst,
     itemList: itemList,
+    logoPath: logoPath,
   );
 
   final String dir = (await getExternalStorageDirectory()).path;

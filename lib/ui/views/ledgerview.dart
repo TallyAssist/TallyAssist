@@ -131,7 +131,10 @@ class _LedgerViewState extends State<LedgerView>
                     child: TabBarView(
                       controller: _tabController,
                       children: <Widget>[
-                        LedgerSummary(ledgerGuid: ledgerGuid),
+                        LedgerSummary(
+                          ledgerGuid: ledgerGuid,
+                          partyName: partyname,
+                        ),
                         LedgerVoucher(
                           ledgerGuid: ledgerGuid,
                           partyname: partyname,
