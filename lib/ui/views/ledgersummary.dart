@@ -188,7 +188,7 @@ viewPdf(context, voucherData, company, ledger) async {
   print(voucherData);
   // initiate an empty list with column headers
   List<List<String>> ledgerList = [
-    ['Date', 'Vch No.',  'Vch Type', 'Dr./Cr.', 'Amount']
+    ['Date',  'Vch No.',  'Vch Type', 'Dr./Cr.', 'Amount']
   ];
   // for each voucher:
   // 1. create a list of date, nature (credit/debit), ledger name, voucher type, voucher no, amount (debit/credit)
@@ -222,11 +222,11 @@ viewPdf(context, voucherData, company, ledger) async {
   );
 
   // print("Voucher Data");
-  String partyNamePDF = ledger.name;
+  // String partyNamePDF = ledger.name;
 
 
   final String dir = (await getExternalStorageDirectory()).path;
-  final path = "$dir/example.pdf";
+  final path = "$dir/Statement_tallyassist.pdf";
   print(path);
   final file = File(path);
   await file.writeAsBytes(pdf.save());
@@ -238,10 +238,10 @@ viewPdf(context, voucherData, company, ledger) async {
     await Share.files(
         'esys images',
         {
-          'Statement_$partyNamePDF.pdf': bytes1,
+          'Statement_tallyassist.pdf': bytes1,
         },
         '*/*',
-        text: 'My optional text.');
+        text: 'Please find your party statement. Thanks for doing business with us!');
   } catch (e) {
     print('error: $e');
   }

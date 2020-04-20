@@ -8,7 +8,6 @@ import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
 // import 'package:tassist/ui/views/crm.dart';
-import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/home.dart';
 import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';

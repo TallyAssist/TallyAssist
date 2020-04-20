@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:tassist/theme/theme.dart';
-import 'package:tassist/ui/views/dashboard.dart';
 import 'package:tassist/ui/views/home.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -12,6 +10,8 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+
+  
   @override
   void initState() {
     super.initState();

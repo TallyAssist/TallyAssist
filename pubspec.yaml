@@ -40,6 +40,7 @@ dependencies:
   firebase_storage: ^3.1.5
   # contact_picker: ^0.0.2
   native_contact_picker: ^0.0.6
+  # screenshot_and_share: ^0.0.1
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -72,6 +73,9 @@ flutter:
   assets:
     - graphics/rumi-gate.jpg
     - graphics/dataanalysis.png
+    - assets/images/ledgers.png
+    - assets/images/invoice.png
+    - assets/images/invoice-maker.png
 
   fonts: 
     - family: Montserrat

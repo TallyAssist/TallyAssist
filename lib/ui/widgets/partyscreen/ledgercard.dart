@@ -90,14 +90,14 @@ else {
   }
 }
 
-_changeActiveStatus() {
-if (ledgerItem.closingBalance == 0) {
- return Icon(FontAwesomeIcons.powerOff, color: TassistWarning, size: 20.0);
-}
-else {
-  return Icon(FontAwesomeIcons.powerOff, color: TassistSuccess, size: 20.0);
-}
-}
+// _changeActiveStatus() {
+// if (ledgerItem.closingBalance == 0) {
+//  return Icon(FontAwesomeIcons.powerOff, color: TassistWarning, size: 20.0);
+// }
+// else {
+//   return Icon(FontAwesomeIcons.powerOff, color: TassistSuccess, size: 20.0);
+// }
+// }
 
 
     return Card(
