@@ -583,10 +583,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
 
                         await StorageService().downloadFile(uid + '_logo');
                         String logoPath = Directory.systemTemp.path.toString() +
-<<<<<<< HEAD
-=======
                             '/' +
->>>>>>> f2e9a16e60c91389fed55a9764b28f168cb02c9f
                             uid +
                             '_logo';
 

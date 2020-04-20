@@ -17,7 +17,7 @@ class KhataScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<FirebaseUser>(context);
-    print(user.uid);
+    // print(user.uid);
 
     void _showKhataPanel() {
       showModalBottomSheetCustom(

@@ -92,7 +92,7 @@ class DatabaseService {
     });
   }
 
-  Future deleteKhata(String documentId) async {
+  Future deleteKhata(uid, String documentId) async {
     // IDFixTODO
     await khataCollection
         .document(this.uid)
@@ -109,6 +109,7 @@ class DatabaseService {
         partyname: doc.data['partyname'] ?? '',
         amount: doc.data['amount'] ?? '',
         trantype: doc.data['trantype'] ?? '',
+        id: doc.documentID ?? '',
       );
     }).toList();
   }

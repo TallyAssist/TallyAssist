@@ -5,6 +5,7 @@ class Khata {
   final String partyname;
   final String amount;
   final String trantype;
+  final String id;
 
-  Khata({this.date, this.partyname, this.amount, this.trantype});
+  Khata({this. id, this.date, this.partyname, this.amount, this.trantype});
 }
