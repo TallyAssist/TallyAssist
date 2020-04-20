@@ -43,6 +43,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   String _customerName = '';
   String _customerGst = '';
   String _customerPhone = '';
+  String _customerMasterId = '';
   // Product details
   List<VoucherItem> _inventoryEntries = [];
   String _productName = '';
@@ -221,6 +222,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           onChanged: (val) {
                             setState(() {
                               _customerLedger = val;
+                              _customerMasterId = val.masterId;
                               _customerName = val.name;
                               _customerGst = (val.gst ?? '');
                               _customerPhone = (val.phone ?? '');
@@ -410,7 +412,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 stockItemName: _productName,
                                 taxAmount: gstAmount.toString(),
                                 vDate: _invoiceDateRaw,
-                                // vMasterId:
+                                vMasterId: _masterId,
                               ));
 
                               _totalProductPrice += amount;
@@ -555,6 +557,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           amount: (_totalProductPrice + _totalTax),
                           isInvoice: '1',
                           partyname: _customerName,
+                          partyMasterId: _customerMasterId,
                           primaryVoucherType: 'Sales',
                           type: 'Sales',
                           date: _invoiceDateRaw,
