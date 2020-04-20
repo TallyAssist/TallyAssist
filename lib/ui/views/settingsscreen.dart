@@ -12,6 +12,7 @@ import 'package:tassist/ui/shared/headernav.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tassist/ui/widgets/sectionHeader.dart';
 import 'package:signature/signature.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -375,7 +376,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           bottomNavigationBar: Padding(
             padding: spacer.all.xs,
             child: RaisedButton(
-              onPressed: () => showDialog(
+              onPressed: () 
+              => showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -385,7 +387,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       actions: <Widget>[
                         FlatButton(
-                            onPressed: () => Navigator.of(context).pop(),
+                            onPressed: () => _launchURL(),
                             child: Text(
                               'Yes',
                               style: secondaryListDisc,
@@ -407,5 +409,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
           ),
         ));
+  }
+}
+
+
+
+_launchURL() async {
+  const url = 'https://api.whatsapp.com/send?phone=917759091029&text=I%20want%20to%20delete%20my%20account,%20thank%20you';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }
