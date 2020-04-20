@@ -13,6 +13,7 @@ import 'package:tassist/core/models/company.dart';
 import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:tassist/core/models/voucher-item.dart';
+import 'package:tassist/core/services/storageservice.dart';
 import 'package:tassist/core/services/voucher-item-service.dart';
 import 'package:tassist/core/services/vouchers.dart';
 import 'package:tassist/templates/invoice_pdf_template.dart';
@@ -311,7 +312,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       SizedBox(width: 20),
                       Flexible(
                         flex: 1,
-                        child: new TextFormField(                                   
+                        child: new TextFormField(
                           keyboardType: TextInputType.number,
                           style: secondaryListDisc,
                           decoration: InputDecoration(
@@ -519,6 +520,12 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     minWidth: MediaQuery.of(context).size.width / 2,
                     child: RaisedButton(
                       onPressed: () async {
+                        await StorageService().downloadFile(uid + '_logo');
+                        String logoPath = Directory.systemTemp.path.toString() +
+                            '/' +
+                            uid +
+                            '_logo';
+
                         await viewPdf(
                           company: company,
                           context: context,
@@ -528,6 +535,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           totalAmount: (_totalProductPrice + _totalTax),
                           invoiceNumber: _invoiceNumber,
                           preview: true,
+                          logoPath: logoPath,
                         );
                       },
                       child: Text('Preview', style: TextStyle(fontSize: 20)),
@@ -573,6 +581,11 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           );
                         }
 
+                        await StorageService().downloadFile(uid + '_logo');
+                        String logoPath = Directory.systemTemp.path.toString() +
+                            uid +
+                            '_logo';
+
                         await viewPdf(
                           company: company,
                           context: context,
@@ -582,6 +595,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           totalAmount: (_totalProductPrice + _totalTax),
                           invoiceNumber: _invoiceNumber,
                           preview: false,
+                          logoPath: logoPath,
                         );
                       },
                       child: Text('Send', style: TextStyle(fontSize: 20)),
@@ -604,7 +618,8 @@ viewPdf(
     invoiceDate,
     totalAmount,
     invoiceNumber,
-    preview}) async {
+    preview,
+    logoPath}) async {
   // List<VoucherItem> inventoryEntries =
   //     Provider.of<List<VoucherItem>>(context, listen: false);
 
@@ -622,6 +637,7 @@ viewPdf(
     partyState: ledger.state,
     partyGST: ledger.gst,
     itemList: itemList,
+    logoPath: logoPath,
   );
 
   final String dir = (await getExternalStorageDirectory()).path;
@@ -646,9 +662,9 @@ viewPdf(
           {
             'invoice_$invoiceNumber.pdf': bytes1,
           },
-          '*/*', 
-          text: 'Please find $invoiceNumber worth $totalAmount from $company. It was great doing business with you! - shared via TallyAssist');
-
+          '*/*',
+          text:
+              'Please find $invoiceNumber worth $totalAmount from $company. It was great doing business with you! - shared via TallyAssist');
     } catch (e) {
       print('error: $e');
     }

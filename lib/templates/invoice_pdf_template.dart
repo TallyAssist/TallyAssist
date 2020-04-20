@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart';
 
@@ -5,7 +7,7 @@ createInvoicePdf({
   String companyName,
   String companyAddress,
   String companyPincode,
-  // Need to add Company GST, signature, terms and conditions, payment link.. 
+  // Need to add Company GST, signature, terms and conditions, payment link..
   // String companyPan,
   String partyName,
   String partyAddress,
@@ -15,9 +17,23 @@ createInvoicePdf({
   String invoiceNumber,
   String invoiceDate,
   List<List<String>> itemList,
+  String logoPath,
 }) {
-
   final pdf = Document();
+  final logoImage = PdfImage(
+    pdf.document,
+    image: File(logoPath).readAsBytesSync(),
+    width: 40,
+    height: 40,
+  );
+
+  final logoImage = PdfImage(
+    pdf.document,
+    image: File(logoPath).readAsBytesSync(),
+    width: 49,
+    height: 49,
+  );
+
   pdf.addPage(
     MultiPage(
       pageFormat:
@@ -41,62 +57,66 @@ createInvoicePdf({
       },
       footer: (Context context) {
         return Container(
-            margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
-            child: 
-            Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget> [
-            Text('Generated using TallyAssist',  style: TextStyle(color: PdfColors.purple400, font: Font.timesItalic())),
-            Text('Page ${context.pageNumber} of ${context.pagesCount}',
-                style: Theme.of(context)
-                    .defaultTextStyle
-                    .copyWith(color: PdfColors.grey))
-          ]
-        ),
-            
-            );
+          margin: const EdgeInsets.only(top: 1.0 * PdfPageFormat.cm),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text('Generated using TallyAssist',
+                    style: TextStyle(
+                        color: PdfColors.purple400, font: Font.timesItalic())),
+                Text('Page ${context.pageNumber} of ${context.pagesCount}',
+                    style: Theme.of(context)
+                        .defaultTextStyle
+                        .copyWith(color: PdfColors.grey))
+              ]),
+        );
       },
       build: (Context context) => <Widget>[
         Header(
           level: 0,
-          child:Container(
-                  decoration: BoxDecoration(
-                    border: BoxBorder(
-                      bottom: true,
-                      top: true,
-                    ),
-                  ),
-                  child:
-           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                
-                   Column(
+          child: Container(
+            decoration: BoxDecoration(
+              border: BoxBorder(
+                bottom: true,
+                top: true,
+              ),
+            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(companyName,  style: TextStyle(fontWeight: FontWeight.bold,)),
+                      Text(companyName,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
                       Text(companyAddress),
                       Text(companyPincode),
                       Text('GSTIN: ABCD123456SDS')
                     ],
                   ),
-               
-                Text('Company logo', ),
-                Column(
+                  Center(
+                    child: Image(logoImage),
+                  ), // C,
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text('GST Invoice', style: TextStyle(fontWeight: FontWeight.bold,)),
+                      Text('GST Invoice',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
                       Text('Invoice No.: $invoiceNumber'),
                       Text('Invoice Date: $invoiceDate'),
-                       Text('Place of supply:' ),
+                      Text('Place of supply:'),
                     ],
-                  ), // Need this to be 
-               
-                // PdfLogo()
-              ]),
+                  ), // Need this to be
+
+                  // PdfLogo()
+                ]),
+          ),
         ),
-         ),
         Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,32 +124,41 @@ createInvoicePdf({
           children: <Widget>[
             Row(
               children: <Widget>[
-
-            Container(
-              width: 300,
-              child:  Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Customer Name',style: TextStyle(fontWeight: FontWeight.bold,) ),
-                  Text(partyName),
-                  Text(partyAddress),
-                  Text(partyPincode),
-                 
-
-                ],
-              ),
-            ),
-               Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text('Customer GSTIN',style: TextStyle(fontWeight: FontWeight.bold,) ),
-                  Text(partyGST),
-                  Text('State: $partyState',style: TextStyle(fontWeight: FontWeight.bold,) ),
-                  Text('Due Date:', style: TextStyle(fontWeight: FontWeight.bold,)) //TODO need to add due date from invoice 
-                ],
-              )
+                Container(
+                  width: 300,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text('Customer Name',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          )),
+                      Text(partyName),
+                      Text(partyAddress),
+                      Text(partyPincode),
+                    ],
+                  ),
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text('Customer GSTIN',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text(partyGST),
+                    Text('State: $partyState',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )),
+                    Text('Due Date:',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        )) //TODO need to add due date from invoice
+                  ],
+                )
               ],
             ),
             SizedBox(height: 20),
@@ -139,7 +168,7 @@ createInvoicePdf({
                 crossAxisCount: 4,
                 childAspectRatio: 0.3,
                 children: <Widget>[
-                  // Need to add fields here from the invoice 
+                  // Need to add fields here from the invoice
                   gridChild('Delivery Notes', ''),
                   gridChild('Mode/Terms of Payment', ''),
                   // gridChild('Suppliers Ref', ''),
@@ -189,7 +218,10 @@ createInvoicePdf({
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Company PAN:', style: TextStyle(fontWeight: FontWeight.bold,)), // TODO need to add 
+                  Text('Company PAN:',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )), // TODO need to add
                 ],
               ),
             ),
@@ -197,12 +229,11 @@ createInvoicePdf({
               child: Container(
                 decoration: BoxDecoration(
                   border: BoxBorder(
-                    top: true,
-                    left: true,
-                    right: true,
-                    bottom: true,
-                    color: PdfColors.grey400
-                  ),
+                      top: true,
+                      left: true,
+                      right: true,
+                      bottom: true,
+                      color: PdfColors.grey400),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
@@ -217,7 +248,7 @@ createInvoicePdf({
           ],
         ),
         // SizedBox(height: 20),
-        
+
         Padding(padding: const EdgeInsets.all(10)),
       ],
     ),
@@ -231,12 +262,11 @@ gridChild(String text1, String text2) {
     alignment: Alignment.centerLeft,
     decoration: BoxDecoration(
       border: BoxBorder(
-        left: true,
-        right: true,
-        top: true,
-        bottom: true,
-        color: PdfColors.grey400
-      ),
+          left: true,
+          right: true,
+          top: true,
+          bottom: true,
+          color: PdfColors.grey400),
     ),
     child: Column(
       children: <Widget>[
