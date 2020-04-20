@@ -191,11 +191,7 @@ viewPdf(context, voucherData, company, ledger) async {
   print(voucherData);
   // initiate an empty list with column headers
   List<List<String>> ledgerList = [
-<<<<<<< HEAD
-    ['Date',  'Vch No.',  'Vch Type', 'Dr./Cr.', 'Amount']
-=======
     ['Date', 'Vch No.', 'Vch Type', 'Dr./Cr.', 'Amount']
->>>>>>> f2e9a16e60c91389fed55a9764b28f168cb02c9f
   ];
   // for each voucher:
   // 1. create a list of date, nature (credit/debit), ledger name, voucher type, voucher no, amount (debit/credit)
