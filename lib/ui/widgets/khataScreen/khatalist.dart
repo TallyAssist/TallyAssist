@@ -30,9 +30,10 @@ class _KhataListState extends State<KhataList> {
               key: Key(khataData[index].id.toString()),
               onDismissed: (DismissDirection dismissDirection) async {
                 if (khataData.contains(khataData[index])) {
-                  setState(() {
+                  setState(() async {
+                    await DatabaseService(uid: user.uid)
+                        .deleteKhata(khataData[index].id);
                     khataData.removeAt(index);
-                    // DatabaseService().deleteKhata(khataData[index].id);
                   });
                 }
                 Scaffold.of(context).showSnackBar(
