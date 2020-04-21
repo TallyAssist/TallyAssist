@@ -20,12 +20,22 @@ createInvoicePdf({
   String logoPath,
 }) {
   final pdf = Document();
-  final logoImage = PdfImage(
-    pdf.document,
-    image: File(logoPath).readAsBytesSync(),
-    width: 40,
-    height: 40,
-  );
+
+  Center logoImage;
+  if (logoPath != null) {
+    logoImage = Center(
+      child: Image(
+        PdfImage(
+          pdf.document,
+          image: File(logoPath).readAsBytesSync(),
+          width: 40,
+          height: 40,
+        ),
+      ),
+    );
+  } else {
+    logoImage = Center(child: SizedBox());
+  }
 
   pdf.addPage(
     MultiPage(
@@ -89,9 +99,7 @@ createInvoicePdf({
                       Text('GSTIN: ABCD123456SDS')
                     ],
                   ),
-                  Center(
-                    child: Image(logoImage),
-                  ), // C,
+                  logoImage, // C,
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,

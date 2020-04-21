@@ -522,11 +522,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                     minWidth: MediaQuery.of(context).size.width / 2,
                     child: RaisedButton(
                       onPressed: () async {
-                        await StorageService().downloadFile(uid + '_logo');
-                        String logoPath = Directory.systemTemp.path.toString() +
-                            '/' +
-                            uid +
-                            '_logo';
+                        String logoPath;
+                        if (company.hasLogo == '1') {
+                          await StorageService().downloadFile(uid + '_logo');
+                          logoPath = Directory.systemTemp.path.toString() +
+                              '/' +
+                              uid +
+                              '_logo';
+                        } else {
+                          logoPath = null;
+                        }
 
                         await viewPdf(
                           company: company,
@@ -584,11 +589,16 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           );
                         }
 
-                        await StorageService().downloadFile(uid + '_logo');
-                        String logoPath = Directory.systemTemp.path.toString() +
-                            '/' +
-                            uid +
-                            '_logo';
+                        String logoPath;
+                        if (company.hasLogo == '1') {
+                          await StorageService().downloadFile(uid + '_logo');
+                          logoPath = Directory.systemTemp.path.toString() +
+                              '/' +
+                              uid +
+                              '_logo';
+                        } else {
+                          logoPath = null;
+                        }
 
                         await viewPdf(
                           company: company,

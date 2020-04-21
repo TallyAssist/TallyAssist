@@ -51,6 +51,7 @@ class CompanyService {
         pincode: companyData['pincode'] ?? '',
         // startingFrom: ,
         stateName: companyData['state_name'] ?? '',
+        hasLogo: companyData['has_logo'] ?? '',
       );
     } else {
       return Company(
@@ -61,6 +62,7 @@ class CompanyService {
         gstNumber: '',
         pincode: '',
         stateName: '',
+        hasLogo: '',
       );
     }
   }

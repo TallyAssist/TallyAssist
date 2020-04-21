@@ -195,9 +195,14 @@ class InvoiceButton extends StatelessWidget {
         IconButton(
             icon: Icon(Icons.picture_as_pdf),
             onPressed: () async {
-              await StorageService().downloadFile(uid + '_logo');
-              String logoPath =
-                  Directory.systemTemp.path.toString() + '/' + uid + '_logo';
+              String logoPath;
+              if (company.hasLogo == '1') {
+                await StorageService().downloadFile(uid + '_logo');
+                logoPath =
+                    Directory.systemTemp.path.toString() + '/' + uid + '_logo';
+              } else {
+                logoPath = null;
+              }
 
               viewPdf(
                 context,
