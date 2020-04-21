@@ -81,6 +81,7 @@ class AuthService {
         'closingrate': 250,
         'standardcost': 200,
         'standardprice': 225,
+        
       });
 
       // Ledger
@@ -94,8 +95,8 @@ class AuthService {
         'master_id': '1',
         'currencyname': 'Rupees',
         'opening_balance': 0,
-        'closing_balance': 100000,
-        'parentcode': '',
+        'closing_balance': -100000,
+        'parentcode': '20',
         'contact': '',
         'address': 'CP, New Delhi',
         'state': 'Delhi',
@@ -104,7 +105,84 @@ class AuthService {
         'phone': '9999999999',
         'guid': '1',
         'gst': 'XXXXXXXXXXXX',
-      });
+        'restat_primary_group_type': 'Sundry Debtors'
+      },
+      );
+
+       Firestore.instance
+          .collection('company')
+          .document(user.uid)
+          .collection('ledger')
+          .document('2')
+          .setData(
+      {
+      'name': 'Cash',
+        'master_id': '2',
+        'currencyname': 'Rupees',
+        'opening_balance': 1000,
+        'closing_balance': 101000,
+        'parentcode': '',
+        'contact': '',
+        'address': '',
+        'state': 'Delhi',
+        'pincode': '110001',
+        'email': '',
+        'phone': '',
+        'guid': '2',
+        'gst': '',
+         'restat_primary_group_type': ''
+      },
+      );
+
+ Firestore.instance
+          .collection('company')
+          .document(user.uid)
+          .collection('ledger')
+          .document('3')
+          .setData(
+      {
+      'name': 'ABC Ltd',
+        'master_id': '3',
+        'currencyname': 'Rupees',
+        'opening_balance': 0,
+        'closing_balance': 50000,
+        'parentcode': '16',
+        'contact': '',
+        'address': 'CP, New Delhi',
+        'state': 'Delhi',
+        'pincode': '110001',
+        'email': 'abc@email.com',
+        'phone': '9898989898',
+        'guid': '3',
+        'gst': 'ABCD1234PQ56',
+         'restat_primary_group_type': 'Sundry Creditors'
+      }
+      );
+
+Firestore.instance
+          .collection('company')
+          .document(user.uid)
+          .collection('ledger')
+          .document('4')
+          .setData(
+      {
+      'name': 'GST @ 18%',
+        'master_id': '4',
+        'currencyname': 'Rupees',
+        'opening_balance': 0,
+        'closing_balance': 396,
+        'parentid': '',
+        'contact': '',
+        'address': 'CP, New Delhi',
+        'state': 'Delhi',
+        'pincode': '',
+        'email': '',
+        'phone': '9898989898',
+        'guid': '4',
+        'gst': '',
+      }
+      );
+
 
       // Voucher
       Firestore.instance
@@ -137,7 +215,59 @@ class AuthService {
             'taxamount': 396,
           }
         ],
-        'ledger_entries': [],
+        'ledger_entries': [
+          {
+            'amount':'2200',
+            'isdeemedpositive':'1',
+            'ledger_guid': '1',
+            'ispartyledger':'1',
+            'ledger_guid':'1',
+            'ledgername':'1',
+            'ledgerrefname':'',
+            'parent':'',
+            'primarygroup':''
+          },
+          {
+            'amount':'396',
+            'isdeemedpositive':'1',
+            'ledger_guid': '4',
+            'ispartyledger':'0',
+            'ledger_guid':'1',
+            'ledgername':'1',
+            'ledgerrefname':'',
+            'parent':'',
+            'primarygroup':''
+          }
+
+
+
+        ],
+      });
+
+      // Ledger Stock
+
+      Firestore.instance
+          .collection('company')
+          .document(user.uid)
+          .collection('ledger')
+          .document('1')
+          .collection('ledger_stock_entries')
+          .document('1')
+          .setData({
+            
+              'last_amount':'2596',
+              'last_discount': '0',
+              'last_rate': '220',
+              'last_voucher_date': DateTime.now(),
+              'mean_amount': '2596',
+              'num_vouchers': '1',
+              'restat_stock_item_name': 'Wheat', 
+              'stockitemname':'1',
+              'total_actualqty': '10',
+              'total_amount':'2596',
+              'total_billedqty':'10',
+              'voucher_type': 'Sales' 
+
       });
 
       Firestore.instance
