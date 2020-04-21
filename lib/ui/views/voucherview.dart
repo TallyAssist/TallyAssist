@@ -336,7 +336,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
       'HSN/SAC',
       'Quantity',
       'Rate',
-      'per',
+      // 'per',
       'Disc',
       'Amount'
     ]
@@ -360,7 +360,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
       hsnSac,
       quantity,
       rate,
-      unit,
+      // unit,
       discount,
       amount
     ]);
@@ -368,7 +368,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
   }
 
   itemList
-      .add(["", "Total", "", "", "", "", "", "", voucher.amount.toString()]);
+      .add(["", "Total", "", "", "", "", voucher.amount.toString()]);
 
   return itemList;
 }

@@ -707,7 +707,7 @@ _createInvoiceItemList(inventoryEntries, amount) {
       'HSN/SAC',
       'Quantity',
       'Rate',
-      'per',
+      // 'per',
       'Disc',
       'Amount'
     ]
@@ -731,14 +731,14 @@ _createInvoiceItemList(inventoryEntries, amount) {
       hsnSac,
       quantity,
       rate,
-      unit,
+      // unit,
       discount,
       amount
     ]);
     itemList.add(["", "Tax", "", "", "", "", taxAmount]);
   }
 
-  itemList.add(["", "Total", "", "", "", "", "", "", amount.toString()]);
+  itemList.add(["", "Total", "", "", "", "", amount.toString()]);
 
   return itemList;
 }
