@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -83,6 +84,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         .copyWith(color: TassistWhite)),
                 onPressed: () async {
                   await StorageService().uploadFile(_imageFile, uid + '_logo');
+                  Firestore.instance
+                      .collection('company')
+                      .document(uid)
+                      .setData({
+                    'has_logo': '1',
+                  }, merge: true);
+
                   // return AlertDialog(
                   //     title: Text(
                   //       'Your logo has been uploaded',
@@ -200,10 +208,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   style: secondaryListDisc,
                   decoration: InputDecoration(
                     contentPadding: spacer.all.xxs,
-                     hintText: 'This will be shown on GST invoice',
-                      hintStyle: secondaryHint,
-                      labelText: 'Terms & Conditions for GST invoice',
-                      labelStyle: secondaryListTitle.copyWith(fontSize: 16),
+                    hintText: 'This will be shown on GST invoice',
+                    hintStyle: secondaryHint,
+                    labelText: 'Terms & Conditions for GST invoice',
+                    labelStyle: secondaryListTitle.copyWith(fontSize: 16),
                   ),
                 ),
               ),
@@ -242,92 +250,88 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   }
                 },
               ),
-              
 
               Padding(
                 padding: spacer.all.xs,
                 child: Text('Record your signature (for GST Invoice)'),
               ),
-               RaisedButton(
-              onPressed: () => showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                      title: Text(
-                        'Sign here',
-                        style: secondaryListTitle,
-                      ),
-                      content:  Padding(
-                padding: spacer.all.xs,
-                child: Signature(
-                    controller: _controller,
-                    height: 200,
-                    backgroundColor: TassistInfoLight),
-              ),
-                      actions: <Widget>[
-                       IconButton(
-                      icon: const Icon(Icons.check),
-                      color: TassistSuccess,
-                      onPressed: () async {
-                        if (_controller.isNotEmpty) {
-                          var data = await _controller.toPngBytes();
-                          Navigator.of(context).pop();
-                            // MaterialPageRoute(
-                            //   builder: (BuildContext context) {
-                            //     return Scaffold(
-                            //       appBar: headerNav(_drawerKey),
-                            //       body: Center(
-                            //           child: Container(
-                            //               color: TassistWhite,
-                            //               child: Column(
-                            //                 children: <Widget>[
-                            //                   Image.memory(data),
-                            //                   FlatButton(
-                            // onPressed: () => Navigator.of(context).pop(),
-                            // child: Text(
-                            //   'Close',
-                            //   style: secondaryListDisc,
-                            // )
-                            // )
-                            //                 ],
-                            //               )
-                            //           )
-                            //       )
-                            //     );
-                                
-                            //   },
-                            // ),
-                          // );
-                        }
-                       
-                      },
-                    ),
-                    //CLEAR CANVAS
-                    IconButton(
-                      icon: const Icon(Icons.clear),
-                      color: TassistWarning,
-                      onPressed: () {
-                        setState(() => _controller.clear());
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                      ]);
-                },
-              ),
+              RaisedButton(
+                onPressed: () => showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                        title: Text(
+                          'Sign here',
+                          style: secondaryListTitle,
+                        ),
+                        content: Padding(
+                          padding: spacer.all.xs,
+                          child: Signature(
+                              controller: _controller,
+                              height: 200,
+                              backgroundColor: TassistInfoLight),
+                        ),
+                        actions: <Widget>[
+                          IconButton(
+                            icon: const Icon(Icons.check),
+                            color: TassistSuccess,
+                            onPressed: () async {
+                              if (_controller.isNotEmpty) {
+                                var data = await _controller.toPngBytes();
+                                Navigator.of(context).pop();
+                                // MaterialPageRoute(
+                                //   builder: (BuildContext context) {
+                                //     return Scaffold(
+                                //       appBar: headerNav(_drawerKey),
+                                //       body: Center(
+                                //           child: Container(
+                                //               color: TassistWhite,
+                                //               child: Column(
+                                //                 children: <Widget>[
+                                //                   Image.memory(data),
+                                //                   FlatButton(
+                                // onPressed: () => Navigator.of(context).pop(),
+                                // child: Text(
+                                //   'Close',
+                                //   style: secondaryListDisc,
+                                // )
+                                // )
+                                //                 ],
+                                //               )
+                                //           )
+                                //       )
+                                //     );
 
-              child: Text('Record Sign', style: Theme.of(context)
+                                //   },
+                                // ),
+                                // );
+                              }
+                            },
+                          ),
+                          //CLEAR CANVAS
+                          IconButton(
+                            icon: const Icon(Icons.clear),
+                            color: TassistWarning,
+                            onPressed: () {
+                              setState(() => _controller.clear());
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ]);
+                  },
+                ),
+                child: Text('Record Sign',
+                    style: Theme.of(context)
                         .textTheme
                         .bodyText1
                         .copyWith(color: TassistWhite)),
-              color: TassistPrimaryDarkButtonShadow,
-              textColor: Colors.white,
-              elevation: 5,
-            ),
-              
-
+                color: TassistPrimaryDarkButtonShadow,
+                textColor: Colors.white,
+                elevation: 5,
+              ),
 
               //SIGNATURE CANVAS
-             
+
               // OK AND CLEAR BUTTONS
               // Container(
               //   padding: spacer.x.xs,
@@ -369,15 +373,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               //     ],
               //   ),
               // ),
-                          ]),
-
+            ]),
           ),
           // DELETE (EVERYTHING) BUTTON
           bottomNavigationBar: Padding(
             padding: spacer.all.xs,
             child: RaisedButton(
-              onPressed: () 
-              => showDialog(
+              onPressed: () => showDialog(
                 context: context,
                 builder: (context) {
                   return AlertDialog(
@@ -401,7 +403,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ]);
                 },
               ),
-
               child: Text('Delete Account', style: TextStyle(fontSize: 20)),
               color: TassistWarning,
               textColor: Colors.white,
@@ -412,10 +413,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
   }
 }
 
-
-
 _launchURL() async {
-  const url = 'https://api.whatsapp.com/send?phone=917759091029&text=I%20want%20to%20delete%20my%20account,%20thank%20you';
+  const url =
+      'https://api.whatsapp.com/send?phone=917759091029&text=I%20want%20to%20delete%20my%20account,%20thank%20you';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

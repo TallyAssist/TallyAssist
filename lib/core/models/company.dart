@@ -17,6 +17,7 @@ class Company {
   final String pincode;
   final String startingFrom;
   final String stateName;
+  final String hasLogo;
 
   Company(
       {this.booksFrom,
@@ -36,5 +37,6 @@ class Company {
       this.phoneNumber,
       this.pincode,
       this.startingFrom,
-      this.stateName});
+      this.stateName,
+      this.hasLogo});
 }
