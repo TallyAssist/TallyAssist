@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
-
 import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +51,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   String _productQuantity;
   double _totalProductPrice = 0;
   double _totalTax = 0;
+  double _totalAmount = 0;
 
   DateTime _invoiceDateRaw = DateTime.now();
   String _currentDate = DateFormat('dd-MM-yyyy').format(DateTime.now());
@@ -74,6 +74,8 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
           style: secondaryListDisc.copyWith(color: TassistInfoGrey));
     }
   }
+
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -100,7 +102,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           Text('Invoice ',
                               style: secondaryListDisc.copyWith(
                                   color: TassistInfoGrey)),
-                          Text('#12345'),
+                          Text('#$_invoiceNumber'),
                           SizedBox(
                             width: 20.0,
                           ),
@@ -414,6 +416,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 vDate: _invoiceDateRaw,
                                 vMasterId: _masterId,
                               ));
+            
 
                               _totalProductPrice += amount;
                               _totalTax += gstAmount;
@@ -422,6 +425,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                               _productPrice = '';
                               _productQuantity = '';
                               _gstPercentage = '';
+                              _totalAmount = _totalProductPrice + _totalTax;
                             });
                           },
                           child: Icon(
@@ -501,7 +505,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       padding: spacer.all.xxs,
                       child: Column(
                         children: <Widget>[
-                          Text('Total: $_totalProductPrice',
+                          Text('Total: $_totalAmount',
                               style: secondaryListTitle.copyWith(fontSize: 18)),
                           Text(
                             'Tax: $_totalTax',
@@ -720,7 +724,7 @@ _createInvoiceItemList(inventoryEntries, amount) {
     String hsnSac = "";
     String quantity = inventoryEntries[i]?.actualQty.toString() ?? "";
     String rate = inventoryEntries[i]?.rate.toString() ?? "";
-    String unit = "";
+    // String unit = "";
     String discount = inventoryEntries[i]?.discount.toString() ?? "";
     String amount = inventoryEntries[i]?.amount.toString() ?? "";
     String taxAmount = inventoryEntries[i]?.taxAmount?.toString() ?? "";

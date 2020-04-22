@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/ui/root_page.dart';
+
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -113,6 +115,13 @@ class _RegisterState extends State<Register> {
                           loading = false;
                           error = 'Please supply a valid email';
                         });
+                      }
+                      else {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => RootPage(),
+                          ),
+                        );
                       }
                     }
                   }),

@@ -228,15 +228,12 @@ class _WelcomeScreen2State extends State<WelcomeScreen2> {
           );
                 }, 
                 child: Center(
-                  child: Padding(
-                    padding: EdgeInsets.only(bottom: 30.0),
-                    child: Text(
-                      'Get started',
-                      style: TextStyle(
-                        color: TassistWhite,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  child: Text(
+                    'Get started',
+                    style: TextStyle(
+                      color: TassistWhite,
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),

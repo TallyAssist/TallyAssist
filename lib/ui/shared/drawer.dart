@@ -51,7 +51,7 @@ Drawer tassistDrawer(BuildContext context) {
            
             FittedBox(
               child: Text(
-                user?.email,
+                user?.email ?? 'No email',
                 style: Theme.of(context).textTheme.headline6.copyWith(
                       color: TassistWhite,
                       fontSize: 14.0,
@@ -106,12 +106,6 @@ Drawer tassistDrawer(BuildContext context) {
         color: TassistPrimaryBackground,
       ),
       DrawerItem(
-        icon: Icons.receipt,
-        title: 'Make New Invoice',
-        ontap: LedgerInputScreen(),
-        color: TassistPrimary,
-      ),
-      DrawerItem(
         icon: FontAwesomeIcons.warehouse,
         title: 'Stock',
         ontap: StockScreen(),
@@ -122,6 +116,12 @@ Drawer tassistDrawer(BuildContext context) {
         title: 'Vouchers',
         ontap: VouchersHome(),
         color: TassistPrimaryBackground,
+      ),
+       DrawerItem(
+        icon: Icons.receipt,
+        title: 'Make New Invoice',
+        ontap: LedgerInputScreen(),
+        color: TassistPrimary,
       ),
       
       Padding(

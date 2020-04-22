@@ -164,6 +164,10 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   //   height: 35,
                   // ),
                   // Container 1 - Sales
+                   Padding(
+                      padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                      child: Text('Metrics based on Tally', style: secondaryListTitle,),
+                    ),
                   Container(
                     child: DashboardCard(
                       timePeriod: timePeriod,

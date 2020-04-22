@@ -40,10 +40,12 @@ class AuthService {
       FirebaseUser user = result.user;
 
       Firestore.instance.collection('metrics').document(user.uid).setData({
-        'total_sales': 0.0,
-        'total_payments': 0.0,
-        'total_purchases': 0.0,
-        'total_receipts': 0.0,
+        'total_sales': 100000,
+        'total_payments': 0,
+        'total_purchases': 50000,
+        'total_receipts': 0,
+        'out_actual_rec': 100000,
+        'out_actual_pay':50000,
       });
 
       // Company
@@ -91,7 +93,7 @@ class AuthService {
           .collection('ledger')
           .document('1')
           .setData({
-        'name': 'XYZ Ltd',
+        'name': 'ABC Ltd',
         'master_id': '1',
         'currencyname': 'Rupees',
         'opening_balance': 0,
@@ -105,7 +107,9 @@ class AuthService {
         'phone': '9999999999',
         'guid': '1',
         'gst': 'XXXXXXXXXXXX',
-        'restat_primary_group_type': 'Sundry Debtors'
+        'restat_primary_group_type': 'Sundry Debtors',
+        'restat_total_receivables': 100000,
+        'restat_total_payables': 0,
       },
       );
 
@@ -130,7 +134,9 @@ class AuthService {
         'phone': '',
         'guid': '2',
         'gst': '',
-         'restat_primary_group_type': ''
+         'restat_primary_group_type': '',
+         'restat_total_receivables': '',
+        'restat_total_payables': ''
       },
       );
 
@@ -141,7 +147,7 @@ class AuthService {
           .document('3')
           .setData(
       {
-      'name': 'ABC Ltd',
+      'name': 'BCD Ltd',
         'master_id': '3',
         'currencyname': 'Rupees',
         'opening_balance': 0,
@@ -155,7 +161,9 @@ class AuthService {
         'phone': '9898989898',
         'guid': '3',
         'gst': 'ABCD1234PQ56',
-         'restat_primary_group_type': 'Sundry Creditors'
+        'restat_primary_group_type': 'Sundry Creditors',
+        'restat_total_receivables': 0,
+        'restat_total_payables': 50000
       }
       );
 
@@ -180,6 +188,7 @@ Firestore.instance
         'phone': '9898989898',
         'guid': '4',
         'gst': '',
+        
       }
       );
 
@@ -192,7 +201,7 @@ Firestore.instance
           .document('1')
           .setData({
         'date': DateTime.now(),
-        'restat_party_ledger_name': 'XYZ Ltd',
+        'restat_party_ledger_name': 'ABC Ltd',
         'amount': 10000,
         'master_id': '1',
         'guid': '1',
@@ -251,7 +260,7 @@ Firestore.instance
           .document(user.uid)
           .collection('ledger')
           .document('1')
-          .collection('ledger_stock_entries')
+          .collection('ledger_stock_metrics')
           .document('1')
           .setData({
             
@@ -265,7 +274,7 @@ Firestore.instance
               'stockitemname':'1',
               'total_actualqty': '10',
               'total_amount':'2596',
-              'total_billedqty':'10',
+              'total_billedqty': 10,
               'voucher_type': 'Sales' 
 
       });

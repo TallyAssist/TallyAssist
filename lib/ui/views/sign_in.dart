@@ -119,24 +119,24 @@ class _SignInState extends State<SignIn> {
                 error,
                 style: TextStyle(color: Colors.red, fontSize: 14.0),
               ),
-              Text(
-                  'Have you installed the Tally Connector yet?',
-                  style: Theme.of(context)
-                  .textTheme
-                  .headline6
-                  .copyWith(fontSize: 18.0, color: TassistMainText),
-                ),
-                SizedBox(height: 30),
-                 RaisedButton( 
-                   color: TassistBgLightPurple,
-                   child:
-                   Row(children: <Widget>[
-                  Icon(FontAwesomeIcons.laptop),
-                  SizedBox(width: 30),
-                  Text('Launch the Tally Connector website')
+            //   Text(
+            //       'Have you installed the Tally Connector yet?',
+            //       style: Theme.of(context)
+            //       .textTheme
+            //       .headline6
+            //       .copyWith(fontSize: 18.0, color: TassistMainText),
+            //     ),
+            //     SizedBox(height: 30),
+            //      RaisedButton( 
+            //        color: TassistBgLightPurple,
+            //        child:
+            //        Row(children: <Widget>[
+            //       Icon(FontAwesomeIcons.laptop),
+            //       SizedBox(width: 30),
+            //       Text('Launch the Tally Connector website')
 
-                   ]),
-                onPressed: () => _launchURL(),)
+            //        ]),
+            //     onPressed: () => _launchURL(),)
             ],
           ),
         ),

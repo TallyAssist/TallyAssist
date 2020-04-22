@@ -9,7 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/company.dart';
 import 'package:tassist/core/models/ledger.dart';
-import 'package:tassist/core/models/ledgervoucher.dart';
+// import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/templates/ledgeraccount_pdf_template.dart';
 import 'package:tassist/theme/colors.dart';
@@ -85,7 +85,8 @@ class LedgerSummary extends StatelessWidget {
                           children: <Widget>[
                             // PDF Sharing button
                             IconButton(
-                              icon: Icon(Icons.picture_as_pdf),
+                              iconSize: 28,
+                              icon: Icon(Icons.picture_as_pdf, color: TassistMenuBg),
                               onPressed: () => viewPdf(
                                   context, voucherData, company, ledger),
                             ),
@@ -220,7 +221,7 @@ viewPdf(context, voucherData, company, ledger) async {
 
   final pdf = createLedgerPdf(
     companyName: company.formalName,
-    startDate: '01-04-2020', //TODO need to make this
+    startDate: '01-04-2020', //TODO need to make this dynamic
     endDate: DateFormat('dd-MM-yyyy')
         .format(DateTime.now()), // TODO need to make this dynamic
     partyName: ledger.name,

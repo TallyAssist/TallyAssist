@@ -87,19 +87,26 @@ class VoucherView extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: <Widget>[
-                          Text(voucher.number),
-                          Visibility(
-                            visible: voucher.primaryVoucherType == "Sales",
-                            child: InvoiceButton(
-                              voucher: voucher,
-                              company: company,
-                              ledger: ledger,
+                    Padding(
+                      padding: spacer.all.xxs,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(children: <Widget>[
+                              Text('Voucher #'),
+                            Text(voucher.number),
+                            ],),
+                            
+                            Visibility(
+                              visible: voucher.primaryVoucherType == "Sales",
+                              child: InvoiceButton(
+                                voucher: voucher,
+                                company: company,
+                                ledger: ledger,
+                              ),
                             ),
-                          ),
-                        ]),
+                          ]),
+                    ),
                     Container(height: 3.0, color: TassistGray),
                     Padding(
                       padding: spacer.all.xxs,
@@ -192,8 +199,15 @@ class InvoiceButton extends StatelessWidget {
     String uid = Provider.of<FirebaseUser>(context).uid;
 
     return // PDF Sharing button
-        IconButton(
-            icon: Icon(Icons.picture_as_pdf),
+        RaisedButton(
+          color: TassistMenuBg,
+            child: Row(children: <Widget>[
+              Text('Send PDF  ', style: TextStyle(color: TassistWhite)),
+              Icon(Icons.picture_as_pdf, color: TassistWhite),
+
+            ],),
+            
+            
             onPressed: () async {
               String logoPath;
               if (company.hasLogo == '1') {
