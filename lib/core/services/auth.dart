@@ -109,7 +109,7 @@ class AuthService {
         'gst': 'XXXXXXXXXXXX',
         'restat_primary_group_type': 'Sundry Debtors',
         'restat_total_receivables': 100000,
-        'restat_total_payables': 0,
+        'restat_total_payables': 0.0,
       },
       );
 
@@ -162,7 +162,7 @@ class AuthService {
         'guid': '3',
         'gst': 'ABCD1234PQ56',
         'restat_primary_group_type': 'Sundry Creditors',
-        'restat_total_receivables': 0,
+        'restat_total_receivables': 0.0,
         'restat_total_payables': 50000
       }
       );
@@ -202,7 +202,7 @@ Firestore.instance
           .setData({
         'date': DateTime.now(),
         'restat_party_ledger_name': 'ABC Ltd',
-        'amount': 10000,
+        'amount': 2596,
         'master_id': '1',
         'guid': '1',
         'is_cancelled': '0',

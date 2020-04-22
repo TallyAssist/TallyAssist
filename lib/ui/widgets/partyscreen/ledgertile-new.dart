@@ -7,6 +7,7 @@ import 'package:tassist/ui/widgets/detailcard.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/ui/widgets/partyscreen/ledgercard.dart';
 import 'package:tassist/ui/shared/debitcredit.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 
 var formatter = new DateFormat('dd-MM-yyyy');
 
@@ -40,7 +41,7 @@ class LedgerItemTileNew  extends StatelessWidget {
      'Sales: ${formatIndianCurrency(ledgerItem.totalSales)}', 
      'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt)}'),
       title1: 'Receivables', 
-      info1: formatIndianCurrency(ledgerItem.closingBalance.toString()), 
+      info1: formatIndianCurrency(positiveAmount(ledgerItem.closingBalance).toString()), 
       title2: 'Last Sale ', 
       info2: _formatDate(ledgerItem.lastSalesDate), 
       title3: 'Last Receipt', info3: _formatDate(ledgerItem.lastReceiptDate),

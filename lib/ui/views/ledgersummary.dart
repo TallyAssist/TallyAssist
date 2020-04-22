@@ -41,7 +41,7 @@ class LedgerSummary extends StatelessWidget {
     Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context)
             .where((item) => item.guid == ledgerGuid) ??
         [];
-    LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
+    LedgerItem ledger = ledgerItem?.elementAt(0) ?? [];
 
     // Here we get all vouchers for current ledger
     List<Voucher> voucherData;
