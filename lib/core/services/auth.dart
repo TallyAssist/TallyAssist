@@ -39,14 +39,14 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      Firestore.instance.collection('metrics').document(user.uid).setData({
-        'total_sales': 100000,
-        'total_payments': 0,
-        'total_purchases': 50000,
-        'total_receipts': 0,
-        'out_actual_rec': 100000,
-        'out_actual_pay':50000,
-      });
+      // Firestore.instance.collection('metrics').document(user.uid).setData({
+      //   'total_sales': 100000,
+      //   'total_payments': 0,
+      //   'total_purchases': 50000,
+      //   'total_receipts': 0,
+      //   'out_actual_rec': 100000,
+      //   'out_actual_pay':50000,
+      // });
 
       // Company
       Firestore.instance.collection('company').document(user.uid).setData({
@@ -61,7 +61,7 @@ class AuthService {
           .document('1')
           .setData({
         'name': 'Gur',
-        'master_id': '1',
+        'masterid': '1',
         'closingbalance': 100,
         'closingvalue': 25000,
         'baseunits': 'kg',
@@ -76,14 +76,13 @@ class AuthService {
           .document('2')
           .setData({
         'name': 'Wheat',
-        'master_id': '2',
+        'masterid': '2',
         'closingbalance': 10,
         'closingvalue': 2500,
         'baseunits': 'kg',
         'closingrate': 250,
         'standardcost': 200,
         'standardprice': 225,
-        
       });
 
       // Ledger
@@ -92,66 +91,62 @@ class AuthService {
           .document(user.uid)
           .collection('ledger')
           .document('1')
-          .setData({
-        'name': 'ABC Ltd',
-        'master_id': '1',
-        'currencyname': 'Rupees',
-        'opening_balance': 0,
-        'closing_balance': -100000,
-        'parentcode': '20',
-        'contact': '',
-        'address': 'CP, New Delhi',
-        'state': 'Delhi',
-        'pincode': '110001',
-        'email': 'xyz@email.com',
-        'phone': '9999999999',
-        'guid': '1',
-        'gst': 'XXXXXXXXXXXX',
-        'restat_primary_group_type': 'Sundry Debtors',
-        'restat_total_receivables': 100000,
-        'restat_total_payables': 0.0,
-      },
+          .setData(
+        {
+          'name': 'ABC Ltd',
+          'masterid': '1',
+          'currencyname': 'Rupees',
+          'openingbalance': 0,
+          'closingbalance': -100000,
+          'parentcode': '20',
+          'contact': '',
+          'address': 'CP, New Delhi',
+          'state': 'Delhi',
+          'pincode': '110001',
+          'email': 'xyz@email.com',
+          'phone': '9999999999',
+          'guid': '1',
+          'gst': 'XXXXXXXXXXXX',
+          // 'restat_primary_group_type': 'Sundry Debtors',
+        },
       );
 
-       Firestore.instance
+      Firestore.instance
           .collection('company')
           .document(user.uid)
           .collection('ledger')
           .document('2')
           .setData(
-      {
-      'name': 'Cash',
-        'master_id': '2',
-        'currencyname': 'Rupees',
-        'opening_balance': 1000,
-        'closing_balance': 101000,
-        'parentcode': '',
-        'contact': '',
-        'address': '',
-        'state': 'Delhi',
-        'pincode': '110001',
-        'email': '',
-        'phone': '',
-        'guid': '2',
-        'gst': '',
-         'restat_primary_group_type': '',
-         'restat_total_receivables': '',
-        'restat_total_payables': ''
-      },
+        {
+          'name': 'Cash',
+          'masterid': '2',
+          'currencyname': 'Rupees',
+          'openingbalance': 1000,
+          'closingbalance': 101000,
+          'parentcode': '',
+          'contact': '',
+          'address': '',
+          'state': 'Delhi',
+          'pincode': '110001',
+          'email': '',
+          'phone': '',
+          'guid': '2',
+          'gst': '',
+          // 'restat_primary_group_type': '',
+        },
       );
 
- Firestore.instance
+      Firestore.instance
           .collection('company')
           .document(user.uid)
           .collection('ledger')
           .document('3')
-          .setData(
-      {
-      'name': 'BCD Ltd',
-        'master_id': '3',
+          .setData({
+        'name': 'BCD Ltd',
+        'masterid': '3',
         'currencyname': 'Rupees',
-        'opening_balance': 0,
-        'closing_balance': 50000,
+        'openingbalance': 0,
+        'closingbalance': 50000,
         'parentcode': '16',
         'contact': '',
         'address': 'CP, New Delhi',
@@ -161,24 +156,20 @@ class AuthService {
         'phone': '9898989898',
         'guid': '3',
         'gst': 'ABCD1234PQ56',
-        'restat_primary_group_type': 'Sundry Creditors',
-        'restat_total_receivables': 0.0,
-        'restat_total_payables': 50000
-      }
-      );
+        // 'restat_primary_group_type': 'Sundry Creditors',
+      });
 
-Firestore.instance
+      Firestore.instance
           .collection('company')
           .document(user.uid)
           .collection('ledger')
           .document('4')
-          .setData(
-      {
-      'name': 'GST @ 18%',
-        'master_id': '4',
+          .setData({
+        'name': 'GST @ 18%',
+        'masterid': '4',
         'currencyname': 'Rupees',
-        'opening_balance': 0,
-        'closing_balance': 396,
+        'openingbalance': 0,
+        'closingbalance': 396,
         'parentid': '',
         'contact': '',
         'address': 'CP, New Delhi',
@@ -188,10 +179,7 @@ Firestore.instance
         'phone': '9898989898',
         'guid': '4',
         'gst': '',
-        
-      }
-      );
-
+      });
 
       // Voucher
       Firestore.instance
@@ -201,17 +189,17 @@ Firestore.instance
           .document('1')
           .setData({
         'date': DateTime.now(),
-        'restat_party_ledger_name': 'ABC Ltd',
+        // 'restat_party_ledger_name': 'ABC Ltd',
         'amount': 2596,
-        'master_id': '1',
+        'masterid': '1',
         'guid': '1',
-        'is_cancelled': '0',
-        'primary_voucher_type_name': 'Sales',
-        'is_invoice': '1',
+        'iscancelled': '0',
+        'primaryvouchertypename': 'Sales',
+        'isinvoice': '1',
         'type': 'Sales',
-        'party_ledger_name': '1',
+        'partyledgername': '1',
         'number': '1',
-        'inventory_entries': [
+        'inventoryentries': [
           {
             'voucher_date': DateTime.now(),
             'voucher_master_id': '1',
@@ -224,32 +212,27 @@ Firestore.instance
             'taxamount': 396,
           }
         ],
-        'ledger_entries': [
+        'ledgerentries': [
           {
-            'amount':'2200',
-            'isdeemedpositive':'1',
+            'amount': '2200',
+            'isdeemedpositive': '1',
+            'ispartyledger': '1',
             'ledger_guid': '1',
-            'ispartyledger':'1',
-            'ledger_guid':'1',
-            'ledgername':'1',
-            'ledgerrefname':'',
-            'parent':'',
-            'primarygroup':''
+            'ledgername': '1',
+            'ledgerrefname': '',
+            'parent': '',
+            'primarygroup': ''
           },
           {
-            'amount':'396',
-            'isdeemedpositive':'1',
+            'amount': '396',
+            'isdeemedpositive': '1',
             'ledger_guid': '4',
-            'ispartyledger':'0',
-            'ledger_guid':'1',
-            'ledgername':'1',
-            'ledgerrefname':'',
-            'parent':'',
-            'primarygroup':''
+            'ispartyledger': '0',
+            'ledgername': '1',
+            'ledgerrefname': '',
+            'parent': '',
+            'primarygroup': ''
           }
-
-
-
         ],
       });
 
@@ -263,20 +246,18 @@ Firestore.instance
           .collection('ledger_stock_metrics')
           .document('1')
           .setData({
-            
-              'last_amount':'2596',
-              'last_discount': '0',
-              'last_rate': '220',
-              'last_voucher_date': DateTime.now(),
-              'mean_amount': '2596',
-              'num_vouchers': '1',
-              'restat_stock_item_name': 'Wheat', 
-              'stockitemname':'1',
-              'total_actualqty': '10',
-              'total_amount':'2596',
-              'total_billedqty': 10,
-              'voucher_type': 'Sales' 
-
+        'last_amount': '2596',
+        'last_discount': '0',
+        'last_rate': '220',
+        'last_voucher_date': DateTime.now(),
+        'mean_amount': '2596',
+        'num_vouchers': '1',
+        // 'restat_stock_item_name': 'Wheat',
+        'stockitemname': '1',
+        'total_actualqty': '10',
+        'total_amount': '2596',
+        'total_billedqty': 10,
+        'voucher_type': 'Sales'
       });
 
       Firestore.instance
@@ -288,9 +269,9 @@ Firestore.instance
         'restat_stock_item_name': 'Wheat',
         'restat_party_ledger_name': 'XYZ Ltd',
         'voucher_date': DateTime.now(),
-        'voucher_master_id': '1',
+        'restat_voucher_master_id': '1',
         'rate': 220,
-        'primary_voucher_type_name': 'Sales',
+        // 'primary_voucher_type_name': 'Sales',
         'gstpercent': '18',
         'billedqty': 10,
         'actualqty': 10,

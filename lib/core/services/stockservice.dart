@@ -33,7 +33,7 @@ class StockItemService {
         .document(masterId)
         .setData({
       'name': name,
-      'masterId': masterId,
+      'masterid': masterId,
       'standardcost': standardCost,
       'standardprice': standardPrice,
       'baseunits': baseUnits,
@@ -47,7 +47,7 @@ class StockItemService {
     return snapshot.documents.map((doc) {
       return StockItem(
         name: doc.data['name'] ?? '',
-        masterId: doc.data['master_id'] ?? '',
+        masterId: doc.data['masterid'] ?? '',
         closingBalance: doc.data['closingbalance']?.toString() ?? '',
         closingValue: doc.data['closingvalue'] != ''
             ? (doc.data['closingvalue']?.toDouble() ?? 0)

@@ -42,10 +42,10 @@ class VoucherItemService {
         .setData({
       'restat_stock_item_name': stockItemName,
       'restat_party_ledger_name': partyLedgerName,
-      'voucher_date': vdate,
-      'voucher_master_id': vMasterId,
+      'restat_voucher_date': vdate,
+      'restat_voucher_master_id': vMasterId,
       'rate': rate,
-      'primary_voucher_type_name': primaryVoucherType,
+      'restat_primary_voucher_type_name': primaryVoucherType,
       'gstpercent': gstPercent,
       'billedqty': billedQty,
       'actualQty': actualqty,
@@ -59,11 +59,11 @@ class VoucherItemService {
       return VoucherItem(
         stockItemName: doc.data['restat_stock_item_name'].toString() ?? '',
         partyLedgerName: doc.data['restat_party_ledger_name'].toString() ?? '',
-        vDate: doc.data['voucher_date'].toDate() ?? null,
-        vMasterId: doc.data['voucher_master_id'].toString() ?? '',
+        vDate: doc.data['restat_voucher_date'].toDate() ?? null,
+        vMasterId: doc.data['restat_voucher_master_id'].toString() ?? '',
         rate: doc.data['rate'].toString() ?? '',
         primaryVoucherType:
-            doc.data['primary_voucher_type_name'].toString() ?? '',
+            doc.data['restat_primary_voucher_type_name'].toString() ?? '',
         discount: doc.data['discount'].toString() ?? '',
         gstPercent: doc.data['gstpercent'].toString() ?? '',
         billedQty: doc.data['billedqty'].toDouble() ?? 0,

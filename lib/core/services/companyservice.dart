@@ -23,7 +23,7 @@ class CompanyService {
       'upi_address': upiAddress,
       'name': companyName,
       'phonenumber': phoneNumber,
-      'gst_number': gstNumber,
+      'gstnumber': gstNumber,
       'address': registeredAddress,
     }, merge: true);
   }
@@ -36,12 +36,12 @@ class CompanyService {
         address: companyData['address'] ?? '',
         // booksFrom: ,
         // corporateidentityNumber: ,
-        countryName: companyData['country_name'] ?? '',
+        countryName: companyData['countryname'] ?? '',
         // currencyName: ,
         // currencySymbol: ,
         email: companyData['email'] ?? '',
-        formalName: companyData['formal_name'] ?? '',
-        gstNumber: companyData['gst_number'] ?? '',
+        formalName: companyData['basicompanyformalname'] ?? '',
+        gstNumber: companyData['gstnumber'] ?? '',
         // guid: ,
         // incometaxNumber: ,
         // interstatestNumber: ,
@@ -50,8 +50,8 @@ class CompanyService {
         // phoneNumber: ,
         pincode: companyData['pincode'] ?? '',
         // startingFrom: ,
-        stateName: companyData['state_name'] ?? '',
-        hasLogo: companyData['has_logo'] ?? '',
+        stateName: companyData['statename'] ?? '',
+        hasLogo: companyData['restat_has_logo'] ?? '',
       );
     } else {
       return Company(

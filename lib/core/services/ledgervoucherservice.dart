@@ -16,7 +16,7 @@ class LedgerVoucherService {
         .document(this.uid)
         .collection('voucher')
         .where('restat_party_ledger_name', isEqualTo: partyName)
-        .orderBy('date', descending: true)
+        .orderBy('vdate', descending: true)
         .snapshots()
         .map(_ledgervoucherdata);
   }
@@ -25,17 +25,17 @@ class LedgerVoucherService {
     return snapshot.documents.map(
       (doc) {
         return LedgerVoucherModel(
-          date: doc.data['date'].toDate() ?? null,
+          date: doc.data['vdate']?.toDate() ?? null,
           partyname: doc.data['restat_party_ledger_name'] ?? '',
           amount: doc.data['amount']?.toDouble() ?? 0,
-          masterid: doc.data['master_id'] ?? '',
-          iscancelled: doc.data['is_cancelled'] ?? '',
+          masterid: doc.data['masterid'] ?? '',
+          iscancelled: doc.data['iscancelled'] ?? '',
           primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
-          isInvoice: doc.data['is_invoice'] ?? '',
-          isPostDated: doc.data['is_post_dated'] ?? '',
+          isInvoice: doc.data['isinvoice'] ?? '',
+          isPostDated: doc.data['ispostdated'] ?? '',
           reference: doc.data['reference'] ?? '',
           type: doc.data['type'] ?? '',
-          partyGuid: doc.data['party_ledger_name'] ?? '',
+          partyGuid: doc.data['partyledgername'] ?? '',
           number: doc.data['number'] ?? '',
           ledgerEntries: doc.data['ledger_entries'] ?? [],
           inventoryEntries: doc.data['inventory_entries'] != ''

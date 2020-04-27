@@ -88,7 +88,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       .collection('company')
                       .document(uid)
                       .setData({
-                    'has_logo': '1',
+                    'restat_has_logo': '1',
                   }, merge: true);
 
                   // return AlertDialog(

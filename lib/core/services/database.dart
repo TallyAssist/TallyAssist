@@ -136,7 +136,7 @@ class SalesVoucherService {
     return companyCollection
         .document(this.uid)
         .collection('voucher')
-        .where('primary_voucher_type_name', isEqualTo: 'Sales')
+        .where('primaryvouchertypename', isEqualTo: 'Sales')
         .orderBy('amount', descending: true)
         .snapshots()
         .map(_salesvouchersfromSnapshots);
@@ -148,8 +148,8 @@ class SalesVoucherService {
         date: doc.data['date'] ?? '',
         partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount'].toInt() ?? 0,
-        masterid: doc.data['master_id'] ?? '',
-        iscancelled: doc.data['is_cancelled'] ?? '',
+        masterid: doc.data['masterid'] ?? '',
+        iscancelled: doc.data['iscancelled'] ?? '',
       );
     }).toList();
   }

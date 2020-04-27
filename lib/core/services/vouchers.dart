@@ -12,9 +12,9 @@ class VoucherService {
     return companyCollection
         .document(this.uid)
         .collection('voucher')
-        .orderBy('date', descending: true)
+        .orderBy('vdate', descending: true)
         // .endBefore([DateTime(2019, 9, 30)])
-        // .limit(2000)
+        .limit(2000)
         .snapshots()
         .map(_receiptvouchersfromSnapshots);
   }
@@ -36,13 +36,13 @@ class VoucherService {
         .document(masterId)
         .setData({
       'number': number,
-      'master_id': masterId,
-      'date': date,
-      'party_ledger_name': partyMasterId,
+      'masterid': masterId,
+      'vdate': date,
+      'partyledgername': partyMasterId,
       'restat_party_ledger_name': partyname,
       'amount': amount,
-      'primary_voucher_type_name': primaryVoucherType,
-      'is_invoice': isInvoice,
+      'primaryvouchertypename': primaryVoucherType,
+      'isinvoice': isInvoice,
       'type': type,
       'fromTally': '0',
     });
@@ -51,17 +51,17 @@ class VoucherService {
   List<Voucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Voucher(
-        date: doc.data['date']?.toDate() ?? null,
+        date: doc.data['vdate']?.toDate() ?? null,
         partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount']?.toDouble() ?? 0,
-        masterid: doc.data['master_id'] ?? '',
-        iscancelled: doc.data['is_cancelled'] ?? '',
+        masterid: doc.data['masterid'] ?? '',
+        iscancelled: doc.data['iscancelled'] ?? '',
         primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
-        isInvoice: doc.data['is_invoice'] ?? '',
-        isPostDated: doc.data['is_post_dated'] ?? '',
+        isInvoice: doc.data['isinvoice'] ?? '',
+        isPostDated: doc.data['ispostdated'] ?? '',
         reference: doc.data['reference'] ?? '',
         type: doc.data['type'] ?? '',
-        partyGuid: doc.data['party_ledger_name'] ?? '',
+        partyGuid: doc.data['partyledgername'] ?? '',
         number: doc.data['number'] ?? '',
       );
     }).toList();
