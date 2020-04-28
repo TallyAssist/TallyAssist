@@ -116,7 +116,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Receivables'),
-                          Text(formatIndianCurrency(ledger.totalReceivables))
+                          Text(formatIndianCurrency(ledger.totalReceivables.toString()))
                         ],
                       ),
                     ),
@@ -126,7 +126,7 @@ class LedgerSummary extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text('Payables'),
-                          Text(formatIndianCurrency(ledger.totalPayables))
+                          Text(formatIndianCurrency(ledger.totalPayables.toString()))
                         ],
                       ),
                     ),
@@ -158,29 +158,29 @@ class LedgerSummary extends StatelessWidget {
                 title: 'Sales',
                 number: 'Bills: ${ledger.numSalesVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastSalesDate)}',
-                metric: 'Total: ${formatIndianCurrency(ledger.totalSales)}',
-                average: 'Average: ${formatIndianCurrency(ledger.meanSales)}'),
+                metric: 'Total: ${formatIndianCurrency(ledger.totalSales.toString())}',
+                average: 'Average: ${formatIndianCurrency(ledger.meanSales.toString())}'),
             LedgerMetric(
                 title: 'Receipts',
                 number: 'Bills: ${ledger.numReceiptVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastReceiptDate)}',
-                metric: 'Total: ${formatIndianCurrency(ledger.totalReceipt)}',
+                metric: 'Total: ${formatIndianCurrency(ledger.totalReceipt.toString())}',
                 average:
-                    'Average: ${formatIndianCurrency(ledger.meanReceipt)}'),
+                    'Average: ${formatIndianCurrency(ledger.meanReceipt.toString())}'),
             LedgerMetric(
                 title: 'Purchases',
                 number: 'Bills: ${ledger.numPurchaseVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastPurchaseDate)}',
-                metric: 'Total: ${formatIndianCurrency(ledger.totalPurchase)}',
+                metric: 'Total: ${formatIndianCurrency(ledger.totalPurchase.toString())}',
                 average:
-                    'Average: ${formatIndianCurrency(ledger.meanPurchase)}'),
+                    'Average: ${formatIndianCurrency(ledger.meanPurchase.toString())}'),
             LedgerMetric(
                 title: 'Payment',
                 number: 'Bills: ${ledger.numPaymentVouchers}',
                 date: 'Last: ${_formatDate(ledger.lastPaymentDate)}',
-                metric: 'Total: ${formatIndianCurrency(ledger.totalPayment)}',
+                metric: 'Total: ${formatIndianCurrency(ledger.totalPayment.toString())}',
                 average:
-                    'Average: ${formatIndianCurrency(ledger.meanPayment)}'),
+                    'Average: ${formatIndianCurrency(ledger.meanPayment.toString())}'),
           ]),
         ));
   }

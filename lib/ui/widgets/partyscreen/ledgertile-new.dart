@@ -31,8 +31,8 @@ class LedgerItemTileNew extends StatelessWidget {
             ledgerItem.name,
             '# ${ledgerItem.masterId}',
             ledgerItem.restatCompanyCode.toString(),
-            'Sales: ${formatIndianCurrency(ledgerItem.totalSales)}',
-            'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt)}'),
+            'Sales: ${formatIndianCurrency(ledgerItem.totalSales.toString())}',
+            'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt.toString())}'),
         title1: 'Receivables',
         info1: formatIndianCurrency(
             positiveAmount(ledgerItem.closingBalance).toString()),
