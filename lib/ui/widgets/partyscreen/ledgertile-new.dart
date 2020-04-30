@@ -49,7 +49,7 @@ class LedgerItemTileNew extends StatelessWidget {
               ledgerItem.name,
               '# ${ledgerItem.masterId}',
               ledgerItem.restatCompanyCode.toString(),
-              'Purchsase: ${formatIndianCurrency(ledgerItem.totalPurchase.toString())}',
+              'Purchase: ${formatIndianCurrency(ledgerItem.totalPurchase.toString())}',
               'Payment: ${formatIndianCurrency(ledgerItem.totalPayment.toString())}'),
           title1: 'Payables',
           info1: formatIndianCurrency(ledgerItem.closingBalance.toString()),

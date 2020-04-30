@@ -83,9 +83,10 @@ class LedgerItemService {
         // meanSales: doc.data['restat_mean_sales'].toString() ?? '',
         partyGuid: doc.data['guid'].toString() ?? '',
         // totalPayables: doc.data['restat_total_payables'].toString() ?? '',
-        // totalPayment: doc.data['restat_total_payment'].toString() ?? '',
-        // totalPurchase: doc.data['restat_total_purchase'].toString() ?? '',
-        // totalReceipt: doc.data['restat_total_receipt'].toString() ?? '',
+        totalSales: doc.data['restat_total_sales'].toString() ?? '',
+        totalPayment: doc.data['restat_total_payment'].toString() ?? '',
+        totalPurchase: doc.data['restat_total_purchase'].toString() ?? '',
+        totalReceipt: doc.data['restat_total_receipt'].toString() ?? '',
         // totalReceivables: doc.data['restat_total_receivables'].toString() ?? '',
         primaryGroupType:
             doc.data['restat_primary_group_type'].toString() ?? '',
