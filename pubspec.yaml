@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+3
+version: 1.0.0+4
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -39,7 +39,7 @@ dependencies:
   signature: ^3.0.0
   firebase_storage: ^3.1.5
   # contact_picker: ^0.0.2
-  native_contact_picker: ^0.0.6
+  # native_contact_picker: ^0.0.6
   # screenshot_and_share: ^0.0.1
   http: ^0.12.0+4
   printing: ^3.3.1
