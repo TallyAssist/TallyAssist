@@ -46,6 +46,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   // Product details
   List<VoucherItem> _inventoryEntries = [];
   String _productName = '';
+  String _gstType = '';
   String _gstPercentage;
   String _productPrice;
   String _productQuantity;
@@ -74,8 +75,6 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
           style: secondaryListDisc.copyWith(color: TassistInfoGrey));
     }
   }
-
- 
 
   @override
   Widget build(BuildContext context) {
@@ -316,6 +315,28 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       SizedBox(width: 20),
                       Flexible(
                         flex: 1,
+                        child: new DropdownButtonFormField(
+                          items: <DropdownMenuItem>[
+                            DropdownMenuItem(
+                              child: Text('IGST', style: secondaryListDisc),
+                              value: 'igst',
+                            ),
+                            DropdownMenuItem(
+                              child:
+                                  Text('CGST & SGST', style: secondaryListDisc),
+                              value: 'cgst & sgst',
+                            ),
+                          ],
+                          // value: 'igst',
+                          decoration: InputDecoration(
+                              labelText: 'GST type',
+                              // AT: This should be a dropdown
+                              labelStyle: secondaryListDisc),
+                          onChanged: (val) => setState(() => _gstType = val),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 1,
                         child: new TextFormField(
                           keyboardType: TextInputType.number,
                           style: secondaryListDisc,
@@ -391,16 +412,34 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                             //       'Discount: 10'
                             double amount = double.parse(_productQuantity) *
                                 double.parse(_productPrice);
-                            double gstAmount =
-                                ((double.parse(_gstPercentage)) / 100) * amount;
-                            List tempList = [
-                              _productName,
-                              'HSN Code: ',
-                              '$_productQuantity Qty @ $_productPrice/item',
-                              'GST @ $_gstPercentage% : $gstAmount',
-                              'Amount: $amount',
-                              'Discount: ',
-                            ];
+                            double gstAmount;
+                            List tempList;
+                            if (_gstType == 'igst') {
+                              gstAmount =
+                                  ((double.parse(_gstPercentage)) / 100) *
+                                      amount;
+                              tempList = [
+                                _productName,
+                                'HSN Code: ',
+                                '$_productQuantity Qty @ $_productPrice/item',
+                                'IGST @ $_gstPercentage% : $gstAmount',
+                                'Amount: $amount',
+                                'Discount: ',
+                              ];
+                            } else {
+                              gstAmount =
+                                  (((double.parse(_gstPercentage)) * 2.0) /
+                                          100) *
+                                      amount;
+                              tempList = [
+                                _productName,
+                                'HSN Code: ',
+                                '$_productQuantity Qty @ $_productPrice/item',
+                                'CGST & SGST @ $_gstPercentage% : $gstAmount',
+                                'Amount: $amount',
+                                // 'Discount: ',
+                              ];
+                            }
                             setState(() {
                               _inventoryEntries.add(VoucherItem(
                                 actualQty: _productQuantity,
@@ -413,10 +452,10 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 rate: _productPrice,
                                 stockItemName: _productName,
                                 taxAmount: gstAmount.toString(),
+                                taxType: _gstType,
                                 vDate: _invoiceDateRaw,
                                 vMasterId: _masterId,
                               ));
-            
 
                               _totalProductPrice += amount;
                               _totalTax += gstAmount;
@@ -425,6 +464,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                               _productPrice = '';
                               _productQuantity = '';
                               _gstPercentage = '';
+                              _gstType = '';
                               _totalAmount = _totalProductPrice + _totalTax;
                             });
                           },
@@ -728,6 +768,7 @@ _createInvoiceItemList(inventoryEntries, amount) {
     String discount = inventoryEntries[i]?.discount.toString() ?? "";
     String amount = inventoryEntries[i]?.amount.toString() ?? "";
     String taxAmount = inventoryEntries[i]?.taxAmount?.toString() ?? "";
+    String taxType = inventoryEntries[i]?.taxType?.toString() ?? "";
 
     itemList.add([
       serialNo,
@@ -739,7 +780,36 @@ _createInvoiceItemList(inventoryEntries, amount) {
       discount,
       amount
     ]);
-    itemList.add(["", "Tax", "", "", "", "", taxAmount]);
+    if (taxType == 'igst') {
+      itemList.add([
+        "",
+        "IGST",
+        "",
+        "",
+        "",
+        "",
+        taxAmount,
+      ]);
+    } else {
+      itemList.add([
+        "",
+        "CGST",
+        "",
+        "",
+        "",
+        "",
+        (double.parse(taxAmount) / 2).toString(),
+      ]);
+      itemList.add([
+        "",
+        "SGST",
+        "",
+        "",
+        "",
+        "",
+        (double.parse(taxAmount) / 2).toString(),
+      ]);
+    }
   }
 
   itemList.add(["", "Total", "", "", "", "", amount.toString()]);

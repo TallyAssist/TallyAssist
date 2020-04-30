@@ -187,30 +187,6 @@ createInvoicePdf({
         ),
         SizedBox(height: 30),
         Table.fromTextArray(context: context, data: itemList),
-        // const <List<String>>[
-        //   [
-        //     'SI No.',
-        //     'Description of Goods',
-        //     'HSN/SAC',
-        //     'Quantity',
-        //     'Rate',
-        //     'per',
-        //     'Disc%',
-        //     'Amount'
-        //   ],
-        //   [
-        //     '1',
-        //     'PARAM LURE REFILL FRUIT FLY (O) (PACK)',
-        //     '3808',
-        //     '10 Pack (100 Pcs)',
-        //     '180.00',
-        //     'Pack',
-        //     '',
-        //     '1,800.00'
-        //   ],
-        //   ['', 'CGST- MH (27)', '', '', '', '', '', '162.00'],
-        //   ['', 'Total', '', '10 Pack', '', '', '', 'Rs. 2,124.00']
-        // ]),
         SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
