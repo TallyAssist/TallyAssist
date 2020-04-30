@@ -56,7 +56,7 @@ class VoucherService {
         amount: doc.data['amount']?.toDouble() ?? 0,
         masterid: doc.data['masterid'] ?? '',
         iscancelled: doc.data['iscancelled'] ?? '',
-        primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
+        primaryVoucherType: doc.data['primaryvouchertypename'] ?? '',
         isInvoice: doc.data['isinvoice'] ?? '',
         isPostDated: doc.data['ispostdated'] ?? '',
         reference: doc.data['reference'] ?? '',
