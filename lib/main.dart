@@ -1,5 +1,9 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tassist/core/models/inactivecustomer.dart';
@@ -21,7 +25,6 @@ import 'core/models/ledger.dart';
 import 'core/services/companyservice.dart';
 import 'core/services/ledgerservice.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -39,7 +42,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class TopWidget extends StatelessWidget {
+class TopWidget extends StatefulWidget {
   const TopWidget({
     Key key,
     @required String title,
@@ -49,13 +52,106 @@ class TopWidget extends StatelessWidget {
   final String _title;
 
   @override
+  _TopWidgetState createState() => _TopWidgetState();
+}
+
+class _TopWidgetState extends State<TopWidget> {
+  final Firestore _db = Firestore.instance;
+
+  final FirebaseMessaging _fcm = FirebaseMessaging();
+
+  StreamSubscription iosSubscription;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // String uid = Provider.of<FirebaseUser>(context, listen: false).uid;
+
+    if (Platform.isIOS) {
+      iosSubscription = _fcm.onIosSettingsRegistered.listen((data) {
+        print(data);
+        _saveDeviceToken();
+      });
+
+      _fcm.requestNotificationPermissions(IosNotificationSettings());
+    } else {
+      _saveDeviceToken();
+    }
+
+    _fcm.configure(
+      onMessage: (Map<String, dynamic> message) async {
+        print("onMessage: $message");
+        // final snackbar = SnackBar(
+        //   content: Text(message['notification']['title']),
+        //   action: SnackBarAction(
+        //     label: 'Go',
+        //     onPressed: () => null,
+        //   ),
+        // );
+
+        // Scaffold.of(context).showSnackBar(snackbar);
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            content: ListTile(
+              title: Text(message['notification']['title']),
+              subtitle: Text(message['notification']['body']),
+            ),
+            actions: <Widget>[
+              FlatButton(
+                color: Colors.amber,
+                child: Text('Ok'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          ),
+        );
+      },
+      onLaunch: (Map<String, dynamic> message) async {
+        print("onLaunch: $message");
+        // TODO optional
+      },
+      onResume: (Map<String, dynamic> message) async {
+        print("onResume: $message");
+        // TODO optional
+      },
+    );
+  }
+
+  /// Get the token, save it to the database for current user
+  _saveDeviceToken() async {
+    // Get the current user
+    // String uid = 'jeffd23';
+    // FirebaseUser user = await _auth.currentUser();
+
+    // Get the token for this device
+    String fcmToken = await _fcm.getToken();
+
+    // Save it to Firestore
+    // if (fcmToken != null) {
+    //   var tokens = _db
+    //       .collection('company')
+    //       .document(uid)
+    //       .collection('tokens')
+    //       .document(fcmToken);
+
+    //   await tokens.setData({
+    //     'token': fcmToken,
+    //     'createdAt': FieldValue.serverTimestamp(), // optional
+    //     'platform': Platform.operatingSystem // optional
+    //   });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final user = Provider.of<FirebaseUser>(context);
     return MultiProvider(
       providers: [
         StreamProvider<List<ReceivablesItem>>.value(
           // initialData: List<ReceivablesItem>(),
-          value: ReceivablesItemService(uid: user?.uid).accountsReceivableData,),
+          value: ReceivablesItemService(uid: user?.uid).accountsReceivableData,
+        ),
         // LEDGER/PARTY DATA
         StreamProvider<List<LedgerItem>>.value(
             value: LedgerItemService(uid: user?.uid).ledgerItemData),
@@ -64,7 +160,8 @@ class TopWidget extends StatelessWidget {
         StreamProvider<List<PayablesItem>>.value(
             value: PayablesItemService(uid: user?.uid).accountsPayablesData),
         StreamProvider<List<InactiveCustomer>>.value(
-            value: InactiveCustomerService(uid: user?.uid).inactiveCustomerData),
+            value:
+                InactiveCustomerService(uid: user?.uid).inactiveCustomerData),
         // StreamProvider<List<SalesVoucher>>.value(
         //     value: SalesVoucherService(uid: user?.uid).salesVoucherData),
         // StreamProvider<List<PurchaseVoucher>>.value(
@@ -93,7 +190,7 @@ class TopWidget extends StatelessWidget {
         //   '/ledgerview': (context) => LedgerView(),
         //   '/ledgers': (context) => LedgerScreen()
         // },
-        title: _title,
+        title: widget._title,
         // home: HomeScreen(),
         // home: RootPage(),
         theme: ThemeData(

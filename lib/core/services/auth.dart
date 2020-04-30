@@ -100,7 +100,8 @@ class AuthService {
           'closingbalance': -100000,
           'parentcode': '20',
           'contact': '',
-          'address': 'CP, New Delhi',
+          'address1': 'CP, New Delhi',
+          'address2': '',
           'state': 'Delhi',
           'pincode': '110001',
           'email': 'xyz@email.com',
@@ -125,7 +126,8 @@ class AuthService {
           'closingbalance': 101000,
           'parentcode': '',
           'contact': '',
-          'address': '',
+          'address1': '',
+          'address2': '',
           'state': 'Delhi',
           'pincode': '110001',
           'email': '',
@@ -149,7 +151,8 @@ class AuthService {
         'closingbalance': 50000,
         'parentcode': '16',
         'contact': '',
-        'address': 'CP, New Delhi',
+        'address1': 'CP, New Delhi',
+        'address2': '',
         'state': 'Delhi',
         'pincode': '110001',
         'email': 'abc@email.com',
@@ -172,7 +175,8 @@ class AuthService {
         'closingbalance': 396,
         'parentid': '',
         'contact': '',
-        'address': 'CP, New Delhi',
+        'address1': 'CP, New Delhi',
+        'address2': '',
         'state': 'Delhi',
         'pincode': '',
         'email': '',
@@ -188,7 +192,7 @@ class AuthService {
           .collection('voucher')
           .document('1')
           .setData({
-        'date': DateTime.now(),
+        'vdate': DateTime.now(),
         // 'restat_party_ledger_name': 'ABC Ltd',
         'amount': 2596,
         'masterid': '1',
@@ -201,10 +205,7 @@ class AuthService {
         'number': '1',
         'inventoryentries': [
           {
-            'voucher_date': DateTime.now(),
-            'voucher_master_id': '1',
             'rate': 220,
-            'primary_voucher_type_name': 'Sales',
             'gstpercent': '18',
             'billedqty': 10,
             'actualqty': 10,
@@ -268,7 +269,7 @@ class AuthService {
           .setData({
         'restat_stock_item_name': 'Wheat',
         'restat_party_ledger_name': 'XYZ Ltd',
-        'voucher_date': DateTime.now(),
+        'restat_voucher_date': DateTime.now(),
         'restat_voucher_master_id': '1',
         'rate': 220,
         // 'primary_voucher_type_name': 'Sales',
