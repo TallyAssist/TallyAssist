@@ -39,14 +39,14 @@ class AuthService {
           email: email, password: password);
       FirebaseUser user = result.user;
 
-      // Firestore.instance.collection('metrics').document(user.uid).setData({
-      //   'total_sales': 100000,
-      //   'total_payments': 0,
-      //   'total_purchases': 50000,
-      //   'total_receipts': 0,
-      //   'out_actual_rec': 100000,
-      //   'out_actual_pay':50000,
-      // });
+      Firestore.instance.collection('metrics').document(user.uid).setData({
+        'total_sales': 100000,
+        'total_payments': 0,
+        'total_purchases': 50000,
+        'total_receipts': 0,
+        'out_actual_rec': 100000,
+        'out_actual_pay':50000,
+      });
 
       // Company
       Firestore.instance.collection('company').document(user.uid).setData({
