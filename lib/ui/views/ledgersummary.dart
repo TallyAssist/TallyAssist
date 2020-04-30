@@ -84,19 +84,25 @@ class LedgerSummary extends StatelessWidget {
                         Row(
                           children: <Widget>[
                             // PDF Sharing button
-                            IconButton(
-                              iconSize: 28,
-                              icon: Icon(Icons.picture_as_pdf, color: TassistMenuBg),
+                            RaisedButton(
+                              child: Row(
+                                children: <Widget>[
+                                  Text('Send PDF', style: TextStyle(color: TassistMenuBg),),
+                                  // Icon(Icons.picture_as_pdf, color: TassistMenuBg), 
+
+                                ],
+                              ),
                               onPressed: () => viewPdf(
                                   context, voucherData, company, ledger),
+                              color: TassistBgLightPurple,
                             ),
                             SizedBox(
                               width: 10,
                             ),
-                            Icon(
-                              FontAwesomeIcons.whatsapp,
-                              color: TassistSuccess,
-                            )
+                            // Icon(
+                            //   FontAwesomeIcons.whatsapp,
+                            //   color: TassistSuccess,
+                            // )
                           ],
                         )
                       ])

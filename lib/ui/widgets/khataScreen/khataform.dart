@@ -74,7 +74,21 @@ class _KhataFormState extends State<KhataForm> {
                           context: context,
                           initialDate: DateTime.now(),
                           firstDate: DateTime(2001),
-                          lastDate: DateTime(2022))
+                          lastDate: DateTime(2022),
+                          builder: (BuildContext context, Widget child) {
+                                return Theme(
+                                  data: ThemeData.light().copyWith(
+                                      //OK/Cancel button text color
+                                      primaryColor: const Color(
+                                          0xFF4A5BF6), //Head background
+                                      accentColor: const Color(
+                                          0xFF4A5BF6) //selection color
+                                      //dialogBackgroundColor: Colors.white,//Background color
+                                      ),
+                                  child: child,
+                                );
+                              },
+                            )
                       .then((date) {
                     _currentDate = date;
                   });

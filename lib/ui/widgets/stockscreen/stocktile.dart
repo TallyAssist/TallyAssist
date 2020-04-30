@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tassist/core/models/stockitem.dart';
 import 'package:intl/intl.dart';
 import 'package:tassist/core/services/string_format.dart';
+import 'package:tassist/ui/shared/positiveamount.dart';
 import 'package:tassist/ui/widgets/childdetailcard.dart';
 import 'package:tassist/ui/widgets/expansibledetailcard.dart';
 
@@ -21,7 +22,7 @@ class StockItemTile extends StatelessWidget {
         '# ${stockItem.masterId}',
         'CR: ${formatIndianCurrency(stockItem.closingRate.toString())}',
         '${stockItem.closingBalance.toString()} ${stockItem.baseUnit}',
-        'CV: ${formatIndianCurrency(stockItem.closingValue)}',
+        'CV: ${formatIndianCurrency(positiveAmount(stockItem.closingValue))}',
 
       ),
       title1: 'Standard Cost',

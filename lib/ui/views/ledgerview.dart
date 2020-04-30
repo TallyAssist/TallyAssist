@@ -41,7 +41,7 @@ class _LedgerViewState extends State<LedgerView>
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 3);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
     _tabController.addListener(() {
       if (_tabController.index == 0) {
         showFab = true;
@@ -140,7 +140,7 @@ class _LedgerViewState extends State<LedgerView>
                           partyname: partyname,
                           timePeriod: timePeriod,
                         ),
-                        LedgerStockView(ledgerGuid: ledgerGuid)
+                        // LedgerStockView(ledgerGuid: ledgerGuid)
                       ],
                     ),
                   )
@@ -177,9 +177,9 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey,
             text: 'Summary',
           ),
           Tab(text: 'Vouchers'),
-          Tab(
-            text: 'Stock',
-          ),
+          // Tab(
+          //   text: 'Stock',
+          // ),
         ],
       ),
       title: Row(

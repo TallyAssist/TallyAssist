@@ -111,11 +111,12 @@ class _VoucherListState extends State<VoucherList> {
                 children: <Widget>[
                   Row(children: <Widget>[
                     Container(
-                        height: 30.0,
+                        // height: 30.0,
+                        width: MediaQuery.of(context).size.width/1.1,
                         child: Text(
                           ledger.name,
                           overflow: TextOverflow.ellipsis,
-                          maxLines: 1,
+                          maxLines: 2,
                           style: TextStyle(color: TassistPrimary),
                         ))
                   ]),

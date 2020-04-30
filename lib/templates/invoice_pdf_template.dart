@@ -136,8 +136,8 @@ createInvoicePdf({
                             fontWeight: FontWeight.bold,
                           )),
                       Text(partyName),
-                      Text(partyAddress),
-                      Text(partyPincode),
+                      Text(partyAddress ?? ''),
+                      Text(partyPincode ?? ''),
                     ],
                   ),
                 ),
@@ -149,7 +149,7 @@ createInvoicePdf({
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         )),
-                    Text(partyGST),
+                    Text(partyGST ?? ''),
                     Text('State: $partyState',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
