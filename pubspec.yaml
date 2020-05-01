@@ -97,6 +97,14 @@ flutter:
           weight: 500
         - asset: fonts/Poppins-Bold.ttf
           weight: 700
+    - family: Proxima-Nova
+      fonts: 
+        - asset: fonts/proxima-nova-bold.ttf
+          weight: 700
+        - asset: fonts/proxima-nova-reg.ttf
+          weight: 500
+        - asset: fonts/proxima-nova-thin.ttf
+          weight: 300
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

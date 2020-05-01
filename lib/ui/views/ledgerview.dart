@@ -10,8 +10,8 @@ import 'package:tassist/ui/shared/drawer.dart';
 // import 'package:tassist/ui/widgets/myboxdecoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/models/ledgerstock.dart';
-import 'package:tassist/ui/views/ledgersummary.dart';
-import 'package:tassist/ui/views/ledgerstock.dart';
+import 'package:tassist/ui/views/ledgersummary2.dart';
+// import 'package:tassist/ui/views/ledgerstock.dart';
 import 'package:tassist/ui/views/ledgervoucher.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -131,7 +131,7 @@ class _LedgerViewState extends State<LedgerView>
                     child: TabBarView(
                       controller: _tabController,
                       children: <Widget>[
-                        LedgerSummary(
+                        LedgerSummary2(
                           ledgerGuid: ledgerGuid,
                           partyName: partyname,
                         ),
