@@ -59,14 +59,14 @@ class _VouchersHomeState extends State<VouchersHome>
                 Container(
                   decoration: myBoxDecorationBottomBorder(),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                    padding: const EdgeInsets.fromLTRB(10, 4, 10, 4),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Text(
                           "Limit: last 2000 vouchers",
-                          style: secondaryListTitle2,
+                          style: secondaryListDisc.copyWith(color: TassistInfoGrey),
                         ),
                       ],
                     ),

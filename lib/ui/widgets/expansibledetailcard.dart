@@ -20,7 +20,7 @@ class ExpansibleDetailCard extends StatelessWidget {
     return Card(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(5.0))),
-      elevation: 0.5,
+      elevation: 1,
       // margin: spacer.all.xxs,
       child: Padding(
               padding: spacer.all.xxs,
