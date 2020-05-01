@@ -51,7 +51,7 @@ class VoucherView extends StatelessWidget {
     Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context)
             .where((item) => item.guid == voucher.partyGuid) ??
         [];
-    LedgerItem ledger = ledgerItem.elementAt(0) ?? [];
+    LedgerItem ledger = ledgerItem?.elementAt(0) ?? [];
 
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 

@@ -312,9 +312,9 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           //     color: TassistBgLightPurple)
                         ),
                       ),
-                      SizedBox(width: 20),
+                      SizedBox(width: 10),
                       Flexible(
-                        flex: 1,
+                        flex: 2,
                         child: new DropdownButtonFormField(
                           items: <DropdownMenuItem>[
                             DropdownMenuItem(
@@ -329,7 +329,8 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           ],
                           // value: 'igst',
                           decoration: InputDecoration(
-                              labelText: 'GST type',
+                              isDense: true,
+                              labelText: 'GST Type',
                               // AT: This should be a dropdown
                               labelStyle: secondaryListDisc),
                           onChanged: (val) => setState(() => _gstType = val),
@@ -689,11 +690,11 @@ viewPdf(
     companyName: company.formalName,
     companyAddress: company.address,
     companyPincode: company.pincode,
-    partyName: ledger.name,
-    partyAddress: ledger.address,
+    partyName: ledger.name ?? '',
+    partyAddress: ledger.address ?? '',
     partyPincode: ledger.pincode,
     partyState: ledger.state,
-    partyGST: ledger.gst,
+    partyGST: ledger.gst ?? '',
     itemList: itemList,
     logoPath: logoPath,
   );
