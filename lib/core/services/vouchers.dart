@@ -62,7 +62,7 @@ class VoucherService {
         reference: doc.data['reference'] ?? '',
         type: doc.data['type'] ?? '',
         partyGuid: doc.data['partyledgername'] ?? '',
-        number: doc.data['number'] ?? '',
+        number: doc.data['vouchernumber'] ?? '',
       );
     }).toList();
   }

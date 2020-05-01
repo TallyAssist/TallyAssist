@@ -62,7 +62,7 @@ class LedgerItemService {
     return snapshot.documents.map((doc) {
       return LedgerItem(
         name: doc.data['name'].toString() ?? '',
-        masterId: doc.data['master_id'].toString() ?? '',
+        masterId: doc.data['masterid'].toString() ?? '',
         currencyName: doc.data['currencyname'].toString() ?? '',
         openingBalance: doc.data['openingbalance']?.toDouble() ?? 0,
         closingBalance: doc.data['closingbalance']?.toDouble() ?? 0,
