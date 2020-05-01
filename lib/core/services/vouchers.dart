@@ -12,28 +12,57 @@ class VoucherService {
     return companyCollection
         .document(this.uid)
         .collection('voucher')
-        .orderBy('date', descending: true)
-        .endBefore([DateTime(2019, 9, 30)])
-        // .limit(1000)
+        .orderBy('vdate', descending: true)
+        // .endBefore([DateTime(2019, 9, 30)])
+        .limit(2000)
         .snapshots()
         .map(_receiptvouchersfromSnapshots);
+  }
+
+  Future saveVoucherRecord({
+    number,
+    masterId,
+    date,
+    partyMasterId,
+    partyname,
+    amount,
+    primaryVoucherType,
+    isInvoice,
+    type,
+  }) async {
+    return await companyCollection
+        .document(this.uid)
+        .collection('voucher')
+        .document(masterId)
+        .setData({
+      'number': number,
+      'masterid': masterId,
+      'vdate': date,
+      'partyledgername': partyMasterId,
+      'restat_party_ledger_name': partyname,
+      'amount': amount,
+      'primaryvouchertypename': primaryVoucherType,
+      'isinvoice': isInvoice,
+      'type': type,
+      'fromTally': '0',
+    });
   }
 
   List<Voucher> _receiptvouchersfromSnapshots(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return Voucher(
-        date: doc.data['date'].toDate() ?? null,
+        date: doc.data['vdate']?.toDate() ?? null,
         partyname: doc.data['restat_party_ledger_name'] ?? '',
         amount: doc.data['amount']?.toDouble() ?? 0,
-        masterid: doc.data['master_id'] ?? '',
-        iscancelled: doc.data['is_cancelled'] ?? '',
-        primaryVoucherType: doc.data['primary_voucher_type_name'] ?? '',
-        isInvoice: doc.data['is_invoice'] ?? '',
-        isPostDated: doc.data['is_post_dated'] ?? '',
+        masterid: doc.data['masterid'] ?? '',
+        iscancelled: doc.data['iscancelled'] ?? '',
+        primaryVoucherType: doc.data['primaryvouchertypename'] ?? '',
+        isInvoice: doc.data['isinvoice'] ?? '',
+        isPostDated: doc.data['ispostdated'] ?? '',
         reference: doc.data['reference'] ?? '',
         type: doc.data['type'] ?? '',
-        partyGuid: doc.data['party_ledger_name'] ?? '',
-        number: doc.data['number'] ?? '',
+        partyGuid: doc.data['partyledgername'] ?? '',
+        number: doc.data['vouchernumber'] ?? '',
       );
     }).toList();
   }

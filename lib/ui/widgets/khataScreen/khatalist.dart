@@ -16,7 +16,8 @@ class _KhataListState extends State<KhataList> {
   Widget build(BuildContext context) {
     final khataData = Provider.of<List<Khata>>(context);
     var user = Provider.of<FirebaseUser>(context);
-    // final id = DatabaseService().khataCollection.document('PTDQMfuftCgJJiA6UwZOExfawV23').collection('transations').document().documentID;
+
+    // final id = DatabaseService().khataCollection.document(user.uid).collection('transations').document().documentID;
 
     return Container(
       height: MediaQuery.of(context).size.height / 1.5,
@@ -26,11 +27,12 @@ class _KhataListState extends State<KhataList> {
         itemCount: khataData?.length ?? 0,
         itemBuilder: (context, index) {
           return Dismissible(
-              key: Key(khataData[index].toString()),
+              key: Key(khataData[index].id.toString()),
               onDismissed: (DismissDirection dismissDirection) async {
-                DatabaseService().deleteKhata(user.uid);
                 if (khataData.contains(khataData[index])) {
-                  setState(() {
+                  setState(() async {
+                    await DatabaseService(uid: user.uid)
+                        .deleteKhata(khataData[index].id);
                     khataData.removeAt(index);
                   });
                 }

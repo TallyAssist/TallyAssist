@@ -6,10 +6,13 @@ class LedgerItem {
   final double closingBalance;
   final String parentid;
   final String contact;
+  final String address;
+  final String pincode;
   final String state;
   final String email;
   final String phone;
   final String guid;
+  final String gst;
   final DateTime lastPaymentDate;
   final DateTime lastPurchaseDate;
   final DateTime lastReceiptDate;
@@ -27,7 +30,6 @@ class LedgerItem {
   final String totalSales;
   final String primaryGroupType;
   final String restatCompanyCode;
-  final String gst;
   final String numPaymentVouchers;
   final String numSalesVouchers;
   final String numPurchaseVouchers;
@@ -41,14 +43,16 @@ class LedgerItem {
       this.closingBalance,
       this.parentid,
       this.contact,
+      this.address,
+      this.pincode,
       this.state,
       this.email,
       this.phone,
       this.guid,
+      this.gst,
       this.lastPaymentDate,
       this.lastPurchaseDate,
       this.lastReceiptDate,
-      this.gst,
       this.lastSalesDate,
       this.meanPayment,
       this.meanPurchase,

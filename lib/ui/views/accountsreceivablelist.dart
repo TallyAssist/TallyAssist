@@ -98,8 +98,12 @@ TextEditingController editingController = TextEditingController();
                   child:   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),),
-                Text( 'Outstandings', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2,
+                  child: Text('Party Name    ', style: TextStyle(color: TassistPrimary, fontWeight: FontWeight.bold),)),
+                Container(
+                  width: 120,
+                  child: Text( 'Receivables', style: TextStyle(color: TassistBlack, fontWeight: FontWeight.bold),)),
                 // Text ('Receipts', style: TextStyle(color: TassistInfoGrey, fontWeight: FontWeight.bold ),),
                 Icon(Icons.phone)
               ]
@@ -112,7 +116,7 @@ TextEditingController editingController = TextEditingController();
                     itemCount: ledgerItemDataforDisplay?.length ?? 0,
                     itemBuilder: (context, index) {
                       return GestureDetector(
-                      onDoubleTap: () => {
+                      onTap: () => {
             
                         partyname = ledgerItemDataforDisplay[index].name,
                         ledgerGuid = ledgerItemDataforDisplay[index].guid,

@@ -15,7 +15,7 @@ class ChildDetailCard extends StatelessWidget {
     return Column(children: <Widget>[
     Row(children: <Widget>[
     Container(
-      width: MediaQuery.of(context).size.width / 1.45,
+      width: MediaQuery.of(context).size.width / 1.35,
       child: Text(_title1,
             overflow: TextOverflow.ellipsis,
             maxLines: 1,

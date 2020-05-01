@@ -15,7 +15,7 @@ class LedgerPartyService {
     return companyCollection
         .document(this.uid)
         .collection('ledger_entries')
-        .where('voucher_master_id', isEqualTo: voucherId)
+        .where('restat_voucher_master_id', isEqualTo: voucherId)
         .snapshots()
         .map(_voucherLedgerData);
   }
@@ -29,14 +29,14 @@ class LedgerPartyService {
         ledgerGuid: doc.data['ledger_guid'].toString() ?? '',
         ledgerMasterId: doc.data['ledgername'].toString() ?? '',
         ledgerRefMasterId: doc.data['ledgerrefname'].toString() ?? '',
-        primaryVoucherType:
-            doc.data['primary_voucher_type_name'].toString() ?? '',
+        // primaryVoucherType:
+        //     doc.data['primary_voucher_type_name'].toString() ?? '',
         primaryGroup: doc.data['primarygroup'].toString() ?? '',
         ledgerName: doc.data['restat_ledger_name'].toString() ?? '',
         ledgerRefName: doc.data['restat_ledger_ref_name'].toString() ?? '',
         partyName: doc.data['restat_party_ledger_name'].toString() ?? '',
-        date: doc.data['voucher_date'].toDate() ?? null,
-        voucherMasterID: doc.data['voucher_master_id'].toString() ?? '',
+        date: doc.data['restat_voucher_date'].toDate() ?? null,
+        voucherMasterID: doc.data['restat_voucher_master_id'].toString() ?? '',
       );
     }).toList();
   }

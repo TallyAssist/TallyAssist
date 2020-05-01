@@ -17,17 +17,45 @@ class StockItemService {
         .map(_stockItemData);
   }
 
+  Future saveStockItem({
+    masterId,
+    name,
+    standardCost,
+    standardPrice,
+    baseUnits,
+    closingBalance,
+    minimumStock,
+    reorderValue,
+  }) async {
+    return await companyCollection
+        .document(this.uid)
+        .collection('stockitem')
+        .document(masterId)
+        .setData({
+      'name': name,
+      'masterid': masterId,
+      'standardcost': standardCost,
+      'standardprice': standardPrice,
+      'baseunits': baseUnits,
+      'closingbalance': closingBalance,
+      'minimumstock': minimumStock,
+      'reordervalue': reorderValue,
+    });
+  }
+
   List<StockItem> _stockItemData(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return StockItem(
         name: doc.data['name'] ?? '',
-        masterId: doc.data['master_id'] ?? '',
-        closingBalance: doc.data['closingbalance'].toString() ?? '',
-        closingValue: doc.data['closingvalue'].toString() ?? '',
-        baseUnit: doc.data['baseunits'] ?? '',
-        closingRate: doc.data['closingrate'].toString() ?? '',
-        standardCost: doc.data['standardcost'].toString() ?? '',
-        standardPrice: doc.data['standardprice'].toString() ?? '',
+        masterId: doc.data['masterid'] ?? '',
+        closingBalance: doc.data['closingbalance']?.toString() ?? '',
+        closingValue: doc.data['closingvalue'] != ''
+            ? (doc.data['closingvalue']?.toDouble() ?? 0)
+            : 0,
+        baseUnit: doc.data['baseunits']?.toString() ?? '',
+        closingRate: doc.data['closingrate']?.toString() ?? '',
+        standardCost: doc.data['standardcost']?.toString() ?? '',
+        standardPrice: doc.data['standardprice']?.toString() ?? '',
       );
     }).toList();
   }

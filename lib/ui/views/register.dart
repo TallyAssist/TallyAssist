@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/ui/root_page.dart';
+
 
 class Register extends StatefulWidget {
   final Function toggleView;
@@ -77,23 +79,23 @@ class _RegisterState extends State<Register> {
                 },
               ),
               SizedBox(height: 20.0),
-              TextFormField(
-                style: Theme.of(context).textTheme.bodyText2,
-                decoration: InputDecoration(
-                   icon: Icon(Icons.perm_contact_calendar, color: TassistPrimaryBackground),
-                  hintText: 'Enter your referral code',
-                  hintStyle: Theme.of(context).textTheme.bodyText2,
-                  labelText: 'Referral Code'
-                ),
-                obscureText: true,
-                validator: (val) =>
-                    val.length < 6  ? 'Enter a referral code 6+ chars long' : null,
-                onChanged: (val) {
-                  setState(() => referralCode = val);
-                },
-              ),
+              // TextFormField(
+              //   style: Theme.of(context).textTheme.bodyText2,
+              //   decoration: InputDecoration(
+              //      icon: Icon(Icons.perm_contact_calendar, color: TassistPrimaryBackground),
+              //     hintText: 'Enter your referral code',
+              //     hintStyle: Theme.of(context).textTheme.bodyText2,
+              //     labelText: 'Referral Code'
+              //   ),
+              //   obscureText: true,
+              //   validator: (val) =>
+              //       val.length < 6  ? 'Enter a referral code 6+ chars long' : null,
+              //   onChanged: (val) {
+              //     setState(() => referralCode = val);
+              //   },
+              // ),
 
-              SizedBox(height: 20.0),
+              // SizedBox(height: 20.0),
              
         
               RaisedButton(
@@ -113,6 +115,13 @@ class _RegisterState extends State<Register> {
                           loading = false;
                           error = 'Please supply a valid email';
                         });
+                      }
+                      else {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => RootPage(),
+                          ),
+                        );
                       }
                     }
                   }),

@@ -72,7 +72,7 @@ class HomeScreenText extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         Text(
-          "Your own business assistant",
+          "Send invoices under 30 seconds.",
           style: TextStyle(fontSize: 20),
         ),
       ],

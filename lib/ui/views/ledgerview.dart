@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/ledgervoucher.dart';
 import 'package:tassist/core/services/ledgerstock.dart';
-import 'package:tassist/core/services/timeperiod_filter_service.dart';
+import 'package:tassist/core/services/ledgervoucherservice.dart';
+// import 'package:tassist/core/services/timeperiod_filter_service.dart';
 import 'package:tassist/theme/theme.dart';
 import 'package:tassist/ui/shared/drawer.dart';
-import 'package:tassist/ui/widgets/myboxdecoration.dart';
+// import 'package:tassist/ui/widgets/myboxdecoration.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tassist/core/models/ledgerstock.dart';
 import 'package:tassist/ui/views/ledgersummary.dart';
@@ -39,7 +41,7 @@ class _LedgerViewState extends State<LedgerView>
   void initState() {
     super.initState();
 
-    _tabController = TabController(vsync: this, initialIndex: 0, length: 3);
+    _tabController = TabController(vsync: this, initialIndex: 0, length: 2);
     _tabController.addListener(() {
       if (_tabController.index == 0) {
         showFab = true;
@@ -58,9 +60,20 @@ class _LedgerViewState extends State<LedgerView>
 
     return MultiProvider(
       providers: [
+        // Gets ledger stock metrics (calculated)
         StreamProvider<List<LedgerStock>>.value(
-            value: LedgerStockService(uid: user?.uid, ledgerId: ledgerGuid)
-                .ledgerStockData),
+          value: LedgerStockService(
+            uid: user?.uid,
+            ledgerId: ledgerGuid,
+          ).ledgerStockData,
+        ),
+        // Gets all vouchers for current ledger
+        StreamProvider<List<LedgerVoucherModel>>.value(
+          value: LedgerVoucherService(
+            partyName: partyname,
+            uid: user?.uid,
+          ).ledgerVoucherData,
+        )
       ],
       child: WillPopScope(
         onWillPop: () async => false,
@@ -72,59 +85,62 @@ class _LedgerViewState extends State<LedgerView>
               height: MediaQuery.of(context).size.height / 1.1,
               child: Column(
                 children: <Widget>[
-                  Container(
-                    decoration: myBoxDecorationBottomBorder(),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            "Select timeperiod",
-                            style: secondaryListTitle2,
-                          ),
-                          PopupMenuButton<String>(
-                            icon: Icon(Icons.av_timer),
-                            onSelected: (value) {
-                              setState(() {
-                                timePeriod = value;
-                              });
-                            },
-                            itemBuilder: (BuildContext context) {
-                              return timePeriodList.map(
-                                (String choice) {
-                                  return PopupMenuItem<String>(
-                                    value: choice,
-                                    child: Text(
-                                      choice,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 14.0),
-                                    ),
-                                  );
-                                },
-                              ).toList();
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                    // color: Colors.blueGrey[100],
-                    width: MediaQuery.of(context).size.width,
-                    height: 35,
-                  ),
+                  // Container(
+                  //   decoration: myBoxDecorationBottomBorder(),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+                  //     child: Row(
+                  //       crossAxisAlignment: CrossAxisAlignment.end,
+                  //       mainAxisAlignment: MainAxisAlignment.center,
+                  //       children: <Widget>[
+                  //         Text(
+                  //           "Select timeperiod",
+                  //           style: secondaryListTitle2,
+                  //         ),
+                  //         PopupMenuButton<String>(
+                  //           icon: Icon(Icons.av_timer),
+                  //           onSelected: (value) {
+                  //             setState(() {
+                  //               timePeriod = value;
+                  //             });
+                  //           },
+                  //           itemBuilder: (BuildContext context) {
+                  //             return timePeriodList.map(
+                  //               (String choice) {
+                  //                 return PopupMenuItem<String>(
+                  //                   value: choice,
+                  //                   child: Text(
+                  //                     choice,
+                  //                     style: TextStyle(
+                  //                         fontWeight: FontWeight.normal,
+                  //                         fontSize: 14.0),
+                  //                   ),
+                  //                 );
+                  //               },
+                  //             ).toList();
+                  //           },
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  //   // color: Colors.blueGrey[100],
+                  //   width: MediaQuery.of(context).size.width,
+                  //   height: 35,
+                  // ),
                   Expanded(
                     child: TabBarView(
                       controller: _tabController,
                       children: <Widget>[
-                        LedgerSummary(ledgerGuid: ledgerGuid),
+                        LedgerSummary(
+                          ledgerGuid: ledgerGuid,
+                          partyName: partyname,
+                        ),
                         LedgerVoucher(
                           ledgerGuid: ledgerGuid,
                           partyname: partyname,
                           timePeriod: timePeriod,
                         ),
-                        LedgerStockView(ledgerGuid: ledgerGuid)
+                        // LedgerStockView(ledgerGuid: ledgerGuid)
                       ],
                     ),
                   )
@@ -161,9 +177,9 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey,
             text: 'Summary',
           ),
           Tab(text: 'Vouchers'),
-          Tab(
-            text: 'Stock',
-          ),
+          // Tab(
+          //   text: 'Stock',
+          // ),
         ],
       ),
       title: Row(

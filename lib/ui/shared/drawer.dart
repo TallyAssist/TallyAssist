@@ -7,16 +7,18 @@ import 'package:tassist/theme/colors.dart';
 import 'package:tassist/theme/dimensions.dart';
 import 'package:tassist/ui/views/accountspayablescreen.dart';
 import 'package:tassist/ui/views/accountsreceivables.dart';
-import 'package:tassist/ui/views/crm.dart';
-import 'package:tassist/ui/views/dashboard.dart';
-import 'package:tassist/ui/views/gstreportscreen.dart';
+// import 'package:tassist/ui/views/crm.dart';
+import 'package:tassist/ui/views/home.dart';
+import 'package:tassist/ui/views/ledgerinput.dart';
 import 'package:tassist/ui/views/khatascreen.dart';
 import 'package:tassist/ui/views/ledgerscreen.dart';
-import 'package:tassist/ui/views/productionInput.dart';
-import 'package:tassist/ui/views/pruchaseorderreport.dart';
-import 'package:tassist/ui/views/salesorderreport.dart';
+import 'package:tassist/ui/views/settingsscreen.dart';
+// import 'package:tassist/ui/views/productionInput.dart';
+// import 'package:tassist/ui/views/pruchaseorderreport.dart';
+// import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
 
@@ -25,9 +27,6 @@ final AuthService _auth = AuthService();
 Drawer tassistDrawer(BuildContext context) {
   final user = Provider.of<FirebaseUser>(context);
 
-  // final snapshot = Provider.of<DocumentSnapshot>(context);
-  // var companyInfo = snapshot.data;
-
   return Drawer(
       child: ListView(
     children: <Widget>[
@@ -35,39 +34,41 @@ Drawer tassistDrawer(BuildContext context) {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+          
+             
             CircleAvatar(
-              child: Icon(
-                Icons.person_outline,
-                color: TassistInfoGrey,
-                size: 50.0,
+                child: Icon(
+                  Icons.person_outline,
+                  color: TassistInfoGrey,
+                  size: 40.0,
+                ),
+                radius: 25.0,
+                backgroundColor: TassistWhite,
               ),
-              radius: 30.0,
-              backgroundColor: TassistWhite,
-            ),
-            SizedBox(
-              height: 10.0,
-            ),
+            SizedBox(width: 70,),
+            
+            
+           
             FittedBox(
               child: Text(
-                user?.email,
+                user?.email ?? 'No email',
                 style: Theme.of(context).textTheme.headline6.copyWith(
                       color: TassistWhite,
-                      fontSize: 18.0,
+                      fontSize: 14.0,
                     ),
               ),
             ),
-            Container(
-              child: Text(
-                // 'Company: ${companyInfo['formal_name']}',
-                'You are awesome!',
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: TassistWhite),
-              ),
-            )
+
+                 RaisedButton( 
+                   color: TassistWhite,
+                   child:
+                   Row(children: <Widget>[
+                  Icon(FontAwesomeIcons.laptop),
+                  SizedBox(width: 20),
+                  Text('Get Tally Connector')
+
+                   ]),
+                onPressed: () => _launchURL(),)
           ],
         ),
         decoration: BoxDecoration(
@@ -76,36 +77,19 @@ Drawer tassistDrawer(BuildContext context) {
         ),
       ),
       Padding(
-        padding: spacer.all.xs,
+        padding: spacer.all.xxs,
         child: Text('Reports', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
         icon: Icons.dashboard,
-        title: 'Dashboard',
-        ontap: DashboardScreen(),
+        title: 'Home',
+        ontap: HomeDashboardScreen(),
         color: TassistPrimaryBackground,
       ),
-      DrawerItem(
-        icon: Icons.card_membership,
-        title: 'Sales',
-        ontap: SalesOrderReportScreen(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.fileInvoice,
-        title: 'Vouchers',
-        ontap: VouchersHome(),
-        color: TassistPrimaryBackground,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.warehouse,
-        title: 'Stock',
-        ontap: StockScreen(),
-        color: TassistPrimaryBackground,
-      ),
+      
       DrawerItem(
         icon: FontAwesomeIcons.listAlt,
-        title: 'Ledgers',
+        title: 'Ledgers / Parties',
         ontap: LedgerScreen(),
         color: TassistPrimaryBackground,
       ),
@@ -122,38 +106,39 @@ Drawer tassistDrawer(BuildContext context) {
         color: TassistPrimaryBackground,
       ),
       DrawerItem(
-        icon: Icons.inbox,
-        title: 'Purchases',
-        ontap: PurchaseOrderReportScreen(),
-        color: TassistInfoGrey,
+        icon: FontAwesomeIcons.warehouse,
+        title: 'Stock',
+        ontap: StockScreen(),
+        color: TassistPrimaryBackground,
       ),
       DrawerItem(
-        icon: Icons.computer,
-        title: 'GST Report',
-        ontap: GstReportScreen(),
-        color: TassistInfoGrey,
+        icon: FontAwesomeIcons.fileInvoice,
+        title: 'Vouchers',
+        ontap: VouchersHome(),
+        color: TassistPrimaryBackground,
       ),
+       DrawerItem(
+        icon: Icons.receipt,
+        title: 'Make New Invoice',
+        ontap: LedgerInputScreen(),
+        color: TassistPrimary,
+      ),
+      
       Padding(
-        padding: spacer.all.xs,
+        padding: spacer.all.xxs,
         child: Text('Specials', style: Theme.of(context).textTheme.bodyText1),
       ),
       DrawerItem(
         icon: Icons.lock,
-        title: 'Apka Secret Khata',
+        title: 'Bahi Khata',
         ontap: KhataScreen(),
         color: TassistMainText,
       ),
       DrawerItem(
-        icon: Icons.build,
-        title: 'Production',
-        ontap: ProductionScreen(),
-        color: TassistInfoGrey,
-      ),
-      DrawerItem(
-        icon: FontAwesomeIcons.users,
-        title: 'CRM',
-        ontap: CRMScreen(),
-        color: TassistInfoGrey,
+        icon: Icons.settings,
+        title: 'Settings',
+        ontap: SettingsScreen(),
+        color: TassistMainText,
       ),
       SizedBox(
         height: 20.0,
@@ -174,7 +159,7 @@ Drawer tassistDrawer(BuildContext context) {
               Text(
                 'Sign Out',
                 textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headline6,
+                style: Theme.of(context).textTheme.headline6.copyWith(fontSize: 16 ),
               ),
             ],
           ),
@@ -227,7 +212,7 @@ class _DrawerItemState extends State<DrawerItem> {
               style: Theme.of(context)
                   .textTheme
                   .headline6
-                  .copyWith(color: widget.color),
+                  .copyWith(color: widget.color, fontSize: 16),
             ),
           ],
         ),
@@ -238,5 +223,15 @@ class _DrawerItemState extends State<DrawerItem> {
         ));
       },
     );
+  }
+}
+
+
+_launchURL() async {
+  const url = 'https://share.hsforms.com/1zpdLYOX4TDydLlHGzP50Zg3txai';
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
   }
 }

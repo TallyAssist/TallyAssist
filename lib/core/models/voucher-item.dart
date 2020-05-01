@@ -11,6 +11,7 @@ class VoucherItem {
   final String actualQty;
   final double amount;
   final String taxAmount;
+  final String taxType;
 
   VoucherItem(
       {this.stockItemName,
@@ -24,5 +25,6 @@ class VoucherItem {
       this.rate,
       this.vDate,
       this.vMasterId,
-      this.taxAmount});
+      this.taxAmount,
+      this.taxType});
 }

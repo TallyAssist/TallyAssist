@@ -1,8 +1,18 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:esys_flutter_share/esys_flutter_share.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_full_pdf_viewer/full_pdf_viewer_scaffold.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/company.dart';
+import 'package:tassist/core/models/ledger.dart';
 import 'package:tassist/core/models/voucher-item.dart';
 import 'package:tassist/core/models/vouchers.dart';
+import 'package:tassist/core/services/storageservice.dart';
+import 'package:tassist/templates/invoice_pdf_template.dart';
 import 'package:tassist/ui/shared/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/theme/theme.dart';
@@ -28,20 +38,31 @@ class VoucherView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<FirebaseUser>(context);
+    final company = Provider.of<Company>(context);
 
-    Iterable<Voucher> voucherList = Provider.of<List<Voucher>>(context)
-            .where((item) => item.masterid == voucherId) ??
-        [];
+    // TODO: Replace usage of Voucher with LedgerVoucher
+    Iterable<Voucher> voucherList =
+        Provider.of<List<Voucher>>(context, listen: false)
+                .where((item) => item.masterid == voucherId) ??
+            [];
     Voucher voucher = voucherList.elementAt(0) ?? [];
+
+    // Get ledger data for voucher's counterparty
+    Iterable<LedgerItem> ledgerItem = Provider.of<List<LedgerItem>>(context)
+            .where((item) => item.guid == voucher.partyGuid) ??
+        [];
+    LedgerItem ledger = ledgerItem?.elementAt(0) ?? [];
 
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
 
     return MultiProvider(
       providers: [
+        // inventory entries
         StreamProvider<List<VoucherItem>>.value(
           value: VoucherItemService(uid: user?.uid, voucherId: voucherId)
               .voucherItemData,
         ),
+        // ledger entries
         StreamProvider<List<LedgerParty>>.value(
           value: LedgerPartyService(uid: user?.uid, voucherId: voucherId)
               .voucherLedgerData,
@@ -52,7 +73,9 @@ class VoucherView extends StatelessWidget {
           child: Scaffold(
               key: _drawerKey,
               drawer: tassistDrawer(context),
-              appBar: headerNavOtherVoucher(_drawerKey, context, voucher),
+              // Invoice PDF gets shared from here
+              appBar: headerNavOtherVoucher(
+                  _drawerKey, context, voucher, company, ledger),
               body: SingleChildScrollView(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -64,7 +87,26 @@ class VoucherView extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
-                    Text(voucher.number),
+                    Padding(
+                      padding: spacer.all.xxs,
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Row(children: <Widget>[
+                              Text('Voucher #'),
+                            Text(voucher.number),
+                            ],),
+                            
+                            Visibility(
+                              visible: voucher.primaryVoucherType == "Sales",
+                              child: InvoiceButton(
+                                voucher: voucher,
+                                company: company,
+                                ledger: ledger,
+                              ),
+                            ),
+                          ]),
+                    ),
                     Container(height: 3.0, color: TassistGray),
                     Padding(
                       padding: spacer.all.xxs,
@@ -142,6 +184,49 @@ class VoucherView extends StatelessWidget {
                 ),
               ))),
     );
+  }
+}
+
+class InvoiceButton extends StatelessWidget {
+  InvoiceButton({this.voucher, this.company, this.ledger});
+
+  final Voucher voucher;
+  final Company company;
+  final LedgerItem ledger;
+
+  @override
+  Widget build(BuildContext context) {
+    String uid = Provider.of<FirebaseUser>(context).uid;
+
+    return // PDF Sharing button
+        RaisedButton(
+          color: TassistMenuBg,
+            child: Row(children: <Widget>[
+              Text('Send PDF  ', style: TextStyle(color: TassistWhite)),
+              Icon(Icons.picture_as_pdf, color: TassistWhite),
+
+            ],),
+            
+            
+            onPressed: () async {
+              String logoPath;
+              if (company.hasLogo == '1') {
+                await StorageService().downloadFile(uid + '_logo');
+                logoPath =
+                    Directory.systemTemp.path.toString() + '/' + uid + '_logo';
+              } else {
+                logoPath = null;
+              }
+
+              viewPdf(
+                context,
+                voucher,
+                company,
+                ledger,
+                logoPath,
+                // inventoryEntries,
+              );
+            });
   }
 }
 
@@ -257,11 +342,125 @@ _isInvoice(Voucher voucher) {
   }
 }
 
+_createInvoiceItemList(voucher, inventoryEntries) {
+  List<List<String>> itemList = [
+    [
+      'SI No.',
+      'Description of Goods',
+      'HSN/SAC',
+      'Quantity',
+      'Rate',
+      // 'per',
+      'Disc',
+      'Amount'
+    ]
+  ];
+
+  // We add relevant data to itemList
+  for (var i = 0; i < inventoryEntries.length; i++) {
+    String serialNo = (i + 1).toString();
+    String itemDescription = inventoryEntries[i]?.stockItemName ?? "";
+    String hsnSac = "";
+    String quantity = inventoryEntries[i]?.actualQty.toString() ?? "";
+    String rate = inventoryEntries[i]?.rate.toString() ?? "";
+    String unit = "";
+    String discount = inventoryEntries[i]?.discount.toString() ?? "";
+    String amount = inventoryEntries[i]?.amount.toString() ?? "";
+    String taxAmount = inventoryEntries[i]?.taxAmount?.toString() ?? "";
+
+    itemList.add([
+      serialNo,
+      itemDescription,
+      hsnSac,
+      quantity,
+      rate,
+      // unit,
+      discount,
+      amount
+    ]);
+    itemList.add(["", "Tax", "", "", "", "", taxAmount]);
+  }
+
+  itemList
+      .add(["", "Total", "", "", "", "", voucher.amount.toString()]);
+
+  return itemList;
+}
+
+viewPdf(context, voucher, company, ledger, logoPath) async {
+  List<VoucherItem> inventoryEntries =
+      Provider.of<List<VoucherItem>>(context, listen: false);
+
+  final itemList = _createInvoiceItemList(voucher, inventoryEntries);
+
+  final pdf = createInvoicePdf(
+    invoiceNumber: voucher.number,
+    invoiceDate: voucher.date.toString().substring(0, 10),
+    companyName: company.formalName,
+    companyAddress: company.address,
+    companyPincode: company.pincode,
+    partyName: ledger.name,
+    partyAddress: ledger.address,
+    partyPincode: ledger.pincode,
+    partyState: ledger.state,
+    partyGST: ledger.gst,
+    itemList: itemList,
+    logoPath: logoPath,
+  );
+
+  final String dir = (await getExternalStorageDirectory()).path;
+  final path = "$dir/invoice_tallyassist.pdf";
+  print(path);
+  final file = File(path);
+  await file.writeAsBytes(pdf.save());
+
+  try {
+    final Uint8List bytes1 = await file.readAsBytes();
+    //  rootBundle.load('assets/image1.png');
+
+    await Share.files(
+        'esys images',
+        {
+          'invoice_tallyassist.pdf': bytes1,
+        },
+        '*/*',
+        text: 'My optional text.');
+  } catch (e) {
+    print('error: $e');
+  }
+
+  // return PdfViewerPage(path: path);
+
+  // Navigator.of(context).push(
+  //   MaterialPageRoute(
+  //     builder: (_) => PdfViewerPage(path: path),
+  //   ),
+  // );
+}
+
+class PdfViewerPage extends StatelessWidget {
+  final String path;
+  const PdfViewerPage({Key key, this.path}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return PDFViewerScaffold(
+      path: path,
+    );
+  }
+}
+
 AppBar headerNavOtherVoucher(GlobalKey<ScaffoldState> _drawerkey,
-    BuildContext context, Voucher voucher) {
+    BuildContext context, Voucher voucher, Company company, LedgerItem ledger) {
   bool enabled = true;
 
   return AppBar(
+      // actions: <Widget>[
+      //   IconButton(
+      //     icon: Icon(Icons.picture_as_pdf),
+      //     onPressed: () => viewPdf(context, voucher, company, ledger),
+      //   )
+      // ],
       leading: Padding(
         padding: EdgeInsets.only(left: 12),
         child: IconButton(

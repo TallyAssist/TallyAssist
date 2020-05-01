@@ -103,7 +103,7 @@ const secondaryListTitle = const TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
-  letterSpacing: 1
+  letterSpacing: 0.5
 
 );
 
@@ -134,4 +134,13 @@ const secondaryDrawerText = const TextStyle(
   fontStyle: FontStyle.normal,
   letterSpacing: 3,
     
+);
+
+const secondaryHint = const TextStyle(
+  color: TassistGray,
+  fontFamily: 'Poppins',
+  fontSize: 14,
+  fontWeight: FontWeight.w300,
+  fontStyle: FontStyle.normal,
+  letterSpacing: 1
 );

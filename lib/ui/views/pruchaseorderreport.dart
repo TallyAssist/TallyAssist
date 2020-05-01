@@ -111,16 +111,20 @@ class PurchaseOrderReportScreen extends StatelessWidget {
 }
 
 
-class InactiveSupplierList extends StatelessWidget {
+class InactiveSupplierList extends StatefulWidget {
 
   final LedgerItem ledgerItem;
 
   InactiveSupplierList({this.ledgerItem});
 
+  @override
+  _InactiveSupplierListState createState() => _InactiveSupplierListState();
+}
 
+class _InactiveSupplierListState extends State<InactiveSupplierList> {
   Iterable<LedgerItem> inactiveSuppliers;
-   List<LedgerItem> inactiveSupplierData = List<LedgerItem> ();
 
+   List<LedgerItem> inactiveSupplierData = List<LedgerItem> ();
 
   @override
   Widget build(BuildContext context) {

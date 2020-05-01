@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tassist/theme/colors.dart';
+// import 'package:screenshot_and_share/screenshot_share.dart';
+
 
 class SectionHeader extends StatelessWidget {
 
@@ -43,23 +45,26 @@ class SectionHeader extends StatelessWidget {
                       //   Icons.bookmark,
                       //   color: TassistPrimaryBackground,
                       // ),
-                      IconButton(
-                        icon: Icon(Icons.share),
-                        color: TassistPrimaryBackground,
-                        onPressed: () => showDialog(
-                          context: context,
-                          builder: (context) {
-                           return AlertDialog(
-                                title: Text('Coming soon!'),
-                                actions: <Widget>[
-                                  FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text('Ill wait :)'))
-                                ]
-                            );
-                          },
+                      // IconButton(
+                      //   icon: Icon(Icons.share),
+                      //   color: TassistPrimaryBackground,
+                      //   onPressed: () => ScreenshotShare.takeScreenshotAndShare(),
                         
-                        ),
+                      //   // () => showDialog(
+                      //   //   context: context,
+                      //   //   builder: (context) {
+                      //   //    return AlertDialog(
+                      //   //         title: Text('Coming soon!'),
+                      //   //         actions: 
+                      //   //         <Widget>[
+                      //   //           FlatButton(onPressed: () => Navigator.of(context).pop(), child: Text('Ill wait :)'))
+                      //   //         ]
+                      //   //     );
+                      //   //   },
+                        
+                      //   // ),
 
-                      ),
+                      // ),
                     ],
                   ),
                 ),

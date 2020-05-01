@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/models/payables.dart';
 import 'package:tassist/core/services/string_format.dart';
 import 'package:tassist/theme/colors.dart';
+import 'package:tassist/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class APSingleItem extends StatelessWidget {
@@ -21,16 +22,16 @@ class APSingleItem extends StatelessWidget {
       }
     }
 
-    return FittedBox(
-      child: Card(
-        borderOnForeground: true,
-        child: Row(
+    return Card(
+      borderOnForeground: true,
+      child: FittedBox(
+              child: Row(
           children: <Widget>[
             SizedBox(
               width: 5,
             ),
             Container(
-              width: MediaQuery.of(context).size.width / 2.5,
+              width: MediaQuery.of(context).size.width / 1.8,
               child: Text(
                 ledgerItem.name,
                 maxLines: 2,
@@ -44,7 +45,14 @@ class APSingleItem extends StatelessWidget {
             SizedBox(
               width: 5,
             ),
-            Text('${formatIndianCurrency(ledgerItem.closingBalance)}'),
+            Container(
+              width: 80,
+              child: Text('${formatIndianCurrency(ledgerItem.closingBalance)}', style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontSize: 14, color: TassistBlack),
+                ),
+            ),
             SizedBox(
               width: 10,
             ),
@@ -56,6 +64,7 @@ class APSingleItem extends StatelessWidget {
               onPressed: () {
                 _launchURL();
               },
+              iconSize: 20,
               icon: Icon(
                 FontAwesomeIcons.whatsapp,
                 color: TassistSuccess,

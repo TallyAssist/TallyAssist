@@ -1,4 +1,4 @@
-package com.example.tassist
+package com.restat.bizassist
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
