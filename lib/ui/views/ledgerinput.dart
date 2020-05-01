@@ -35,8 +35,8 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
   final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  String _invoiceNumber = Random().nextInt(10000).toString();
-  String _masterId = Random().nextInt(100000).toString();
+  String _invoiceNumber = Random().nextInt(1000).toString();
+  String _masterId = Random().nextInt(1000  ).toString();
   // Customer details
   LedgerItem _customerLedger;
   String _customerName = '';
@@ -441,7 +441,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 '$_productQuantity Qty @ $_productPrice/item',
                                 'CGST & SGST @ $_gstPercentage% : $gstAmount',
                                 'Amount: $amount',
-                                // 'Discount: ',
+                                'Discount: ',
                               ];
                             }
                             setState(() {
