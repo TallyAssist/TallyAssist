@@ -330,6 +330,9 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           // value: 'igst',
                           decoration: InputDecoration(
                               isDense: true,
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
                               labelText: 'GST Type',
                               // AT: This should be a dropdown
                               labelStyle: secondaryListDisc),
@@ -517,45 +520,48 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                 //   onChanged: (val) => setState(() => _currentDate = val),
                 // ),
 
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      children: <Widget>[
-                        Row(
+                Padding(
+                  padding: spacer.x.xxs,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          Row(
+                            children: <Widget>[
+                              // Checkbox(
+                              //   value: checkboxValue,
+                              //   onChanged: (bool value) {
+                              //     setState(() {
+                              //       print(value);
+                              //       checkboxValue = value;
+                              //     });
+                              //   },
+                              //   activeColor: TassistPrimary,
+                              // ),
+                              // Text(
+                              //   'Include payment link',
+                              //   style: secondaryListDisc,
+                              // )
+                            ],
+                          ),
+                        ],
+                      ),
+                      Padding(
+                        padding: spacer.all.xxs,
+                        child: Column(
                           children: <Widget>[
-                            Checkbox(
-                              value: checkboxValue,
-                              onChanged: (bool value) {
-                                setState(() {
-                                  print(value);
-                                  checkboxValue = value;
-                                });
-                              },
-                              activeColor: TassistPrimary,
-                            ),
+                            Text('Total: $_totalAmount',
+                                style: secondaryListTitle.copyWith(fontSize: 18)),
                             Text(
-                              'Include payment link',
-                              style: secondaryListDisc,
+                              'Tax: $_totalTax',
+                              style: secondaryListTitle2,
                             )
                           ],
                         ),
-                      ],
-                    ),
-                    Padding(
-                      padding: spacer.all.xxs,
-                      child: Column(
-                        children: <Widget>[
-                          Text('Total: $_totalAmount',
-                              style: secondaryListTitle.copyWith(fontSize: 18)),
-                          Text(
-                            'Tax: $_totalTax',
-                            style: secondaryListTitle2,
-                          )
-                        ],
-                      ),
-                    )
-                  ],
+                      )
+                    ],
+                  ),
                 ),
               ]),
             ),

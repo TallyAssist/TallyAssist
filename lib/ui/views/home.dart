@@ -6,7 +6,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:tassist/core/models/company.dart';
 // import 'package:tassist/core/models/vouchers.dart';
 import 'package:tassist/core/services/database.dart';
 // import 'package:tassist/core/services/timeperiod_filter_service.dart';
@@ -24,6 +26,17 @@ import 'package:tassist/ui/views/settingsscreen.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
 import 'package:tassist/core/services/string_format.dart';
+
+var formatter = new DateFormat('dd-MM-yyyy');
+
+_formatDate(DateTime date) {
+  if (date != null) {
+    return formatter.format(date);
+  } else {
+    return 'NA';
+  }
+}
+
 
 class HomeDashboardScreen extends StatefulWidget {
   HomeDashboardScreen({Key key, this.userId}) : super(key: key);
@@ -87,8 +100,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
     final user = Provider.of<FirebaseUser>(context);
     final GlobalKey<ScaffoldState> _drawerKey = new GlobalKey<ScaffoldState>();
     
- 
-    print(timePeriod);
+    
 
     return MultiProvider(
         providers: [
@@ -98,6 +110,8 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   .document(user?.uid)
                   .snapshots()),
         ],
+
+
         child: WillPopScope(
           onWillPop: () async => false,
           child: Scaffold(
@@ -118,7 +132,10 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
             body: SafeArea(
               child: ListView(
                 children: <Widget>[
-                  tallyconnection(tallyconnected),
+                  // tallyconnection(tallyconnected),
+                  StatusBar(),
+               
+
                   // Container 0 - Timeperiod picker
                   // Container(
                   //   decoration: myBoxDecorationBottomBorder(),
@@ -166,20 +183,27 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   // Container 1 - Sales
                    Padding(
                       padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                      child: Text('Metrics based on Tally', style: secondaryListTitle,),
+                      child: Text('Tally Dashboard', style: secondaryListTitle,),
                     ),
                   Container(
                     child: DashboardCard(
                       timePeriod: timePeriod,
                     ),
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
                     // decoration: myBoxDecorationTopBorder()
                   ),
                    Container(
                     child: DashboardCard2(
                       timePeriod: timePeriod,
                     ),
-                    margin: const EdgeInsets.all(15.0),
+                    margin: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
+                    // decoration: myBoxDecorationTopBorder()
+                  ),
+                   Container(
+                    child: DashboardCard3(
+                      timePeriod: timePeriod,
+                    ),
+                    margin: const EdgeInsets.fromLTRB(15.0, 5.0, 15.0, 5.0),
                     // decoration: myBoxDecorationTopBorder()
                   ),
                     Padding(
@@ -199,29 +223,75 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                         ),
                       ),
                     ),
-                     Padding(
-                      padding: spacer.all.xs,
-                      child: Text('Create / नया बनाएँ', style: secondaryListTitle,),
-                    ),
-                    Padding(
-                      padding: spacer.x.xs,
-                      child: Row(
-                          children: <Widget>[
-                          ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice', 'बिल'),
-                          // ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate','कच्चा'),
-                          // ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party','पार्टी'),
-                          // ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product','उत्पाद'),
-                          ],
-                        ),
-                    )
+                    //  Padding(
+                    //   padding: spacer.all.xs,
+                    //   child: Text('Create / नया बनाएँ', style: secondaryListTitle,),
+                    // ),
+                    // Padding(
+                    //   padding: spacer.x.xs,
+                    //   child: Row(
+                    //       children: <Widget>[
+                    //       ActionButton(Icon(FontAwesomeIcons.fileInvoice), LedgerInputScreen(), 'Invoice', 'बिल'),
+                    //       // ActionButton(Icon(FontAwesomeIcons.fileAlt), LedgerInputScreen(), 'Estimate','कच्चा'),
+                    //       // ActionButton(Icon(Icons.person_outline), CustomerInputScreen(), 'Party','पार्टी'),
+                    //       // ActionButton(Icon(Icons.add_shopping_cart), ProductInputScreen(), 'Product','उत्पाद'),
+                    //       ],
+                    //     ),
+                    // )
                     
                                 ],
               ),
             ),
+            floatingActionButton: FloatingActionButton.extended(
+              icon: Icon(FontAwesomeIcons.fileInvoice),
+              label: Text('Invoice बनाएँ'),
+              backgroundColor: TassistMenuBg,
+              onPressed: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => LedgerInputScreen(),
+                    )
+            );
+              }
           ),
-        ));
+        )
+        )
+    );
   }
 }
+
+class StatusBar extends StatefulWidget {
+  @override
+  _StatusBarState createState() => _StatusBarState();
+}
+
+class _StatusBarState extends State<StatusBar> {
+  @override
+  Widget build(BuildContext context) {
+
+    final companyData = Provider.of<Company>(context);
+    return  Container(
+                      padding: const EdgeInsets.fromLTRB(16.0, 5.0, 16.0, 5.0),
+                      child: 
+                      Row(children: <Widget>[
+                        Text('Synced: ', style: TextStyle(fontSize: 12, color: TassistInfoGrey),),
+                        Text(_formatDate(companyData.lastSyncedAt), style: TextStyle(fontSize: 12, color: TassistMenuBg),),
+                        Expanded(child: SizedBox(width: 20)),
+                        Text('Last Entry: ', style: TextStyle(fontSize: 12, color: TassistInfoGrey),),
+                        Text(companyData.lastEntryDate, style: TextStyle(fontSize: 12, color: TassistMenuBg),)
+
+                      ],),
+                      
+                      
+                  
+                    color: TassistBgLightPurple,
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                  );
+  }
+}
+
+
+
 class DashboardCard extends StatefulWidget {
   final String timePeriod;
   DashboardCard({this.timePeriod});
@@ -310,15 +380,15 @@ class _DashboardCardState
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                       Text(
-                        formatIndianCurrency(
-                                userDocument['total_receipts'].toString()) ??
+                        // formatIndianCurrency(
+                                userDocument['net_profit'].toString() ??
                             '',
                         style: Theme.of(context).textTheme.bodyText2.copyWith(
                             color: TassistMainText,
                             fontSize: 18,
                             fontWeight: FontWeight.normal),
                       ),
-                  Text('Receipts प्राप्तियाँ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                  Text('Net Profit लाभ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
                 ],
               ),
                             )
@@ -461,6 +531,130 @@ class _DashboardCard2State
     }
   }
 }
+
+
+
+class DashboardCard3 extends StatefulWidget {
+  final String timePeriod;
+  DashboardCard3({this.timePeriod});
+
+  @override
+  _DashboardCard3State createState() =>
+      _DashboardCard3State();
+}
+
+class _DashboardCard3State
+    extends State<DashboardCard3> {
+  @override
+  Widget build(BuildContext context) {
+    final snapshot = Provider.of<DocumentSnapshot>(context);
+    var userDocument;
+    if (widget.timePeriod == 'Everything') {
+      userDocument = snapshot?.data;
+    } else {
+      userDocument = snapshot?.data[widget.timePeriod];
+    }
+
+    if (userDocument != null) {
+      return FittedBox(
+              child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+           Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width: MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => AccountsReceivableScreen(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                  
+                          Text(
+                              // formatIndianCurrency(
+                                      userDocument['cash_in_hand'].toString() ??
+                                  '',
+                              style: Theme.of(context).textTheme.bodyText2.copyWith(
+                                  color: TassistMainText,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.normal),
+                          ),
+                  
+                    Text('Cash in Hand नकद', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    
+                  ],
+                ),
+                            ),
+              ),
+            ),
+              ),
+            SizedBox(
+              width: 20.0,
+            ),
+             Card(
+                  elevation: 5,
+                  child:           
+            Container(
+              width:  MediaQuery.of(context).size.width / 2.2,
+              height: 70,
+              child: InkWell(
+                onTap: () {Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                      builder: (context) => AccountsPayableScreen(),
+                    )
+          );
+                },
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child:
+               Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                
+                      Text(
+                        // formatIndianCurrency(
+                                userDocument['cash_in_bank'].toString() ??
+                            '',
+                        style: Theme.of(context).textTheme.bodyText2.copyWith(
+                            color: TassistMainText,
+                            fontSize: 18,
+                            fontWeight: FontWeight.normal),
+                      ),
+                 
+                  Text('Cash in bank बैंक', style: secondaryListDisc.copyWith(color: TassistPrimary),),
+                ],
+              ),
+                            )
+              ),
+            )
+             )
+            // SimpleTimeSeriesChart.withSampleData(),
+         
+         
+          ],
+        ),
+      );
+    } else {
+      return Container(
+        child: Center(
+          child: Text('Loading...'),
+        ),
+      );
+    }
+  }
+}
+
 
 
 

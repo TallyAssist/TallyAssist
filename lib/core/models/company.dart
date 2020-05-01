@@ -18,6 +18,8 @@ class Company {
   final String startingFrom;
   final String stateName;
   final String hasLogo;
+  final DateTime lastSyncedAt;
+  final String lastEntryDate;
 
   Company(
       {this.booksFrom,
@@ -38,5 +40,7 @@ class Company {
       this.pincode,
       this.startingFrom,
       this.stateName,
-      this.hasLogo});
+      this.hasLogo,
+      this.lastEntryDate,
+      this.lastSyncedAt});
 }
