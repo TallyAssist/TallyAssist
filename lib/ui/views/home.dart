@@ -50,45 +50,45 @@ class HomeDashboardScreen extends StatefulWidget {
 class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
   String timePeriod = 'Everything';
 
-   bool tallyconnected = false;
+//    bool tallyconnected = false;
 
-  tallyconnection(bool successConnection) {
+//   tallyconnection(bool successConnection) {
     
-  if (successConnection == true) {
-    return  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: Text(
-                        'Your Tally is Connected!',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                    color: const Color(0xff14D2B8),
-                    width: MediaQuery.of(context).size.width,
-                    height: 20,
-                  );
-  }
-  else {
-   return  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: Text(
-                        'Your Tally is not connected :(',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                    color: TassistWarning,
-                    width: MediaQuery.of(context).size.width,
-                    height: 20,
-                  );
-                  }
-}
+//   if (successConnection == true) {
+//     return  Container(
+//                     child: Padding(
+//                       padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+//                       child: Text(
+//                         'Your Tally is Connected!',
+//                         style: TextStyle(
+//                           fontWeight: FontWeight.normal,
+//                           fontSize: 14.0,
+//                         ),
+//                       ),
+//                     ),
+//                     color: const Color(0xff14D2B8),
+//                     width: MediaQuery.of(context).size.width,
+//                     height: 20,
+//                   );
+//   }
+//   else {
+//    return  Container(
+//                     child: Padding(
+//                       padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+//                       child: Text(
+//                         'Your Tally is not connected :(',
+//                         style: TextStyle(
+//                           fontWeight: FontWeight.normal,
+//                           fontSize: 14.0,
+//                         ),
+//                       ),
+//                     ),
+//                     color: TassistWarning,
+//                     width: MediaQuery.of(context).size.width,
+//                     height: 20,
+//                   );
+//                   }
+// }
 
 
 

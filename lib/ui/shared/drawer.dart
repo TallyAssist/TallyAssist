@@ -228,7 +228,7 @@ class _DrawerItemState extends State<DrawerItem> {
 
 
 _launchURL() async {
-  const url = 'https://share.hsforms.com/1zpdLYOX4TDydLlHGzP50Zg3txai';
+  const url = 'https://docs.google.com/document/d/1xG_l_6ltWNeR1Srtk7AbDXLafShTpbDHBt-PvyS3nC0/edit?usp=sharing';
   if (await canLaunch(url)) {
     await launch(url);
   } else {

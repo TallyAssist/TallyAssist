@@ -53,7 +53,7 @@ class CompanyService {
         stateName: companyData['statename'] ?? '',
         hasLogo: companyData['restat_has_logo'] ?? '',
         lastEntryDate: companyData['lastentrydate'] ?? '',
-        lastSyncedAt: companyData['last_synced_at'].toDate() ?? '',
+        lastSyncedAt: companyData['last_synced_at']?.toDate() ?? null,
       );
     } else {
       return Company(
