@@ -277,7 +277,7 @@ class _StatusBarState extends State<StatusBar> {
                         Text(_formatDate(companyData.lastSyncedAt), style: TextStyle(fontSize: 12, color: TassistMenuBg),),
                         Expanded(child: SizedBox(width: 20)),
                         Text('Last Entry: ', style: TextStyle(fontSize: 12, color: TassistInfoGrey),),
-                        Text(companyData.lastEntryDate, style: TextStyle(fontSize: 12, color: TassistMenuBg),)
+                        Text(_formatDate(companyData.lastEntryDate), style: TextStyle(fontSize: 12, color: TassistMenuBg),)
 
                       ],),
                       
