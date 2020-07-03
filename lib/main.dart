@@ -1,6 +1,3 @@
-import 'dart:async';
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -172,11 +169,11 @@ class _TopWidgetState extends State<TopWidget> {
             value: VoucherService(uid: user?.uid).voucherData),
         StreamProvider<Company>.value(
             value: CompanyService(uid: user?.uid).companyData),
-        StreamProvider<DocumentSnapshot>.value(
-            value: DatabaseService()
-                .companyCollection
-                .document(user?.uid)
-                .snapshots()),
+        // StreamProvider<DocumentSnapshot>.value(
+        //     value: DatabaseService()
+        //         .companyCollection
+        //         .document(user?.uid)
+        //         .snapshots()),
       ],
       child: MaterialApp(
         initialRoute: '/',

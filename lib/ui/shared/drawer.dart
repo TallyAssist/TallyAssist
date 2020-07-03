@@ -18,7 +18,7 @@ import 'package:tassist/ui/views/settingsscreen.dart';
 // import 'package:tassist/ui/views/salesorderreport.dart';
 import 'package:tassist/ui/views/stockscreen.dart';
 import 'package:tassist/ui/views/vouchers.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import '../../main.dart';
 
@@ -59,16 +59,16 @@ Drawer tassistDrawer(BuildContext context) {
               ),
             ),
 
-                 RaisedButton( 
-                   color: TassistWhite,
-                   child:
-                   Row(children: <Widget>[
-                  Icon(FontAwesomeIcons.laptop),
-                  SizedBox(width: 20),
-                  Text('Get Tally Connector')
+                //  RaisedButton( 
+                //    color: TassistWhite,
+                //    child:
+                //    Row(children: <Widget>[
+                //   Icon(FontAwesomeIcons.laptop),
+                //   SizedBox(width: 20),
+                //   Text('Get Tally Connector')
 
-                   ]),
-                onPressed: () => _launchURL(),)
+                //    ]),
+                // onPressed: () => _launchURL(),)
           ],
         ),
         decoration: BoxDecoration(
@@ -228,10 +228,10 @@ class _DrawerItemState extends State<DrawerItem> {
 
 
 _launchURL() async {
-  const url = 'https://docs.google.com/document/d/1xG_l_6ltWNeR1Srtk7AbDXLafShTpbDHBt-PvyS3nC0/edit?usp=sharing';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
+  const url = '';
+  // if (await canLaunch(url)) {
+  //   await launch(url);
+  // } else {
     throw 'Could not launch $url';
-  }
+  // }
 }

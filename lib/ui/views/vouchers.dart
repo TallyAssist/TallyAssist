@@ -208,7 +208,7 @@ AppBar headerNavOther(GlobalKey<ScaffoldState> _drawerkey)
 }
 
 _launchURL() async {
-  const url = 'https://api.whatsapp.com/send?phone=+917759091029';
+  const url = 'https://api.whatsapp.com/send';
   if (await canLaunch(url)) {
     await launch(url);
   } else {
