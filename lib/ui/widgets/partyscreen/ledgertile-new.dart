@@ -30,7 +30,7 @@ class LedgerItemTileNew extends StatelessWidget {
         childdetailCard: ChildDetailCard(
             ledgerItem.name,
             '# ${ledgerItem.masterId}',
-            ledgerItem.restatCompanyCode.toString(),
+            ledgerItem.state ?? '',
             'Sales: ${formatIndianCurrency(ledgerItem.totalSales.toString())}',
             'Receipt: ${formatIndianCurrency(ledgerItem.totalReceipt.toString())}'),
         title1: 'Receivables',

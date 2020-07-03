@@ -50,45 +50,45 @@ class HomeDashboardScreen extends StatefulWidget {
 class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
   String timePeriod = 'Everything';
 
-   bool tallyconnected = false;
+//    bool tallyconnected = false;
 
-  tallyconnection(bool successConnection) {
+//   tallyconnection(bool successConnection) {
     
-  if (successConnection == true) {
-    return  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: Text(
-                        'Your Tally is Connected!',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                    color: const Color(0xff14D2B8),
-                    width: MediaQuery.of(context).size.width,
-                    height: 20,
-                  );
-  }
-  else {
-   return  Container(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
-                      child: Text(
-                        'Your Tally is not connected :(',
-                        style: TextStyle(
-                          fontWeight: FontWeight.normal,
-                          fontSize: 14.0,
-                        ),
-                      ),
-                    ),
-                    color: TassistWarning,
-                    width: MediaQuery.of(context).size.width,
-                    height: 20,
-                  );
-                  }
-}
+//   if (successConnection == true) {
+//     return  Container(
+//                     child: Padding(
+//                       padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+//                       child: Text(
+//                         'Your Tally is Connected!',
+//                         style: TextStyle(
+//                           fontWeight: FontWeight.normal,
+//                           fontSize: 14.0,
+//                         ),
+//                       ),
+//                     ),
+//                     color: const Color(0xff14D2B8),
+//                     width: MediaQuery.of(context).size.width,
+//                     height: 20,
+//                   );
+//   }
+//   else {
+//    return  Container(
+//                     child: Padding(
+//                       padding: const EdgeInsets.fromLTRB(4.0, 1.0, 10.0, 1.0),
+//                       child: Text(
+//                         'Your Tally is not connected :(',
+//                         style: TextStyle(
+//                           fontWeight: FontWeight.normal,
+//                           fontSize: 14.0,
+//                         ),
+//                       ),
+//                     ),
+//                     color: TassistWarning,
+//                     width: MediaQuery.of(context).size.width,
+//                     height: 20,
+//                   );
+//                   }
+// }
 
 
 
@@ -277,7 +277,7 @@ class _StatusBarState extends State<StatusBar> {
                         Text(_formatDate(companyData.lastSyncedAt), style: TextStyle(fontSize: 12, color: TassistMenuBg),),
                         Expanded(child: SizedBox(width: 20)),
                         Text('Last Entry: ', style: TextStyle(fontSize: 12, color: TassistInfoGrey),),
-                        Text(companyData.lastEntryDate, style: TextStyle(fontSize: 12, color: TassistMenuBg),)
+                        Text(_formatDate(companyData.lastEntryDate), style: TextStyle(fontSize: 12, color: TassistMenuBg),)
 
                       ],),
                       
@@ -348,7 +348,7 @@ class _DashboardCardState
                                   fontWeight: FontWeight.normal),
                           ),
                   
-                    Text('Sales सेल्स ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    Text('Sales सेल्स ', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                     
                   ],
                 ),
@@ -388,7 +388,7 @@ class _DashboardCardState
                             fontSize: 18,
                             fontWeight: FontWeight.normal),
                       ),
-                  Text('Net Profit लाभ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                  Text('Net Profit लाभ', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                 ],
               ),
                             )
@@ -467,7 +467,7 @@ class _DashboardCard2State
                                   fontWeight: FontWeight.normal),
                           ),
                   
-                    Text('Receivables लेन ', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    Text('Receivables लेन ', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                     
                   ],
                 ),
@@ -590,7 +590,7 @@ class _DashboardCard3State
                                   fontWeight: FontWeight.normal),
                           ),
                   
-                    Text('Cash in Hand नकद', style: secondaryListDisc.copyWith(color: TassistPrimary, fontSize: 14),),
+                    Text('Cash in Hand नकद', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                     
                   ],
                 ),
@@ -632,7 +632,7 @@ class _DashboardCard3State
                             fontWeight: FontWeight.normal),
                       ),
                  
-                  Text('Cash in bank बैंक', style: secondaryListDisc.copyWith(color: TassistPrimary),),
+                  Text('Cash in Bank बैंक', style: secondaryListDisc.copyWith(color: TassistPrimary),),
                 ],
               ),
                             )
@@ -690,8 +690,8 @@ ActionButton(this.icon, this.widget, this.title, this.hindiTitle);
                     )
           );
                 }),
-              Text(title, style: secondaryListDisc.copyWith(fontSize: 12, color: TassistPrimary),),
-              Text(hindiTitle, style: secondaryListDisc.copyWith(fontSize: 12, color: TassistPrimary),)
+              Text(title, style: secondaryListDisc.copyWith(fontSize: 14, color: TassistPrimary),),
+              Text(hindiTitle, style: secondaryListDisc.copyWith(fontSize: 14, color: TassistPrimary),)
 
           ]
         ),

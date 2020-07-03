@@ -46,6 +46,9 @@ class AuthService {
         'total_receipts': 0,
         'out_actual_rec': 100000,
         'out_actual_pay':50000,
+        'net_profit': '1000 Cr',
+        'cash_in_hand': '12000 Dr',
+        'cash_in_bank': '42000 Dr'
       });
 
       // Company

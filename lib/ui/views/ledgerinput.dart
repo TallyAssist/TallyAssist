@@ -190,11 +190,11 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       ]),
                 ),
                 Padding(
-                  padding: spacer.all.xxs,
+                  padding: spacer.x.xxs,
                   child: Container(
                     // width: MediaQuery.of(context).size.width / 1.2,
                     child: Padding(
-                      padding: spacer.all.xxs,
+                      padding: spacer.x.xxs,
                       child: Center(
                         child: DropdownButtonFormField(
                           // value: _customerName,
@@ -213,6 +213,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                             icon: Icon(
                               Icons.person,
                               color: TassistPrimary,
+                              size: 20,
                             ),
                             hintText: 'Select customer',
                             hintStyle: secondaryHint,
@@ -256,13 +257,14 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       Text(
                         'GST: $_customerGst',
                         style: secondaryListTitle2.copyWith(
-                            color: TassistInfoGrey),
+                            color: TassistInfoGrey, fontSize: 14),
                       ),
                       SizedBox(width: 30),
                       Icon(Icons.phone, color: TassistMenuBg),
                       Text(
                         '$_customerPhone',
-                        style: secondaryListTitle2,
+                        style: secondaryListTitle2.copyWith(
+                            color: TassistInfoGrey, fontSize: 14),
                       )
                     ],
                   ),
@@ -277,7 +279,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                   child: Row(
                     children: <Widget>[
                       Flexible(
-                        flex: 3,
+                        flex: 4,
                         child: Container(
                           child: DropdownButtonFormField(
                             // value: _productName,
@@ -297,6 +299,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                isDense: true,
                                 hintText: 'Add product',
                                 hintStyle: secondaryHint,
                                 labelText: 'Add Product(s)',
@@ -316,29 +319,31 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                       Flexible(
                         flex: 2,
                         child: new DropdownButtonFormField(
+                          isExpanded: true,
                           items: <DropdownMenuItem>[
                             DropdownMenuItem(
-                              child: Text('IGST', style: secondaryListDisc),
+                              child: Text('IGST', style: secondaryListDisc.copyWith(fontSize: 12)),
                               value: 'igst',
                             ),
                             DropdownMenuItem(
                               child:
-                                  Text('CGST & SGST', style: secondaryListDisc),
+                                  Text('CGST & SGST', style: secondaryListDisc.copyWith(fontSize: 12)),
                               value: 'cgst & sgst',
                             ),
                           ],
                           // value: 'igst',
-                          decoration: InputDecoration(
+                          decoration: InputDecoration( 
                               isDense: true,
                               enabledBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
                               labelText: 'GST Type',
                               // AT: This should be a dropdown
-                              labelStyle: secondaryListDisc),
+                              labelStyle: secondaryListDisc.copyWith(fontSize: 14)),
                           onChanged: (val) => setState(() => _gstType = val),
                         ),
                       ),
+                          SizedBox(width: 10),
                       Flexible(
                         flex: 1,
                         child: new TextFormField(
@@ -347,7 +352,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           decoration: InputDecoration(
                               labelText: 'GST %',
                               // AT: This should be a dropdown
-                              labelStyle: secondaryListDisc),
+                              labelStyle: secondaryListDisc.copyWith(fontSize: 14)),
                           onChanged: (val) =>
                               setState(() => _gstPercentage = val),
                         ),
@@ -439,7 +444,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                                 _productName,
                                 'HSN Code: ',
                                 '$_productQuantity Qty @ $_productPrice/item',
-                                'CGST & SGST @ $_gstPercentage% : $gstAmount',
+                                'CGST & SGST @ ${double.parse(_gstPercentage) / 2 } % : $gstAmount',
                                 'Amount: $amount',
                                 'Discount: ',
                               ];
@@ -596,7 +601,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           logoPath: logoPath,
                         );
                       },
-                      child: Text('Preview', style: TextStyle(fontSize: 20)),
+                      child: Text('Preview', style: TextStyle(fontSize: 20, fontFamily: 'Proxima-Nova')),
                       color: TassistInfoGrey,
                       textColor: Colors.white,
                       elevation: 5,
@@ -663,7 +668,7 @@ class _LedgerInputScreenState extends State<LedgerInputScreen> {
                           logoPath: logoPath,
                         );
                       },
-                      child: Text('Send', style: TextStyle(fontSize: 20)),
+                      child: Text('Send', style: TextStyle(fontSize: 20, fontFamily: 'Proxima-Nova`')),
                       color: TassistPrimary,
                       textColor: Colors.white,
                       elevation: 5,

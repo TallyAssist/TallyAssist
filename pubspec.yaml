@@ -11,7 +11,7 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+4
+version: 1.0.0+6
 
 environment:
   sdk: ">=2.2.2 <3.0.0"
@@ -97,6 +97,14 @@ flutter:
           weight: 500
         - asset: fonts/Poppins-Bold.ttf
           weight: 700
+    - family: Proxima-Nova
+      fonts: 
+        - asset: fonts/proxima-nova-bold.ttf
+          weight: 700
+        - asset: fonts/proxima-nova-reg.ttf
+          weight: 500
+        - asset: fonts/proxima-nova-thin.ttf
+          weight: 300
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

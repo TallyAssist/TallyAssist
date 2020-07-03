@@ -19,7 +19,7 @@ class Company {
   final String stateName;
   final String hasLogo;
   final DateTime lastSyncedAt;
-  final String lastEntryDate;
+  final DateTime lastEntryDate;
 
   Company(
       {this.booksFrom,

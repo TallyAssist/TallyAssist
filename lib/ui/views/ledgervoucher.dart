@@ -22,6 +22,8 @@ class LedgerVoucher extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
     return ListView(
       children: <Widget>[
         VoucherList(
@@ -127,10 +129,8 @@ class _VoucherListState extends State<VoucherList> {
                           'GST: ${ledger.gst}',
                           style: TextStyle(color: TassistInfoGrey),
                         ),
-                        Icon(
-                          FontAwesomeIcons.whatsapp,
-                          color: TassistSuccess,
-                        )
+                        
+                        
                       ])
                 ],
               ),
