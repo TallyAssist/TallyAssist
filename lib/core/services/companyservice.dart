@@ -52,7 +52,7 @@ class CompanyService {
         // startingFrom: ,
         stateName: companyData['statename'] ?? '',
         hasLogo: companyData['restat_has_logo'] ?? '',
-        lastEntryDate: companyData['lastentrydate']?.toDate() ?? '',
+        lastEntryDate: companyData['lastentrydate']?.toDate() ?? null,
         lastSyncedAt: companyData['last_synced_at']?.toDate() ?? null,
       );
     } else {
