@@ -402,7 +402,7 @@ class _MenuScreenState extends State<MenuScreen> {
                 ],
               ),
               onTap: () async {
-                dynamic result = await _auth.signOut();
+                await _auth.signOut();
                 Navigator.of(context).pushReplacement(
                   MaterialPageRoute(
                     builder: (context) => RootPage(),

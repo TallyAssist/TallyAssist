@@ -56,11 +56,11 @@ class TopWidget extends StatefulWidget {
 }
 
 class _TopWidgetState extends State<TopWidget> {
-  final Firestore _db = Firestore.instance;
+  // final Firestore _db = Firestore.instance;
 
   final FirebaseMessaging _fcm = FirebaseMessaging();
 
-  StreamSubscription iosSubscription;
+  // StreamSubscription iosSubscription;
 
   @override
   void initState() {
@@ -68,16 +68,16 @@ class _TopWidgetState extends State<TopWidget> {
 
     // String uid = Provider.of<FirebaseUser>(context, listen: false).uid;
 
-    if (Platform.isIOS) {
-      iosSubscription = _fcm.onIosSettingsRegistered.listen((data) {
-        print(data);
-        _saveDeviceToken();
-      });
+    // if (Platform.isIOS) {
+    //   iosSubscription = _fcm.onIosSettingsRegistered.listen((data) {
+    //     print(data);
+    //     _saveDeviceToken();
+    //   });
 
-      _fcm.requestNotificationPermissions(IosNotificationSettings());
-    } else {
-      _saveDeviceToken();
-    }
+    //   _fcm.requestNotificationPermissions(IosNotificationSettings());
+    // } else {
+    _saveDeviceToken();
+    // }
 
     _fcm.configure(
       onMessage: (Map<String, dynamic> message) async {
@@ -110,11 +110,9 @@ class _TopWidgetState extends State<TopWidget> {
       },
       onLaunch: (Map<String, dynamic> message) async {
         print("onLaunch: $message");
-        // TODO optional
       },
       onResume: (Map<String, dynamic> message) async {
         print("onResume: $message");
-        // TODO optional
       },
     );
   }
@@ -126,7 +124,7 @@ class _TopWidgetState extends State<TopWidget> {
     // FirebaseUser user = await _auth.currentUser();
 
     // Get the token for this device
-    String fcmToken = await _fcm.getToken();
+    await _fcm.getToken();
 
     // Save it to Firestore
     // if (fcmToken != null) {

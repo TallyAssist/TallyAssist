@@ -363,7 +363,7 @@ _createInvoiceItemList(voucher, inventoryEntries) {
     String hsnSac = "";
     String quantity = inventoryEntries[i]?.actualQty.toString() ?? "";
     String rate = inventoryEntries[i]?.rate.toString() ?? "";
-    String unit = "";
+    // String unit = "";
     String discount = inventoryEntries[i]?.discount.toString() ?? "";
     String amount = inventoryEntries[i]?.amount.toString() ?? "";
     String taxAmount = inventoryEntries[i]?.taxAmount?.toString() ?? "";

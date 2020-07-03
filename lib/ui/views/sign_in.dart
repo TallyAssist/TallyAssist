@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:tassist/core/services/auth.dart';
 import 'package:tassist/theme/colors.dart';
 import 'package:tassist/ui/root_page.dart';

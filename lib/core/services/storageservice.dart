@@ -45,7 +45,7 @@ class StorageService {
 
     final String url = await storageReference.getDownloadURL();
     // final String uuid = Uuid().v1();
-    final http.Response downloadData = await http.get(url);
+    await http.get(url);
     final Directory systemTempDir = Directory.systemTemp;
     final File tempFile = File('${systemTempDir.path}/$filename');
     if (tempFile.existsSync()) {
@@ -53,8 +53,8 @@ class StorageService {
     }
     await tempFile.create();
     assert(await tempFile.readAsString() == "");
-    final StorageFileDownloadTask task = storageReference.writeToFile(tempFile);
-    final int byteCount = (await task.future).totalByteCount;
+    // final StorageFileDownloadTask task = storageReference.writeToFile(tempFile);
+    // final int byteCount = (await task.future).totalByteCount;
     // final String tempFileContents = await tempFile.readAsString();
     // assert(tempFileContents == kTestString);
     // assert(byteCount == kTestString.length);

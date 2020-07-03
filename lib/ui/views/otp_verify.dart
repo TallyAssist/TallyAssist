@@ -74,7 +74,7 @@ class _PhoneAuthVerifyState extends State<PhoneAuthVerify> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       setState(() => loading = true);
-                      dynamic result = await _auth.signInWithPhone(smsCode: otp);
+                      await _auth.signInWithPhone(smsCode: otp);
                     }
                   }),
               SizedBox(height: 12.0),

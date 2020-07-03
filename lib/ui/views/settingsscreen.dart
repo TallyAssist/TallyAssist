@@ -277,7 +277,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                             color: TassistSuccess,
                             onPressed: () async {
                               if (_controller.isNotEmpty) {
-                                var data = await _controller.toPngBytes();
+                                await _controller.toPngBytes();
                                 Navigator.of(context).pop();
                                 // MaterialPageRoute(
                                 //   builder: (BuildContext context) {

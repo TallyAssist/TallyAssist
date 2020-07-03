@@ -78,7 +78,7 @@ class _SignInPhoneState extends State<SignInPhone> {
                   onPressed: () async {
                     if (_formKey.currentState.validate()) {
                       setState(() => loading = true);
-                      dynamic result = await _auth.verifyPhone(phone);
+                      await _auth.verifyPhone(phone);
 
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
