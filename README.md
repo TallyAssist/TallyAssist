@@ -1,12 +1,12 @@
 # BizAssist
 
-BizAssist is an open source Flutter-based template for a business assistant application. It has been designed to use [Firebase](firebase.google.com/) as a backend.
+BizAssist is an open source Flutter-based template for a business assistant application. It has been designed to use [Google Firebase](firebase.google.com/) as backend.
 
-The project had started out with an intent to become a mobile interface for Tally (India's premier accounting software). Over time, it refined to become a focused business assistant application. For more details, check out this blog post announcing the project's release.
+The project had started out with an intent to become a mobile interface for [Tally](https://tallysolutions.com/) (India's premier accounting software). Over time, it refined to become a more focused business assistant application. For more details, check out this blog post announcing the project's release.
 
-The project was developed and tested for Android. Please feel free to contribute and make changes for iOS support.
+The project was developed and tested for Android. Please feel free to contribute and open PRs for iOS support.
 
-*Note: The codebase was developed in fast iterations while performing user research. There may be instances where it can be improved and modularized. If you come across such cases and want to contribute improvements, consider opening a PR.*
+*Note: The codebase was developed in fast iterations while performing user research. There may be instances where it can be improved and modularized. This is especially true for the data model and implementation of state management using [provider](https://pub.dev/packages/provider). If you come across such cases and want to contribute improvements, consider opening an issue or PR.*
 
 ## Demo App
 
@@ -28,14 +28,39 @@ The project was developed and tested for Android. Please feel free to contribute
 
 ## Setup
 
-- Make sure that you are on Flutter's `stable` channel
-- Firebase setup ~ make sure that you change the app name in config and manifest ~ create an Android app ~ download google.json and place it in app/src
+Start out by [cloning this repo](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository).
+
+### Flutter
+
+- Install Flutter by following the [official documentation](https://flutter.dev/docs/get-started/install) if you haven't.
+- Using VSCode or Android Studio as your choice of IDEs is highly recommended. You can find official Flutter documentation for getting up and running with them [here](https://flutter.dev/docs/development/tools).
+- Make sure that you are on Flutter's `stable` [channel](https://flutter.dev/docs/development/tools/sdk/upgrading#switching-flutter-channels)
+  - `flutter channel stable`
+
+### Firebase
+
+- Default app name is `com.example.tassist`. Choose your app's name and replace the default name in the following files.
+  - `android/app/build.gradle`
+  - `android/app/src/main/AndroidManifest.xml`
+  - `android/app/src/debug/AndroidManifest.xml`
+  - `android/app/src/profile/AndroidManifest.xml`
+  - `android/app/src/main/kotlin/com/example/MainActivity.kt`
+- Set up a Firebase project, generate a configuration file and copy the file to this repo by following Steps 1-3 listed [here](https://firebase.google.com/docs/flutter/setup?platform=android).
+- Enable `Email/Password` authentication method in the Firebase console. You can find it under `Develop`>`Authentication`>`Sign-in method`.
+- Enable [Cloud Firestore](https://firebase.google.com/docs/firestore) by going to `Develop`>`Database`.
+
+## Development
 
 ### Local
 
-- Flutter run
+- Make sure that a physical device or emulator is connected to your system.
+- [Run](https://flutter.dev/docs/get-started/test-drive?tab=terminal) the application.
+
+*Note: When running the application for the first time, you will encounter an exception related to Firebase indices. Fixing it is as easy as clicking on the link that shows up, as described in this [Stack Overflow answer](https://stackoverflow.com/a/47972492/2557831).*
 
 ### Build
+
+#### Coming Soon
 
 - Unsigned
 
