@@ -74,18 +74,18 @@ class LedgerCard extends StatelessWidget {
       }
     }
 
-    _changeReceivables() {
-      if ((ledgerItem.totalReceivables != '0.0')) {
-        return Icon(FontAwesomeIcons.arrowCircleDown,
-            color: TassistSuccess, size: 20.0);
-      } else if ((ledgerItem.totalPayables != '0.0')) {
-        return Icon(FontAwesomeIcons.arrowCircleUp,
-            color: TassistWarning, size: 20.0);
-      } else {
-        return Icon(FontAwesomeIcons.circle,
-            color: TassistInfoBlue, size: 20.0);
-      }
-    }
+    // _changeReceivables() {
+    //   if ((ledgerItem.totalReceivables != '0.0')) {
+    //     return Icon(FontAwesomeIcons.arrowCircleDown,
+    //         color: TassistSuccess, size: 20.0);
+    //   } else if ((ledgerItem.totalPayables != '0.0')) {
+    //     return Icon(FontAwesomeIcons.arrowCircleUp,
+    //         color: TassistWarning, size: 20.0);
+    //   } else {
+    //     return Icon(FontAwesomeIcons.circle,
+    //         color: TassistInfoBlue, size: 20.0);
+    //   }
+    // }
 
 // _changeActiveStatus() {
 // if (ledgerItem.closingBalance == 0) {
@@ -110,10 +110,10 @@ class LedgerCard extends StatelessWidget {
             Row(children: <Widget>[
               // _changeActiveStatus(),
               //   SizedBox(width: 8.0,),
-              _changeReceivables(),
-              SizedBox(
-                width: 8.0,
-              ),
+              // _changeReceivables(),
+              // SizedBox(
+              //   width: 8.0,
+              // ),
               _changeCreditorDebtor(),
               Spacer(),
 

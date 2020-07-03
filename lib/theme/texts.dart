@@ -63,7 +63,7 @@ const primaryAppBarDisc = const TextStyle(
 ///
 const secondaryH1Bold = const TextStyle(
   color: TassistBlack,
-  fontFamily: 'Poppins',
+  fontFamily: 'Proxima-Nova',
   fontSize: 80,
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
@@ -73,14 +73,14 @@ const secondaryH1Bold = const TextStyle(
 const secondaryH1Regular = const TextStyle(
   color: TassistBlack,
   fontWeight: FontWeight.w300,
-  fontFamily: 'Poppins',
+  fontFamily: 'Proxima-Nova',
   fontStyle:  FontStyle.normal,
   fontSize: 80,
   letterSpacing: 2.88
 );
 
 const secondaryCategoryTitle = const TextStyle( 
-    fontFamily: 'Poppins',
+    fontFamily: 'Proxima-Nova',
     color: TassistBlack,
     fontSize: 40,
     fontWeight: FontWeight.w400,
@@ -90,7 +90,7 @@ const secondaryCategoryTitle = const TextStyle(
 
 const secondaryCategoryDesc = const TextStyle(
   color: TassistPrimary,
-  fontFamily: 'Poppins',
+  fontFamily: 'Proxima-Nova',
   fontSize: 40,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
@@ -99,8 +99,8 @@ const secondaryCategoryDesc = const TextStyle(
 
 const secondaryListTitle = const TextStyle(
   color: TassistPrimary,
-  fontFamily: 'Poppins',
-  fontSize: 20,
+  fontFamily: 'Proxima-Nova',
+  fontSize: 24,
   fontWeight: FontWeight.w500,
   fontStyle: FontStyle.normal,
   letterSpacing: 0.5
@@ -109,8 +109,8 @@ const secondaryListTitle = const TextStyle(
 
 const secondaryListDisc = const TextStyle(
   color: TassistBlack,
-  fontFamily: 'Poppins',
-  fontSize: 14,
+  fontFamily: 'Proxima-Nova',
+  fontSize: 16,
   fontWeight: FontWeight.w300,
   fontStyle: FontStyle.normal,
   letterSpacing: 1
@@ -119,8 +119,8 @@ const secondaryListDisc = const TextStyle(
 
 const secondaryListTitle2 = const TextStyle(
   color: TassistBlack,
-  fontFamily: 'Poppins',
-  fontSize: 16,
+  fontFamily: 'Proxima-Nova',
+  fontSize: 18,
   fontWeight: FontWeight.w300,
   fontStyle: FontStyle.normal,
   letterSpacing: 1
@@ -128,8 +128,8 @@ const secondaryListTitle2 = const TextStyle(
 
 const secondaryDrawerText = const TextStyle(
   color: TassistPrimary,
-  fontFamily: 'Poppins',
-  fontSize: 30,
+  fontFamily: 'Proxima-Nova',
+  fontSize: 32,
   fontWeight: FontWeight.w400,
   fontStyle: FontStyle.normal,
   letterSpacing: 3,
@@ -138,8 +138,8 @@ const secondaryDrawerText = const TextStyle(
 
 const secondaryHint = const TextStyle(
   color: TassistGray,
-  fontFamily: 'Poppins',
-  fontSize: 14,
+  fontFamily: 'Proxima-Nova',
+  fontSize: 16,
   fontWeight: FontWeight.w300,
   fontStyle: FontStyle.normal,
   letterSpacing: 1
