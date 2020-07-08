@@ -1,12 +1,12 @@
-# BizAssist
+# TallyAssist
 
-BizAssist is an open source Flutter-based template for a business assistant application. It has been designed to use [Google Firebase](firebase.google.com/) as backend.
+TallyAssist is an open source Flutter-based template for a business assistant application. It has been designed to use [Google Firebase](firebase.google.com/) as backend.
 
 The project had started out with an intent to become a mobile interface for [Tally](https://tallysolutions.com/) (India's premier accounting software). Over time, it refined to become a more focused business assistant application. For more details, check out this blog post announcing the project's release.
 
 The project was developed and tested for Android. Please feel free to contribute and open PRs for iOS support.
 
-*Note: The codebase was developed in fast iterations while performing user research. There may be instances where it can be improved and modularized. This is especially true for the data model and implementation of state management using [provider](https://pub.dev/packages/provider). If you come across such cases and want to contribute improvements, consider opening an issue or PR.*
+*Note: The codebase was developed in fast iterations while performing user research. There are instances where it can be improved and modularized. This is especially true for the data model and implementation of state management using [provider](https://pub.dev/packages/provider). If you come across such cases and want to contribute improvements, consider opening an issue or PR.*
 
 ## Demo App
 
@@ -22,9 +22,13 @@ The project was developed and tested for Android. Please feel free to contribute
 
 ### Screenshots
 
-<!-- <p align="center">
-    <img src="https://github.com/<repo>/blob/master/assets/images/PS-2.png" alt="List Invoices" width="200"/>
-</p> -->
+<p align="center">
+    <img src="https://github.com/TallyAssist/TallyAssist/blob/master/assets/images/PS-2.png" alt="Ledger statements" width="200"/>
+    <img src="https://github.com/TallyAssist/TallyAssist/blob/master/assets/images/PS-1.png" alt="GST Invoices" width="200"/>
+    <img src="https://github.com/TallyAssist/TallyAssist/blob/master/assets/images/PS-3.png" alt="Invoice PDFs" width="200"/>
+    <img src="https://github.com/TallyAssist/TallyAssist/blob/master/assets/images/PS-4.png" alt="Dashboard" width="200"/>
+    <img src="https://github.com/TallyAssist/TallyAssist/blob/master/assets/images/PS-5.png" alt="Menu" width="200"/>
+</p>
 
 ## Setup
 
@@ -65,3 +69,12 @@ Start out by [cloning this repo](https://docs.github.com/en/github/creating-clon
 - Unsigned
 
 - Signed
+
+## 🤓 Author(s)
+
+- [**Richa Verma**](https://github.com/RichaVerma/)
+- [**Akash Tandon**](https://github.com/analyticalmonk)
+
+## 🔖 LICENCE
+
+[MIT](https://github.com/TallyAssist/TallyAssist/blob/master/LICENSE)
