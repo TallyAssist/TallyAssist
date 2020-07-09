@@ -75,6 +75,8 @@ Start out by [cloning this repo](https://docs.github.com/en/github/creating-clon
 - [**Richa Verma**](https://github.com/RichaVerma/)
 - [**Akash Tandon**](https://github.com/analyticalmonk)
 
+We would also like to thank [**Ishaan Kakkar**](https://github.com/ishaan1995) for all his guidance. 
+
 ## 🔖 LICENCE
 
 [MIT](https://github.com/TallyAssist/TallyAssist/blob/master/LICENSE)
