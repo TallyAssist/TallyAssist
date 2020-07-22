@@ -64,18 +64,20 @@ Start out by [cloning this repo](https://docs.github.com/en/github/creating-clon
 
 ### Build
 
-#### Coming Soon
-
 - Unsigned
+  - In the root project directory, run `flutter build appbundle` or `flutter build apk`.
 
 - Signed
+  - *Coming Soon*
+  
+For more details, check out [official Flutter documentation](https://flutter.dev/docs/deployment/android).
 
 ## 🤓 Author(s)
 
 - [**Richa Verma**](https://github.com/RichaVerma/)
 - [**Akash Tandon**](https://github.com/analyticalmonk)
 
-We would also like to thank [**Ishaan Kakkar**](https://github.com/ishaan1995) for all his guidance. 
+We would also like to thank [**Ishaan Kakkar**](https://github.com/ishaan1995) for all his help. 
 
 ## 🔖 LICENCE
 
